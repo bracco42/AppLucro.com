@@ -75,11 +75,11 @@ export default function CalculoLucro() {
       )}
 
       <div>
-        <label>Valor da Corrida:</label>
+        <label>Valor Pago na Corrida:</label>
         <input type="number" value={valorCorrida} onChange={(e) => setValorCorrida(parseFloat(e.target.value) || 0)} />
       </div>
       <div>
-        <label>Quilômetros Rodados:</label>
+        <label>Quilômetros da Corrida:</label>
         <input type="number" value={kmsRodados} onChange={(e) => setKmsRodados(parseFloat(e.target.value) || 0)} />
       </div>
 
