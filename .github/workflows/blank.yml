@@ -13,8 +13,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3  # Usando a versão mais recente do checkout
 
-    - name: Fetch all commits to unshallow the repository
-      run: git fetch --app_lucro_motorista --unshallow  # Garante que o repositório não seja um shallow clone
+    - name: Ensure full repository history
+      run: git fetch --unshallow  # Garante que o repositório não seja um shallow clone
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -36,10 +36,6 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         git remote add heroku https://:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git  # Adiciona o repositório remoto com o token de API
-
-    - name: Unshallow the repository
-      run: |
-        git fetch --all --unshallow  # Desfaz o clone raso
 
     - name: Deploy to Heroku
       run: |
