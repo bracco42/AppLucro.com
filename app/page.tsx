@@ -72,4 +72,34 @@ export default function CalculoLucro() {
           </div>
           <div>
             <label>Kms rodados por dia:</label>
-            <input type="number" value={kmsPorDia} onChange={handleInputChange(setKmsPorDia
+            <input type="number" value={kmsPorDia} onChange={handleInputChange(setKmsPorDia)} required />
+          </div>
+          <button onClick={() => setShowModal(false)}>Salvar</button>
+        </div>
+      )}
+
+      <div>
+        <label>Valor da Corrida:</label>
+        <input type="number" value={valorCorrida} onChange={handleInputChange(setValorCorrida)} />
+      </div>
+      <div>
+        <label>Quilômetros Rodados:</label>
+        <input type="number" value={kmsRodados} onChange={handleInputChange(setKmsRodados)} />
+      </div>
+      <button onClick={calcularLucros}>Calcular Lucros</button>
+
+      <div>
+        <label>Lucro de Curto Prazo:</label>
+        <input type="text" value={lucroCurtoPrazo !== null ? `R$${lucroCurtoPrazo.toFixed(2)}` : ''} readOnly />
+      </div>
+      <div>
+        <label>Lucro de Longo Prazo:</label>
+        <input type="text" value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} readOnly />
+      </div>
+
+      <p>
+        <strong>Obs.:</strong> preencher qualquer número diferente de 0 em valor do seguro E manutenção para funcionar corretamente (incluir IPVA e demais custos dentro desses campos). O valor do veículo serve como referência, pois calculamos uma depreciação de 3,333% ao ano para o lucro de longo prazo (em caso de aluguel colocar 1 ou um outro valor baixo). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os custos. Os KMs rodados por dia (útil) servem para diferir (espalhar) os custos anuais para cada corrida. Dica: 0 à esquerda é desconsiderado (pode deixar).
+      </p>
+    </div>
+  );
+}
