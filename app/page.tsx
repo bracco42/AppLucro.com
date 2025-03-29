@@ -40,7 +40,7 @@ export default function CalculoLucro() {
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
       {/* LOGO */}
-      <img src="/logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
+      <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
 
       {/* TÍTULO */}
       <h1 style={{ color: 'green' }}>Calcular Lucro de Corrida (Todas Plataformas)</h1>
