@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-export default function CalculoLucro(): JSX.Element {
+export default function CalculoLucro() {
   const [precoCombustivel, setPrecoCombustivel] = useState(0);
   const [valorVeiculo, setValorVeiculo] = useState(0);
   const [valorSeguro, setValorSeguro] = useState(0);
@@ -44,7 +44,7 @@ export default function CalculoLucro(): JSX.Element {
 
   return (
     <div>
-      <h1>Cálculo de Lucro</h1>
+      <h1>Calcular Lucro de Corrida (Todas Plataformas)</h1>
       <button onClick={() => setShowModal(true)}>Cadastrar Dados do Veículo</button>
 
       {showModal && (
@@ -61,4 +61,15 @@ export default function CalculoLucro(): JSX.Element {
           <div>
             <label>Valor do Seguro (por ano):</label>
             <input type="number" value={valorSeguro} onChange={handleInputChange(setValorSeguro)} required />
-          </div
+          </div>
+          <div>
+            <label>Valor de Manutenção (por ano):</label>
+            <input type="number" value={valorManutencao} onChange={handleInputChange(setValorManutencao)} required />
+          </div>
+          <div>
+            <label>Km/L feitos pelo veículo:</label>
+            <input type="number" value={kmPorLitro} onChange={handleInputChange(setKmPorLitro)} required />
+          </div>
+          <div>
+            <label>Kms rodados por dia:</label>
+            <input type="number" value={kmsPorDia} onChange={handleInputChange(setKmsPorDia
