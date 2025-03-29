@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function CalculoLucro() {
+export default function CalculoLucro(): JSX.Element {
   const [precoCombustivel, setPrecoCombustivel] = useState(0);
   const [valorVeiculo, setValorVeiculo] = useState(0);
   const [valorSeguro, setValorSeguro] = useState(0);
@@ -11,8 +11,8 @@ export default function CalculoLucro() {
   const [kmsPorDia, setKmsPorDia] = useState(0);
   const [valorCorrida, setValorCorrida] = useState(0);
   const [kmsRodados, setKmsRodados] = useState(0);
-  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState(null);
-  const [lucroLongoPrazo, setLucroLongoPrazo] = useState(null);
+  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
+  const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ export default function CalculoLucro() {
   }, [precoCombustivel, valorVeiculo, valorSeguro, valorManutencao, kmPorLitro, kmsPorDia, valorCorrida, kmsRodados]);
 
   const calcularLucros = () => {
-    // Se algum campo for 0 ou inválido, evita cálculos incorretos
     if ([precoCombustivel, valorVeiculo, valorSeguro, valorManutencao, kmPorLitro, kmsPorDia, valorCorrida, kmsRodados].some(val => val <= 0 || isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
@@ -38,8 +37,7 @@ export default function CalculoLucro() {
     setLucroLongoPrazo(lucroLongo);
   };
 
-  // Função para lidar com inputs vazios
-  const handleInputChange = (setter) => (e) => {
+  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     setter(isNaN(value) ? 0 : value);
   };
@@ -63,5 +61,4 @@ export default function CalculoLucro() {
           <div>
             <label>Valor do Seguro (por ano):</label>
             <input type="number" value={valorSeguro} onChange={handleInputChange(setValorSeguro)} required />
-          </div>
-          <div>
+          </div
