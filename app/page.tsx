@@ -38,13 +38,9 @@ export default function CalculoLucro() {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      {/* LOGO */}
+    <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
-
-      {/* TÍTULO */}
-      <h1 style={{ color: 'green' }}>Calcular Lucro de Corrida (Todas Plataformas)</h1>
-
+      <h1 style={{ color: '#0f0' }}>Calcular Lucro de Corrida (Todas Plataformas)</h1>
       <button onClick={() => setShowModal(true)}>Cadastrar Dados do Veículo</button>
 
       {showModal && (
@@ -86,7 +82,6 @@ export default function CalculoLucro() {
         <label>Quilômetros Rodados:</label>
         <input type="number" value={kmsRodados} onChange={(e) => setKmsRodados(parseFloat(e.target.value) || 0)} />
       </div>
-      <button onClick={calcularLucros}>Calcular Lucros</button>
 
       <div>
         <label>Lucro de Curto Prazo (desconta combustível):</label>
