@@ -91,6 +91,10 @@ export default function CalculoLucro() {
         <label>Lucro de Longo Prazo:</label>
         <input type="text" value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} readOnly />
       </div>
+
+      <p>
+        <strong>Obs.:</strong> Favor preencher qualquer valor em valor do seguro E manutenção para funcionar corretamente (incluir IPVA e demais custos dentro desses campos). O valor do veículo serve como referência, pois calculamos uma depreciação de 3,333% ao ano no valor informado para melhorar a precisão do lucro de longo prazo. O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os custos.
+      </p>
     </div>
   );
 }
