@@ -31,8 +31,8 @@ export default function CalculoLucro() {
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
 
-    const custoManutencaoCorrida = ((valorManutencao + valorSeguro) || (0.03 * valorVeiculo)) * kmsRodados / (kmsPorDia * 252);
-    const depreciaçãoVeiculo = (valorVeiculo * 0.03 * kmsRodados) / (kmsPorDia * 252);
+    const custoManutencaoCorrida = ((valorManutencao + valorSeguro) || (0.03333 * valorVeiculo)) * kmsRodados / (kmsPorDia * 252);
+    const depreciaçãoVeiculo = (valorVeiculo * 0.03333 * kmsRodados) / (kmsPorDia * 252);
     const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
     setLucroLongoPrazo(lucroLongo);
   };
@@ -55,7 +55,7 @@ export default function CalculoLucro() {
             <input type="number" value={precoCombustivel} onChange={(e) => setPrecoCombustivel(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
-            <label>Valor do Veículo:</label>
+            <label>Valor Atual do Veículo:</label>
             <input type="number" value={valorVeiculo} onChange={(e) => setValorVeiculo(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
@@ -71,7 +71,7 @@ export default function CalculoLucro() {
             <input type="number" value={kmPorLitro} onChange={(e) => setKmPorLitro(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
-            <label>Kms rodados por dia:</label>
+            <label>Kms rodados por dia (útil):</label>
             <input type="number" value={kmsPorDia} onChange={(e) => setKmsPorDia(parseFloat(e.target.value) || 0)} required />
           </div>
           <button onClick={() => setShowModal(false)}>Salvar</button>
@@ -89,11 +89,11 @@ export default function CalculoLucro() {
       <button onClick={calcularLucros}>Calcular Lucros</button>
 
       <div>
-        <label>Lucro de Curto Prazo:</label>
+        <label>Lucro de Curto Prazo (desconta combustível):</label>
         <input type="text" value={lucroCurtoPrazo !== null ? `R$${lucroCurtoPrazo.toFixed(2)}` : ''} readOnly />
       </div>
       <div>
-        <label>Lucro de Longo Prazo:</label>
+        <label>Lucro de Longo Prazo (desconta todos valores):</label>
         <input type="text" value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} readOnly />
       </div>
 
