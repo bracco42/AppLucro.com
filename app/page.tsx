@@ -93,7 +93,7 @@ export default function CalculoLucro() {
       </div>
 
       <p>
-        <strong>Obs.:</strong> Favor preencher qualquer valor em valor do seguro E manutenção para funcionar corretamente (incluir IPVA e demais custos dentro desses campos). O valor do veículo serve como referência, pois calculamos uma depreciação de 3,333% ao ano no valor informado para melhorar a precisão do lucro de longo prazo. O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os custos.
+        <strong>Obs.:</strong> Favor preencher qualquer número diferente de 0 em valor do seguro E manutenção para funcionar corretamente (incluir IPVA e demais custos dentro desses campos). O valor do veículo serve como referência, pois calculamos uma depreciação de 3,333% ao ano para o lucro de longo prazo. O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os custos. Os KMs rodados por dia (útil) servem para diferir (espalhar) os custos anuais para cada corrida.
       </p>
     </div>
   );
