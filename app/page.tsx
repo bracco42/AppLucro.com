@@ -37,14 +37,14 @@ export default function CalculoLucro() {
     setLucroLongoPrazo(lucroLongo);
   };
 
-  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setter(isNaN(value) ? 0 : value);
-  };
-
   return (
-    <div>
-      <h1>Calcular Lucro de Corrida (Todas Plataformas)</h1>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      {/* LOGO */}
+      <img src="/logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
+
+      {/* TÍTULO */}
+      <h1 style={{ color: 'green' }}>Calcular Lucro de Corrida (Todas Plataformas)</h1>
+
       <button onClick={() => setShowModal(true)}>Cadastrar Dados do Veículo</button>
 
       {showModal && (
@@ -52,27 +52,27 @@ export default function CalculoLucro() {
           <h2>Cadastro de Dados do Veículo</h2>
           <div>
             <label>Preço do Combustível (por litro):</label>
-            <input type="number" value={precoCombustivel} onChange={handleInputChange(setPrecoCombustivel)} required />
+            <input type="number" value={precoCombustivel} onChange={(e) => setPrecoCombustivel(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
             <label>Valor do Veículo:</label>
-            <input type="number" value={valorVeiculo} onChange={handleInputChange(setValorVeiculo)} required />
+            <input type="number" value={valorVeiculo} onChange={(e) => setValorVeiculo(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
             <label>Valor do Seguro (por ano):</label>
-            <input type="number" value={valorSeguro} onChange={handleInputChange(setValorSeguro)} required />
+            <input type="number" value={valorSeguro} onChange={(e) => setValorSeguro(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
             <label>Valor de Manutenção (por ano):</label>
-            <input type="number" value={valorManutencao} onChange={handleInputChange(setValorManutencao)} required />
+            <input type="number" value={valorManutencao} onChange={(e) => setValorManutencao(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
             <label>Km/L feitos pelo veículo:</label>
-            <input type="number" value={kmPorLitro} onChange={handleInputChange(setKmPorLitro)} required />
+            <input type="number" value={kmPorLitro} onChange={(e) => setKmPorLitro(parseFloat(e.target.value) || 0)} required />
           </div>
           <div>
             <label>Kms rodados por dia:</label>
-            <input type="number" value={kmsPorDia} onChange={handleInputChange(setKmsPorDia)} required />
+            <input type="number" value={kmsPorDia} onChange={(e) => setKmsPorDia(parseFloat(e.target.value) || 0)} required />
           </div>
           <button onClick={() => setShowModal(false)}>Salvar</button>
         </div>
@@ -80,11 +80,11 @@ export default function CalculoLucro() {
 
       <div>
         <label>Valor da Corrida:</label>
-        <input type="number" value={valorCorrida} onChange={handleInputChange(setValorCorrida)} />
+        <input type="number" value={valorCorrida} onChange={(e) => setValorCorrida(parseFloat(e.target.value) || 0)} />
       </div>
       <div>
         <label>Quilômetros Rodados:</label>
-        <input type="number" value={kmsRodados} onChange={handleInputChange(setKmsRodados)} />
+        <input type="number" value={kmsRodados} onChange={(e) => setKmsRodados(parseFloat(e.target.value) || 0)} />
       </div>
       <button onClick={calcularLucros}>Calcular Lucros</button>
 
