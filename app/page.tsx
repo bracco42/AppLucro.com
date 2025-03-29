@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 
 export default function CalculoLucro() {
-  const [precoCombustivel, setPrecoCombustivel] = useState(0);
-  const [valorVeiculo, setValorVeiculo] = useState(0);
-  const [valorSeguro, setValorSeguro] = useState(0);
-  const [valorManutencao, setValorManutencao] = useState(0);
-  const [kmPorLitro, setKmPorLitro] = useState(0);
-  const [kmsPorDia, setKmsPorDia] = useState(0);
-  const [valorCorrida, setValorCorrida] = useState(0);
-  const [kmsRodados, setKmsRodados] = useState(0);
+  const [precoCombustivel, setPrecoCombustivel] = useState();
+  const [valorVeiculo, setValorVeiculo] = useState();
+  const [valorSeguro, setValorSeguro] = useState();
+  const [valorManutencao, setValorManutencao] = useState();
+  const [kmPorLitro, setKmPorLitro] = useState();
+  const [kmsPorDia, setKmsPorDia] = useState();
+  const [valorCorrida, setValorCorrida] = useState();
+  const [kmsRodados, setKmsRodados] = useState();
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState(null);
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState(null);
   const [showModal, setShowModal] = useState(false);
