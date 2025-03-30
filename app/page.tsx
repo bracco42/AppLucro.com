@@ -760,9 +760,9 @@ export default function CalculoLucro() {
 
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
-        {t.tip1}<br />
-        {t.tip2}<br /><br />
-        {t.community}
+        #{t.tip1}<br />
+        #{t.tip2}<br /><br />
+        #{t.community}
       </p>
     </div>
   );
