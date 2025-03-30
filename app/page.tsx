@@ -25,6 +25,7 @@ const translations = {
     addCost: 'Adicionar Custo',
     remove: 'Remover',
     distance: 'Distância percorrida:',
+    workingDays: 'Dias da semana trabalhados:',
     vehicleValue: 'Valor Atual do Veículo:',
     rideValue: 'Valor Pago:',
     rideDistance: 'Distância da Corrida:',
@@ -56,6 +57,7 @@ const translations = {
     addCost: 'Add Cost',
     remove: 'Remove',
     distance: 'Distance traveled:',
+    workingDays: 'Working days per week:',
     vehicleValue: 'Current Vehicle Value:',
     rideValue: 'Paid Value:',
     rideDistance: 'Ride Distance:',
@@ -87,6 +89,7 @@ const translations = {
     addCost: 'Ajouter un Coût',
     remove: 'Supprimer',
     distance: 'Distance parcourue:',
+    workingDays: 'Jours travaillés par semaine:',
     vehicleValue: 'Valeur Actuelle du Véhicule:',
     rideValue: 'Valeur Payée:',
     rideDistance: 'Distance de Course:',
@@ -118,6 +121,7 @@ const translations = {
     addCost: '添加',
     remove: '删除',
     distance: '行驶距离:',
+    workingDays: '每周工作天数:',
     vehicleValue: '车辆现值:',
     rideValue: '行程收入:',
     rideDistance: '行程距离:',
@@ -149,6 +153,7 @@ const translations = {
     addCost: '追加',
     remove: '削除',
     distance: '走行距離:',
+    workingDays: '週の稼働日数:',
     vehicleValue: '車両価値:',
     rideValue: '配達収入:',
     rideDistance: '走行距離:',
@@ -180,6 +185,7 @@ const translations = {
     addCost: 'إضافة',
     remove: 'إزالة',
     distance: 'المسافة المقطوعة:',
+    workingDays: 'أيام العمل في الأسبوع:',
     vehicleValue: 'قيمة المركبة الحالية:',
     rideValue: 'قيمة الرحلة:',
     rideDistance: 'مسافة الرحلة:',
@@ -211,6 +217,7 @@ const translations = {
     addCost: 'Hinzufügen',
     remove: 'Entfernen',
     distance: 'Fahrstrecke:',
+    workingDays: 'Arbeitstage pro Woche:',
     vehicleValue: 'Aktueller Fahrzeugwert:',
     rideValue: 'Fahrtentgelt:',
     rideDistance: 'Fahrstrecke:',
@@ -242,6 +249,7 @@ const translations = {
     addCost: 'Добавить',
     remove: 'Удалить',
     distance: 'Пробег:',
+    workingDays: 'Рабочих дней в неделю:',
     vehicleValue: 'Текущая стоимость ТС:',
     rideValue: 'Доход за поездку:',
     rideDistance: 'Расстояние:',
@@ -273,6 +281,7 @@ const translations = {
     addCost: 'Додати',
     remove: 'Видалити',
     distance: 'Пробіг:',
+    workingDays: 'Робочих днів на тиждень:',
     vehicleValue: 'Поточна вартість ТЗ:',
     rideValue: 'Дохід за поїздку:',
     rideDistance: 'Відстань:',
@@ -304,6 +313,7 @@ const translations = {
     addCost: 'Tilføj',
     remove: 'Fjern',
     distance: 'Kørt distance:',
+    workingDays: 'Arbejdsdage om ugen:',
     vehicleValue: 'Nuværende køretøjsværdi:',
     rideValue: 'Kørselsindtægt:',
     rideDistance: 'Kørselsdistance:',
@@ -335,6 +345,7 @@ const translations = {
     addCost: 'Ekle',
     remove: 'Sil',
     distance: 'Mesafe:',
+    workingDays: 'Haftalık çalışma günleri:',
     vehicleValue: 'Mevcut Araç Değeri:',
     rideValue: 'Sürüş Geliri:',
     rideDistance: 'Sürüş Mesafesi:',
@@ -366,6 +377,7 @@ const translations = {
     addCost: 'Ongeza',
     remove: 'Ondoa',
     distance: 'Umbali:',
+    workingDays: 'Siku za kufanya kazi kwa wiki:',
     vehicleValue: 'Thamani ya Sasa ya Gari:',
     rideValue: 'Mapato ya Safari:',
     rideDistance: 'Umbali wa Safari:',
@@ -394,6 +406,7 @@ export default function CalculoLucro() {
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
   const [distanciaPercorrida, setDistanciaPercorrida] = useState<number>(250);
   const [periodicidadeDistancia, setPeriodicidadeDistancia] = useState<Periodicity>('daily');
+  const [diasTrabalhadosPorSemana, setDiasTrabalhadosPorSemana] = useState<number>(5);
   const [valorVeiculo, setValorVeiculo] = useState<number>(15000);
   const [valorCorrida, setValorCorrida] = useState<number>(15);
   const [KmRodados, setKmRodados] = useState<number>(10);
@@ -409,60 +422,56 @@ export default function CalculoLucro() {
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
-    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
-      setLucroCurtoPrazo(null);
-      setLucroLongoPrazo(null);
-      return;
-    }
+  if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
+    setLucroCurtoPrazo(null);
+    setLucroLongoPrazo(null);
+    return;
+  }
 
-    const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
-    const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
-    const lucroCurto = valorCorrida - custoCombustivelCorrida;
-    setLucroCurtoPrazo(lucroCurto);
+  const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
+  const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
+  const lucroCurto = valorCorrida - custoCombustivelCorrida;
+  setLucroCurtoPrazo(lucroCurto);
 
-    const converterParaAnual = (valor: number, periodicity: Periodicity) => {
-      switch(periodicity) {
-        case 'monthly': return valor * 12;
-        case 'weekly': return valor * 52;
-        case 'daily': return valor * 252;
-        default: return valor;
-      }
-    };
-
-    const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
-      switch(periodicity) {
-        case 'monthly': return valor / 21;
-        case 'weekly': return valor / 5;
-        default: return valor;
-      }
-    };
-
-    const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
-    
-    const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
-    const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
-    
-    const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
-    
-    const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
-    const seguroTotalAnual = seguroAnual + premioAnual;
-    
-    const denominator = distanciaDiaria * 252;
-    const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
-    const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
-    const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
-    setLucroLongoPrazo(lucroLongo);
-  };
-
-  const adicionarCustoManutencao = () => {
-    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
-  };
-
-  const removerCustoManutencao = (id: number) => {
-    if (custosManutencao.length > 1) {
-      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
+  const converterParaAnual = (valor: number, periodicity: Periodicity) => {
+    switch(periodicity) {
+      case 'monthly': return valor * 12;
+      case 'weekly': return valor * 52;
+      case 'daily': return valor * 252;
+      default: return valor;
     }
   };
+
+  const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity, diasTrabalhadosPorSemana: number = 5) => {
+    switch(periodicity) {
+      case 'monthly': return valor / 21;
+      case 'weekly': return valor / diasTrabalhadosPorSemana;
+      case 'daily': return valor;
+      default: return valor;
+    }
+  };
+
+  // Novo cálculo que considera dias trabalhados por semana quando é diário
+  let distanciaDiaria = converterDistanciaParaDiaria(
+    distanciaPercorrida, 
+    periodicidadeDistancia, 
+    periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana : 5
+  );
+  
+  const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
+  const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
+  
+  const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
+  
+  const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
+  const seguroTotalAnual = seguroAnual + premioAnual;
+  
+  const denominator = distanciaDiaria * 252;
+  const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
+  const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
+  const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
+  setLucroLongoPrazo(lucroLongo);
+};
 
   const atualizarCustoManutencao = (id: number, field: string, value: any) => {
     setCustosManutencao(custosManutencao.map(custo => 
