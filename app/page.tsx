@@ -127,7 +127,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km (Ft) rodados por dia (útil):</label>
+            <label>Km(Ft) rodados por dia (útil):</label>
             <input 
               type="number" 
               value={KmPorDia} 
@@ -192,7 +192,7 @@ export default function CalculoLucro() {
       </div>
 
       <p>
-        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Preencha qualquer número diferente de 0 em valor do seguro e manutenção para funcionar corretamente (incluir imposto, óleo, etc. [ao ano]). O valor do veículo serve para calcular uma depreciação de 3.33% ao ano para o lucro de longo prazo (em caso de aluguel ou se preferir informar esse custo colocar 1 ou um outro valor baixo). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os outros custos também. Os Km rodados por dia útil servem para diferir (espalhar) os custos anuais para cada corrida (se trabalhar mais que 5x na semana considerar um valor maior nesse campo). A distância pode ser preenchida em qualquer medida.
+        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Precisa incluir imposto, óleo, etc. (ao ano) no valor da manutenção. O valor atual do veículo serve para calcular uma depreciação de 3.33% (em caso de aluguar o automóvel, ou se preferir informar esse custo ao ano, colocar 1 ou qualquer outro valor baixo para desconsiderar esse cálculo de depreciação). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta esse e todos os outros. Os Km rodados por dia útil servem para dividir os custos anuais para cada corrida (portanto se trabalhar mais que 5x na semana considerar um valor maior nesse campo, por exemplo). A distância pode ser preenchida em qualquer medida (Km,Ft,Mp)...
       </p>
     </div>
   );
