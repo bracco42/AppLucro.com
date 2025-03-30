@@ -84,8 +84,14 @@ export default function CalculoLucro() {
   return (
     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
+      <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
       <h1 style={{ color: '#0f0' }}>Funcionalidade Para Calcular Lucros de Corridas</h1>
       <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>Destinado à tomada de decisões de curto e longo prazo</h2>
+
+      {/* ... (restante do código permanece exatamente igual) */}
+    </div>
+  );
+}
       
       <button onClick={() => setShowModal(!showModal)} style={{
         padding: '10px 20px',
