@@ -8,6 +8,103 @@ type Cost = {
   valor: number;
   periodicity: Periodicity;
 };
+type Language = 'pt' | 'en' | 'fr';
+
+const translations = {
+  pt: {
+    title: 'Funcionalidade Para Calcular Lucros de Corridas',
+    subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
+    registerButton: 'Cadastrar Dados do Veículo',
+    closeButton: 'Fechar Cadastro',
+    saveButton: 'Salvar',
+    fuelPrice: 'Preço do Combustível (por litro):',
+    fuelEfficiency: 'Km/L (Mi/L ou outra medida de distância por litro) feitos pelo veículo:',
+    insuranceValue: 'Valor do Seguro:',
+    insurancePremium: 'Prêmio do Seguro (x10% de probabilidade de batida ao ano):',
+    maintenanceCosts: 'Custos de Manutenção (inclua aluguel do veículo aqui se aplicável):',
+    addCost: 'Adicionar Custo',
+    remove: 'Remover',
+    distance: 'Distância percorrida (se selecionar "Diária" e trabalhar mais que 5x na semana precisa aumentar o valor desse campo, que considera dias úteis):',
+    vehicleValue: 'Valor Atual do Veículo se Comprado (deixe zero se for alugado - deprecia 3.33% no ano):',
+    rideValue: 'Valor Pago App/Cliente:',
+    rideDistance: 'Km/Mi da Corrida (distância percorrida):',
+    shortTermProfit: 'Lucro de Curto Prazo (desconta custo do combustível):',
+    longTermProfit: 'Lucro de Longo Prazo (desconta custo do combustível e todos os outros):',
+    tips: 'Dicas:',
+    tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
+    tip2: '2. Todos os campos podem ser zero sem afetar o cálculo.',
+    formula: 'Fórmula do Lucro de Longo Prazo:',
+    community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
+    periodicityOptions: {
+      annual: 'Anual',
+      monthly: 'Mensal',
+      weekly: 'Semanal',
+      daily: 'Diário'
+    }
+  },
+  en: {
+    title: 'Ride Profit Calculation Feature',
+    subtitle: 'Designed for short and long term decision making',
+    registerButton: 'Register Vehicle Data',
+    closeButton: 'Close Registration',
+    saveButton: 'Save',
+    fuelPrice: 'Fuel Price (per liter):',
+    fuelEfficiency: 'Km/L (Mi/L or other distance measure per liter) achieved by the vehicle:',
+    insuranceValue: 'Insurance Value:',
+    insurancePremium: 'Insurance Premium (x10% probability of accident per year):',
+    maintenanceCosts: 'Maintenance Costs (include vehicle rental here if applicable):',
+    addCost: 'Add Cost',
+    remove: 'Remove',
+    distance: 'Distance traveled (if selecting "Daily" and working more than 5x a week, you need to increase this value, which considers working days):',
+    vehicleValue: 'Current Vehicle Value if Purchased (set to zero if rented - depreciates 3.33% per year):',
+    rideValue: 'App/Customer Paid Value:',
+    rideDistance: 'Km/Mi of the Ride (distance traveled):',
+    shortTermProfit: 'Short Term Profit (deducts fuel cost):',
+    longTermProfit: 'Long Term Profit (deducts fuel cost and all other expenses):',
+    tips: 'Tips:',
+    tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
+    tip2: '2. All fields can be zero without affecting the calculation.',
+    formula: 'Long Term Profit Formula:',
+    community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
+    periodicityOptions: {
+      annual: 'Annual',
+      monthly: 'Monthly',
+      weekly: 'Weekly',
+      daily: 'Daily'
+    }
+  },
+  fr: {
+    title: 'Fonctionnalité de Calcul de Profit des Courses',
+    subtitle: 'Conçu pour la prise de décision à court et long terme',
+    registerButton: 'Enregistrer les Données du Véhicule',
+    closeButton: 'Fermer l\'Enregistrement',
+    saveButton: 'Enregistrer',
+    fuelPrice: 'Prix du Carburant (par litre):',
+    fuelEfficiency: 'Km/L (Mi/L ou autre mesure de distance par litre) réalisés par le véhicule:',
+    insuranceValue: 'Valeur de l\'Assurance:',
+    insurancePremium: 'Prime d\'Assurance (x10% de probabilité d\'accident par an):',
+    maintenanceCosts: 'Coûts de Maintenance (inclure la location du véhicule ici si applicable):',
+    addCost: 'Ajouter un Coût',
+    remove: 'Supprimer',
+    distance: 'Distance parcourue (si vous sélectionnez "Quotidien" et travaillez plus de 5x par semaine, vous devez augmenter cette valeur, qui considère les jours ouvrables):',
+    vehicleValue: 'Valeur Actuelle du Véhicule si Acheté (mettez zéro si loué - déprécie 3.33% par an):',
+    rideValue: 'Valeur Payée par l\'App/Client:',
+    rideDistance: 'Km/Mi de la Course (distance parcourue):',
+    shortTermProfit: 'Profit à Court Terme (déduit le coût du carburant):',
+    longTermProfit: 'Profit à Long Terme (déduit le coût du carburant et tous les autres):',
+    tips: 'Conseils:',
+    tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
+    tip2: '2. Tous les champs peuvent être zéro sans affecter le calcul.',
+    formula: 'Formule du Profit à Long Terme:',
+    community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
+    periodicityOptions: {
+      annual: 'Annuel',
+      monthly: 'Mensuel',
+      weekly: 'Hebdomadaire',
+      daily: 'Quotidien'
+    }
+  }
+};
 
 export default function CalculoLucro() {
   const [precoCombustivel, setPrecoCombustivel] = useState<number>(5);
@@ -24,13 +121,15 @@ export default function CalculoLucro() {
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [language, setLanguage] = useState<Language>('pt');
+
+  const t = translations[language];
 
   useEffect(() => {
     calcularLucros();
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
-    // Remove validation that was preventing calculations when any value was zero
     if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
@@ -42,22 +141,20 @@ export default function CalculoLucro() {
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
 
-    // Converter todos os custos para valor anual
     const converterParaAnual = (valor: number, periodicity: Periodicity) => {
       switch(periodicity) {
         case 'monthly': return valor * 12;
         case 'weekly': return valor * 52;
-        case 'daily': return valor * 252; // 252 dias úteis
+        case 'daily': return valor * 252;
         default: return valor;
       }
     };
 
-    // Converter distância para diária
     const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
       switch(periodicity) {
-        case 'monthly': return valor / 21; // 21 dias úteis no mês
-        case 'weekly': return valor / 5;   // 5 dias úteis na semana
-        default: return valor;             // diário
+        case 'monthly': return valor / 21;
+        case 'weekly': return valor / 5;
+        default: return valor;
       }
     };
 
@@ -68,11 +165,9 @@ export default function CalculoLucro() {
     
     const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
     
-    // Inclui 10% do prêmio do seguro no cálculo anual
     const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
     const seguroTotalAnual = seguroAnual + premioAnual;
     
-    // Cálculo proporcional por corrida
     const denominator = distanciaDiaria * 252;
     const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
     const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
@@ -98,10 +193,29 @@ export default function CalculoLucro() {
 
   return (
     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+        <select 
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as Language)}
+          style={{
+            padding: '5px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold'
+          }}
+        >
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+        </select>
+      </div>
+
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
-      <h1 style={{ color: '#0f0' }}>Funcionalidade Para Calcular Lucros de Corridas</h1>
-      <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>Destinado à tomada de decisões de curto e longo prazo</h2>
+      <h1 style={{ color: '#0f0' }}>{t.title}</h1>
+      <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>{t.subtitle}</h2>
       
       <button onClick={() => setShowModal(!showModal)} style={{
         padding: '10px 20px',
@@ -113,7 +227,7 @@ export default function CalculoLucro() {
         cursor: 'pointer',
         marginBottom: '20px'
       }}>
-        {showModal ? 'Fechar Cadastro' : 'Cadastrar Dados do Veículo'}
+        {showModal ? t.closeButton : t.registerButton}
       </button>
 
       {showModal && (
@@ -125,10 +239,10 @@ export default function CalculoLucro() {
           borderRadius: '10px',
           boxShadow: '0 0 10px rgba(0,255,0,0.5)'
         }}>
-          <h2 style={{ color: '#0f0' }}>Cadastro de Dados do Veículo</h2>
+          <h2 style={{ color: '#0f0' }}>{t.registerButton}</h2>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Preço do Combustível (por litro):</label>
+            <label>{t.fuelPrice}</label>
             <input 
               type="number" 
               value={precoCombustivel} 
@@ -139,7 +253,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km/L (Mi/L ou outra medida de distância por litro) feitos pelo veículo:</label>
+            <label>{t.fuelEfficiency}</label>
             <input 
               type="number" 
               value={kmPorLitro} 
@@ -150,7 +264,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Valor do Seguro:</label>
+            <label>{t.insuranceValue}</label>
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
               <input 
                 type="number" 
@@ -164,16 +278,16 @@ export default function CalculoLucro() {
                 onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
                 style={{ marginLeft: '10px', padding: '5px' }}
               >
-                <option value="annual">Anual</option>
-                <option value="monthly">Mensal</option>
-                <option value="weekly">Semanal</option>
-                <option value="daily">Diário</option>
+                <option value="annual">{t.periodicityOptions.annual}</option>
+                <option value="monthly">{t.periodicityOptions.monthly}</option>
+                <option value="weekly">{t.periodicityOptions.weekly}</option>
+                <option value="daily">{t.periodicityOptions.daily}</option>
               </select>
             </div>
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Prêmio do Seguro (x10% de probabilidade de batida ao ano):</label>
+            <label>{t.insurancePremium}</label>
             <input 
               type="number" 
               value={premioSeguro} 
@@ -184,7 +298,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Custos de Manutenção (inclua aluguel do veículo aqui se aplicável):</label>
+            <label>{t.maintenanceCosts}</label>
             {custosManutencao.map((custo) => (
               <div key={custo.id} style={{marginBottom: '10px'}}>
                 <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
@@ -200,10 +314,10 @@ export default function CalculoLucro() {
                     onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
                     style={{ marginLeft: '10px', padding: '5px' }}
                   >
-                    <option value="annual">Anual</option>
-                    <option value="monthly">Mensal</option>
-                    <option value="weekly">Semanal</option>
-                    <option value="daily">Diário</option>
+                    <option value="annual">{t.periodicityOptions.annual}</option>
+                    <option value="monthly">{t.periodicityOptions.monthly}</option>
+                    <option value="weekly">{t.periodicityOptions.weekly}</option>
+                    <option value="daily">{t.periodicityOptions.daily}</option>
                   </select>
                   {custosManutencao.length > 1 && (
                     <button 
@@ -218,7 +332,7 @@ export default function CalculoLucro() {
                         cursor: 'pointer'
                       }}
                     >
-                      Remover
+                      {t.remove}
                     </button>
                   )}
                 </div>
@@ -237,12 +351,12 @@ export default function CalculoLucro() {
                 cursor: 'pointer'
               }}
             >
-              Adicionar Custo
+              {t.addCost}
             </button>
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Distância percorrida (se selecionar "Diária" e trabalhar mais que 5x na semana precisa aumentar o valor desse campo, que considera dias úteis):</label>
+            <label>{t.distance}</label>
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
               <input 
                 type="number" 
@@ -256,15 +370,15 @@ export default function CalculoLucro() {
                 onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
                 style={{ marginLeft: '10px', padding: '5px' }}
               >
-                <option value="daily">Diária</option>
-                <option value="weekly">Semanal</option>
-                <option value="monthly">Mensal</option>
+                <option value="daily">{t.periodicityOptions.daily}</option>
+                <option value="weekly">{t.periodicityOptions.weekly}</option>
+                <option value="monthly">{t.periodicityOptions.monthly}</option>
               </select>
             </div>
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Valor Atual do Veículo se Comprado (deixe zero se for alugado - deprecia 3.33% no ano):</label>
+            <label>{t.vehicleValue}</label>
             <input 
               type="number" 
               value={valorVeiculo} 
@@ -289,13 +403,13 @@ export default function CalculoLucro() {
               width: '100%'
             }}
           >
-            Salvar
+            {t.saveButton}
           </button>
         </div>
       )}
 
       <div style={{ margin: '15px 0' }}>
-        <label>Valor Pago pelo App/Cliente em Qualquer Plataforma/Veículo:</label>
+        <label>{t.rideValue}</label>
         <input 
           type="number" 
           value={valorCorrida} 
@@ -306,7 +420,7 @@ export default function CalculoLucro() {
       </div>
       
       <div style={{ margin: '15px 0' }}>
-        <label>Km/Mi da Corrida (distância percorrida):</label>
+        <label>{t.rideDistance}</label>
         <input 
           type="number" 
           value={KmRodados} 
@@ -317,7 +431,7 @@ export default function CalculoLucro() {
       </div>
 
       <div style={{ margin: '15px 0' }}>
-        <label>Lucro de Curto Prazo (desconta custo do combustível):</label>
+        <label>{t.shortTermProfit}</label>
         <input 
           type="text" 
           value={lucroCurtoPrazo !== null ? `$${lucroCurtoPrazo.toFixed(2)}` : ''} 
@@ -337,7 +451,7 @@ export default function CalculoLucro() {
       </div>
       
       <div style={{ margin: '15px 0' }}>
-        <label>Lucro de Longo Prazo (desconta custo do combustível e todos os outros):</label>
+        <label>{t.longTermProfit}</label>
         <input 
           type="text" 
           value={lucroLongoPrazo !== null ? `$${lucroLongoPrazo.toFixed(2)}` : ''} 
@@ -357,13 +471,13 @@ export default function CalculoLucro() {
       </div>
 
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
-        <strong style={{ color: '#0f0' }}>Dicas:</strong><br />
-        1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.<br />
-        2. Todos os campos podem ser zero sem afetar o cálculo.<br /><br />
+        <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
+        {t.tip1}<br />
+        {t.tip2}<br /><br />
         
-        <strong style={{ color: '#0f0' }}>Fórmula do Lucro de Longo Prazo:</strong> Valor Pago App/Cliente - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
+        <strong style={{ color: '#0f0' }}>{t.formula}</strong> Valor Pago App/Cliente - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
         <br /><br />
-        Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.
+        {t.community}
       </p>
     </div>
   );
