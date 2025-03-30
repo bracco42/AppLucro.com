@@ -14,7 +14,7 @@ export default function CalculoLucro() {
   const [kmPorLitro, setKmPorLitro] = useState<number>(35);
   const [valorSeguro, setValorSeguro] = useState<number>(2000);
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
-  const [premioSeguro, setPremioSeguro] = useState<number>(0);
+  const [premioSeguro, setPremioSeguro] = useState<number>(4000);
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
   const [KmPorDia, setKmPorDia] = useState<number>(250);
   const [valorVeiculo, setValorVeiculo] = useState<number>(15000);
@@ -235,7 +235,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Valor Atual do Veículo (deprecia 3.33% no ano):</label>
+            <label>Valor Atual do Veículo se Comprado (deprecia 3.33% no ano):</label>
             <input 
               type="number" 
               value={valorVeiculo} 
