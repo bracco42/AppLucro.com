@@ -116,7 +116,7 @@ const translations = {
     fuelPrice: '燃油价格每升:',
     fuelEfficiency: '每升行驶距离:',
     insuranceValue: '保险价值:',
-    insurancePremium: '保险费用:', // Mudei "溢价" para "费用" (mais comum para "premium")
+    insurancePremium: '保险保费:',
     maintenanceCosts: '维护成本:',
     addCost: '添加',
     remove: '删除',
