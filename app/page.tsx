@@ -490,6 +490,13 @@ export default function CalculoLucro() {
           <option value="fr">FR</option>
           <option value="zh">中</option>
           <option value="ja">日</option>
+          <option value="ar">ع</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+          <option value="uk">УК</option>
+          <option value="da">DK</option>
+          <option value="tr">TR</option>
+          <option value="sw">SW</option>
         </select>
       </div>
 
