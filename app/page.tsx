@@ -225,10 +225,10 @@ export default function CalculoLucro() {
       </div>
 
       <div style={{ margin: '15px 0' }}>
-        <label>Lucro de Curto Prazo (desconta combustível):</label>
+        <label>Lucro de Curto Prazo (desconta custo do combustível):</label>
         <input 
           type="text" 
-          value={lucroCurtoPrazo !== null ? `R$${lucroCurtoPrazo.toFixed(2)}` : ''} 
+          value={lucroCurtoPrazo !== null ? `$${lucroCurtoPrazo.toFixed(2)}` : ''} 
           readOnly 
           style={{ 
             backgroundColor: '#0f0',
@@ -245,10 +245,10 @@ export default function CalculoLucro() {
       </div>
       
       <div style={{ margin: '15px 0' }}>
-        <label>Lucro de Longo Prazo (desconta combustível e custos):</label>
+        <label>Lucro de Longo Prazo (desconta custo do combustível e todos os outros):</label>
         <input 
           type="text" 
-          value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} 
+          value={lucroLongoPrazo !== null ? `$${lucroLongoPrazo.toFixed(2)}` : ''} 
           readOnly 
           style={{ 
             backgroundColor: '#0f0',
