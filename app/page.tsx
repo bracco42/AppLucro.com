@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
   id: number;
@@ -12,21 +14,161 @@ type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | '
 
 const translations = {
   pt: {
-    // ... (mantenha o conteúdo em português existente) ...
+    title: 'Funcionalidade Para Calcular Lucros de Corridas',
+    subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
+    registerButton: 'Cadastrar Dados do Veículo',
+    closeButton: 'Fechar Cadastro',
+    saveButton: 'Salvar',
+    fuelPrice: 'Preço do Combustível (por litro):',
+    fuelEfficiency: 'Km/L (Mi/L ou outra medida de distância por litro) feitos pelo veículo:',
+    insuranceValue: 'Valor do Seguro:',
+    insurancePremium: 'Prêmio do Seguro (x10% de probabilidade de batida ao ano):',
+    maintenanceCosts: 'Custos de Manutenção (inclua aluguel do veículo aqui se aplicável):',
+    addCost: 'Adicionar Custo',
+    remove: 'Remover',
+    distance: 'Distância percorrida (se selecionar "Diária" e trabalhar mais que 5x na semana precisa aumentar o valor desse campo, que considera dias úteis):',
+    vehicleValue: 'Valor Atual do Veículo se Comprado (deixe zero se for alugado - deprecia 3.33% no ano):',
+    rideValue: 'Valor Pago App/Cliente:',
+    rideDistance: 'Km/Mi da Corrida (distância percorrida):',
+    shortTermProfit: 'Lucro de Curto Prazo (desconta custo do combustível):',
+    longTermProfit: 'Lucro de Longo Prazo (desconta custo do combustível e todos os outros):',
+    tips: 'Dicas:',
+    tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
+    tip2: '2. Todos os campos podem ser zero sem afetar o cálculo.',
+    formula: 'Fórmula do Lucro de Longo Prazo:',
+    community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
+    periodicityOptions: {
+      annual: 'Anual',
+      monthly: 'Mensal',
+      weekly: 'Semanal',
+      daily: 'Diário'
+    }
   },
   en: {
-    // ... (mantenha o conteúdo em inglês existente) ...
+    title: 'Ride Profit Calculation Feature',
+    subtitle: 'Designed for short and long term decision making',
+    registerButton: 'Register Vehicle Data',
+    closeButton: 'Close Registration',
+    saveButton: 'Save',
+    fuelPrice: 'Fuel Price (per liter):',
+    fuelEfficiency: 'Km/L (Mi/L or other distance measure per liter) achieved by the vehicle:',
+    insuranceValue: 'Insurance Value:',
+    insurancePremium: 'Insurance Premium (x10% probability of accident per year):',
+    maintenanceCosts: 'Maintenance Costs (include vehicle rental here if applicable):',
+    addCost: 'Add Cost',
+    remove: 'Remove',
+    distance: 'Distance traveled (if selecting "Daily" and working more than 5x a week, you need to increase this value, which considers working days):',
+    vehicleValue: 'Current Vehicle Value if Purchased (set to zero if rented - depreciates 3.33% per year):',
+    rideValue: 'App/Customer Paid Value:',
+    rideDistance: 'Km/Mi of the Ride (distance traveled):',
+    shortTermProfit: 'Short Term Profit (deducts fuel cost):',
+    longTermProfit: 'Long Term Profit (deducts fuel cost and all other expenses):',
+    tips: 'Tips:',
+    tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
+    tip2: '2. All fields can be zero without affecting the calculation.',
+    formula: 'Long Term Profit Formula:',
+    community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
+    periodicityOptions: {
+      annual: 'Annual',
+      monthly: 'Monthly',
+      weekly: 'Weekly',
+      daily: 'Daily'
+    }
   },
   fr: {
-    // ... (mantenha o conteúdo em francês existente) ...
+    title: 'Fonctionnalité de Calcul de Profit des Courses',
+    subtitle: 'Conçu pour la prise de décision à court et long terme',
+    registerButton: 'Enregistrer les Données du Véhicule',
+    closeButton: 'Fermer l\'Enregistrement',
+    saveButton: 'Enregistrer',
+    fuelPrice: 'Prix du Carburant (par litre):',
+    fuelEfficiency: 'Km/L (Mi/L ou autre mesure de distance par litre) réalisés par le véhicule:',
+    insuranceValue: 'Valeur de l\'Assurance:',
+    insurancePremium: 'Prime d\'Assurance (x10% de probabilité d\'accident par an):',
+    maintenanceCosts: 'Coûts de Maintenance (inclure la location du véhicule ici si applicable):',
+    addCost: 'Ajouter un Coût',
+    remove: 'Supprimer',
+    distance: 'Distance parcourue (si vous sélectionnez "Quotidien" et travaillez plus de 5x par semaine, vous devez augmenter cette valeur, qui considère les jours ouvrables):',
+    vehicleValue: 'Valeur Actuelle du Véhicule si Acheté (mettez zéro si loué - déprécie 3.33% par an):',
+    rideValue: 'Valeur Payée par l\'App/Client:',
+    rideDistance: 'Km/Mi de la Course (distance parcourue):',
+    shortTermProfit: 'Profit à Court Terme (déduit le coût du carburant):',
+    longTermProfit: 'Profit à Long Terme (déduit le coût du carburant et tous les autres):',
+    tips: 'Conseils:',
+    tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
+    tip2: '2. Tous les champs peuvent être zéro sans affecter le calcul.',
+    formula: 'Formule du Profit à Long Terme:',
+    community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
+    periodicityOptions: {
+      annual: 'Annuel',
+      monthly: 'Mensuel',
+      weekly: 'Hebdomadaire',
+      daily: 'Quotidien'
+    }
   },
   zh: {
-    // ... (mantenha o conteúdo em chinês existente) ...
+    title: '行程利润计算器',
+    subtitle: '用于短期和长期决策',
+    registerButton: '注册车辆数据',
+    closeButton: '关闭',
+    saveButton: '保存',
+    fuelPrice: '燃油价格(每升):',
+    fuelEfficiency: '车辆油耗(公里/升):',
+    insuranceValue: '保险价值:',
+    insurancePremium: '保险溢价(每年10%事故概率):',
+    maintenanceCosts: '维护成本(如适用包括租车):',
+    addCost: '添加',
+    remove: '删除',
+    distance: '行驶距离(选择"每日"需考虑工作日):',
+    vehicleValue: '车辆现值(租赁请设为零-年折旧3.33%):',
+    rideValue: '行程收入:',
+    rideDistance: '行程距离(公里):',
+    shortTermProfit: '短期利润(扣除燃油费):',
+    longTermProfit: '长期利润(扣除所有费用):',
+    tips: '提示:',
+    tip1: '1. 如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
+    tip2: '2. 所有字段均可设为零',
+    formula: '长期利润公式:',
+    community: '开源社区! Instagram联系bernard.bracco或Facebook联系Ehnov7id30或Bernard Diniz Bracco! 捐赠PIX:100.980.686-60',
+    periodicityOptions: {
+      annual: '年',
+      monthly: '月',
+      weekly: '周',
+      daily: '日'
+    }
   },
   ja: {
-    // ... (mantenha o conteúdo em japonês existente) ...
+    title: '配達利益計算',
+    subtitle: '短期・長期の意思決定用',
+    registerButton: '車両登録',
+    closeButton: '閉じる',
+    saveButton: '保存',
+    fuelPrice: '燃料価格(1リットル):',
+    fuelEfficiency: '燃費(km/リットル):',
+    insuranceValue: '保険金額:',
+    insurancePremium: '保険料(事故確率10%):',
+    maintenanceCosts: '維持費(レンタル含む):',
+    addCost: '追加',
+    remove: '削除',
+    distance: '走行距離(日次選択時は営業日考慮):',
+    vehicleValue: '車両価値(レンタル時は0-年3.33%減価):',
+    rideValue: '配達収入:',
+    rideDistance: '走行距離(km):',
+    shortTermProfit: '短期利益(燃料費控除):',
+    longTermProfit: '長期利益(全費用控除):',
+    tips: 'ヒント:',
+    tip1: '1. レンタル車両は車両価値を0にし維持費にレンタル代を計上',
+    tip2: '2. 全項目0設定可能',
+    formula: '長期利益計算式:',
+    community: 'オープンソース! Instagramでbernard.braccoかFacebookでEhnov7id30かBernard Diniz Braccoに連絡! 寄付PIX:100.980.686-60',
+    periodicityOptions: {
+      annual: '年',
+      monthly: '月',
+      weekly: '週',
+      daily: '日'
+    }
   },
-  ar: { // Árabe
+  ar: {
     title: 'حاسبة ربح الرحلات',
     subtitle: 'لصنع القرارات قصيرة وطويلة المدى',
     registerButton: 'تسجيل بيانات المركبة',
@@ -57,7 +199,7 @@ const translations = {
       daily: 'يومي'
     }
   },
-  de: { // Alemão
+  de: {
     title: 'Fahrtkostenberechnung',
     subtitle: 'Für kurzfristige und langfristige Entscheidungen',
     registerButton: 'Fahrzeugdaten registrieren',
@@ -88,7 +230,7 @@ const translations = {
       daily: 'Täglich'
     }
   },
-  ru: { // Russo
+  ru: {
     title: 'Калькулятор прибыли',
     subtitle: 'Для краткосрочных и долгосрочных решений',
     registerButton: 'Регистрация данных ТС',
@@ -119,7 +261,7 @@ const translations = {
       daily: 'День'
     }
   },
-  uk: { // Ucraniano
+  uk: {
     title: 'Калькулятор прибутку',
     subtitle: 'Для прийняття рішень',
     registerButton: 'Реєстрація даних ТЗ',
@@ -150,7 +292,7 @@ const translations = {
       daily: 'День'
     }
   },
-  da: { // Dinamarquês
+  da: {
     title: 'Kørselsprofitberegner',
     subtitle: 'Til kortsigtet og langsigtet beslutningstagning',
     registerButton: 'Registrer køretøjsdata',
@@ -181,7 +323,7 @@ const translations = {
       daily: 'Daglig'
     }
   },
-  tr: { // Turco
+  tr: {
     title: 'Sürüş Kar Hesaplayıcı',
     subtitle: 'Kısa ve uzun vadeli kararlar için',
     registerButton: 'Araç Kaydı',
@@ -212,7 +354,7 @@ const translations = {
       daily: 'Günlük'
     }
   },
-  sw: { // Swahili (África Oriental)
+  sw: {
     title: 'Kikokotoo cha Faida ya Usafiri',
     subtitle: 'Kwa maamuzi ya muda mfupi na mrefu',
     registerButton: 'Sajili Data ya Gari',
@@ -245,36 +387,8 @@ const translations = {
   }
 };
 
-// ... (mantenha o resto do código existente, incluindo o componente CalculoLucro) ...
-
-// Atualize o seletor de idiomas para incluir as novas opções
-<select 
-  value={language}
-  onChange={(e) => setLanguage(e.target.value as Language)}
-  style={{
-    padding: '5px',
-    backgroundColor: '#0f0',
-    color: '#000',
-    border: 'none',
-    borderRadius: '5px',
-    fontWeight: 'bold'
-  }}
->
-  <option value="pt">PT</option>
-  <option value="en">EN</option>
-  <option value="fr">FR</option>
-  <option value="zh">中</option>
-  <option value="ja">日</option>
-  <option value="ar">ع</option>  {/* Árabe - ع */}
-  <option value="de">DE</option> {/* Alemão - DE */}
-  <option value="ru">RU</option> {/* Russo - RU */}
-  <option value="uk">УК</option> {/* Ucraniano - УК */}
-  <option value="da">DK</option> {/* Dinamarquês - DK */}
-  <option value="tr">TR</option> {/* Turco - TR */}
-  <option value="sw">SW</option> {/* Swahili - SW */}
-</select>
-
 export default function CalculoLucro() {
+  const [isClient, setIsClient] = useState(false);
   const [precoCombustivel, setPrecoCombustivel] = useState<number>(5);
   const [kmPorLitro, setKmPorLitro] = useState<number>(35);
   const [valorSeguro, setValorSeguro] = useState<number>(2000);
@@ -291,11 +405,22 @@ export default function CalculoLucro() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>('pt');
 
-  const t = translations[language];
-
   useEffect(() => {
+    setIsClient(true);
     calcularLucros();
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
+
+  const t = translations[language];
+
+  if (!isClient) {
+    return <div style={{ 
+      textAlign: 'center', 
+      padding: '20px', 
+      backgroundColor: '#000', 
+      color: '#fff',
+      minHeight: '100vh'
+    }}>Carregando...</div>;
+  }
 
   const calcularLucros = () => {
     if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
@@ -379,6 +504,13 @@ export default function CalculoLucro() {
           <option value="fr">FR</option>
           <option value="zh">中</option>
           <option value="ja">日</option>
+          <option value="ar">ع</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+          <option value="uk">УК</option>
+          <option value="da">DK</option>
+          <option value="tr">TR</option>
+          <option value="sw">SW</option>
         </select>
       </div>
 
