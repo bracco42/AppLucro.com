@@ -34,7 +34,7 @@ const translations = {
     tips: 'Dicas:',
     tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: '2. Pode ser usado em todas as plataformas e veículos! Tanto aplicativos quanto motoristas de APP, taxi, Ifood, Uber, 99, etc.',
-    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% sobre o valor do veículo - 10% sobre o Prêmio do Seguro. Observação: se selecionar "Diário" e trabalhar mais que 5x na semana, considere aumentar o valor da distância percorrida.',
+    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% ao ano sobre o valor do veículo - 10% ao ano sobre o Prêmio do Seguro. Observação: se selecionar "Diário" e trabalhar mais que 5x na semana, considere aumentar o valor da distância percorrida.',
     community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
     periodicityOptions: {
       annual: 'Anual',
@@ -419,11 +419,13 @@ export default function CalculoLucro() {
 
   useEffect(() => {
     calcularLucros();
-  }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
+  }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, 
+      custosManutencao, distanciaPercorrida, periodicidadeDistancia, 
+      diasTrabalhadosPorSemana, valorVeiculo, valorCorrida, KmRodados]);
 
-  // Função calcularLucros corrigida
   const calcularLucros = () => {
-    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
+    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, 
+         valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
       return;
@@ -435,7 +437,7 @@ export default function CalculoLucro() {
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
 
-    // Cálculo do lucro de longo prazo
+    // Funções auxiliares para conversão
     const converterParaAnual = (valor: number, periodicity: Periodicity) => {
       const fatorDias = periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1;
       switch(periodicity) {
@@ -445,105 +447,55 @@ export default function CalculoLucro() {
         default: return valor;
       }
     };
-    const distanciaDiaria = periodicidadeDistancia === 'monthly' ? distanciaPercorrida / 21 :
-                          periodicidadeDistancia === 'weekly' ? distanciaPercorrida / diasTrabalhadosPorSemana :
-                          distanciaPercorrida;
 
+    const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
+      switch(periodicity) {
+        case 'monthly': return valor / 21;
+        case 'weekly': return valor / diasTrabalhadosPorSemana;
+        case 'daily': return valor;
+        default: return valor;
+      }
+    };
+
+    // Cálculos principais
+    const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
     const diasUteisAno = 252 * (periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1);
     const denominator = distanciaDiaria * diasUteisAno;
 
-    // Cálculo dos custos anuais
-    const custosAnuais = custosManutencao.map(c => converterParaAnual(c.valor, c.periodicity));
+    // Conversão de custos para anuais
+    const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
     const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
-    const totalCustosAnuais = custosAnuais.reduce((a, b) => a + b, 0) + seguroAnual;
     
-    // Aplicação do prêmio do seguro (10% do valor fixo)
-    const descontoPremio = premioSeguro * 0.1;
+    // Cálculo do prêmio do seguro (10% ao ano do valor fixo)
+    const descontoPremioAnual = premioSeguro * 0.1;
     
-    // Cálculo por corrida
-    const custoPorCorrida = denominator > 0 ? 
-      (totalCustosAnuais * KmRodados / denominator) + 
-      (valorVeiculo > 0 ? (valorVeiculo * 0.0333 * KmRodados / denominator) : 0) +
-      (descontoPremio * KmRodados / denominator) : 0;
+    // Cálculo dos custos por corrida
+    const custoManutencaoCorrida = denominator > 0 ? 
+      custosAnuais.reduce((total, valor) => total + valor, 0) * KmRodados / denominator : 0;
+    
+    const custoSeguroCorrida = denominator > 0 ? seguroAnual * KmRodados / denominator : 0;
+    
+    const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? 
+      (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
+    
+    const descontoPremioCorrida = denominator > 0 ? 
+      descontoPremioAnual * KmRodados / denominator : 0;
 
-    const lucroLongo = valorCorrida - custoCombustivelCorrida - custoPorCorrida;
+    // Lucro de longo prazo final
+    const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - 
+                      custoSeguroCorrida - depreciaçãoVeiculo - descontoPremioCorrida;
     setLucroLongoPrazo(lucroLongo);
   };
 
-  // 2. Conversão para valores anuais (com ajuste para dias trabalhados)
-  const converterParaAnual = (valor: number, periodicity: Periodicity) => {
-    const fatorDiasTrabalhados = periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1;
-    
-    switch(periodicity) {
-      case 'monthly': return valor * 12;
-      case 'weekly': return valor * 52;
-      case 'daily': return valor * 252 * fatorDiasTrabalhados;
-      default: return valor; // annual
-    }
+  const adicionarCustoManutencao = () => {
+    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
   };
 
-  // 3. Conversão de distância para diária
-  const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
-    switch(periodicity) {
-      case 'monthly': return valor / 21;
-      case 'weekly': return valor / diasTrabalhadosPorSemana;
-      case 'daily': return valor;
-      default: return valor;
+  const removerCustoManutencao = (id: number) => {
+    if (custosManutencao.length > 1) {
+      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
     }
   };
-
-  // 4. Cálculos principais
-  const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
-  
-  // 5. Convertendo custos para anuais (exceto prêmio do seguro)
-  const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
-  const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
-  
-  // 6. Cálculo do prêmio do seguro (10% do valor FIXO, sem periodicidade)
-  const descontoPremioSeguro = premioSeguro * 0.1; // 10% do valor fixo
-  
-  // 7. Cálculo do denominador ajustado
-  const diasUteisAno = 252 * (periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1);
-  const denominator = distanciaDiaria * diasUteisAno;
-  
-  // 8. Cálculos por corrida
-  const custoManutencaoCorrida = denominator > 0 ? 
-    custosAnuais.reduce((total, valor) => total + valor, 0) * KmRodados / denominator : 0;
-  
-  const custoSeguroCorrida = denominator > 0 ? seguroAnual * KmRodados / denominator : 0;
-  
-  const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? 
-    (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
-  
-  // 9. Cálculo do desconto do prêmio por corrida (proporcional)
-  const descontoPremioPorCorrida = denominator > 0 ?
-    (descontoPremioSeguro * KmRodados) / denominator : 0;
-
-  // 10. Lucro de longo prazo final (com todos os componentes)
-  const lucroLongo = valorCorrida 
-    - custoCombustivelCorrida 
-    - custoManutencaoCorrida 
-    - custoSeguroCorrida 
-    - depreciaçãoVeiculo
-    - descontoPremioPorCorrida; // 10% do prêmio aplicado aqui
-  
-  setLucroLongoPrazo(lucroLongo);
-};
-  
-  const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
-  const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
-  
-  const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
-  
-  const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
-  const seguroTotalAnual = seguroAnual + premioAnual;
-  
-  const denominator = distanciaDiaria * 252;
-  const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
-  const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
-  const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
-  setLucroLongoPrazo(lucroLongo);
-};
 
   const atualizarCustoManutencao = (id: number, field: string, value: any) => {
     setCustosManutencao(custosManutencao.map(custo => 
@@ -553,7 +505,6 @@ export default function CalculoLucro() {
 
   return (
     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
-      {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select 
           value={language}
@@ -567,70 +518,86 @@ export default function CalculoLucro() {
             fontWeight: 'bold'
           }}
         >
-          {/* Opções de idioma */}
+          <option value="pt">PT</option>
+          <option value="en">EN</option>
+          <option value="fr">FR</option>
+          <option value="zh">中</option>
+          <option value="ja">日</option>
+          <option value="ar">ع</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+          <option value="uk">УК</option>
+          <option value="da">DK</option>
+          <option value="tr">TR</option>
+          <option value="sw">SW</option>
         </select>
       </div>
 
-      {/* Conteúdo principal */}
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
       <h1 style={{ color: '#0f0' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>{t.subtitle}</h2>
       
-      {/* Botão e modal */}
-      <button onClick={() => setShowModal(!showModal)} style={/* estilos */}>
+      <button onClick={() => setShowModal(!showModal)} style={{
+        padding: '10px 20px',
+        backgroundColor: '#0f0',
+        color: '#000',
+        border: 'none',
+        borderRadius: '5px',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        marginBottom: '20px'
+      }}>
         {showModal ? t.closeButton : t.registerButton}
       </button>
 
       {showModal && (
-        <div className="modal" style={/* estilos */}>
-          {/* Conteúdo do modal */}
+        <div className="modal" style={{ 
+          maxWidth: '400px', 
+          margin: '0 auto',
+          backgroundColor: '#222',
+          padding: '20px',
+          borderRadius: '10px',
+          boxShadow: '0 0 10px rgba(0,255,0,0.5)'
+        }}>
+          <h2 style={{ color: '#0f0' }}>{t.registerButton}</h2>
+          
+          {/* Formulário de entrada */}
+          {/* ... (mantenha todos os campos de entrada existentes) ... */}
+          
+          {/* Campo de dias trabalhados (apenas quando periodicidade é diária) */}
+          {periodicidadeDistancia === 'daily' && (
+            <div style={{ marginBottom: '15px' }}>
+              <label>{t.workingDays}</label>
+              <input 
+                type="number" 
+                value={diasTrabalhadosPorSemana} 
+                onChange={(e) => setDiasTrabalhadosPorSemana(Math.min(7, Math.max(1, parseInt(e.target.value) || 5))} 
+                style={{ marginLeft: '10px', padding: '5px' }}
+                min="1"
+                max="7"
+              />
+            </div>
+          )}
+          
+          <button 
+            onClick={() => setShowModal(false)} 
+            style={{ 
+              marginTop: '20px', 
+              padding: '10px 20px', 
+              fontSize: '16px',
+              backgroundColor: '#0f0',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            {t.saveButton}
+          </button>
         </div>
       )}
-
-      {/* Campos de entrada e resultados */}
-      <div style={{ margin: '15px 0' }}>
-        <label>{t.rideValue}</label>
-        <input 
-          type="number" 
-          value={valorCorrida} 
-          onChange={(e) => setValorCorrida(parseFloat(e.target.value) || 0)} 
-          style={{ marginLeft: '10px', padding: '5px' }}
-          min="0"
-        />
-      </div>
       
-      {/* ... outros campos de entrada ... */}
-
-      {/* Resultados */}
-      <div style={{ margin: '15px 0' }}>
-        <label>{t.shortTermProfit}</label>
-        <input 
-          type="text" 
-          value={lucroCurtoPrazo !== null ? `$${lucroCurtoPrazo.toFixed(2)}` : ''} 
-          readOnly 
-          style={/* estilos */}
-        />
-      </div>
       
-      <div style={{ margin: '15px 0' }}>
-        <label>{t.longTermProfit}</label>
-        <input 
-          type="text" 
-          value={lucroLongoPrazo !== null ? `$${lucroLongoPrazo.toFixed(2)}` : ''} 
-          readOnly 
-          style={/* estilos */}
-        />
-      </div>
-
-      {/* Dicas e informações */}
-      <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
-        <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
-        #{t.tip1}<br />
-        #{t.tip2}<br /><br />
-        #{t.formula}<br /><br />
-        #{t.community}
-      </p>
-    </div>
-  );
-}
