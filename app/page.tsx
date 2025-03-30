@@ -7,35 +7,35 @@ export default function CalculoLucro() {
   const [kmPorLitro, setKmPorLitro] = useState(35);
   const [valorSeguro, setValorSeguro] = useState(2000);
   const [custosManutencao, setCustosManutencao] = useState<{id: number, valor: number}[]>([{id: 1, valor: 20000}]);
-  const [kmsPorDia, setKmsPorDia] = useState(250);
+  const [KmPorDia, setKmPorDia] = useState(250);
   const [valorVeiculo, setValorVeiculo] = useState(15000);
   const [valorCorrida, setValorCorrida] = useState(15);
-  const [kmsRodados, setKmsRodados] = useState(10);
+  const [KmRodados, setKmRodados] = useState(10);
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     calcularLucros();
-  }, [precoCombustivel, kmPorLitro, valorSeguro, custosManutencao, kmsPorDia, valorVeiculo, valorCorrida, kmsRodados]);
+  }, [precoCombustivel, kmPorLitro, valorSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
-    if ([precoCombustivel, kmPorLitro, valorSeguro, kmsPorDia, valorVeiculo, valorCorrida, kmsRodados].some(val => val <= 0 || isNaN(val))) {
+    if ([precoCombustivel, kmPorLitro, valorSeguro, KmPorDia, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
       return;
     }
 
     const custoCombustivelPorKm = precoCombustivel / kmPorLitro;
-    const custoCombustivelCorrida = custoCombustivelPorKm * kmsRodados;
+    const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
 
     // Soma todos os custos de manutenção
     const totalManutencaoAnual = custosManutencao.reduce((total, custo) => total + custo.valor, 0);
     
-    const custoManutencaoCorrida = ((totalManutencaoAnual + valorSeguro) || (0.0333 * valorVeiculo)) * kmsRodados / (kmsPorDia * 252);
-    const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * kmsRodados) / (kmsPorDia * 252);
+    const custoManutencaoCorrida = ((totalManutencaoAnual + valorSeguro) || (0.0333 * valorVeiculo)) * KmRodados / (KmPorDia * 252);
+    const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * KmRodados) / (KmPorDia * 252);
     const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
     setLucroLongoPrazo(lucroLongo);
   };
@@ -78,7 +78,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Kms/L feitos pelo veículo:</label>
+            <label>Km/L feitos pelo veículo:</label>
             <input 
               type="number" 
               value={kmPorLitro} 
@@ -127,11 +127,11 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Kms rodados por dia (útil):</label>
+            <label>Km (Ft) rodados por dia (útil):</label>
             <input 
               type="number" 
-              value={kmsPorDia} 
-              onChange={(e) => setKmsPorDia(parseFloat(e.target.value) || 0)} 
+              value={KmPorDia} 
+              onChange={(e) => setKmPorDia(parseFloat(e.target.value) || 0)} 
               required 
             />
           </div>
@@ -173,11 +173,11 @@ export default function CalculoLucro() {
       </div>
       
       <div style={{ margin: '15px 0' }}>
-        <label>Quilômetros da Corrida:</label>
+        <label>Km(Ft) da Corrida:</label>
         <input 
           type="number" 
-          value={kmsRodados} 
-          onChange={(e) => setKmsRodados(parseFloat(e.target.value) || 0)} 
+          value={KmRodados} 
+          onChange={(e) => setKmRodados(parseFloat(e.target.value) || 0)} 
         />
       </div>
 
@@ -192,7 +192,7 @@ export default function CalculoLucro() {
       </div>
 
       <p>
-        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Preencha qualquer número diferente de 0 em valor do seguro e manutenção para funcionar corretamente (incluir IPVA, óleo, etc. ao ano). O valor do veículo serve para calcular uma depreciação de 3,33% ao ano para o lucro de longo prazo (em caso de aluguel ou se preferir informar esse custo colocar 1 ou um outro valor baixo). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os outros custos também. Os KMs rodados por dia útil servem para diferir (espalhar) os custos anuais para cada corrida (se trabalhar mais que 5x considerar um valor maior nesse campo).
+        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Preencha qualquer número diferente de 0 em valor do seguro e manutenção para funcionar corretamente (incluir imposto, óleo, etc. [ao ano]). O valor do veículo serve para calcular uma depreciação de 3.33% ao ano para o lucro de longo prazo (em caso de aluguel ou se preferir informar esse custo colocar 1 ou um outro valor baixo). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta todos os outros custos também. Os Km rodados por dia útil servem para diferir (espalhar) os custos anuais para cada corrida (se trabalhar mais que 5x na semana considerar um valor maior nesse campo). A distância pode ser preenchida em qualquer medida.
       </p>
     </div>
   );
