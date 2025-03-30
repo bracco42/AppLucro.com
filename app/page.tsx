@@ -805,7 +805,7 @@ export default function CalculoLucro() {
       />
     </div>
 
-    <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
+  <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
       <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
       #{t.tip1}<br />
       #{t.tip2}<br /><br />
@@ -813,5 +813,6 @@ export default function CalculoLucro() {
       #{t.community}
     </p>
   </div>
-);
+  );
+}
        
