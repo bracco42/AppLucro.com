@@ -31,8 +31,8 @@ const translations = {
     shortTermProfit: 'Lucro de Curto Prazo (desconta custo do combustível):',
     longTermProfit: 'Lucro de Longo Prazo (desconta custo do combustível e todos os outros):',
     tips: 'Dicas:',
-    tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
-    tip2: '2. Pode ser usado em todas as plataformas e veículos! Tanto aplicativos quanto motoristas de APP, taxi, Ifood, Uber, 99, etc.',
+    tip1: 'Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
+    tip2: 'Pode ser usado em todas as plataformas e veículos! Tanto aplicativos quanto motoristas de APP, taxi, Ifood, Uber, 99, etc.',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% sobre o valor do veículo - 10% sobre o Prêmio do Seguro',
     community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
     periodicityOptions: {
@@ -62,8 +62,8 @@ const translations = {
     shortTermProfit: 'Short Term Profit (deducts fuel cost):',
     longTermProfit: 'Long Term Profit (deducts fuel cost and all other expenses):',
     tips: 'Tips:',
-    tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
-    tip2: '2. Can be used for all platforms and vehicles! Including app drivers, taxis, Ifood, Uber, 99, etc.',
+    tip1: 'If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
+    tip2: 'Can be used for all platforms and vehicles! Including app drivers, taxis, Ifood, Uber, 99, etc.',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% Vehicle Depreciation - 10% Insurance Premium',
     community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
     periodicityOptions: {
@@ -93,8 +93,8 @@ const translations = {
     shortTermProfit: 'Profit à Court Terme (déduit le coût du carburant):',
     longTermProfit: 'Profit à Long Terme (déduit le coût du carburant et tous les autres):',
     tips: 'Conseils:',
-    tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
-    tip2: '2. Peut être utilisé pour toutes les plateformes et véhicules! Y compris les chauffeurs d\'application, taxis, Ifood, Uber, 99, etc.',
+    tip1: 'Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
+    tip2: 'Peut être utilisé pour toutes les plateformes et véhicules! Y compris les chauffeurs d\'application, taxis, Ifood, Uber, 99, etc.',
     formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% sur la valeur du véhicule - 10% sur la Prime d\'Assurance',
     community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
     periodicityOptions: {
@@ -484,7 +484,7 @@ export default function CalculoLucro() {
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         #{t.tip1}<br />
         #{t.tip2}<br /><br />
-        #3{t.formula}<br /><br />
+        #{t.formula}<br /><br />
         #{t.community}
       </p>
     </div>
