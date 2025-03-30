@@ -240,7 +240,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Distância percorrida:</label>
+            <label>Distância percorrida (diário se trabalhar mais que 5x na semana precisa aumentar o valor desse campo que considera dias úteis):</label>
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
               <input 
                 type="number" 
