@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-type Periodicity = 'annual' | 'monthly' | 'daily';
+type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
   id: number;
   valor: number;
@@ -16,7 +16,8 @@ export default function CalculoLucro() {
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<number>(4000);
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
-  const [KmPorDia, setKmPorDia] = useState<number>(250);
+  const [distanciaPercorrida, setDistanciaPercorrida] = useState<number>(250);
+  const [periodicidadeDistancia, setPeriodicidadeDistancia] = useState<Periodicity>('daily');
   const [valorVeiculo, setValorVeiculo] = useState<number>(15000);
   const [valorCorrida, setValorCorrida] = useState<number>(15);
   const [KmRodados, setKmRodados] = useState<number>(10);
@@ -26,10 +27,10 @@ export default function CalculoLucro() {
 
   useEffect(() => {
     calcularLucros();
-  }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
+  }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
-    if ([precoCombustivel, kmPorLitro, valorSeguro, KmPorDia, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
+    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
       return;
@@ -44,11 +45,23 @@ export default function CalculoLucro() {
     const converterParaAnual = (valor: number, periodicity: Periodicity) => {
       switch(periodicity) {
         case 'monthly': return valor * 12;
+        case 'weekly': return valor * 52;
         case 'daily': return valor * 252; // 252 dias úteis
         default: return valor;
       }
     };
 
+    // Converter distância para diária
+    const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
+      switch(periodicity) {
+        case 'monthly': return valor / 21; // 21 dias úteis no mês
+        case 'weekly': return valor / 5;   // 5 dias úteis na semana
+        default: return valor;             // diário
+      }
+    };
+
+    const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
+    
     const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
     const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
     
@@ -59,8 +72,8 @@ export default function CalculoLucro() {
     const seguroTotalAnual = seguroAnual + premioAnual;
     
     // Cálculo proporcional por corrida
-    const custoManutencaoCorrida = (totalManutencaoAnual + seguroTotalAnual) * KmRodados / (KmPorDia * 252);
-    const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * KmRodados) / (KmPorDia * 252);
+    const custoManutencaoCorrida = (totalManutencaoAnual + seguroTotalAnual) * KmRodados / (distanciaDiaria * 252);
+    const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * KmRodados) / (distanciaDiaria * 252);
     const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
     setLucroLongoPrazo(lucroLongo);
   };
@@ -151,6 +164,7 @@ export default function CalculoLucro() {
               >
                 <option value="annual">Anual</option>
                 <option value="monthly">Mensal</option>
+                <option value="weekly">Semanal</option>
                 <option value="daily">Diário</option>
               </select>
             </div>
@@ -186,6 +200,7 @@ export default function CalculoLucro() {
                   >
                     <option value="annual">Anual</option>
                     <option value="monthly">Mensal</option>
+                    <option value="weekly">Semanal</option>
                     <option value="daily">Diário</option>
                   </select>
                   {custosManutencao.length > 1 && (
@@ -225,14 +240,25 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Distância percorrida por dia da semana (seg. a sex.):</label>
-            <input 
-              type="number" 
-              value={KmPorDia} 
-              onChange={(e) => setKmPorDia(parseFloat(e.target.value) || 0)} 
-              style={{ marginLeft: '10px', padding: '5px' }}
-              required 
-            />
+            <label>Distância percorrida:</label>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+              <input 
+                type="number" 
+                value={distanciaPercorrida} 
+                onChange={(e) => setDistanciaPercorrida(parseFloat(e.target.value) || 0)} 
+                required 
+                style={{ flex: 1, padding: '5px' }}
+              />
+              <select
+                value={periodicidadeDistancia}
+                onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
+                style={{ marginLeft: '10px', padding: '5px' }}
+              >
+                <option value="daily">Diária</option>
+                <option value="weekly">Semanal</option>
+                <option value="monthly">Mensal</option>
+              </select>
+            </div>
           </div>
           
           <div style={{ marginBottom: '15px' }}>
