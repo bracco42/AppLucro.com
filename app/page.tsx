@@ -66,7 +66,7 @@ const translations = {
     tips: 'Tips:',
     tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: '2. Can be used for all platforms and vehicles! Including app drivers, taxis, Ifood, Uber, 99, etc.',
-    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% Vehicle Depreciation - 10% Insurance Premium. Note: if selecting "Daily" and working more than 5x a week, consider increasing the distance value.',
+    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% per year Vehicle Depreciation - 10% per year Insurance Premium. Note: if selecting "Daily" and working more than 5x a week, consider increasing the distance value.',
     community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
     periodicityOptions: {
       annual: 'Annual',
@@ -98,7 +98,7 @@ const translations = {
     tips: 'Conseils:',
     tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
     tip2: '2. Peut être utilisé pour toutes les plateformes et véhicules! Y compris les chauffeurs d\'application, taxis, Ifood, Uber, 99, etc.',
-    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% sur la valeur du véhicule - 10% sur la Prime d\'Assurance. Remarque: si vous sélectionnez "Quotidien" et travaillez plus de 5 fois par semaine, envisagez d\'augmenter la valeur de distance.',
+    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% par an sur la valeur du véhicule - 10% par an sur la Prime d\'Assurance. Remarque: si vous sélectionnez "Quotidien" et travaillez plus de 5 fois par semaine, envisagez d\'augmenter la valeur de distance.',
     community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
     periodicityOptions: {
       annual: 'Annuel',
@@ -130,7 +130,7 @@ const translations = {
     tips: '提示:',
     tip1: '1. 如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
     tip2: '2. 适用于所有平台和车辆! 包括网约车、出租车、Ifood、Uber、99等',
-    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 车辆价值3.33%折旧 - 保险溢价10%。注意:选择"每日"且每周工作超过5天时，请考虑增加距离值。',
+    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 车辆价值3.33%年折旧 - 保险溢价10%年费。注意:选择"每日"且每周工作超过5天时，请考虑增加距离值。',
     community: '开源社区! Instagram联系bernard.bracco或Facebook联系Ehnov7id30或Bernard Diniz Bracco! 捐赠PIX:100.980.686-60',
     periodicityOptions: {
       annual: '年',
@@ -162,7 +162,7 @@ const translations = {
     tips: 'ヒント:',
     tip1: '1. レンタル車両は車両価値を0にし維持費にレンタル代を計上',
     tip2: '2. 全プラットフォーム/車両で利用可能! 配達アプリ、タクシー、Ifood、Uber、99等',
-    formula: '長期利益計算式: 収益 - 支出(燃料他) - 車両価値3.33%減価 - 保険料10%。注記: "日次"選択で週5日以上稼働時は走行距離値を増やすことを検討してください。',
+    formula: '長期利益計算式: 収益 - 支出(燃料他) - 車両価値3.33%年間減価 - 保険料10%年間。注記: "日次"選択で週5日以上稼働時は走行距離値を増やすことを検討してください。',
     community: 'オープンソース! Instagramでbernard.braccoかFacebookでEhnov7id30かBernard Diniz Braccoに連絡! 寄付PIX:100.980.686-60',
     periodicityOptions: {
       annual: '年',
@@ -194,7 +194,7 @@ const translations = {
     tips: 'نصائح:',
     tip1: '1. عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
     tip2: '2. يمكن استخدامه لجميع المنصات والمركبات! بما في ذلك سائق التطبيقات، سيارات الأجرة، Ifood، Uber، 99، إلخ.',
-    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - استهلاك 3.33% من قيمة المركبة - 10% من قسط التأمين. ملاحظة: عند اختيار "يومي" والعمل أكثر من 5 مرات في الأسبوع، فكر في زيادة قيمة المسافة.',
+    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - استهلاك 3.33% سنويًا من قيمة المركبة - 10% سنويًا من قسط التأمين. ملاحظة: عند اختيار "يومي" والعمل أكثر من 5 مرات في الأسبوع، فكر في زيادة قيمة المسافة.',
     community: 'مصدر مفتوح! تواصل عبر Instagram bernard.bracco أو Facebook Ehnov7id30 أو Bernard Diniz Bracco! التبرعات: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'سنوي',
@@ -226,7 +226,7 @@ const translations = {
     tips: 'Tipps:',
     tip1: '1. Bei Mietfahrzeugen Wert auf 0 setzen und Miete zu Wartungskosten addieren',
     tip2: '2. Für alle Plattformen und Fahrzeuge nutzbar! Inkl. App-Fahrer, Taxis, Ifood, Uber, 99 usw.',
-    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - 3.33% Fahrzeugwertabschreibung - 10% Versicherungsprämie. Hinweis: Bei Auswahl "Täglich" und mehr als 5 Arbeitstagen pro Woche, Fahrstreckenwert erhöhen.',
+    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - 3.33% jährliche Fahrzeugwertabschreibung - 10% jährliche Versicherungsprämie. Hinweis: Bei Auswahl "Täglich" und mehr als 5 Arbeitstagen pro Woche, Fahrstreckenwert erhöhen.',
     community: 'Open Source! Kontakt: Instagram bernard.bracco oder Facebook Ehnov7id30 oder Bernard Diniz Bracco! Spenden: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Jährlich',
@@ -258,7 +258,7 @@ const translations = {
     tips: 'Советы:',
     tip1: '1. Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
     tip2: '2. Подходит для всех платформ и ТС! Включая приложения, такси, Ifood, Uber, 99 и др.',
-    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - 3.33% амортизация ТС - 10% страховой премии. Примечание: при выборе "День" и работе более 5 дней в неделю, увеличьте значение пробега.',
+    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - 3.33% годовая амортизация ТС - 10% годовая страховая премия. Примечание: при выборе "День" и работе более 5 дней в неделю, увеличьте значение пробега.',
     community: 'Open Source! Контакты: Instagram bernard.bracco или Facebook Ehnov7id30 или Bernard Diniz Bracco! Пожертвования: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Год',
@@ -290,7 +290,7 @@ const translations = {
     tips: 'Поради:',
     tip1: '1. Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
     tip2: '2. Підходить для всіх платформ і ТЗ! Включаючи додатки, таксі, Ifood, Uber, 99 тощо.',
-    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - 3.33% амортизація ТЗ - 10% страхової премії. Примітка: при виборі "День" та роботі понад 5 днів на тиждень, збільште значення пробігу.',
+    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - 3.33% річна амортизація ТЗ - 10% річна страхова премія. Примітка: при виборі "День" та роботі понад 5 днів на тиждень, збільште значення пробігу.',
     community: 'Open Source! Контакти: Instagram bernard.bracco або Facebook Ehnov7id30 або Bernard Diniz Bracco! Донати: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Рік',
@@ -322,7 +322,7 @@ const translations = {
     tips: 'Tips:',
     tip1: '1. Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
     tip2: '2. Kan bruges til alle platforme og køretøjer! Inkl. app-chauffører, taxaer, Ifood, Uber, 99 osv.',
-    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - 3.33% køretøjsværdiafsrivning - 10% forsikringspræmie. Bemærk: Ved valg af "Daglig" og arbejde mere end 5 gange om ugen, overvej at øge distanceværdien.',
+    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - 3.33% årlig køretøjsværdiafsrivning - 10% årlig forsikringspræmie. Bemærk: Ved valg af "Daglig" og arbejde mere end 5 gange om ugen, overvej at øge distanceværdien.',
     community: 'Open Source! Kontakt: Instagram bernard.bracco eller Facebook Ehnov7id30 eller Bernard Diniz Bracco! Donationer: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Årlig',
@@ -354,7 +354,7 @@ const translations = {
     tips: 'İpuçları:',
     tip1: '1. Kiralık araçlarda değeri 0 yapın ve kira maliyetlere ekleyin',
     tip2: '2. Tüm platformlar ve araçlar için kullanılabilir! Uygulama sürücüleri, taksiler, Ifood, Uber, 99 vb.',
-    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Aracın değerinin %3.33 amortismanı - Sigorta Primi %10. Not: "Günlük" seçip haftada 5\'ten fazla çalışırsanız mesafe değerini artırmayı düşünün.',
+    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Aracın değerinin %3.33 yıllık amortismanı - Sigorta Primi %10 yıllık. Not: "Günlük" seçip haftada 5\'ten fazla çalışırsanız mesafe değerini artırmayı düşünün.',
     community: 'Açık Kaynak! İletişim: Instagram bernard.bracco veya Facebook Ehnov7id30 veya Bernard Diniz Bracco! Bağışlar: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Yıllık',
@@ -386,7 +386,7 @@ const translations = {
     tips: 'Vidokezo:',
     tip1: '1. Kwa gari zilizokodishwa, weka thamani ya 0 na ongeza kodi kwenye gharama',
     tip2: '2. Inaweza kutumika kwa mifumo yote na magari! Pamoja na madereva wa programu, teksi, Ifood, Uber, 99, n.k.',
-    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - 3.33% kupungua kwa thamani ya gari - 10% ya Malipo ya Bima. Kumbuka: ukichagua "Kila Siku" na kufanya kazi zaidi ya mara 5 kwa wiki, fikiria kuongeza thamani ya umbali.',
+    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - 3.33% kupungua kwa thamani ya gari kwa mwaka - 10% ya Malipo ya Bima kwa mwaka. Kumbuka: ukichagua "Kila Siku" na kufanya kazi zaidi ya mara 5 kwa wiki, fikiria kuongeza thamani ya umbali.',
     community: 'Chanzo Wazi! Wasiliana: Instagram bernard.bracco au Facebook Ehnov7id30 au Bernard Diniz Bracco! Michango: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Mwaka',
@@ -539,65 +539,279 @@ export default function CalculoLucro() {
       <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>{t.subtitle}</h2>
       
       <button onClick={() => setShowModal(!showModal)} style={{
-        padding: '10px 20px',
-        backgroundColor: '#0f0',
-        color: '#000',
-        border: 'none',
-        borderRadius: '5px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        marginBottom: '20px'
-      }}>
-        {showModal ? t.closeButton : t.registerButton}
-      </button>
+      padding: '10px 20px',
+      backgroundColor: '#0f0',
+      color: '#000',
+      border: 'none',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      marginBottom: '20px'
+    }}>
+      {showModal ? t.closeButton : t.registerButton}
+    </button>
 
-      {showModal && (
-        <div className="modal" style={{ 
-          maxWidth: '400px', 
-          margin: '0 auto',
-          backgroundColor: '#222',
-          padding: '20px',
-          borderRadius: '10px',
-          boxShadow: '0 0 10px rgba(0,255,0,0.5)'
-        }}>
-          <h2 style={{ color: '#0f0' }}>{t.registerButton}</h2>
-          
-          {/* Formulário de entrada */}
-          {/* ... (mantenha todos os campos de entrada existentes) ... */}
-          
-          {/* Campo de dias trabalhados (apenas quando periodicidade é diária) */}
-          {periodicidadeDistancia === 'daily' && (
-            <div style={{ marginBottom: '15px' }}>
-              <label>{t.workingDays}</label>
-              <input 
-                type="number" 
-                value={diasTrabalhadosPorSemana} 
-                onChange={(e) => setDiasTrabalhadosPorSemana(Math.min(7, Math.max(1, parseInt(e.target.value) || 5))} 
-                style={{ marginLeft: '10px', padding: '5px' }}
-                min="1"
-                max="7"
-              />
+    {showModal && (
+      <div className="modal" style={{ 
+        maxWidth: '400px', 
+        margin: '0 auto',
+        backgroundColor: '#222',
+        padding: '20px',
+        borderRadius: '10px',
+        boxShadow: '0 0 10px rgba(0,255,0,0.5)'
+      }}>
+        <h2 style={{ color: '#0f0' }}>{t.registerButton}</h2>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.fuelPrice}</label>
+          <input 
+            type="number" 
+            value={precoCombustivel} 
+            onChange={(e) => setPrecoCombustivel(parseFloat(e.target.value) || 0)} 
+            style={{ width: '50%', marginLeft: '10px', padding: '5px' }}
+            min="0"
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.fuelEfficiency}</label>
+          <input 
+            type="number" 
+            value={kmPorLitro} 
+            onChange={(e) => setKmPorLitro(parseFloat(e.target.value) || 0)} 
+            style={{ marginLeft: '10px', padding: '5px' }}
+            min="0"
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.insuranceValue}</label>
+          <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+            <input 
+              type="number" 
+              value={valorSeguro} 
+              onChange={(e) => setValorSeguro(parseFloat(e.target.value) || 0)} 
+              style={{ flex: 1, padding: '5px' }}
+              min="0"
+            />
+            <select
+              value={periodicidadeSeguro}
+              onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
+              style={{ marginLeft: '10px', padding: '5px' }}
+            >
+              <option value="annual">{t.periodicityOptions.annual}</option>
+              <option value="monthly">{t.periodicityOptions.monthly}</option>
+              <option value="weekly">{t.periodicityOptions.weekly}</option>
+              <option value="daily">{t.periodicityOptions.daily}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.insurancePremium}</label>
+          <input 
+            type="number" 
+            value={premioSeguro} 
+            onChange={(e) => setPremioSeguro(parseFloat(e.target.value) || 0)} 
+            style={{ marginLeft: '10px', padding: '5px' }}
+            min="0"
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.maintenanceCosts}</label>
+          {custosManutencao.map((custo) => (
+            <div key={custo.id} style={{marginBottom: '10px'}}>
+              <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+                <input 
+                  type="number" 
+                  value={custo.valor} 
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', parseFloat(e.target.value))} 
+                  style={{ flex: 1, padding: '5px' }}
+                  min="0"
+                />
+                <select
+                  value={custo.periodicity}
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
+                  style={{ marginLeft: '10px', padding: '5px' }}
+                >
+                  <option value="annual">{t.periodicityOptions.annual}</option>
+                  <option value="monthly">{t.periodicityOptions.monthly}</option>
+                  <option value="weekly">{t.periodicityOptions.weekly}</option>
+                  <option value="daily">{t.periodicityOptions.daily}</option>
+                </select>
+                {custosManutencao.length > 1 && (
+                  <button 
+                    onClick={() => removerCustoManutencao(custo.id)} 
+                    style={{
+                      marginLeft: '10px', 
+                      padding: '5px 10px',
+                      backgroundColor: '#f00',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '3px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t.remove}
+                  </button>
+                )}
+              </div>
             </div>
-          )}
-          
+          ))}
           <button 
-            onClick={() => setShowModal(false)} 
+            onClick={adicionarCustoManutencao}
             style={{ 
-              marginTop: '20px', 
-              padding: '10px 20px', 
-              fontSize: '16px',
+              marginTop: '5px', 
+              padding: '5px 10px',
               backgroundColor: '#0f0',
               color: '#000',
               border: 'none',
-              borderRadius: '5px',
+              borderRadius: '3px',
               fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%'
+              cursor: 'pointer'
             }}
           >
-            {t.saveButton}
+            {t.addCost}
           </button>
         </div>
-      )}
-      
-      
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.distance}</label>
+          <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+            <input 
+              type="number" 
+              value={distanciaPercorrida} 
+              onChange={(e) => setDistanciaPercorrida(parseFloat(e.target.value) || 0)} 
+              style={{ flex: 1, padding: '5px' }}
+              min="0"
+            />
+            <select
+              value={periodicidadeDistancia}
+              onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
+              style={{ marginLeft: '10px', padding: '5px' }}
+            >
+              <option value="daily">{t.periodicityOptions.daily}</option>
+              <option value="weekly">{t.periodicityOptions.weekly}</option>
+              <option value="monthly">{t.periodicityOptions.monthly}</option>
+            </select>
+          </div>
+        </div>
+
+        {periodicidadeDistancia === 'daily' && (
+          <div style={{ marginBottom: '15px' }}>
+            <label>{t.workingDays}</label>
+            <input 
+              type="number" 
+              value={diasTrabalhadosPorSemana} 
+              onChange={(e) => setDiasTrabalhadosPorSemana(Math.min(7, Math.max(1, parseInt(e.target.value) || 5)))} 
+              style={{ marginLeft: '10px', padding: '5px' }}
+              min="1"
+              max="7"
+            />
+          </div>
+        )}
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>{t.vehicleValue}</label>
+          <input 
+            type="number" 
+            value={valorVeiculo} 
+            onChange={(e) => setValorVeiculo(parseFloat(e.target.value) || 0)} 
+            style={{ marginLeft: '10px', padding: '5px' }}
+            min="0"
+          />
+        </div>
+        
+        <button 
+          onClick={() => setShowModal(false)} 
+          style={{ 
+            marginTop: '20px', 
+            padding: '10px 20px', 
+            fontSize: '16px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            width: '100%'
+          }}
+        >
+          {t.saveButton}
+        </button>
+      </div>
+    )}
+
+    <div style={{ margin: '15px 0' }}>
+      <label>{t.rideValue}</label>
+      <input 
+        type="number" 
+        value={valorCorrida} 
+        onChange={(e) => setValorCorrida(parseFloat(e.target.value) || 0)} 
+        style={{ marginLeft: '10px', padding: '5px' }}
+        min="0"
+      />
+    </div>
+    
+    <div style={{ margin: '15px 0' }}>
+      <label>{t.rideDistance}</label>
+      <input 
+        type="number" 
+        value={KmRodados} 
+        onChange={(e) => setKmRodados(parseFloat(e.target.value) || 0)} 
+        style={{ marginLeft: '10px', padding: '5px' }}
+        min="0"
+      />
+    </div>
+
+    <div style={{ margin: '15px 0' }}>
+      <label>{t.shortTermProfit}</label>
+      <input 
+        type="text" 
+        value={lucroCurtoPrazo !== null ? `$${lucroCurtoPrazo.toFixed(2)}` : ''} 
+        readOnly 
+        style={{ 
+          backgroundColor: '#0f0',
+          color: '#000',
+          fontWeight: 'bold',
+          border: 'none',
+          padding: '8px',
+          borderRadius: '5px',
+          marginLeft: '10px',
+          width: '150px',
+          textAlign: 'center'
+        }}
+      />
+    </div>
+    
+    <div style={{ margin: '15px 0' }}>
+      <label>{t.longTermProfit}</label>
+      <input 
+        type="text" 
+        value={lucroLongoPrazo !== null ? `$${lucroLongoPrazo.toFixed(2)}` : ''} 
+        readOnly 
+        style={{ 
+          backgroundColor: '#0f0',
+          color: '#000',
+          fontWeight: 'bold',
+          border: 'none',
+          padding: '8px',
+          borderRadius: '5px',
+          marginLeft: '10px',
+          width: '150px',
+          textAlign: 'center'
+        }}
+      />
+    </div>
+
+    <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
+      <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
+      #{t.tip1}<br />
+      #{t.tip2}<br /><br />
+      #{t.formula}<br /><br />
+      #{t.community}
+    </p>
+  </div>
+);
+       
