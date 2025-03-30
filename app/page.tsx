@@ -762,9 +762,6 @@ export default function CalculoLucro() {
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         {t.tip1}<br />
         {t.tip2}<br /><br />
-        
-        <strong style={{ color: '#0f0' }}>{t.formula}</strong> {t.rideValue} - {t.fuelPrice} - {t.maintenanceCosts} - {t.insuranceValue} - {t.insurancePremium} * 10% - {t.vehicleValue} * 3.33%
-        <br /><br />
         {t.community}
       </p>
     </div>
