@@ -192,7 +192,7 @@ export default function CalculoLucro() {
       </div>
 
       <p>
-        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Precisa incluir imposto, óleo, etc. (ao ano) no valor da manutenção. O valor atual do veículo serve para calcular uma depreciação de 3.33% (em caso de aluguar o automóvel, ou se preferir informar esse custo ao ano, colocar 1 ou qualquer outro valor baixo para desconsiderar esse cálculo de depreciação). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta esse e todos os outros. Os Km rodados por dia útil servem para dividir os custos anuais para cada corrida (portanto se trabalhar mais que 5x na semana considerar um valor maior nesse campo, por exemplo). A distância pode ser preenchida em qualquer medida (Km,Ft,Mp)...
+        <strong>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Precisa incluir imposto, óleo, etc. (ao ano) no valor da manutenção. O valor atual do veículo serve para calcular uma depreciação de 3.33% (em caso de aluguar o automóvel, ou se preferir informar esse custo ao ano, colocar 1 ou qualquer outro valor baixo para desconsiderar esse cálculo de depreciação). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta esse e todos os outros. Os Km rodados por dia útil servem para dividir os custos anuais para cada corrida (portanto se trabalhar mais que 5x na semana considerar um valor maior nesse campo, por exemplo). A distância pode ser informada em qualquer medida (Km,Mi,Ft), contanto que sempre na mesma.
       </p>
     </div>
   );
