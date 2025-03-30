@@ -33,8 +33,8 @@ const translations = {
     longTermProfit: 'Lucro de Longo Prazo:',
     tips: 'Dicas:',
     tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
-    tip2: '2. Pode ser usado em todas as plataformas e veículos! Tanto aplicativos quanto motoristas de APP, taxi, Ifood, Uber, 99, etc.',
-    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% ao ano sobre o valor do veículo - 10% ao ano sobre o Prêmio do Seguro. Observação: se selecionar "Diário" e trabalhar mais que 5x na semana, considere aumentar o valor da distância percorrida.',
+    tip2: '2. Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade)',
+    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% ao ano sobre o valor do veículo - 10% ao ano sobre o Prêmio do Seguro.',
     community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
     periodicityOptions: {
       annual: 'Anual',
@@ -65,8 +65,8 @@ const translations = {
     longTermProfit: 'Long Term Profit:',
     tips: 'Tips:',
     tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
-    tip2: '2. Can be used for all platforms and vehicles! Including app drivers, taxis, Ifood, Uber, 99, etc.',
-    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% per year Vehicle Depreciation - 10% per year Insurance Premium. Note: if selecting "Daily" and working more than 5x a week, consider increasing the distance value.',
+    tip2: '2. Can be used for all platforms and vehicles! For all drivers, both app-based (Ifood, Uber, 99, etc.) and taxis, vans, and even buses/planes/subways (requires creativity)',
+    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% per year Vehicle Depreciation - 10% per year Insurance Premium.',
     community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
     periodicityOptions: {
       annual: 'Annual',
@@ -97,8 +97,8 @@ const translations = {
     longTermProfit: 'Profit à Long Terme:',
     tips: 'Conseils:',
     tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
-    tip2: '2. Peut être utilisé pour toutes les plateformes et véhicules! Y compris les chauffeurs d\'application, taxis, Ifood, Uber, 99, etc.',
-    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% par an sur la valeur du véhicule - 10% par an sur la Prime d\'Assurance. Remarque: si vous sélectionnez "Quotidien" et travaillez plus de 5 fois par semaine, envisagez d\'augmenter la valeur de distance.',
+    tip2: '2. Peut être utilisé pour toutes les plateformes et véhicules! Pour tous les conducteurs, applications (Ifood, Uber, 99, etc.), taxis, vans et même bus/avions/métros (nécessite de la créativité)',
+    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% par an sur la valeur du véhicule - 10% par an sur la Prime d\'Assurance.',
     community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
     periodicityOptions: {
       annual: 'Annuel',
@@ -108,7 +108,7 @@ const translations = {
     }
   },
   zh: {
-    title: '行程利润计算器 (所有平台/车辆)',
+    title: '行程利润计算器 (所有平台/车辆) [普通话]', // Adicionei "[普通话]" para deixar explícito
     subtitle: '用于短期和长期决策',
     registerButton: '注册车辆数据',
     closeButton: '关闭',
@@ -116,7 +116,7 @@ const translations = {
     fuelPrice: '燃油价格每升:',
     fuelEfficiency: '每升行驶距离:',
     insuranceValue: '保险价值:',
-    insurancePremium: '保险溢价:',
+    insurancePremium: '保险费用:', // Mudei "溢价" para "费用" (mais comum para "premium")
     maintenanceCosts: '维护成本:',
     addCost: '添加',
     remove: '删除',
@@ -129,9 +129,9 @@ const translations = {
     longTermProfit: '长期利润:',
     tips: '提示:',
     tip1: '1. 如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
-    tip2: '2. 适用于所有平台和车辆! 包括网约车、出租车、Ifood、Uber、99等',
-    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 车辆价值3.33%年折旧 - 保险溢价10%年费。注意:选择"每日"且每周工作超过5天时，请考虑增加距离值。',
-    community: '开源社区! Instagram联系bernard.bracco或Facebook联系Ehnov7id30或Bernard Diniz Bracco! 捐赠PIX:100.980.686-60',
+    tip2: '2. 适用于所有平台和车辆！包括网约车司机(如Ifood, Uber, 99等)、出租车、货车，甚至公交车/飞机/地铁(需灵活应用)',
+    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 车辆价值3.33%年折旧 - 保险费用10%年费。',
+    community: '开源社区！Instagram联系@bernard.bracco或Facebook联系Ehnov7id30或Bernard Diniz Bracco！捐赠PIX: 100.980.686-60',
     periodicityOptions: {
       annual: '年',
       monthly: '月',
@@ -161,8 +161,8 @@ const translations = {
     longTermProfit: '長期利益:',
     tips: 'ヒント:',
     tip1: '1. レンタル車両は車両価値を0にし維持費にレンタル代を計上',
-    tip2: '2. 全プラットフォーム/車両で利用可能! 配達アプリ、タクシー、Ifood、Uber、99等',
-    formula: '長期利益計算式: 収益 - 支出(燃料他) - 車両価値3.33%年間減価 - 保険料10%年間。注記: "日次"選択で週5日以上稼働時は走行距離値を増やすことを検討してください。',
+    tip2: '2. 全プラットフォーム/車両で利用可能! 配達アプリ(Ifood, Uber, 99等)、タクシー、バン、バス/飛行機/地下鉄まで(創造力が必要)',
+    formula: '長期利益計算式: 収益 - 支出(燃料他) - 車両価値3.33%年間減価 - 保険料10%年間。',
     community: 'オープンソース! Instagramでbernard.braccoかFacebookでEhnov7id30かBernard Diniz Braccoに連絡! 寄付PIX:100.980.686-60',
     periodicityOptions: {
       annual: '年',
@@ -193,8 +193,8 @@ const translations = {
     longTermProfit: 'الربح طويل المدى:',
     tips: 'نصائح:',
     tip1: '1. عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
-    tip2: '2. يمكن استخدامه لجميع المنصات والمركبات! بما في ذلك سائق التطبيقات، سيارات الأجرة، Ifood، Uber، 99، إلخ.',
-    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - استهلاك 3.33% سنويًا من قيمة المركبة - 10% سنويًا من قسط التأمين. ملاحظة: عند اختيار "يومي" والعمل أكثر من 5 مرات في الأسبوع، فكر في زيادة قيمة المسافة.',
+    tip2: '2. يمكن استخدامه لجميع المنصات والمركبات! لكل السائقين، التطبيقات (Ifood, Uber, 99, إلخ)، سيارات الأجرة، الحافلات وحتى الطائرات/المترو (يتطلب الإبداع)',
+    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - استهلاك 3.33% سنويًا من قيمة المركبة - 10% سنويًا من قسط التأمين.',
     community: 'مصدر مفتوح! تواصل عبر Instagram bernard.bracco أو Facebook Ehnov7id30 أو Bernard Diniz Bracco! التبرعات: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'سنوي',
@@ -225,8 +225,8 @@ const translations = {
     longTermProfit: 'Langfristiger Gewinn:',
     tips: 'Tipps:',
     tip1: '1. Bei Mietfahrzeugen Wert auf 0 setzen und Miete zu Wartungskosten addieren',
-    tip2: '2. Für alle Plattformen und Fahrzeuge nutzbar! Inkl. App-Fahrer, Taxis, Ifood, Uber, 99 usw.',
-    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - 3.33% jährliche Fahrzeugwertabschreibung - 10% jährliche Versicherungsprämie. Hinweis: Bei Auswahl "Täglich" und mehr als 5 Arbeitstagen pro Woche, Fahrstreckenwert erhöhen.',
+    tip2: '2. Für alle Plattformen und Fahrzeuge nutzbar! Für alle Fahrer, App-basiert (Ifood, Uber, 99 etc.), Taxis, Vans und sogar Busse/Flugzeuge/U-Bahnen (Kreativität erforderlich)',
+    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - 3.33% jährliche Fahrzeugwertabschreibung - 10% jährliche Versicherungsprämie.',
     community: 'Open Source! Kontakt: Instagram bernard.bracco oder Facebook Ehnov7id30 oder Bernard Diniz Bracco! Spenden: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Jährlich',
@@ -257,8 +257,8 @@ const translations = {
     longTermProfit: 'Долгосрочная прибыль:',
     tips: 'Советы:',
     tip1: '1. Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
-    tip2: '2. Подходит для всех платформ и ТС! Включая приложения, такси, Ifood, Uber, 99 и др.',
-    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - 3.33% годовая амортизация ТС - 10% годовая страховая премия. Примечание: при выборе "День" и работе более 5 дней в неделю, увеличьте значение пробега.',
+    tip2: '2. Подходит для всех платформ и ТС! Для всех водителей: приложения (Ifood, Uber, 99 и др.), такси, фургоны и даже автобусы/самолёты/метро (требует креативности)',
+    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - 3.33% годовая амортизация ТС - 10% годовая страховая премия.',
     community: 'Open Source! Контакты: Instagram bernard.bracco или Facebook Ehnov7id30 или Bernard Diniz Bracco! Пожертвования: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Год',
@@ -289,8 +289,8 @@ const translations = {
     longTermProfit: 'Довгостроковий прибуток:',
     tips: 'Поради:',
     tip1: '1. Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
-    tip2: '2. Підходить для всіх платформ і ТЗ! Включаючи додатки, таксі, Ifood, Uber, 99 тощо.',
-    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - 3.33% річна амортизація ТЗ - 10% річна страхова премія. Примітка: при виборі "День" та роботі понад 5 днів на тиждень, збільште значення пробігу.',
+    tip2: '2. Підходить для всіх платформ і ТЗ! Для всіх водіїв: додатки (Ifood, Uber, 99 тощо), таксі, фургони та навіть автобуси/літаки/метро (вимагає креативності)',
+    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - 3.33% річна амортизація ТЗ - 10% річна страхова премія.',
     community: 'Open Source! Контакти: Instagram bernard.bracco або Facebook Ehnov7id30 або Bernard Diniz Bracco! Донати: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Рік',
@@ -321,8 +321,8 @@ const translations = {
     longTermProfit: 'Langsigtet profit:',
     tips: 'Tips:',
     tip1: '1. Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
-    tip2: '2. Kan bruges til alle platforme og køretøjer! Inkl. app-chauffører, taxaer, Ifood, Uber, 99 osv.',
-    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - 3.33% årlig køretøjsværdiafsrivning - 10% årlig forsikringspræmie. Bemærk: Ved valg af "Daglig" og arbejde mere end 5 gange om ugen, overvej at øge distanceværdien.',
+    tip2: '2. Kan bruges til alle platforme og køretøjer! Til alle chauffører, både app-baserede (Ifood, Uber, 99 osv.), taxaer, varevogne og endda busser/fly/tog (kræver kreativitet)',
+    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - 3.33% årlig køretøjsværdiafsrivning - 10% årlig forsikringspræmie.',
     community: 'Open Source! Kontakt: Instagram bernard.bracco eller Facebook Ehnov7id30 eller Bernard Diniz Bracco! Donationer: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Årlig',
@@ -353,8 +353,8 @@ const translations = {
     longTermProfit: 'Uzun Vadeli Kar:',
     tips: 'İpuçları:',
     tip1: '1. Kiralık araçlarda değeri 0 yapın ve kira maliyetlere ekleyin',
-    tip2: '2. Tüm platformlar ve araçlar için kullanılabilir! Uygulama sürücüleri, taksiler, Ifood, Uber, 99 vb.',
-    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Aracın değerinin %3.33 yıllık amortismanı - Sigorta Primi %10 yıllık. Not: "Günlük" seçip haftada 5\'ten fazla çalışırsanız mesafe değerini artırmayı düşünün.',
+    tip2: '2. Tüm platformlar ve araçlar için kullanılabilir! Tüm sürücüler için, uygulama tabanlı (Ifood, Uber, 99 vb.), taksiler, minibüsler ve hatta otobüsler/uçaklar/metrolar (yaratıcılık gerektirir)',
+    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Aracın değerinin %3.33 yıllık amortismanı - Sigorta Primi %10 yıllık.',
     community: 'Açık Kaynak! İletişim: Instagram bernard.bracco veya Facebook Ehnov7id30 veya Bernard Diniz Bracco! Bağışlar: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Yıllık',
@@ -385,8 +385,8 @@ const translations = {
     longTermProfit: 'Faida ya Muda Mrefu:',
     tips: 'Vidokezo:',
     tip1: '1. Kwa gari zilizokodishwa, weka thamani ya 0 na ongeza kodi kwenye gharama',
-    tip2: '2. Inaweza kutumika kwa mifumo yote na magari! Pamoja na madereva wa programu, teksi, Ifood, Uber, 99, n.k.',
-    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - 3.33% kupungua kwa thamani ya gari kwa mwaka - 10% ya Malipo ya Bima kwa mwaka. Kumbuka: ukichagua "Kila Siku" na kufanya kazi zaidi ya mara 5 kwa wiki, fikiria kuongeza thamani ya umbali.',
+    tip2: '2. Inaweza kutumika kwa mifumo yote na magari! Kwa madereva wote, programu (Ifood, Uber, 99, n.k.), teksi, vani na hata mabasi/ndege/metro (inahitaji ubunifu)',
+    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - 3.33% kupungua kwa thamani ya gari kwa mwaka - 10% ya Malipo ya Bima kwa mwaka.',
     community: 'Chanzo Wazi! Wasiliana: Instagram bernard.bracco au Facebook Ehnov7id30 au Bernard Diniz Bracco! Michango: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Mwaka',
