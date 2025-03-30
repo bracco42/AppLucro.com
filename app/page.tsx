@@ -137,7 +137,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km/L (Mi/L ou outra medida) feitas pelo veículo:</label>
+            <label>Km/L (Mi/L ou outra medida de distância por litro) feitos pelo veículo:</label>
             <input 
               type="number" 
               value={kmPorLitro} 
