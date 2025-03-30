@@ -87,11 +87,6 @@ export default function CalculoLucro() {
       <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
       <h1 style={{ color: '#0f0' }}>Funcionalidade Para Calcular Lucros de Corridas</h1>
       <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>Destinado à tomada de decisões de curto e longo prazo</h2>
-
-      {/* ... (restante do código permanece exatamente igual) */}
-    </div>
-  );
-}
       
       <button onClick={() => setShowModal(!showModal)} style={{
         padding: '10px 20px',
@@ -129,7 +124,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km/L feitos pelo veículo:</label>
+            <label>Km/L (Mi/L ou outra medida) feitas pelo veículo:</label>
             <input 
               type="number" 
               value={kmPorLitro} 
@@ -230,7 +225,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km/Mi rodados por dia útil:</label>
+            <label>Distância percorrida por dia da semana (seg. a sex.):</label>
             <input 
               type="number" 
               value={KmPorDia} 
