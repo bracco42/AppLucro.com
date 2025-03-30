@@ -2,11 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 
+type Periodicity = 'annual' | 'monthly' | 'daily';
+type Cost = {
+  id: number;
+  valor: number;
+  periodicity: Periodicity;
+};
+
 export default function CalculoLucro() {
   const [precoCombustivel, setPrecoCombustivel] = useState<number>(5);
   const [kmPorLitro, setKmPorLitro] = useState<number>(35);
   const [valorSeguro, setValorSeguro] = useState<number>(2000);
-  const [custosManutencao, setCustosManutencao] = useState<{id: number, valor: number}[]>([{id: 1, valor: 20000}]);
+  const [premioSeguro, setPremioSeguro] = useState<number>(0);
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
   const [KmPorDia, setKmPorDia] = useState<number>(250);
   const [valorVeiculo, setValorVeiculo] = useState<number>(15000);
   const [valorCorrida, setValorCorrida] = useState<number>(15);
@@ -17,7 +25,7 @@ export default function CalculoLucro() {
 
   useEffect(() => {
     calcularLucros();
-  }, [precoCombustivel, kmPorLitro, valorSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
+  }, [precoCombustivel, kmPorLitro, valorSeguro, premioSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
     if ([precoCombustivel, kmPorLitro, valorSeguro, KmPorDia, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
@@ -31,16 +39,29 @@ export default function CalculoLucro() {
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
 
-    const totalManutencaoAnual = custosManutencao.reduce((total, custo) => total + custo.valor, 0);
+    // Converter todos os custos para valor anual
+    const custosAnuais = custosManutencao.map(custo => {
+      switch(custo.periodicity) {
+        case 'monthly': return custo.valor * 12;
+        case 'daily': return custo.valor * 252; // 252 dias úteis
+        default: return custo.valor;
+      }
+    });
     
-    const custoManutencaoCorrida = ((totalManutencaoAnual + valorSeguro) || (0.0333 * valorVeiculo)) * KmRodados / (KmPorDia * 252);
+    const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
+    
+    // Inclui 10% do prêmio do seguro no cálculo anual
+    const seguroTotalAnual = valorSeguro + (premioSeguro * 0.1 * 252 / KmPorDia); // Ponderado pela distância
+    
+    // Cálculo proporcional por corrida
+    const custoManutencaoCorrida = (totalManutencaoAnual + seguroTotalAnual) * KmRodados / (KmPorDia * 252);
     const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * KmRodados) / (KmPorDia * 252);
     const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
     setLucroLongoPrazo(lucroLongo);
   };
 
   const adicionarCustoManutencao = () => {
-    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0}]);
+    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
   };
 
   const removerCustoManutencao = (id: number) => {
@@ -49,9 +70,9 @@ export default function CalculoLucro() {
     }
   };
 
-  const atualizarCustoManutencao = (id: number, valor: number) => {
+  const atualizarCustoManutencao = (id: number, field: string, value: any) => {
     setCustosManutencao(custosManutencao.map(custo => 
-      custo.id === id ? {...custo, valor: parseFloat(valor.toString()) || 0} : custo
+      custo.id === id ? {...custo, [field]: value} : custo
     ));
   };
 
@@ -117,32 +138,54 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Custos de Manutenção (por ano):</label>
+            <label>Prêmio do Seguro (x10% de probabilidade de batida):</label>
+            <input 
+              type="number" 
+              value={premioSeguro} 
+              onChange={(e) => setPremioSeguro(parseFloat(e.target.value) || 0)} 
+              style={{ marginLeft: '10px', padding: '5px' }}
+              required 
+            />
+          </div>
+          
+          <div style={{ marginBottom: '15px' }}>
+            <label>Custos de Manutenção:</label>
             {custosManutencao.map((custo) => (
-              <div key={custo.id} style={{display: 'flex', marginBottom: '10px', alignItems: 'center'}}>
-                <input 
-                  type="number" 
-                  value={custo.valor} 
-                  onChange={(e) => atualizarCustoManutencao(custo.id, parseFloat(e.target.value))} 
-                  required 
-                  style={{ flex: 1, padding: '5px' }}
-                />
-                {custosManutencao.length > 1 && (
-                  <button 
-                    onClick={() => removerCustoManutencao(custo.id)} 
-                    style={{
-                      marginLeft: '10px', 
-                      padding: '5px 10px',
-                      backgroundColor: '#f00',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '3px',
-                      cursor: 'pointer'
-                    }}
+              <div key={custo.id} style={{marginBottom: '10px'}}>
+                <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+                  <input 
+                    type="number" 
+                    value={custo.valor} 
+                    onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', parseFloat(e.target.value))} 
+                    required 
+                    style={{ flex: 1, padding: '5px' }}
+                  />
+                  <select
+                    value={custo.periodicity}
+                    onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
+                    style={{ marginLeft: '10px', padding: '5px' }}
                   >
-                    Remover
-                  </button>
-                )}
+                    <option value="annual">Anual</option>
+                    <option value="monthly">Mensal</option>
+                    <option value="daily">Diário</option>
+                  </select>
+                  {custosManutencao.length > 1 && (
+                    <button 
+                      onClick={() => removerCustoManutencao(custo.id)} 
+                      style={{
+                        marginLeft: '10px', 
+                        padding: '5px 10px',
+                        backgroundColor: '#f00',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '3px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Remover
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
             <button 
@@ -265,7 +308,9 @@ export default function CalculoLucro() {
       </div>
 
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
-        <strong style={{ color: '#0f0' }}>Obs.:</strong> Agora você pode adicionar múltiplos custos de manutenção! O cálculo somará todos eles automaticamente. Precisa incluir imposto, óleo, etc. (ao ano) no valor da manutenção. O valor atual do veículo serve para calcular uma depreciação de 3.33% (em caso de aluguar o automóvel, ou se preferir informar esse custo ao ano, colocar 1 ou qualquer outro valor baixo para desconsiderar esse cálculo de depreciação). O lucro de curto prazo desconta apenas o combustível, enquanto o de longo prazo desconta esse e todos os outros. Os Km rodados por dia útil servem para dividir os custos anuais para cada corrida (portanto se trabalhar mais que 5x na semana considerar um valor maior nesse campo, por exemplo). A distância pode ser informada em qualquer medida (Km,Mi,Ft), contanto que sempre na mesma. Para OpenSource Comunity instagram:bernard.bracco PIX para contribuições voluntárias 100.980.686-60. Custos até então 4 semanas de mão de obra, cerca de 60 reais do domínio "applucro.com" e cerca 30 reais do Heroku, anuais, receita até então: 0. Código aberto, comunidade a ser criada, falar no instagram e/ou Facebook com: Bernard Diniz Bracco; ou Ehnov7id30
+        <strong style={{ color: '#0f0' }}>Obs.:</strong> Fórmula do Lucro de Longo Prazo = Valor Pago na Corrida - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
+        <br /><br />
+        Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.
       </p>
     </div>
   );
