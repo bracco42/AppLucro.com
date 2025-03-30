@@ -30,13 +30,14 @@ export default function CalculoLucro() {
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
-    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
+    // Remove validation that was preventing calculations when any value was zero
+    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
       return;
     }
 
-    const custoCombustivelPorKm = precoCombustivel / kmPorLitro;
+    const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
     const lucroCurto = valorCorrida - custoCombustivelCorrida;
     setLucroCurtoPrazo(lucroCurto);
@@ -72,8 +73,9 @@ export default function CalculoLucro() {
     const seguroTotalAnual = seguroAnual + premioAnual;
     
     // Cálculo proporcional por corrida
-    const custoManutencaoCorrida = (totalManutencaoAnual + seguroTotalAnual) * KmRodados / (distanciaDiaria * 252);
-    const depreciaçãoVeiculo = (valorVeiculo * 0.0333 * KmRodados) / (distanciaDiaria * 252);
+    const denominator = distanciaDiaria * 252;
+    const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
+    const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
     const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
     setLucroLongoPrazo(lucroLongo);
   };
@@ -132,7 +134,7 @@ export default function CalculoLucro() {
               value={precoCombustivel} 
               onChange={(e) => setPrecoCombustivel(parseFloat(e.target.value) || 0)} 
               style={{ width: '50%', marginLeft: '10px', padding: '5px' }}
-              required 
+              min="0"
             />
           </div>
           
@@ -143,7 +145,7 @@ export default function CalculoLucro() {
               value={kmPorLitro} 
               onChange={(e) => setKmPorLitro(parseFloat(e.target.value) || 0)} 
               style={{ marginLeft: '10px', padding: '5px' }}
-              required 
+              min="0"
             />
           </div>
           
@@ -154,8 +156,8 @@ export default function CalculoLucro() {
                 type="number" 
                 value={valorSeguro} 
                 onChange={(e) => setValorSeguro(parseFloat(e.target.value) || 0)} 
-                required 
                 style={{ flex: 1, padding: '5px' }}
+                min="0"
               />
               <select
                 value={periodicidadeSeguro}
@@ -177,12 +179,12 @@ export default function CalculoLucro() {
               value={premioSeguro} 
               onChange={(e) => setPremioSeguro(parseFloat(e.target.value) || 0)} 
               style={{ marginLeft: '10px', padding: '5px' }}
-              required 
+              min="0"
             />
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Custos de Manutenção:</label>
+            <label>Custos de Manutenção (inclua aluguel do veículo aqui se aplicável):</label>
             {custosManutencao.map((custo) => (
               <div key={custo.id} style={{marginBottom: '10px'}}>
                 <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
@@ -190,8 +192,8 @@ export default function CalculoLucro() {
                     type="number" 
                     value={custo.valor} 
                     onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', parseFloat(e.target.value))} 
-                    required 
                     style={{ flex: 1, padding: '5px' }}
+                    min="0"
                   />
                   <select
                     value={custo.periodicity}
@@ -246,8 +248,8 @@ export default function CalculoLucro() {
                 type="number" 
                 value={distanciaPercorrida} 
                 onChange={(e) => setDistanciaPercorrida(parseFloat(e.target.value) || 0)} 
-                required 
                 style={{ flex: 1, padding: '5px' }}
+                min="0"
               />
               <select
                 value={periodicidadeDistancia}
@@ -262,13 +264,13 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Valor Atual do Veículo se Comprado (deprecia 3.33% no ano):</label>
+            <label>Valor Atual do Veículo se Comprado (deixe zero se for alugado - deprecia 3.33% no ano):</label>
             <input 
               type="number" 
               value={valorVeiculo} 
               onChange={(e) => setValorVeiculo(parseFloat(e.target.value) || 0)} 
               style={{ marginLeft: '10px', padding: '5px' }}
-              required 
+              min="0"
             />
           </div>
           
@@ -293,12 +295,13 @@ export default function CalculoLucro() {
       )}
 
       <div style={{ margin: '15px 0' }}>
-        <label>Valor Pago App/Cliente:</label>
+        <label>Valor Pago pelo App/Cliente em Qualquer Plataforma/Veículo:</label>
         <input 
           type="number" 
           value={valorCorrida} 
           onChange={(e) => setValorCorrida(parseFloat(e.target.value) || 0)} 
           style={{ marginLeft: '10px', padding: '5px' }}
+          min="0"
         />
       </div>
       
@@ -309,6 +312,7 @@ export default function CalculoLucro() {
           value={KmRodados} 
           onChange={(e) => setKmRodados(parseFloat(e.target.value) || 0)} 
           style={{ marginLeft: '10px', padding: '5px' }}
+          min="0"
         />
       </div>
 
@@ -353,7 +357,11 @@ export default function CalculoLucro() {
       </div>
 
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
-        <strong style={{ color: '#0f0' }}>Obs.:</strong> Fórmula do Lucro de Longo Prazo = Valor Pago App/Cliente - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
+        <strong style={{ color: '#0f0' }}>Dicas:</strong><br />
+        1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.<br />
+        2. Todos os campos podem ser zero sem afetar o cálculo.<br /><br />
+        
+        <strong style={{ color: '#0f0' }}>Fórmula do Lucro de Longo Prazo:</strong> Valor Pago App/Cliente - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
         <br /><br />
         Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.
       </p>
