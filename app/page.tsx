@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-
-export const dynamic = 'force-dynamic';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
@@ -389,7 +386,6 @@ const translations = {
 };
 
 export default function CalculoLucro() {
-  const [isClient, setIsClient] = useState(false);
   const [precoCombustivel, setPrecoCombustivel] = useState<number>(5);
   const [kmPorLitro, setKmPorLitro] = useState<number>(35);
   const [valorSeguro, setValorSeguro] = useState<number>(2000);
@@ -406,67 +402,56 @@ export default function CalculoLucro() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>('pt');
 
+  const t = translations[language];
+
   useEffect(() => {
-    setIsClient(true);
     calcularLucros();
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
-  const t = translations[language];
-
-  if (!isClient) {
-    return null;
-  }
-
   const calcularLucros = () => {
-    try {
-      if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
-        setLucroCurtoPrazo(null);
-        setLucroLongoPrazo(null);
-        return;
-      }
-
-      const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
-      const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
-      const lucroCurto = valorCorrida - custoCombustivelCorrida;
-      setLucroCurtoPrazo(lucroCurto);
-
-      const converterParaAnual = (valor: number, periodicity: Periodicity) => {
-        switch(periodicity) {
-          case 'monthly': return valor * 12;
-          case 'weekly': return valor * 52;
-          case 'daily': return valor * 252;
-          default: return valor;
-        }
-      };
-
-      const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
-        switch(periodicity) {
-          case 'monthly': return valor / 21;
-          case 'weekly': return valor / 5;
-          default: return valor;
-        }
-      };
-
-      const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
-      
-      const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
-      const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
-      
-      const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
-      
-      const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
-      const seguroTotalAnual = seguroAnual + premioAnual;
-      
-      const denominator = distanciaDiaria * 252;
-      const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
-      const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
-      const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
-      setLucroLongoPrazo(lucroLongo);
-    } catch (error) {
-      console.error("Erro no cálculo:", error);
+    if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
+      return;
     }
+
+    const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
+    const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
+    const lucroCurto = valorCorrida - custoCombustivelCorrida;
+    setLucroCurtoPrazo(lucroCurto);
+
+    const converterParaAnual = (valor: number, periodicity: Periodicity) => {
+      switch(periodicity) {
+        case 'monthly': return valor * 12;
+        case 'weekly': return valor * 52;
+        case 'daily': return valor * 252;
+        default: return valor;
+      }
+    };
+
+    const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
+      switch(periodicity) {
+        case 'monthly': return valor / 21;
+        case 'weekly': return valor / 5;
+        default: return valor;
+      }
+    };
+
+    const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
+    
+    const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
+    const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
+    
+    const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
+    
+    const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
+    const seguroTotalAnual = seguroAnual + premioAnual;
+    
+    const denominator = distanciaDiaria * 252;
+    const custoManutencaoCorrida = denominator > 0 ? (totalManutencaoAnual + seguroTotalAnual) * KmRodados / denominator : 0;
+    const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
+    const lucroLongo = valorCorrida - custoCombustivelCorrida - custoManutencaoCorrida - depreciaçãoVeiculo;
+    setLucroLongoPrazo(lucroLongo);
   };
 
   const adicionarCustoManutencao = () => {
@@ -486,7 +471,7 @@ export default function CalculoLucro() {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff', minHeight: '100vh' }}>
+    <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select 
           value={language}
@@ -505,23 +490,10 @@ export default function CalculoLucro() {
           <option value="fr">FR</option>
           <option value="zh">中</option>
           <option value="ja">日</option>
-          <option value="ar">ع</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-          <option value="uk">УК</option>
-          <option value="da">DK</option>
-          <option value="tr">TR</option>
-          <option value="sw">SW</option>
         </select>
       </div>
 
-      <Image 
-        src="/logo.png" 
-        alt="Logo" 
-        width={150} 
-        height={150} 
-        style={{ marginBottom: '10px' }}
-      />
+      <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
       <h1 style={{ color: '#0f0' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>{t.subtitle}</h2>
@@ -590,8 +562,8 @@ export default function CalculoLucro() {
                 <option value="annual">{t.periodicityOptions.annual}</option>
                 <option value="monthly">{t.periodicityOptions.monthly}</option>
                 <option value="weekly">{t.periodicityOptions.weekly}</option>
-                <option value="daily">{t.periodicityOptions
-            </select>
+                <option value="daily">{t.periodicityOptions.daily}</option>
+              </select>
             </div>
           </div>
           
@@ -779,14 +751,7 @@ export default function CalculoLucro() {
         />
       </div>
 
-      <div style={{ 
-        maxWidth: '800px', 
-        margin: '20px auto', 
-        lineHeight: '1.5',
-        padding: '15px',
-        backgroundColor: '#111',
-        borderRadius: '8px'
-      }}>
+      <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         {t.tip1}<br />
         {t.tip2}<br /><br />
@@ -794,7 +759,7 @@ export default function CalculoLucro() {
         <strong style={{ color: '#0f0' }}>{t.formula}</strong> {t.rideValue} - {t.fuelPrice} - {t.maintenanceCosts} - {t.insuranceValue} - {t.insurancePremium} * 10% - {t.vehicleValue} * 3.33%
         <br /><br />
         {t.community}
-      </div>
+      </p>
     </div>
   );
 }
