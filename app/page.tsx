@@ -173,7 +173,7 @@ export default function CalculoLucro() {
       </div>
       
       <div style={{ margin: '15px 0' }}>
-        <label>Km/Mi da Corrida (informar a distância percorrida):</label>
+        <label>Km/Mi da Corrida (distância percorrida):</label>
         <input 
           type="number" 
           value={KmRodados} 
@@ -183,12 +183,22 @@ export default function CalculoLucro() {
 
       <div style={{ margin: '15px 0' }}>
         <label>Lucro de Curto Prazo (desconta combustível):</label>
-        <input type="text" value={lucroCurtoPrazo !== null ? `R$${lucroCurtoPrazo.toFixed(2)}` : ''} readOnly />
+        <input 
+          type="text" 
+          value={lucroCurtoPrazo !== null ? `R$${lucroCurtoPrazo.toFixed(2)}` : ''} 
+          readOnly 
+          style={{ color: '#0f0', fontWeight: 'bold' }}
+        />
       </div>
       
       <div style={{ margin: '15px 0' }}>
         <label>Lucro de Longo Prazo (desconta combustível e todos custos atribuídos à corrida):</label>
-        <input type="text" value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} readOnly />
+        <input 
+          type="text" 
+          value={lucroLongoPrazo !== null ? `R$${lucroLongoPrazo.toFixed(2)}` : ''} 
+          readOnly 
+          style={{ color: '#0f0', fontWeight: 'bold' }}
+        />
       </div>
 
       <p>
