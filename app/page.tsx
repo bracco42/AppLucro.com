@@ -60,7 +60,7 @@ export default function CalculoLucro() {
     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <h1 style={{ color: '#0f0' }}>Lucros de Corridas Para Decisões</h1>
-      <button onClick={() => setShowModal(true)}>Cadastrar Dados do Veículo</button>
+      <button onClick={() => setShowModal(!showModal)}>Cadastrar Dados do Veículo</button>
 
       {showModal && (
         <div className="modal" style={{ maxWidth: '400px', margin: '0 auto' }}>
