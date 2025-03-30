@@ -13,6 +13,7 @@ export default function CalculoLucro() {
   const [precoCombustivel, setPrecoCombustivel] = useState<number>(5);
   const [kmPorLitro, setKmPorLitro] = useState<number>(35);
   const [valorSeguro, setValorSeguro] = useState<number>(2000);
+  const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<number>(0);
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
   const [KmPorDia, setKmPorDia] = useState<number>(250);
@@ -25,7 +26,7 @@ export default function CalculoLucro() {
 
   useEffect(() => {
     calcularLucros();
-  }, [precoCombustivel, kmPorLitro, valorSeguro, premioSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
+  }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, KmPorDia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
     if ([precoCombustivel, kmPorLitro, valorSeguro, KmPorDia, valorVeiculo, valorCorrida, KmRodados].some(val => val <= 0 || isNaN(val))) {
@@ -40,18 +41,22 @@ export default function CalculoLucro() {
     setLucroCurtoPrazo(lucroCurto);
 
     // Converter todos os custos para valor anual
-    const custosAnuais = custosManutencao.map(custo => {
-      switch(custo.periodicity) {
-        case 'monthly': return custo.valor * 12;
-        case 'daily': return custo.valor * 252; // 252 dias úteis
-        default: return custo.valor;
+    const converterParaAnual = (valor: number, periodicity: Periodicity) => {
+      switch(periodicity) {
+        case 'monthly': return valor * 12;
+        case 'daily': return valor * 252; // 252 dias úteis
+        default: return valor;
       }
-    });
+    };
+
+    const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
+    const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
     
     const totalManutencaoAnual = custosAnuais.reduce((total, valor) => total + valor, 0);
     
     // Inclui 10% do prêmio do seguro no cálculo anual
-    const seguroTotalAnual = valorSeguro + (premioSeguro * 0.1 * 252 / KmPorDia); // Ponderado pela distância
+    const premioAnual = converterParaAnual(premioSeguro, 'annual') * 0.1;
+    const seguroTotalAnual = seguroAnual + premioAnual;
     
     // Cálculo proporcional por corrida
     const custoManutencaoCorrida = (totalManutencaoAnual + seguroTotalAnual) * KmRodados / (KmPorDia * 252);
@@ -79,7 +84,9 @@ export default function CalculoLucro() {
   return (
     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#000', color: '#fff' }}>
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
-      <h1 style={{ color: '#0f0' }}>Lucros de Corridas Para Decisões</h1>
+      <h1 style={{ color: '#0f0' }}>Funcionalidade Para Calcular Lucros de Corridas</h1>
+      <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>Destinado à tomada de decisões de curto e longo prazo</h2>
+      
       <button onClick={() => setShowModal(!showModal)} style={{
         padding: '10px 20px',
         backgroundColor: '#0f0',
@@ -127,18 +134,29 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Valor do Seguro (por ano):</label>
-            <input 
-              type="number" 
-              value={valorSeguro} 
-              onChange={(e) => setValorSeguro(parseFloat(e.target.value) || 0)} 
-              style={{ marginLeft: '10px', padding: '5px' }}
-              required 
-            />
+            <label>Valor do Seguro:</label>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
+              <input 
+                type="number" 
+                value={valorSeguro} 
+                onChange={(e) => setValorSeguro(parseFloat(e.target.value) || 0)} 
+                required 
+                style={{ flex: 1, padding: '5px' }}
+              />
+              <select
+                value={periodicidadeSeguro}
+                onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
+                style={{ marginLeft: '10px', padding: '5px' }}
+              >
+                <option value="annual">Anual</option>
+                <option value="monthly">Mensal</option>
+                <option value="daily">Diário</option>
+              </select>
+            </div>
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Prêmio do Seguro (x10% de probabilidade de batida):</label>
+            <label>Prêmio do Seguro (x10% de probabilidade de batida ao ano):</label>
             <input 
               type="number" 
               value={premioSeguro} 
@@ -206,7 +224,7 @@ export default function CalculoLucro() {
           </div>
           
           <div style={{ marginBottom: '15px' }}>
-            <label>Km/Mi rodados por dia (útil):</label>
+            <label>Km/Mi rodados por dia útil:</label>
             <input 
               type="number" 
               value={KmPorDia} 
@@ -248,7 +266,7 @@ export default function CalculoLucro() {
       )}
 
       <div style={{ margin: '15px 0' }}>
-        <label>Valor Pago na Corrida:</label>
+        <label>Valor Pago App/Cliente:</label>
         <input 
           type="number" 
           value={valorCorrida} 
@@ -308,7 +326,7 @@ export default function CalculoLucro() {
       </div>
 
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
-        <strong style={{ color: '#0f0' }}>Obs.:</strong> Fórmula do Lucro de Longo Prazo = Valor Pago na Corrida - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
+        <strong style={{ color: '#0f0' }}>Obs.:</strong> Fórmula do Lucro de Longo Prazo = Valor Pago App/Cliente - Custo do combustível - Custos de manutenção - Valor do Seguro - Prêmio do Seguro * 10% - Valor Atual do Veículo * 3.33%
         <br /><br />
         Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.
       </p>
