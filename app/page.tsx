@@ -484,6 +484,7 @@ export default function CalculoLucro() {
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         #{t.tip1}<br />
         #{t.tip2}<br /><br />
+        #3{t.formula}<br /><br />
         #{t.community}
       </p>
     </div>
