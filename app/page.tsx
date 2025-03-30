@@ -422,27 +422,33 @@ export default function CalculoLucro() {
   }, [precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro, custosManutencao, distanciaPercorrida, periodicidadeDistancia, valorVeiculo, valorCorrida, KmRodados]);
 
   const calcularLucros = () => {
+  // Verifica valores inválidos
   if ([precoCombustivel, kmPorLitro, valorSeguro, distanciaPercorrida, valorVeiculo, valorCorrida, KmRodados].some(val => isNaN(val))) {
     setLucroCurtoPrazo(null);
     setLucroLongoPrazo(null);
     return;
   }
 
+  // 1. Cálculo do Lucro de Curto Prazo (direto, sem mudanças)
   const custoCombustivelPorKm = kmPorLitro > 0 ? precoCombustivel / kmPorLitro : 0;
   const custoCombustivelCorrida = custoCombustivelPorKm * KmRodados;
   const lucroCurto = valorCorrida - custoCombustivelCorrida;
   setLucroCurtoPrazo(lucroCurto);
 
+  // 2. Conversão para valores anuais (com ajuste para dias trabalhados)
   const converterParaAnual = (valor: number, periodicity: Periodicity) => {
+    const fatorDiasTrabalhados = periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1;
+    
     switch(periodicity) {
       case 'monthly': return valor * 12;
       case 'weekly': return valor * 52;
-      case 'daily': return valor * 252;
-      default: return valor;
+      case 'daily': return valor * 252 * fatorDiasTrabalhados;
+      default: return valor; // annual
     }
   };
 
-  const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity, diasTrabalhadosPorSemana: number = 5) => {
+  // 3. Conversão de distância para diária
+  const converterDistanciaParaDiaria = (valor: number, periodicity: Periodicity) => {
     switch(periodicity) {
       case 'monthly': return valor / 21;
       case 'weekly': return valor / diasTrabalhadosPorSemana;
@@ -451,12 +457,43 @@ export default function CalculoLucro() {
     }
   };
 
-  // Novo cálculo que considera dias trabalhados por semana quando é diário
-  let distanciaDiaria = converterDistanciaParaDiaria(
-    distanciaPercorrida, 
-    periodicidadeDistancia, 
-    periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana : 5
-  );
+  // 4. Cálculos principais
+  const distanciaDiaria = converterDistanciaParaDiaria(distanciaPercorrida, periodicidadeDistancia);
+  
+  // 5. Convertendo custos para anuais (exceto prêmio do seguro)
+  const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
+  const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
+  
+  // 6. Cálculo do prêmio do seguro (10% do valor FIXO, sem periodicidade)
+  const descontoPremioSeguro = premioSeguro * 0.1; // 10% do valor fixo
+  
+  // 7. Cálculo do denominador ajustado
+  const diasUteisAno = 252 * (periodicidadeDistancia === 'daily' ? diasTrabalhadosPorSemana/5 : 1);
+  const denominator = distanciaDiaria * diasUteisAno;
+  
+  // 8. Cálculos por corrida
+  const custoManutencaoCorrida = denominator > 0 ? 
+    custosAnuais.reduce((total, valor) => total + valor, 0) * KmRodados / denominator : 0;
+  
+  const custoSeguroCorrida = denominator > 0 ? seguroAnual * KmRodados / denominator : 0;
+  
+  const depreciaçãoVeiculo = (denominator > 0 && valorVeiculo > 0) ? 
+    (valorVeiculo * 0.0333 * KmRodados) / denominator : 0;
+  
+  // 9. Cálculo do desconto do prêmio por corrida (proporcional)
+  const descontoPremioPorCorrida = denominator > 0 ?
+    (descontoPremioSeguro * KmRodados) / denominator : 0;
+
+  // 10. Lucro de longo prazo final (com todos os componentes)
+  const lucroLongo = valorCorrida 
+    - custoCombustivelCorrida 
+    - custoManutencaoCorrida 
+    - custoSeguroCorrida 
+    - depreciaçãoVeiculo
+    - descontoPremioPorCorrida; // 10% do prêmio aplicado aqui
+  
+  setLucroLongoPrazo(lucroLongo);
+};
   
   const custosAnuais = custosManutencao.map(custo => converterParaAnual(custo.valor, custo.periodicity));
   const seguroAnual = converterParaAnual(valorSeguro, periodicidadeSeguro);
