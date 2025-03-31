@@ -1108,9 +1108,9 @@ export default function CalculoLucro() {
       <p style={{ maxWidth: '800px', margin: '20px auto', lineHeight: '1.5' }}>
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         #{t.tip1}<br />
-        #{t.tip2}<br /><br />
-        #{t.formula}<br /><br />
-  <span dangerouslySetInnerHTML={{ __html: t.community }} />
+        #{t.tip2}.<br /><br />
+        #{t.formula}.<br /><br />
+  <span dangerouslySetInnerHTML={{ __html: t.community }}!!! />
 </p>
     </div>
   );
