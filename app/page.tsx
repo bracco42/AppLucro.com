@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
-import DOMPurify from 'dompurify';
+import * as DOMPurify from 'dompurify';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
