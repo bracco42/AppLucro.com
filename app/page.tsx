@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import DOMPurify from 'dompurify';
+import { sanitizeHTML } from '@/lib/sanitize';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
@@ -1111,7 +1111,7 @@ export default function CalculoLucro() {
       #{t.tip1}<br />
       #{t.tip2}.<br /><br />
       #{t.formula}.<br /><br />
-      <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(t.community) + '!!!' }}/>
+      <span dangerouslySetInnerHTML={{ __html: sanitizeHTML(t.community) + '!!!' }}/>
     </p>
     </div>
   );
