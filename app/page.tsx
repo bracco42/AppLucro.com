@@ -812,8 +812,8 @@ export default function CalculoLucro() {
         <strong style={{ color: '#0f0' }}>{t.tips}</strong><br />
         #{t.tip1}<br />
         #{t.tip2}<br /><br />
-        #{t.formula}<br /><br />
-        #{t.community}
+        #{t.formula}
+      // <br /><br /> #{t.community}  comentado pelo sistema
       </p>
     </div>
   );
