@@ -23,9 +23,6 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      
-    - name: Install dompurify
-      run: npm install dompurify
 
     - name: Build the project
       run: npm run build
