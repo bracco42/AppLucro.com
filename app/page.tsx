@@ -8,10 +8,10 @@ type Cost = {
   valor: number;
   periodicity: Periodicity;
 };
-type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw';
+type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa';
 
 const translations = {
-  pt: {
+  'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
     registerButton: 'Cadastrar Dados do Veículo',
@@ -34,7 +34,7 @@ const translations = {
     tips: 'Dicas:',
     tip1: '1. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: '2. Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade)',
-    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação de 3.33% ao ano sobre o valor do veículo - 10% ao ano sobre o Prêmio do Seguro. Obs.: lucro de curto prazo desconta somente combustível da corrida',
+    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida',
     community: 'Comunidade Open Source! Falar com bernard.bracco no Instagram ou Ehnov7id30 ou Bernard Diniz Bracco no Facebook! Para doações segue o PIX: 100.980.686-60. Custos até então: 4 semanas de mão de obra e 80 reais. Receita até então: 0.',
     periodicityOptions: {
       annual: 'Anual',
@@ -43,7 +43,7 @@ const translations = {
       daily: 'Diário'
     }
   },
-  en: {
+  'en': {
     title: 'Ride Profits (All Platforms/Vehicles)',
     subtitle: 'Designed for short and long term decision making',
     registerButton: 'Register Vehicle Data',
@@ -66,7 +66,7 @@ const translations = {
     tips: 'Tips:',
     tip1: '1. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: '2. Can be used for all platforms and vehicles! For all drivers, both app-based (Ifood, Uber, 99, etc.) and taxis, vans, and even buses/planes/subways (requires creativity)',
-    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - 3.33% per year Vehicle Depreciation - 10% per year Insurance Premium. Note: short term profit only deducts fuel cost from the ride',
+    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts fuel cost from the ride',
     community: 'Open Source Community! Contact bernard.bracco on Instagram or Ehnov7id30 or Bernard Diniz Bracco on Facebook! For donations, PIX: 100.980.686-60. Costs so far: 4 weeks of work and 80 reais. Revenue so far: 0.',
     periodicityOptions: {
       annual: 'Annual',
@@ -75,7 +75,7 @@ const translations = {
       daily: 'Daily'
     }
   },
-  fr: {
+  'fr': {
     title: 'Profits des Courses (Toutes Plateformes/Véhicules)',
     subtitle: 'Conçu pour la prise de décision à court et long terme',
     registerButton: 'Enregistrer les Données du Véhicule',
@@ -98,7 +98,7 @@ const translations = {
     tips: 'Conseils:',
     tip1: '1. Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
     tip2: '2. Peut être utilisé pour toutes les plateformes et véhicules! Pour tous les conducteurs, applications (Ifood, Uber, 99, etc.), taxis, vans et même bus/avions/métros (nécessite de la créativité)',
-    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation de 3.33% par an sur la valeur du véhicule - 10% par an sur la Prime d\'Assurance. Remarque: le profit à court terme ne déduit que le coût du carburant de la course',
+    formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation (3.33% * Valeur du Véhicule par an) - Risque (10% * Prime d\'Assurance par an). Remarque: le profit à court terme ne déduit que le coût du carburant de la course',
     community: 'Communauté Open Source! Contactez bernard.bracco sur Instagram ou Ehnov7id30 ou Bernard Diniz Bracco sur Facebook! Pour les dons, PIX: 100.980.686-60. Coûts jusqu\'à présent: 4 semaines de travail et 80 reais. Revenus jusqu\'à présent: 0.',
     periodicityOptions: {
       annual: 'Annuel',
@@ -107,7 +107,7 @@ const translations = {
       daily: 'Quotidien'
     }
   },
-  zh: {
+  'zh': {
     title: '行程利润计算器 (所有平台/车辆)',
     subtitle: '用于短期和长期决策',
     registerButton: '注册车辆数据',
@@ -130,7 +130,7 @@ const translations = {
     tips: '提示:',
     tip1: '1. 如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
     tip2: '2. 适用于所有平台和车辆！包括网约车司机(如Ifood, Uber, 99等)、出租车、货车，甚至公交车/飞机/地铁(需灵活应用)',
-    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 车辆价值3.33%年折旧 - 保险费用10%年费。注: 短期利润仅扣除行程燃油成本',
+    formula: '长期利润公式: 收入 - 支出(燃油及其他) - 折旧 (3.33% * 车辆价值每年) - 风险 (10% * 保险费用每年)。注: 短期利润仅扣除行程燃油成本',
     community: '开源社区！Instagram联系@bernard.bracco或Facebook联系Ehnov7id30或Bernard Diniz Bracco！捐赠PIX: 100.980.686-60',
     periodicityOptions: {
       annual: '年',
@@ -139,7 +139,7 @@ const translations = {
       daily: '日'
     }
   },
-  ja: {
+  'ja': {
     title: '配達利益計算 (全プラットフォーム/車両)',
     subtitle: '短期・長期の意思決定用',
     registerButton: '車両登録',
@@ -162,7 +162,7 @@ const translations = {
     tips: 'ヒント:',
     tip1: '1. レンタル車両は車両価値を0にし維持費にレンタル代を計上',
     tip2: '2. 全プラットフォーム/車両で利用可能! 配達アプリ(Ifood, Uber, 99等)、タクシー、バン、バス/飛行機/地下鉄まで(創造力が必要)',
-    formula: '長期利益計算式: 収益 - 支出(燃料他) - 車両価値3.33%年間減価 - 保険料10%年間。注: 短期利益は走行の燃料費のみ控除',
+    formula: '長期利益計算式: 収益 - 支出(燃料他) - 減価 (3.33% * 車両価値 年間) - リスク (10% * 保険料 年間)。注: 短期利益は走行の燃料費のみ控除',
     community: 'オープンソース! Instagramでbernard.braccoかFacebookでEhnov7id30かBernard Diniz Braccoに連絡! 寄付PIX:100.980.686-60',
     periodicityOptions: {
       annual: '年',
@@ -171,7 +171,7 @@ const translations = {
       daily: '日'
     }
   },
-  ar: {
+  'ar': {
     title: 'حاسبة ربح الرحلات (كل المنصات/المركبات)',
     subtitle: 'لصنع القرارات قصيرة وطويلة المدى',
     registerButton: 'تسجيل بيانات المركبة',
@@ -194,7 +194,7 @@ const translations = {
     tips: 'نصائح:',
     tip1: '1. عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
     tip2: '2. يمكن استخدامه لجميع المنصات والمركبات! لكل السائقين، التطبيقات (Ifood, Uber, 99, إلخ)، سيارات الأجرة، الحافلات وحتى الطائرات/المترو (يتطلب الإبداع)',
-    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - استهلاك 3.33% سنويًا من قيمة المركبة - 10% سنويًا من قسط التأمين. ملاحظة: الربح قصير المدى يخصم فقط تكلفة الوقود للرحلة',
+    formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - الإهلاك (3.33% * قيمة المركبة سنوياً) - المخاطرة (10% * قسط التأمين سنوياً). ملاحظة: الربح قصير المدى يخصم فقط تكلفة الوقود للرحلة',
     community: 'مصدر مفتوح! تواصل عبر Instagram bernard.bracco أو Facebook Ehnov7id30 أو Bernard Diniz Bracco! التبرعات: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'سنوي',
@@ -203,7 +203,7 @@ const translations = {
       daily: 'يومي'
     }
   },
-  de: {
+  'de': {
     title: 'Fahrtkostenberechnung (Alle Plattformen/Fahrzeuge)',
     subtitle: 'Für kurzfristige und langfristige Entscheidungen',
     registerButton: 'Fahrzeugdaten registrieren',
@@ -226,7 +226,7 @@ const translations = {
     tips: 'Tipps:',
     tip1: '1. Bei Mietfahrzeugen Wert auf 0 setzen und Miete zu Wartungskosten addieren',
     tip2: '2. Für alle Plattformen und Fahrzeuge nutzbar! Für alle Fahrer, App-basiert (Ifood, Uber, 99 etc.), Taxis, Vans und sogar Busse/Flugzeuge/U-Bahnen (Kreativität erforderlich)',
-    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - 3.33% jährliche Fahrzeugwertabschreibung - 10% jährliche Versicherungsprämie. Hinweis: Kurzfristiger Gewinn zieht nur Kraftstoffkosten der Fahrt ab',
+    formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff und andere) - Abschreibung (3.33% * Fahrzeugwert pro Jahr) - Risiko (10% * Versicherungsprämie pro Jahr). Hinweis: Kurzfristiger Gewinn zieht nur Kraftstoffkosten der Fahrt ab',
     community: 'Open Source! Kontakt: Instagram bernard.bracco oder Facebook Ehnov7id30 oder Bernard Diniz Bracco! Spenden: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Jährlich',
@@ -235,7 +235,7 @@ const translations = {
       daily: 'Täglich'
     }
   },
-  ru: {
+  'ru': {
     title: 'Калькулятор прибыли (Все платформы/ТС)',
     subtitle: 'Для краткосрочных и долгосрочных решений',
     registerButton: 'Регистрация данных ТС',
@@ -258,7 +258,7 @@ const translations = {
     tips: 'Советы:',
     tip1: '1. Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
     tip2: '2. Подходит для всех платформ и ТС! Для всех водителей: приложения (Ifood, Uber, 99 и др.), такси, фургоны и даже автобусы/самолёты/метро (требует креативности)',
-    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - 3.33% годовая амортизация ТС - 10% годовая страховая премия. Прим.: краткосрочная прибыль учитывает только затраты на топливо для поездки',
+    formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - Амортизация (3.33% * Стоимость ТС в год) - Риск (10% * Страховая премия в год). Прим.: краткосрочная прибыль учитывает только затраты на топливо для поездки',
     community: 'Open Source! Контакты: Instagram bernard.bracco или Facebook Ehnov7id30 или Bernard Diniz Bracco! Пожертвования: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Год',
@@ -267,7 +267,7 @@ const translations = {
       daily: 'День'
     }
   },
-  uk: {
+  'uk': {
     title: 'Калькулятор прибутку (Усі платформи/ТЗ)',
     subtitle: 'Для прийняття рішень',
     registerButton: 'Реєстрація даних ТЗ',
@@ -290,7 +290,7 @@ const translations = {
     tips: 'Поради:',
     tip1: '1. Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
     tip2: '2. Підходить для всіх платформ і ТЗ! Для всіх водіїв: додатки (Ifood, Uber, 99 тощо), таксі, фургони та навіть автобуси/літаки/метро (вимагає креативності)',
-    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - 3.33% річна амортизація ТЗ - 10% річна страхова премія. Прим.: короткостроковий прибуток враховує лише витрати на паливо для поїздки',
+    formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - Амортизація (3.33% * Вартість ТЗ на рік) - Ризик (10% * Страхова премія на рік). Прим.: короткостроковий прибуток враховує лише витрати на паливо для поїздки',
     community: 'Open Source! Контакти: Instagram bernard.bracco або Facebook Ehnov7id30 або Bernard Diniz Bracco! Донати: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Рік',
@@ -299,7 +299,7 @@ const translations = {
       daily: 'День'
     }
   },
-  da: {
+  'da': {
     title: 'Kørselsprofitberegner (Alle platforme/køretøjer)',
     subtitle: 'Til kortsigtet og langsigtet beslutningstagning',
     registerButton: 'Registrer køretøjsdata',
@@ -322,7 +322,7 @@ const translations = {
     tips: 'Tips:',
     tip1: '1. Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
     tip2: '2. Kan bruges til alle platforme og køretøjer! Til alle chauffører, både app-baserede (Ifood, Uber, 99 osv.), taxaer, varevogne og endda busser/fly/tog (kræver kreativitet)',
-    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - 3.33% årlig køretøjsværdiafsrivning - 10% årlig forsikringspræmie. Bemærk: kortsigtet profit fratrækker kun brændstofomkostninger for kørslen',
+    formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - Afskrivning (3.33% * Køretøjsværdi pr. år) - Risiko (10% * Forsikringspræmie pr. år). Bemærk: kortsigtet profit fratrækker kun brændstofomkostninger for kørslen',
     community: 'Open Source! Kontakt: Instagram bernard.bracco eller Facebook Ehnov7id30 eller Bernard Diniz Bracco! Donationer: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Årlig',
@@ -331,7 +331,7 @@ const translations = {
       daily: 'Daglig'
     }
   },
-  tr: {
+  'tr': {
     title: 'Sürüş Kar Hesaplayıcı (Tüm Platformlar/Araçlar)',
     subtitle: 'Kısa ve uzun vadeli kararlar için',
     registerButton: 'Araç Kaydı',
@@ -354,7 +354,7 @@ const translations = {
     tips: 'İpuçları:',
     tip1: '1. Kiralık araçlarda değeri 0 yapın ve kira maliyetlere ekleyin',
     tip2: '2. Tüm platformlar ve araçlar için kullanılabilir! Tüm sürücüler için, uygulama tabanlı (Ifood, Uber, 99 vb.), taksiler, minibüsler ve hatta otobüsler/uçaklar/metrolar (yaratıcılık gerektirir)',
-    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Aracın değerinin %3.33 yıllık amortismanı - Sigorta Primi %10 yıllık. Not: kısa vadeli kar yalnızca sürüş yakıt maliyetini düşürür',
+    formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt ve Diğer) - Amortisman (3.33% * Araç Değeri yıllık) - Risk (10% * Sigorta Primi yıllık). Not: kısa vadeli kar yalnızca sürüş yakıt maliyetini düşürür',
     community: 'Açık Kaynak! İletişim: Instagram bernard.bracco veya Facebook Ehnov7id30 veya Bernard Diniz Bracco! Bağışlar: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Yıllık',
@@ -363,7 +363,7 @@ const translations = {
       daily: 'Günlük'
     }
   },
-  sw: {
+  'sw': {
     title: 'Kikokotoo cha Faida ya Usafiri (Mifumo Yote/Magari)',
     subtitle: 'Kwa maamuzi ya muda mfupi na mrefu',
     registerButton: 'Sajili Data ya Gari',
@@ -386,7 +386,7 @@ const translations = {
     tips: 'Vidokezo:',
     tip1: '1. Kwa gari zilizokodishwa, weka thamani ya 0 na ongeza kodi kwenye gharama',
     tip2: '2. Inaweza kutumika kwa mifumo yote na magari! Kwa madereva wote, programu (Ifood, Uber, 99, n.k.), teksi, vani na hata mabasi/ndege/metro (inahitaji ubunifu)',
-    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - 3.33% kupungua kwa thamani ya gari kwa mwaka - 10% ya Malipo ya Bima kwa mwaka. Kumbuka: faida ya muda mfupi inatoa tu gharama ya mafuta ya safari',
+    formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - Mshuko wa Thamani (3.33% * Thamani ya Gari kwa mwaka) - Hatari (10% * Malipo ya Bima kwa mwaka). Kumbuka: faida ya muda mfupi inatoa tu gharama ya mafuta ya safari',
     community: 'Chanzo Wazi! Wasiliana: Instagram bernard.bracco au Facebook Ehnov7id30 au Bernard Diniz Bracco! Michango: PIX: 100.980.686-60',
     periodicityOptions: {
       annual: 'Mwaka',
