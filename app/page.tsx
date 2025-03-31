@@ -1111,7 +1111,7 @@ export default function CalculoLucro() {
       #{t.tip1}<br />
       #{t.tip2}.<br /><br />
       #{t.formula}.<br /><br />
-      <span dangerouslySetInnerHTML={{ __html: sanitizeHTML(t.community) + '!!!' }}/>
+      <span dangerouslySetInnerHTML={{ __html: sanitizeHTML(t.community)}}/>
     </p>
     </div>
   );
