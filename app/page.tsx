@@ -35,7 +35,7 @@ const translations = {
     tip1: 'Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade)',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida',
-    community: 'Entre em nossa <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidade OpenSource</a>',
+    community: 'Entre em nossa <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidade OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Anual',
       monthly: 'Mensal',
@@ -67,7 +67,7 @@ const translations = {
     tip1: 'If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: 'Can be used for all platforms and vehicles! For all drivers, both app-based (Ifood, Uber, 99, etc.) and taxis, vans, and even buses/planes/subways (requires creativity)',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts fuel cost from the ride',
-    community: 'Join our <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Community</a>',
+    community: 'Join our <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Community</a>!!!',
     periodicityOptions: {
       annual: 'Annual',
       monthly: 'Monthly',
@@ -99,7 +99,7 @@ const translations = {
     tip1: 'Si vous louez le véhicule, mettez la valeur du véhicule à zéro et incluez la valeur de la location dans les coûts de maintenance.',
     tip2: 'Peut être utilisé pour toutes les plateformes et véhicules! Pour tous les conducteurs, applications (Ifood, Uber, 99, etc.), taxis, vans et même bus/avions/métros (nécessite de la créativité)',
     formula: 'Formule du Profit à Long Terme: Revenus - Dépenses (Carburant et Autres) - Dépréciation (3.33% * Valeur du Véhicule par an) - Risque (10% * Prime d\'Assurance par an). Remarque: le profit à court terme ne déduit que le coût du carburant de la course',
-    community: 'Rejoignez notre <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Communauté OpenSource</a>',
+    community: 'Rejoignez notre <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Communauté OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Annuel',
       monthly: 'Mensuel',
@@ -131,7 +131,7 @@ const translations = {
     tip1: '如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
     tip2: '适用于所有平台和车辆！包括网约车司机(如Ifood, Uber, 99等)、出租车、货车，甚至公交车/飞机/地铁(需灵活应用)',
     formula: '长期利润公式: 收入 - 支出(燃油及其他) - 折旧 (3.33% * 车辆价值每年) - 风险 (10% * 保险费用每年)。注: 短期利润仅扣除行程燃油成本',
-    community: '加入我们的<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">开源社区</a>',
+    community: '加入我们的<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">开源社区</a>!!!',
     periodicityOptions: {
       annual: '年',
       monthly: '月',
@@ -195,7 +195,7 @@ const translations = {
     tip1: 'عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
     tip2: 'يمكن استخدامه لجميع المنصات والمركبات! لكل السائقين، التطبيقات (Ifood, Uber, 99, إلخ)، سيارات الأجرة، الحافلات وحتى الطائرات/المترو (يتطلب الإبداع)',
     formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - الإهلاك (3.33% * قيمة المركبة سنوياً) - المخاطرة (10% * قسط التأمين سنوياً). ملاحظة: الربح قصير المدى يخصم فقط تكلفة الوقود للرحلة',
-    community: 'انضم إلى <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">مجتمعنا المفتوح المصدر</a>',
+    community: 'انضم إلى <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">مجتمعنا المفتوح المصدر</a>!!!',
     periodicityOptions: {
       annual: 'سنوي',
       monthly: 'شهري',
@@ -259,7 +259,7 @@ const translations = {
     tip1: 'Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
     tip2: 'Подходит для всех платформ и ТС! Для всех водителей: приложения (Ifood, Uber, 99 и др.), такси, фургоны и даже автобусы/самолёты/метро (требует креативности)',
     formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - Амортизация (3.33% * Стоимость ТС в год) - Риск (10% * Страховая премия в год). Прим.: краткосрочная прибыль учитывает только затраты на топливо для поездки',
-    community: 'Присоединяйтесь к нашему <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">сообществу OpenSource</a>',
+    community: 'Присоединяйтесь к нашему <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">сообществу OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Год',
       monthly: 'Месяц',
@@ -291,7 +291,7 @@ const translations = {
     tip1: 'Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
     tip2: 'Підходить для всіх платформ і ТЗ! Для всіх водіїв: додатки (Ifood, Uber, 99 тощо), таксі, фургони та навіть автобуси/літаки/метро (вимагає креативності)',
     formula: 'Формула довгострокового прибутку: Дохід - Витрати (паливо та ін.) - Амортизація (3.33% * Вартість ТЗ на рік) - Ризик (10% * Страхова премія на рік). Прим.: короткостроковий прибуток враховує лише витрати на паливо для поїздки',
-    community: 'Приєднуйтесь до нашої <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">спільноти OpenSource</a>',
+    community: 'Приєднуйтесь до нашої <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">спільноти OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Рік',
       monthly: 'Місяць',
@@ -323,7 +323,7 @@ const translations = {
     tip1: 'Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
     tip2: 'Kan bruges til alle platforme og køretøjer! Til alle chauffører, både app-baserede (Ifood, Uber, 99 osv.), taxaer, varevogne og endda busser/fly/tog (kræver kreativitet)',
     formula: 'Langsigtet profitformel: Indtægter - Udgifter (brændstof og andre) - Afskrivning (3.33% * Køretøjsværdi pr. år) - Risiko (10% * Forsikringspræmie pr. år). Bemærk: kortsigtet profit fratrækker kun brændstofomkostninger for kørslen',
-    community: 'Tilmeld dig vores <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-fællesskab</a>',
+    community: 'Tilmeld dig vores <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-fællesskab</a>!!!',
     periodicityOptions: {
       annual: 'Årlig',
       monthly: 'Månedlig',
@@ -387,7 +387,7 @@ const translations = {
     tip1: 'Kwa gari zilizokodishwa, weka thamani ya 0 na ongeza kodi kwenye gharama',
     tip2: 'Inaweza kutumika kwa mifumo yote na magari! Kwa madereva wote, programu (Ifood, Uber, 99, n.k.), teksi, vani na hata mabasi/ndege/metro (inahitaji ubunifu)',
     formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta na mengine) - Mshuko wa Thamani (3.33% * Thamani ya Gari kwa mwaka) - Hatari (10% * Malipo ya Bima kwa mwaka). Kumbuka: faida ya muda mfupi inatoa tu gharama ya mafuta ya safari',
-    community: 'Jiunge na <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Jumuiya yetu ya OpenSource</a>',
+    community: 'Jiunge na <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Jumuiya yetu ya OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Mwaka',
       monthly: 'Mwezi',
@@ -451,7 +451,7 @@ const translations = {
     tip1: 'Si alquilas el vehículo, establece el valor del vehículo en cero e incluye el valor del alquiler en los costos de mantenimiento',
     tip2: '¡Puede usarse para todas las plataformas y vehículos! Para todos los conductores, tanto aplicaciones (Ifood, Uber, 99, etc.) como taxis, furgonetas e incluso autobuses/aviones/metro (requiere creatividad)',
     formula: 'Fórmula de Beneficio a Largo Plazo: Ingresos - Gastos (Combustible y Otros) - Depreciación (3.33% * Valor del Vehículo por año) - Riesgo (10% * Prima del Seguro por año). Nota: el beneficio a corto plazo solo descuenta el costo de combustible del viaje',
-    community: 'Únete a nuestra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidad OpenSource</a>',
+    community: 'Únete a nuestra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidad OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Anual',
       monthly: 'Mensual',
@@ -483,7 +483,7 @@ const translations = {
     tip1: 'Se noleggi il veicolo, imposta il valore a zero e includi il noleggio nei costi di manutenzione',
     tip2: 'Utilizzabile per tutte le piattaforme e veicoli! Per tutti i conducenti, app (Ifood, Uber, 99, etc.), taxi, furgoni e persino bus/aerei/metro (richiede creatività)',
     formula: 'Formula Profitto Lungo Termine: Ricavi - Spese (Carburante e Altri) - Deprezzamento (3.33% * Valore Veicolo all\'anno) - Rischio (10% * Premio Assicurativo all\'anno). Nota: il profitto a breve termine detrae solo il costo del carburante della corsa',
-    community: 'Unisciti alla nostra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunità OpenSource</a>',
+    community: 'Unisciti alla nostra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunità OpenSource</a>!!!',
     periodicityOptions: {
       annual: 'Annuale',
       monthly: 'Mensile',
@@ -1110,7 +1110,7 @@ export default function CalculoLucro() {
       {t.tip1}<br />
       {t.tip2}.<br /><br />
       {t.formula}.<br /><br />
-      <div dangerouslySetInnerHTML={{ __html: t.community}}!/>
+      <div dangerouslySetInnerHTML={{ __html: t.community}}/>
     </p>
     </div>
   );
