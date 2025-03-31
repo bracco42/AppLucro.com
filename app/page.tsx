@@ -1110,7 +1110,7 @@ export default function CalculoLucro() {
       #{t.tip1}<br />
       #{t.tip2}.<br /><br />
       #{t.formula}.<br /><br />
-      @{t.community}!!!
+      <div dangerouslySetInnerHTML={{ __html: t.community }} />!!!
     </p>
     </div>
   );
