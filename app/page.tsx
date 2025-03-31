@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { sanitizeHTML } from '@/lib/sanitize';
+import { sanitizeHTML } from '../lib/sanitize';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 type Cost = {
