@@ -853,21 +853,12 @@ const translations = {
   }
 };
 
-'use client';
-
-import React, { useState, useEffect } from 'react';
-
-type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
-
-type Cost = {
-  id: number;
-  valor: number;
-  periodicity: Periodicity;
 };
 
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
+
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
   const [kmPorLitro, setKmPorLitro] = useState<string>('');
