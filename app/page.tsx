@@ -13,8 +13,6 @@ type Cost = {
 type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
 
 const translations = {
- 
-const translations = {
   'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
