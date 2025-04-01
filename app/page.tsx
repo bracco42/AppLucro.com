@@ -1020,9 +1020,31 @@ export default function CalculoLucro() {
     }
   };
 
-  const exportSettings = () => {
+ const exportSettings = async () => {
+  try {
     const settings = localStorage.getItem(STORAGE_KEY);
-    if (settings) {
+    if (!settings) return;
+
+    // Verifica se a API File System Access está disponível
+    if ('showSaveFilePicker' in window) {
+      try {
+        const handle = await (window as any).showSaveFilePicker({
+          suggestedName: 'ride_profit_settings.json',
+          types: [{
+            description: 'JSON Files',
+            accept: { 'application/json': ['.json'] },
+          }],
+        });
+        
+        const writable = await handle.createWritable();
+        await writable.write(settings);
+        await writable.close();
+      } catch (err) {
+        // Usuário cancelou a operação
+        console.log('Export cancelled');
+      }
+    } else {
+      // Fallback para navegadores que não suportam a API
       const blob = new Blob([settings], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       
@@ -1030,8 +1052,69 @@ export default function CalculoLucro() {
       a.href = url;
       a.download = 'ride_profit_settings.json';
       a.click();
+      URL.revokeObjectURL(url);
     }
-  };
+  } catch (error) {
+    console.error('Error exporting settings:', error);
+  }
+};
+
+const importSettings = async () => {
+  try {
+    // Verifica se a API File System Access está disponível
+    if ('showOpenFilePicker' in window) {
+      try {
+        const [handle] = await (window as any).showOpenFilePicker({
+          types: [{
+            description: 'JSON Files',
+            accept: { 'application/json': ['.json'] },
+          }],
+          multiple: false
+        });
+        
+        const file = await handle.getFile();
+        const content = await file.text();
+        
+        try {
+          const settings = JSON.parse(content);
+          localStorage.setItem(STORAGE_KEY, content);
+          window.location.reload();
+        } catch (error) {
+          alert(t.importError);
+        }
+      } catch (err) {
+        // Usuário cancelou a operação
+        console.log('Import cancelled');
+      }
+    } else {
+      // Fallback para navegadores que não suportam a API
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      
+      input.onchange = (e: Event) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            try {
+              const settings = JSON.parse(event.target?.result as string);
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+              window.location.reload();
+            } catch (error) {
+              alert(t.importError);
+            }
+          };
+          reader.readAsText(file);
+        }
+      };
+      
+      input.click();
+    }
+  } catch (error) {
+    console.error('Error importing settings:', error);
+  }
+};
 
   const importSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -1398,22 +1481,23 @@ export default function CalculoLucro() {
                 fontSize: '16px'
               }}
             >
-              {t.exportButton}
-            </button>
-            <label style={{
-              flex: 1,
-              padding: '12px',
-              backgroundColor: '#00f',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '5px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              fontSize: '16px',
-              textAlign: 'center',
-              display: 'block'
-            }}>
-              {t.importButton}
+            {t.exportButton}
+            <button
+              onClick={importSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#00f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+            {t.importButton}
+</button>
               <input 
                 type="file" 
                 accept=".json"
