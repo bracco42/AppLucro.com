@@ -3,11 +3,51 @@
 import React, { useState, useEffect } from 'react';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
+
 type Cost = {
   id: number;
   valor: number;
   periodicity: Periodicity;
 };
+
+type PeriodicityOptions = {
+  annual: string;
+  monthly: string;
+  weekly: string;
+  daily: string;
+};
+
+type Translation = {
+  title: string;
+  subtitle: string;
+  registerButton: string;
+  closeButton: string;
+  saveButton: string;
+  fuelPrice: string;
+  fuelEfficiency: string;
+  insuranceValue: string;
+  insurancePremium: string;
+  maintenanceCosts: string;
+  addCost: string;
+  remove: string;
+  distance: string;
+  timeSpent: string;
+  workingHours: string;
+  workingDays: string;
+  vehicleValue: string;
+  rideValue: string;
+  rideDistance: string;
+  rideTime: string;
+  shortTermProfit: string;
+  longTermProfit: string;
+  tips: string;
+  tip1: string;
+  tip2: string;
+  formula: string;
+  community: string;
+  periodicityOptions: PeriodicityOptions;
+};
+
 type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa' | 'bn';
 
 const translations = {
