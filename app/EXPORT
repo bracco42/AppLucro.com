@@ -1237,6 +1237,7 @@ return (
       <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
       <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
       <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+      </div>
     </div>
-  </div>
-);
+  );
+}
