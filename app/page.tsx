@@ -1021,101 +1021,68 @@ export default function CalculoLucro() {
     }
   };
 
-  const exportSettings = async () => {
-    try {
-      const settings = localStorage.getItem(STORAGE_KEY);
-      if (!settings) return;
+ const exportSettings = async () => {
+  try {
+    const settings = localStorage.getItem(STORAGE_KEY);
+    if (!settings) return;
 
-      // Verifica se a API File System Access está disponível
-      if ('showSaveFilePicker' in window) {
-        try {
-          const handle = await (window as any).showSaveFilePicker({
-            suggestedName: 'ride_profit_settings.json',
-            types: [{
-              description: 'JSON Files',
-              accept: { 'application/json': ['.json'] },
-            }],
-          });
-          
-          const writable = await handle.createWritable();
-          await writable.write(settings);
-          await writable.close();
-        } catch (err) {
-          // Usuário cancelou a operação
-          console.log('Export cancelled');
-        }
-      } else {
-        // Fallback para navegadores que não suportam a API
-        const blob = new Blob([settings], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'ride_profit_settings.json';
-        a.click();
-        URL.revokeObjectURL(url);
-      }
-    } catch (error) {
-      console.error('Error exporting settings:', error);
-    }
-  };
-
-  const importSettings = async () => {
-    try {
-      // Verifica se a API File System Access está disponível
-      if ('showOpenFilePicker' in window) {
-        try {
-          const [handle] = await (window as any).showOpenFilePicker({
-            types: [{
-              description: 'JSON Files',
-              accept: { 'application/json': ['.json'] },
-            }],
-            multiple: false
-          });
-          
-          const file = await handle.getFile();
-          const content = await file.text();
-          
+    // Fallback para todos os navegadores (incluindo Safari)
+    const blob = new Blob([settings], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ride_profit_settings.json';
+    document.body.appendChild(a);
+    a.click();
+    
+    // Limpeza
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  } catch (error) {
+    console.error('Error exporting settings:', error);
+    alert('Failed to export settings');
+  }
+};
+  
+ const importSettings = async () => {
+  try {
+    // Fallback para todos os navegadores (incluindo Safari)
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.onchange = (e: Event) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
           try {
-            const settings = JSON.parse(content);
-            localStorage.setItem(STORAGE_KEY, content);
+            const settings = event.target?.result as string;
+            localStorage.setItem(STORAGE_KEY, settings);
             window.location.reload();
           } catch (error) {
             alert(t.importError);
           }
-        } catch (err) {
-          // Usuário cancelou a operação
-          console.log('Import cancelled');
-        }
-      } else {
-        // Fallback para navegadores que não suportam a API
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-        
-        input.onchange = (e: Event) => {
-          const file = (e.target as HTMLInputElement).files?.[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-              try {
-                const settings = JSON.parse(event.target?.result as string);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-                window.location.reload();
-              } catch (error) {
-                alert(t.importError);
-              }
-            };
-            reader.readAsText(file);
-          }
         };
-        
-        input.click();
+        reader.readAsText(file);
       }
-    } catch (error) {
-      console.error('Error importing settings:', error);
-    }
-  };
+    };
+    
+    document.body.appendChild(input);
+    input.click();
+    
+    // Limpeza
+    setTimeout(() => {
+      document.body.removeChild(input);
+    }, 100);
+  } catch (error) {
+    console.error('Error importing settings:', error);
+    alert('Failed to import settings');
+  }
+};
 
   // Funções de custos
   const adicionarCustoManutencao = () => {
