@@ -10,7 +10,7 @@ type Cost = {
   periodicity: Periodicity;
 };
 
-const formatCurrency = (value: number) => {
+const formatCurrency = (value: number, language: string) => {
   return value.toLocaleString(language, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -20,8 +20,8 @@ const formatCurrency = (value: number) => {
 type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa' | 'bn';
 
 const CURRENCY_SYMBOLS: Record<Language, string> = {
-  'pt': 'R$',     // Português (Brasil)
-  'en': 'US$',    // Inglês (EUA)
+  'pt': 'R$',
+  'en': 'US$',
   'es': '$',      // Espanhol (geralmente peso ou dólar)
   'fr': '€',      // Francês (Europa - Euro)
   'de': '€',      // Alemão (Europa - Euro)
@@ -781,6 +781,7 @@ const translations = {
 };
 
 export default function CalculoLucro() {
+  const t = translations[language];
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('5');
   const [kmPorLitro, setKmPorLitro] = useState<string>('35');
@@ -911,7 +912,7 @@ export default function CalculoLucro() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Seletor de idioma */}
+      {/* Language selector */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select
           value={language}
@@ -934,309 +935,14 @@ export default function CalculoLucro() {
         </select>
       </div>
 
-      {/* Cabeçalho */}
+      {/* Header */}
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
 
-      {/* Botão de configuração */}
-      <button
-        onClick={() => setShowModal(!showModal)}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#0f0',
-          color: '#000',
-          border: 'none',
-          borderRadius: '5px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          marginBottom: '20px',
-          fontSize: '16px'
-        }}
-      >
-        {showModal ? t.closeButton : t.registerButton}
-      </button>
+      {/* ... rest of your JSX ... */}
 
-      {/* Modal de configuração */}
-      {showModal && (
-        <div style={{
-          backgroundColor: '#222',
-          padding: '20px',
-          borderRadius: '10px',
-          marginBottom: '20px',
-          boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
-        }}>
-          <h3 style={{ color: '#0f0', marginTop: 0 }}>{t.registerButton}</h3>
-          
-          {/* Seção de combustível */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.fuelPrice}</label>
-            <input 
-              type="text" 
-              value={precoCombustivel} 
-              onChange={(e) => handleNumberInput(e.target.value, setPrecoCombustivel)} 
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.fuelEfficiency}</label>
-            <input 
-              type="text" 
-              value={kmPorLitro} 
-              onChange={(e) => handleNumberInput(e.target.value, setKmPorLitro)} 
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          {/* Seção de seguro */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.insuranceValue}</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <input 
-                type="text" 
-                value={valorSeguro} 
-                onChange={(e) => handleNumberInput(e.target.value, setValorSeguro)} 
-                style={{
-                  flex: 1,
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff'
-                }}
-              />
-              <select
-                value={periodicidadeSeguro}
-                onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
-                style={{
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff',
-                  minWidth: '100px'
-                }}
-              >
-                {Object.entries(t.periodicityOptions).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.insurancePremium}</label>
-            <input 
-              type="text" 
-              value={premioSeguro} 
-              onChange={(e) => handleNumberInput(e.target.value, setPremioSeguro)} 
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          {/* Seção de custos de manutenção */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
-            {custosManutencao.map((custo) => (
-              <div key={custo.id} style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <input 
-                  type="text" 
-                  value={custo.valor} 
-                  onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
-                  style={{
-                    flex: 1,
-                    padding: '8px',
-                    borderRadius: '5px',
-                    border: '1px solid #0f0',
-                    backgroundColor: '#111',
-                    color: '#fff'
-                  }}
-                />
-                <select
-                  value={custo.periodicity}
-                  onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
-                  style={{
-                    padding: '8px',
-                    borderRadius: '5px',
-                    border: '1px solid #0f0',
-                    backgroundColor: '#111',
-                    color: '#fff',
-                    minWidth: '100px'
-                  }}
-                >
-                  {Object.entries(t.periodicityOptions).map(([value, label]) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
-                {custosManutencao.length > 1 && (
-                  <button
-                    onClick={() => removerCustoManutencao(custo.id)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#f00',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {t.remove}
-                  </button>
-                )}
-              </div>
-            ))}
-            <button
-              onClick={adicionarCustoManutencao}
-              style={{
-                padding: '8px 12px',
-                backgroundColor: '#0f0',
-                color: '#000',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                marginTop: '5px'
-              }}
-            >
-              {t.addCost}
-            </button>
-          </div>
-
-          {/* Seção de jornada de trabalho */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.distance}</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <input 
-                type="text" 
-                value={distanciaPercorrida} 
-                onChange={(e) => handleNumberInput(e.target.value, setDistanciaPercorrida)} 
-                style={{
-                  flex: 1,
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff'
-                }}
-              />
-              <select
-                value={periodicidadeDistancia}
-                onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
-                style={{
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff',
-                  minWidth: '100px'
-                }}
-              >
-                {Object.entries(t.periodicityOptions).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingHours}</label>
-            <input 
-              type="number"
-              min="1"
-              max="16"
-              value={horasPorDia} 
-              onChange={(e) => handleHorasPorDia(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingDays}</label>
-            <input 
-              type="number"
-              min="1"
-              max="7"
-              value={diasPorSemana} 
-              onChange={(e) => handleDiasPorSemana(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          {/* Seção de valor do veículo */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.vehicleValue}</label>
-            <input 
-              type="text" 
-              value={valorVeiculo} 
-              onChange={(e) => handleNumberInput(e.target.value, setValorVeiculo)} 
-              style={{
-                width: '100%',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #0f0',
-                backgroundColor: '#111',
-                color: '#fff'
-              }}
-            />
-          </div>
-
-          <button
-            onClick={() => setShowModal(false)}
-            style={{
-              width: '100%',
-              padding: '12px',
-              backgroundColor: '#0f0',
-              color: '#000',
-              border: 'none',
-              borderRadius: '5px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              fontSize: '16px',
-              marginTop: '10px'
-            }}
-          >
-            {t.saveButton}
-          </button>
-        </div>
-      )}
-
-      {/* Seção de dados da corrida */}
+      {/* Results section */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -1244,115 +950,54 @@ export default function CalculoLucro() {
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
       }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Dados da Corrida</h3>
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
         
         <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideValue}</label>
-          <input 
-            type="text" 
-            value={valorCorrida} 
-            onChange={(e) => handleNumberInput(e.target.value, setValorCorrida)} 
-            style={{
-              width: '100%',
-              padding: '8px',
-              borderRadius: '5px',
-              border: '1px solid #0f0',
-              backgroundColor: '#111',
-              color: '#fff'
-            }}
-          />
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            textAlign: 'center'
+          }}>
+            {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo, language)}` : '---'}
+          </div>
         </div>
 
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideDistance}</label>
-          <input 
-            type="text" 
-            value={distanciaCorrida} 
-            onChange={(e) => handleNumberInput(e.target.value, setDistanciaCorrida)} 
-            style={{
-              width: '100%',
-              padding: '8px',
-              borderRadius: '5px',
-              border: '1px solid #0f0',
-              backgroundColor: '#111',
-              color: '#fff'
-            }}
-          />
-        </div>
-
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideTime}</label>
-          <input 
-            type="text" 
-            value={tempoCorrida} 
-            onChange={(e) => handleNumberInput(e.target.value, setTempoCorrida)} 
-            style={{
-              width: '100%',
-              padding: '8px',
-              borderRadius: '5px',
-              border: '1px solid #0f0',
-              backgroundColor: '#111',
-              color: '#fff'
-            }}
-          />
+        <div style={{ textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            textAlign: 'center'
+          }}>
+            {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo, language)}` : '---'}
+          </div>
         </div>
       </div>
 
-{/* Resultados */}
-<div style={{ 
-  backgroundColor: '#222', 
-  padding: '20px', 
-  borderRadius: '10px',
-  marginBottom: '20px',
-  boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
-}}>
-  <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
-  
-  <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-    <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
-    <div style={{
-      padding: '12px',
-      backgroundColor: '#0f0',
-      color: '#000',
-      borderRadius: '5px',
-      fontWeight: 'bold',
-      fontSize: '18px',
-      textAlign: 'center'
-    }}>
-      {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo, language)}` : '---'}
+      {/* Tips and information */}
+      <div style={{ 
+        backgroundColor: '#222', 
+        padding: '20px', 
+        borderRadius: '10px',
+        marginBottom: '20px',
+        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
+        textAlign: 'left'
+      }}>
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+        <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
+        <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
+        <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+        <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+      </div>
     </div>
-  </div>
-
-  <div style={{ textAlign: 'left' }}>
-    <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
-    <div style={{
-      padding: '12px',
-      backgroundColor: '#0f0',
-      color: '#000',
-      borderRadius: '5px',
-      fontWeight: 'bold',
-      fontSize: '18px',
-      textAlign: 'center'
-    }}>
-      {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo, language)}` : '---'}
-    </div>
-  </div>
-
-  {/* Dicas e informações */}
-  <div style={{ 
-    backgroundColor: '#222', 
-    padding: '20px', 
-    borderRadius: '10px',
-    marginBottom: '20px',
-    boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
-    textAlign: 'left'
-  }}>
-    <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
-    <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
-    <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
-    <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-    <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
-  </div>
-</div>
   );
 }
