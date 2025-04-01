@@ -1616,7 +1616,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            `$${lucroCurtoPrazo.toFixed(2)}` : '---'}
+            {precoCombustivel && kmPorLitro ? `$${lucroCurtoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
 
@@ -1631,7 +1631,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            `$${lucroLongoPrazo.toFixed(2)}` : '---'}
+            {precoCombustivel && kmPorLitro ? `$${lucroLongoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
       </div>
