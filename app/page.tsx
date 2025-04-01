@@ -784,30 +784,55 @@ export default function CalculoLucro() {
   };
 
   // Cálculos principais
-  useEffect(() => {
-    // 1. Cálculo de curto prazo (apenas combustível)
-    const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
-    const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
-    setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
+useEffect(() => {
+  // 1. Cálculo de curto prazo (apenas combustível)
+  const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
+  const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
+  setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
 
-    // 2. Cálculo de longo prazo
-    const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
+  // 2. Cálculo de longo prazo
+  const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
-    const custosAnuais = custosManutencao.map(c => {
-      switch(c.periodicity) {
-        case 'monthly': return c.valor * 12;
-        case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
-        case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
-        default: return c.valor;
-      }
-    });
+  const custosAnuais = custosManutencao.map(c => {
+    switch(c.periodicity) {
+      case 'monthly': return c.valor * 12;
+      case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
+      case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+      default: return c.valor;
+    }
+  });
 
-    const seguroAnual = {
+  const seguroAnual = (() => {
+    switch(periodicidadeSeguro) {
       case 'monthly': return parseInput(valorSeguro) * 12;
       case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
       case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
       default: return parseInput(valorSeguro);
-    };
+    }
+  })();
+
+  const premioAnual = parseInput(premioSeguro);
+
+  const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
+
+  const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
+  const custoSeguroCorrida = seguroAnual * fatorTempo;
+  const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
+  const riscoCorrida = premioAnual * 0.1 * fatorTempo;
+
+  setLucroLongoPrazo(
+    parseInput(valorCorrida) - 
+    custoCombustivelCorrida - 
+    custoManutencaoCorrida - 
+    custoSeguroCorrida - 
+    depreciacaoCorrida - 
+    riscoCorrida
+  );
+}, [
+  precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
+  custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
+  valorCorrida, distanciaCorrida, tempoCorrida
+]);
 
     const premioAnual = parseInput(premioSeguro);
 
