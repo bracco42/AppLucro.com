@@ -10,24 +10,8 @@ type Cost = {
   periodicity: Periodicity;
 };
 
-type SavedSettings = {
-  fuelPrice: string;
-  kmPorLitro: string;
-  valorSeguro: string;
-  periodicidadeSeguro: Periodicity;
-  premioSeguro: string;
-  custosManutencao: Cost[];
-  valorVeiculo: string;
-  horasPorDia: string;
-  diasPorSemana: string;
-  language: Language;
-};
-
-const STORAGE_KEY = 'rideProfitCalculatorSettings';
-
 type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
 
-// Include your translations object here (I'm omitting it for brevity)
 const translations = {
  'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
@@ -869,61 +853,59 @@ const translations = {
   }
 };
 
+const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
-  const [precoCombustivel, setPrecoCombustivel] = useState('');
-  const [kmPorLitro, setKmPorLitro] = useState('');
-  const [valorSeguro, setValorSeguro] = useState('');
+  // Dados do veículo
+  const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
+  const [kmPorLitro, setKmPorLitro] = useState<string>('');
+  const [valorSeguro, setValorSeguro] = useState<string>('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
-  const [premioSeguro, setPremioSeguro] = useState('');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{ id: 1, valor: 0, periodicity: 'annual' }]);
-  const [valorVeiculo, setValorVeiculo] = useState('');
-  const [horasPorDia, setHorasPorDia] = useState('');
-  const [diasPorSemana, setDiasPorSemana] = useState('');
+  const [premioSeguro, setPremioSeguro] = useState<string>('');
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 0, periodicity: 'annual'}]);
+  const [valorVeiculo, setValorVeiculo] = useState<string>('');
+
+  // Jornada de trabalho
+  const [horasPorDia, setHorasPorDia] = useState<string>('');
+  const [diasPorSemana, setDiasPorSemana] = useState<string>('');
+
+  // Dados da corrida
+  const [valorCorrida, setValorCorrida] = useState<string>('');
+  const [distanciaCorrida, setDistanciaCorrida] = useState<string>('');
+  const [tempoCorrida, setTempoCorrida] = useState<string>('');
+
+  // Resultados
+  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
+  const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>('pt');
-  const [showModal, setShowModal] = useState(false);
-  const [valorCorrida, setValorCorrida] = useState('');
-  const [distanciaCorrida, setDistanciaCorrida] = useState('');
-  const [tempoCorrida, setTempoCorrida] = useState('');
-  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState(0);
-  const [lucroLongoPrazo, setLucroLongoPrazo] = useState(0);
 
   const t = translations[language];
 
-  const loadSettings = (): Partial<SavedSettings> => {
-    try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      return savedData ? JSON.parse(savedData) : {};
-    } catch (error) {
-      console.error('Failed to load settings:', error);
-      return {};
+  // Carregar configurações salvas
+  useEffect(() => {
+    const savedSettings = localStorage.getItem(STORAGE_KEY);
+    if (savedSettings) {
+      try {
+        const parsedSettings = JSON.parse(savedSettings);
+        
+        setPrecoCombustivel(parsedSettings.fuelPrice || '');
+        setKmPorLitro(parsedSettings.kmPorLitro || '');
+        setValorSeguro(parsedSettings.valorSeguro || '');
+        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
+        setPremioSeguro(parsedSettings.premioSeguro || '');
+        setCustosManutencao(parsedSettings.custosManutencao || [{id: 1, valor: 0, periodicity: 'annual'}]);
+        setValorVeiculo(parsedSettings.valorVeiculo || '');
+        setHorasPorDia(parsedSettings.horasPorDia || '');
+        setDiasPorSemana(parsedSettings.diasPorSemana || '');
+        setLanguage(parsedSettings.language || 'pt');
+      } catch (e) {
+        console.error('Error loading settings:', e);
+      }
     }
-  };
+  }, []);
 
-  const saveSettings = (settings: SavedSettings, errorMessage?: string) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch (error) {
-      console.error('Failed to save settings:', error);
-      alert(errorMessage || 'Failed to save settings');
-    }
-  };
-
- const resetSettings = (): SavedSettings => {
-  return {
-    fuelPrice: '',
-    kmPorLitro: '',
-    valorSeguro: '',
-    periodicidadeSeguro: 'annual',
-    premioSeguro: '',
-    custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
-    valorVeiculo: '',
-    horasPorDia: '',
-    diasPorSemana: '',
-    language: 'pt'
-  };
-};
-
+  // Funções auxiliares
   const formatNumberInput = (value: string): string => {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
   };
@@ -951,99 +933,7 @@ export default function CalculoLucro() {
     }
   };
 
-  const handleSaveSettings = () => {
-    const settingsToSave: SavedSettings = {
-      fuelPrice: precoCombustivel,
-      kmPorLitro,
-      valorSeguro,
-      periodicidadeSeguro,
-      premioSeguro,
-      custosManutencao,
-      valorVeiculo,
-      horasPorDia,
-      diasPorSemana,
-      language
-    };
-    saveSettings(settingsToSave, t.importError);
-    alert('Configurações salvas com sucesso!');
-  };
-
- const handleResetSettings = () => {
-  if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
-    const defaults = resetSettings();
-    setPrecoCombustivel(defaults.fuelPrice);
-    setKmPorLitro(defaults.kmPorLitro);
-    setValorSeguro(defaults.valorSeguro);
-    setPeriodicidadeSeguro(defaults.periodicidadeSeguro);
-    setPremioSeguro(defaults.premioSeguro);
-    setCustosManutencao(defaults.custosManutencao);
-    setValorVeiculo(defaults.valorVeiculo);
-    setHorasPorDia(defaults.horasPorDia);
-    setDiasPorSemana(defaults.diasPorSemana);
-    setLanguage(defaults.language);
-    alert('Configurações resetadas!');
-  }
-};
-
-  const exportToFile = () => {
-    const settings = loadSettings();
-    const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ride_profit_settings.json';
-    a.click();
-  };
-
-  const importFromFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const settings = JSON.parse(event.target?.result as string) as SavedSettings;
-        saveSettings(settings, t.importError);
-        window.location.reload();
-      } catch (error) {
-        alert('Erro ao importar configurações: arquivo inválido');
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const adicionarCustoManutencao = () => {
-    setCustosManutencao([...custosManutencao, { id: Date.now(), valor: 0, periodicity: 'annual' }]);
-  };
-
-  const removerCustoManutencao = (id: number) => {
-    if (custosManutencao.length > 1) {
-      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
-    }
-  };
-
-  const atualizarCustoManutencao = (id: number, field: string, value: any) => {
-    setCustosManutencao(custosManutencao.map(custo => 
-      custo.id === id ? { ...custo, [field]: field === 'valor' ? parseInput(value) : value } : custo
-    ));
-  };
-
-  useEffect(() => {
-    const saved = loadSettings();
-    if (saved) {
-      setPrecoCombustivel(saved.fuelPrice || '');
-      setKmPorLitro(saved.kmPorLitro || '');
-      setValorSeguro(saved.valorSeguro || '');
-      setPeriodicidadeSeguro(saved.periodicidadeSeguro || 'annual');
-      setPremioSeguro(saved.premioSeguro || '');
-      setCustosManutencao(saved.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
-      setValorVeiculo(saved.valorVeiculo || '');
-      setHorasPorDia(saved.horasPorDia || '');
-      setDiasPorSemana(saved.diasPorSemana || '');
-      setLanguage(saved.language || 'pt');
-    }
-  }, []);
-
+  // Cálculos principais
   useEffect(() => {
     const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
@@ -1052,7 +942,7 @@ export default function CalculoLucro() {
     const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
     const custosAnuais = custosManutencao.map(c => {
-      switch (c.periodicity) {
+      switch(c.periodicity) {
         case 'monthly': return c.valor * 12;
         case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
         case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
@@ -1061,7 +951,7 @@ export default function CalculoLucro() {
     });
 
     const seguroAnual = (() => {
-      switch (periodicidadeSeguro) {
+      switch(periodicidadeSeguro) {
         case 'monthly': return parseInput(valorSeguro) * 12;
         case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
         case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
@@ -1078,30 +968,117 @@ export default function CalculoLucro() {
     const riscoCorrida = premioAnual * 0.1 * fatorTempo;
 
     setLucroLongoPrazo(
-      parseInput(valorCorrida) -
-      custoCombustivelCorrida -
-      custoManutencaoCorrida -
-      custoSeguroCorrida -
-      depreciacaoCorrida -
+      parseInput(valorCorrida) - 
+      custoCombustivelCorrida - 
+      custoManutencaoCorrida - 
+      custoSeguroCorrida - 
+      depreciacaoCorrida - 
       riscoCorrida
     );
   }, [
     precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
-    custosManutencao, valorVeiculo, horasPorDia, diasPorSemana,
+    custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
     valorCorrida, distanciaCorrida, tempoCorrida
   ]);
 
-return (
-    <div style={{
-      textAlign: 'center',
-      padding: '20px',
-      backgroundColor: '#000',
+  // Funções de persistência
+  const saveSettings = () => {
+    if (!precoCombustivel || !kmPorLitro) {
+      alert(t.validationMessage);
+      return;
+    }
+
+    const settingsToSave = {
+      fuelPrice: precoCombustivel,
+      kmPorLitro,
+      valorSeguro,
+      periodicidadeSeguro,
+      premioSeguro,
+      custosManutencao,
+      valorVeiculo,
+      horasPorDia,
+      diasPorSemana,
+      language
+    };
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsToSave));
+    setShowModal(false);
+  };
+
+  const resetSettings = () => {
+    if (confirm(t.resetButton + '?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      setPrecoCombustivel('');
+      setKmPorLitro('');
+      setValorSeguro('');
+      setPeriodicidadeSeguro('annual');
+      setPremioSeguro('');
+      setCustosManutencao([{id: 1, valor: 0, periodicity: 'annual'}]);
+      setValorVeiculo('');
+      setHorasPorDia('');
+      setDiasPorSemana('');
+    }
+  };
+
+  const exportSettings = () => {
+    const settings = localStorage.getItem(STORAGE_KEY);
+    if (settings) {
+      const blob = new Blob([settings], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ride_profit_settings.json';
+      a.click();
+    }
+  };
+
+  const importSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const settings = JSON.parse(event.target?.result as string);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+          window.location.reload();
+        } catch (error) {
+          alert(t.importError);
+        }
+      };
+      reader.readAsText(file);
+    }
+    e.target.value = ''; // Reset input
+  };
+
+  // Funções de custos
+  const adicionarCustoManutencao = () => {
+    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
+  };
+
+  const removerCustoManutencao = (id: number) => {
+    if (custosManutencao.length > 1) {
+      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
+    }
+  };
+
+  const atualizarCustoManutencao = (id: number, field: string, value: any) => {
+    setCustosManutencao(custosManutencao.map(custo => 
+      custo.id === id ? {...custo, [field]: field === 'valor' ? parseInput(value) : value} : custo
+    ));
+  };
+
+  return (
+    <div style={{ 
+      textAlign: 'center', 
+      padding: '20px', 
+      backgroundColor: '#000', 
       color: '#fff',
       maxWidth: '800px',
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Language selector */}
+      {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select
           value={language}
@@ -1124,11 +1101,12 @@ return (
         </select>
       </div>
 
-      {/* Header */}
+      {/* Cabeçalho */}
+      <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
 
-      {/* Configuration button */}
+      {/* Botão de configuração */}
       <button
         onClick={() => setShowModal(!showModal)}
         style={{
@@ -1146,7 +1124,7 @@ return (
         {showModal ? t.closeButton : t.registerButton}
       </button>
 
-      {/* Configuration modal */}
+      {/* Modal de configuração */}
       {showModal && (
         <div style={{
           backgroundColor: '#222',
@@ -1155,11 +1133,299 @@ return (
           marginBottom: '20px',
           boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
         }}>
-          {/* ... rest of your modal content ... */}
+          <h3 style={{ color: '#0f0', marginTop: 0 }}>{t.registerButton}</h3>
+          
+          {/* Seção de combustível */}
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.fuelPrice}</label>
+            <input 
+              type="text" 
+              value={precoCombustivel} 
+              onChange={(e) => handleNumberInput(e.target.value, setPrecoCombustivel)} 
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.fuelEfficiency}</label>
+            <input 
+              type="text" 
+              value={kmPorLitro} 
+              onChange={(e) => handleNumberInput(e.target.value, setKmPorLitro)} 
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          {/* Seção de seguro */}
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.insuranceValue}</label>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <input 
+                type="text" 
+                value={valorSeguro} 
+                onChange={(e) => handleNumberInput(e.target.value, setValorSeguro)} 
+                style={{
+                  flex: 1,
+                  padding: '8px',
+                  borderRadius: '5px',
+                  border: '1px solid #0f0',
+                  backgroundColor: '#111',
+                  color: '#fff'
+                }}
+              />
+              <select
+                value={periodicidadeSeguro}
+                onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
+                style={{
+                  padding: '8px',
+                  borderRadius: '5px',
+                  border: '1px solid #0f0',
+                  backgroundColor: '#111',
+                  color: '#fff',
+                  minWidth: '100px'
+                }}
+              >
+                {Object.entries(t.periodicityOptions).map(([value, label]) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.insurancePremium}</label>
+            <input 
+              type="text" 
+              value={premioSeguro} 
+              onChange={(e) => handleNumberInput(e.target.value, setPremioSeguro)} 
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          {/* Seção de custos de manutenção */}
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
+            {custosManutencao.map((custo) => (
+              <div key={custo.id} style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <input 
+                  type="text" 
+                  value={custo.valor} 
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
+                  style={{
+                    flex: 1,
+                    padding: '8px',
+                    borderRadius: '5px',
+                    border: '1px solid #0f0',
+                    backgroundColor: '#111',
+                    color: '#fff'
+                  }}
+                />
+                <select
+                  value={custo.periodicity}
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
+                  style={{
+                    padding: '8px',
+                    borderRadius: '5px',
+                    border: '1px solid #0f0',
+                    backgroundColor: '#111',
+                    color: '#fff',
+                    minWidth: '100px'
+                  }}
+                >
+                  {Object.entries(t.periodicityOptions).map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+                {custosManutencao.length > 1 && (
+                  <button
+                    onClick={() => removerCustoManutencao(custo.id)}
+                    style={{
+                      padding: '8px 12px',
+                      backgroundColor: '#f00',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '5px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t.remove}
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              onClick={adicionarCustoManutencao}
+              style={{
+                padding: '8px 12px',
+                backgroundColor: '#0f0',
+                color: '#000',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+            >
+              {t.addCost}
+            </button>
+          </div>
+
+          {/* Seção de jornada de trabalho */}
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingHours}</label>
+            <input 
+              type="number"
+              min="1"
+              max="16"
+              value={horasPorDia} 
+              onChange={(e) => handleHorasPorDia(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingDays}</label>
+            <input 
+              type="number"
+              min="1"
+              max="7"
+              value={diasPorSemana} 
+              onChange={(e) => handleDiasPorSemana(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          {/* Seção de valor do veículo */}
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>{t.vehicleValue}</label>
+            <input 
+              type="text" 
+              value={valorVeiculo} 
+              onChange={(e) => handleNumberInput(e.target.value, setValorVeiculo)} 
+              style={{
+                width: '100%',
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #0f0',
+                backgroundColor: '#111',
+                color: '#fff'
+              }}
+            />
+          </div>
+
+          {/* Botões de ação */}
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+            <button
+              onClick={saveSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#0f0',
+                color: '#000',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.saveButton}
+            </button>
+            <button
+              onClick={resetSettings}
+              style={{
+                padding: '12px',
+                backgroundColor: '#f00',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.resetButton}
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={exportSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#00f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.exportButton}
+            </button>
+            <label style={{
+              flex: 1,
+              padding: '12px',
+              backgroundColor: '#00f',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              fontSize: '16px',
+              textAlign: 'center',
+              display: 'block'
+            }}>
+              {t.importButton}
+              <input 
+                type="file" 
+                accept=".json"
+                onChange={importSettings}
+                style={{ display: 'none' }}
+              />
+            </label>
+          </div>
         </div>
       )}
 
-      {/* Ride data section */}
+      {/* Seção de dados da corrida */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -1167,10 +1433,61 @@ return (
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
       }}>
-        {/* ... ride data inputs ... */}
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Dados da Corrida</h3>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideValue}</label>
+          <input 
+            type="text" 
+            value={valorCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setValorCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideDistance}</label>
+          <input 
+            type="text" 
+            value={distanciaCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setDistanciaCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideTime}</label>
+          <input 
+            type="text" 
+            value={tempoCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setTempoCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
       </div>
 
-      {/* Results section */}
+      {/* Resultados */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -1178,10 +1495,40 @@ return (
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
       }}>
-        {/* ... results display ... */}
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            textAlign: 'center'
+          }}>
+            {lucroCurtoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroCurtoPrazo.toFixed(2)}` : '---'}
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#0f0',
+            color: '#000',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            textAlign: 'center'
+          }}>
+            {lucroLongoPrazo !== null ? `R$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
+          </div>
+        </div>
       </div>
 
-      {/* Tips section */}
+      {/* Dicas e informações */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -1190,7 +1537,11 @@ return (
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
         textAlign: 'left'
       }}>
-        {/* ... tips content ... */}
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+        <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
+        <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
+        <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+        <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
       </div>
     </div>
   );
