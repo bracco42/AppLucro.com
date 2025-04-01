@@ -1298,60 +1298,61 @@ export default function CalculoLucro() {
         </div>
       </div>
 
-      {/* Resultados */}
-      <div style={{ 
-        backgroundColor: '#222', 
-        padding: '20px', 
-        borderRadius: '10px',
-        marginBottom: '20px',
-        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
-       }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
-      
-    <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-      <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
-      <div style={{
-        padding: '12px',
-        backgroundColor: '#0f0',
-        color: '#000',
-        borderRadius: '5px',
-        fontWeight: 'bold',
-        fontSize: '18px',
-        textAlign: 'center'
-      }}>
-        {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo)}` : '---'}
-      </div>
+{/* Resultados */}
+<div style={{ 
+  backgroundColor: '#222', 
+  padding: '20px', 
+  borderRadius: '10px',
+  marginBottom: '20px',
+  boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
+}}>
+  <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
+  
+  <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+    <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
+    <div style={{
+      padding: '12px',
+      backgroundColor: '#0f0',
+      color: '#000',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      fontSize: '18px',
+      textAlign: 'center'
+    }}>
+      {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo, language)}` : '---'}
     </div>
-      <div style={{ textAlign: 'left' }}>
-      <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
-      <div style={{
-        padding: '12px',
-        backgroundColor: '#0f0',
-        color: '#000',
-        borderRadius: '5px',
-        fontWeight: 'bold',
-        fontSize: '18px',
-        textAlign: 'center'
-       }}>
-         {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo)}` : '---'}
-      </div>
-    </div>
+  </div>
 
-      {/* Dicas e informações */}
-      <div style={{ 
-        backgroundColor: '#222', 
-        padding: '20px', 
-        borderRadius: '10px',
-        marginBottom: '20px',
-        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
-        textAlign: 'left'
-      }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
-        <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
-        <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
-        <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-        <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
-      </div>
+  <div style={{ textAlign: 'left' }}>
+    <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
+    <div style={{
+      padding: '12px',
+      backgroundColor: '#0f0',
+      color: '#000',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      fontSize: '18px',
+      textAlign: 'center'
+    }}>
+      {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo, language)}` : '---'}
     </div>
+  </div>
+
+  {/* Dicas e informações */}
+  <div style={{ 
+    backgroundColor: '#222', 
+    padding: '20px', 
+    borderRadius: '10px',
+    marginBottom: '20px',
+    boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
+    textAlign: 'left'
+  }}>
+    <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+    <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
+    <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
+    <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+    <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+  </div>
+</div>
   );
 }
