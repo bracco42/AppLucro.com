@@ -10,7 +10,38 @@ type Cost = {
   periodicity: Periodicity;
 };
 
+const formatCurrency = (value: number) => {
+  return value.toLocaleString(language, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+};
+
 type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa' | 'bn';
+
+const CURRENCY_SYMBOLS: Record<Language, string> = {
+  'pt': 'R$',     // Português (Brasil)
+  'en': 'US$',    // Inglês (EUA)
+  'es': '$',      // Espanhol (geralmente peso ou dólar)
+  'fr': '€',      // Francês (Europa - Euro)
+  'de': '€',      // Alemão (Europa - Euro)
+  'it': '€',      // Italiano (Europa - Euro)
+  'ru': '₽',      // Russo (Rublo)
+  'zh': '¥',      // Chinês (Yuan)
+  'ja': '¥',      // Japonês (Yen)
+  'ko': '₩',      // Coreano (Won)
+  'ar': 'د.إ',    // Árabe (Dirham, exemplo UAE)
+  'hi': '₹',      // Hindi (Rúpia indiana)
+  'bn': '৳',      // Bengali (Taka)
+  'pa': '₹',      // Punjabi (Rúpia indiana)
+  'th': '฿',      // Tailandês (Baht)
+  'vi': '₫',      // Vietnamita (Dong)
+  'tr': '₺',      // Turco (Lira turca)
+  'uk': '₴',      // Ucraniano (Hryvnia)
+  'da': 'kr',     // Dinamarquês (Coroa dinamarquesa)
+  'sw': 'TSh',    // Swahili (Xelim tanzaniano)
+  'fa': '﷼',      // Persa (Rial iraniano)
+};
 const translations = {
   'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
@@ -1274,39 +1305,37 @@ export default function CalculoLucro() {
         borderRadius: '10px',
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
-      }}>
+       }}>
         <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
-        
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
-          <div style={{
-            padding: '12px',
-            backgroundColor: '#0f0',
-            color: '#000',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            textAlign: 'center'
-          }}>
-            {lucroCurtoPrazo !== null ? `R$ ${lucroCurtoPrazo.toFixed(2)}` : '---'}
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
-          <div style={{
-            padding: '12px',
-            backgroundColor: '#0f0',
-            color: '#000',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            textAlign: 'center'
-          }}>
-            {lucroLongoPrazo !== null ? `R$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
-          </div>
-        </div>
+      
+    <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+      <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
+      <div style={{
+        padding: '12px',
+        backgroundColor: '#0f0',
+        color: '#000',
+        borderRadius: '5px',
+        fontWeight: 'bold',
+        fontSize: '18px',
+        textAlign: 'center'
+      }}>
+        {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo)}` : '---'}
       </div>
+    </div>
+      <div style={{ textAlign: 'left' }}>
+      <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
+      <div style={{
+        padding: '12px',
+        backgroundColor: '#0f0',
+        color: '#000',
+        borderRadius: '5px',
+        fontWeight: 'bold',
+        fontSize: '18px',
+        textAlign: 'center'
+       }}>
+         {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo)}` : '---'}
+      </div>
+    </div>
 
       {/* Dicas e informações */}
       <div style={{ 
