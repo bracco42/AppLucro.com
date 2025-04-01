@@ -38,12 +38,12 @@ const loadSettings = (): Partial<SavedSettings> => {
   }
 };
 
-const saveSettings = (settings: SavedSettings) => {
+const saveSettings = (settings: SavedSettings, errorMessage?: string) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   } catch (error) {
     console.error('Failed to save settings:', error);
-    alert(t.importError);
+    alert(errorMessage || 'Failed to save settings');
   }
 };
 
@@ -951,7 +951,7 @@ export default function CalculoLucro() {
       diasPorSemana,
       language
     };
-    saveSettings(settingsToSave);
+    saveSettings(settingsToSave, t.importError);
     alert('Configurações salvas com sucesso!');
   };
 
@@ -986,7 +986,7 @@ export default function CalculoLucro() {
     reader.onload = (event) => {
       try {
         const settings = JSON.parse(event.target?.result as string) as SavedSettings;
-        saveSettings(settings);
+        saveSettings(settingsToSave, t.importError);
         window.location.reload(); // Recarrega para aplicar as novas configurações
       } catch (error) {
         alert('Erro ao importar configurações: arquivo inválido');
