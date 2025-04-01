@@ -1523,7 +1523,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroLongoPrazo !== null ? `R$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
+            {lucroLongoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroLongoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
       </div>
