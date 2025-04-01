@@ -833,13 +833,12 @@ export default function CalculoLucro() {
     const seguroAnual = converterParaAnual(parseInput(valorSeguro), periodicidadeSeguro);
     const premioAnual = parseInput(premioSeguro);
 
-    const fatorDistancia = distanciaAnual > 0 ? parseInput(distanciaCorrida) / distanciaAnual : 0;
     const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
 
     const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo ;
     const custoSeguroCorrida = seguroAnual * fatorTempo;
     const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
-    const riscoCorrida = premioAnual * 0.1;
+    const riscoCorrida = premioAnual * 0.1 * fatorTempo;
 
     setLucroLongoPrazo(
       parseInput(valorCorrida) - 
