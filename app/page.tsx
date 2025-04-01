@@ -909,21 +909,20 @@ export default function CalculoLucro() {
     }
   };
 
-  const resetSettings = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    return {
-      fuelPrice: '',
-      kmPorLitro: '',
-      valorSeguro: '',
-      periodicidadeSeguro: 'annual',
-      premioSeguro: '',
-      custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
-      valorVeiculo: '',
-      horasPorDia: '',
-      diasPorSemana: '',
-      language: 'pt'
-    };
+ const resetSettings = (): SavedSettings => {
+  return {
+    fuelPrice: '',
+    kmPorLitro: '',
+    valorSeguro: '',
+    periodicidadeSeguro: 'annual',
+    premioSeguro: '',
+    custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
+    valorVeiculo: '',
+    horasPorDia: '',
+    diasPorSemana: '',
+    language: 'pt'
   };
+};
 
   const formatNumberInput = (value: string): string => {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
@@ -969,22 +968,22 @@ export default function CalculoLucro() {
     alert('Configurações salvas com sucesso!');
   };
 
-  const handleResetSettings = () => {
-    if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
-      const defaults = resetSettings();
-      setPrecoCombustivel(defaults.fuelPrice);
-      setKmPorLitro(defaults.kmPorLitro);
-      setValorSeguro(defaults.valorSeguro);
-      setPeriodicidadeSeguro(defaults.periodicidadeSeguro);
-      setPremioSeguro(defaults.premioSeguro);
-      setCustosManutencao(defaults.custosManutencao);
-      setValorVeiculo(defaults.valorVeiculo);
-      setHorasPorDia(defaults.horasPorDia);
-      setDiasPorSemana(defaults.diasPorSemana);
-      setLanguage(defaults.language);
-      alert('Configurações resetadas!');
-    }
-  };
+ const handleResetSettings = () => {
+  if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
+    const defaults = resetSettings();
+    setPrecoCombustivel(defaults.fuelPrice);
+    setKmPorLitro(defaults.kmPorLitro);
+    setValorSeguro(defaults.valorSeguro);
+    setPeriodicidadeSeguro(defaults.periodicidadeSeguro);
+    setPremioSeguro(defaults.premioSeguro);
+    setCustosManutencao(defaults.custosManutencao);
+    setValorVeiculo(defaults.valorVeiculo);
+    setHorasPorDia(defaults.horasPorDia);
+    setDiasPorSemana(defaults.diasPorSemana);
+    setLanguage(defaults.language);
+    alert('Configurações resetadas!');
+  }
+};
 
   const exportToFile = () => {
     const settings = loadSettings();
