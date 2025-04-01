@@ -1582,7 +1582,6 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            /*{lucroCurtoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroCurtoPrazo.toFixed(2)}` : '---'}*/
             {lucroCurtoPrazo !== null ? `$ ${lucroCurtoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
