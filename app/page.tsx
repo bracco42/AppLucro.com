@@ -32,8 +32,8 @@ const translations = {
     addCost: 'Adicionar Custo',
     remove: 'Remover',
     timeSpent: 'Tempo trabalhado:',
-    workingHours: 'Horas/dia trabalhadas (1-16):',
-    workingDays: 'Dias/semana trabalhados (1-7):',
+    workingHours: 'Horas/dia (1-16):',
+    workingDays: 'Dias/semana (1-7):',
     vehicleValue: 'Valor Atual do Veículo:',
     rideValue: 'Valor Pago:',
     rideDistance: 'Distância da Corrida (km):',
@@ -53,7 +53,7 @@ const translations = {
       weekly: 'Semanal',
       daily: 'Diário'
     }
-  },,
+  },
    'en': {
     title: 'Ride Profits (All Platforms/Vehicles)',
     subtitle: 'For short and long term decision making',
