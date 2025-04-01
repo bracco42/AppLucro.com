@@ -10,16 +10,20 @@ type Cost = {
   periodicity: Periodicity;
 };
 
-type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa' | 'bn';
+type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
+
 const translations = {
-  'pt': {
+ 'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
     registerButton: 'Cadastrar Dados do Veículo',
     closeButton: 'Fechar Cadastro',
     saveButton: 'Salvar',
+    resetButton: 'Resetar Configurações',
+    exportButton: 'Exportar Config',
+    importButton: 'Importar Config',
     fuelPrice: 'Preço do Combustível por Litro:',
-    fuelEfficiency: 'Distância Percorrida por Litro:',
+    fuelEfficiency: 'Distância Percorrida por Litro (Km/L):',
     insuranceValue: 'Valor do Seguro:',
     insurancePremium: 'Prêmio do Seguro:',
     maintenanceCosts: 'Custos de Manutenção:',
@@ -39,6 +43,8 @@ const translations = {
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade).',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida.',
     community: 'Entre em nossa <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidade OpenSource</a>!!!',
+    validationMessage: 'Por favor, preencha pelo menos preço do combustível e eficiência',
+    importError: 'Erro ao importar configurações',
     periodicityOptions: {
       annual: 'Anual',
       monthly: 'Mensal',
@@ -46,14 +52,17 @@ const translations = {
       daily: 'Diário'
     }
   },
-  'en': {
+   'en': {
     title: 'Ride Profits (All Platforms/Vehicles)',
     subtitle: 'For short and long term decision making',
     registerButton: 'Register Vehicle Data',
     closeButton: 'Close Registration',
     saveButton: 'Save',
+    resetButton: 'Reset Settings',
+    exportButton: 'Export Config',
+    importButton: 'Import Config',
     fuelPrice: 'Fuel Price per Liter:',
-    fuelEfficiency: 'Distance per Liter:',
+    fuelEfficiency: 'Distance per Liter (Mi/L or Km/L):',
     insuranceValue: 'Insurance Value:',
     insurancePremium: 'Insurance Premium:',
     maintenanceCosts: 'Maintenance Costs:',
@@ -64,7 +73,7 @@ const translations = {
     workingDays: 'Days/week (1-7):',
     vehicleValue: 'Current Vehicle Value:',
     rideValue: 'Paid Value:',
-    rideDistance: 'Ride Distance (km):',
+    rideDistance: 'Ride Distance (Mi or Km):',
     rideTime: 'Ride Time (minutes):',
     shortTermProfit: 'Short Term Profit:',
     longTermProfit: 'Long Term Profit:',
@@ -73,6 +82,8 @@ const translations = {
     tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity).',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost.',
     community: 'Join our <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Community</a>!!!',
+    validationMessage: 'Please fill at least fuel price and efficiency',
+    importError: 'Error importing settings',
     periodicityOptions: {
       annual: 'Annual',
       monthly: 'Monthly',
@@ -86,8 +97,11 @@ const translations = {
     registerButton: 'Registrar Datos del Vehículo',
     closeButton: 'Cerrar Registro',
     saveButton: 'Guardar',
+    resetButton: 'Restablecer Configuración',
+    exportButton: 'Exportar Config',
+    importButton: 'Importar Config',
     fuelPrice: 'Precio Combustible por Litro:',
-    fuelEfficiency: 'Distancia por Litro:',
+    fuelEfficiency: 'Distancia por Litro (Km/L):',
     insuranceValue: 'Valor del Seguro:',
     insurancePremium: 'Prima del Seguro:',
     maintenanceCosts: 'Costos de Mantenimiento:',
@@ -107,6 +121,9 @@ const translations = {
     tip2: '¡Útil para todas las plataformas! Conductores de apps (Ifood, Uber, 99), taxis, furgonetas y hasta buses/aviones (usa tu creatividad).',
     formula: 'Fórmula Largo Plazo: Ingresos - Gastos (Combustible y otros) - Depreciación (3.33% * Valor/año) - Riesgo (10% * Prima/año). Nota: ganancia corto plazo solo descuenta combustible.',
     community: 'Únete a nuestra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidad OpenSource</a>!!!',
+    validationMessage: 'Por favor complete al menos el precio del combustible y la eficiencia',
+    importError: 'Error al importar configuración',
+    currency: 'MX$',
     periodicityOptions: {
       annual: 'Anual',
       monthly: 'Mensual',
@@ -120,7 +137,10 @@ const translations = {
     registerButton: 'Enregistrer Données Véhicule',
     closeButton: 'Fermer Enregistrement',
     saveButton: 'Enregistrer',
-    fuelPrice: 'Prix Carburant par Litre:',
+    resetButton: 'Réinitialiser',
+    exportButton: 'Exporter Config',
+    importButton: 'Importer Config',
+    fuelPrice: 'Prix Carburant par Litre (Km/L):',
     fuelEfficiency: 'Distance par Litre:',
     insuranceValue: 'Valeur Assurance:',
     insurancePremium: 'Prime Assurance:',
@@ -141,6 +161,9 @@ const translations = {
     tip2: 'Utilisable pour toutes plateformes! Conducteurs d\'apps (Ifood, Uber...), taxis, fourgonnettes et même bus/avions (soyez créatifs!).',
     formula: 'Formule Long Terme: Revenus - Dépenses (Carburant etc.) - Dépréciation (3.33% * Valeur/an) - Risque (10% * Prime/an). NB: bénéfice court terme ne déduit que le carburant.',
     community: 'Rejoignez notre <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Communauté OpenSource</a>!!!',
+    validationMessage: 'Veuillez remplir au moins le prix du carburant et l\'efficacité',
+    importError: 'Erreur lors de l\'importation',
+    currency: '€',
     periodicityOptions: {
       annual: 'Annuel',
       monthly: 'Mensuel',
@@ -154,6 +177,9 @@ const translations = {
     registerButton: 'Fahrzeugdaten registrieren',
     closeButton: 'Registrierung schließen',
     saveButton: 'Speichern',
+    resetButton: 'Zurücksetzen',
+    exportButton: 'Konfig exportieren',
+    importButton: 'Konfig importieren',
     fuelPrice: 'Kraftstoffpreis pro Liter:',
     fuelEfficiency: 'Distanz pro Liter:',
     insuranceValue: 'Versicherungswert:',
@@ -175,6 +201,9 @@ const translations = {
     tip2: 'Für alle Plattformen nutzbar! App-Fahrer (Ifood, Uber...), Taxis, Transporter und sogar Busse/Flugzeuge (Kreativität erforderlich).',
     formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff etc.) - Abschreibung (3.33% * Fahrzeugwert/Jahr) - Risiko (10% * Prämie/Jahr). Hinweis: Kurzfristiger Gewinn berücksichtigt nur Kraftstoffkosten.',
     community: 'Treten Sie unserer <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-Community</a> bei!!!',
+    validationMessage: 'Bitte mindestens Kraftstoffpreis und Effizienz ausfüllen',
+    importError: 'Fehler beim Importieren',
+    currency: '€',
     periodicityOptions: {
       annual: 'Jährlich',
       monthly: 'Monatlich',
@@ -188,8 +217,11 @@ const translations = {
     registerButton: 'Registra Dati Veicolo',
     closeButton: 'Chiudi Registrazione',
     saveButton: 'Salva',
+    resetButton: 'Ripristina',
+    exportButton: 'Esporta Config',
+    importButton: 'Importa Config',
     fuelPrice: 'Prezzo Carburante al Litro:',
-    fuelEfficiency: 'Distanza per Litro:',
+    fuelEfficiency: 'Distanza per Litro (Km/L):',
     insuranceValue: 'Valore Assicurazione:',
     insurancePremium: 'Premio Assicurazione:',
     maintenanceCosts: 'Costi Manutenzione:',
@@ -209,6 +241,9 @@ const translations = {
     tip2: 'Utilizzabile per tutte le piattaforme! Driver di app (Ifood, Uber...), taxi, furgoni e persino bus/aerei (usa la creatività!).',
     formula: 'Formula Lungo Termine: Entrate - Spese (Carburante etc.) - Svalutazione (3.33% * Valore/anno) - Rischio (10% * Premio/anno). Nota: guadagno breve termine deduce solo il carburante.',
     community: 'Unisciti alla nostra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunità OpenSource</a>!!!',
+    validationMessage: 'Si prega di compilare almeno prezzo carburante ed efficienza',
+    importError: 'Errore durante l\'importazione',
+    currency: '€',
     periodicityOptions: {
       annual: 'Annuale',
       monthly: 'Mensile',
@@ -222,6 +257,9 @@ const translations = {
     registerButton: '注册车辆数据',
     closeButton: '关闭',
     saveButton: '保存',
+    resetButton: '重置设置',
+    exportButton: '导出配置',
+    importButton: '导入配置',
     fuelPrice: '燃油价格每升:',
     fuelEfficiency: '每升行驶距离:',
     insuranceValue: '保险价值:',
@@ -243,6 +281,9 @@ const translations = {
     tip2: '适用于所有平台和车辆！包括网约车司机(如Ifood, Uber, 99等)、出租车、货车，甚至公交车/飞机/地铁(需灵活应用)',
     formula: '长期利润公式: 收入 - 支出(燃油及其他) - 折旧 (3.33% * 车辆价值每年) - 风险 (10% * 保险费用每年)。注: 短期利润仅扣除行程燃油成本',
     community: '加入我们的<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">开源社区</a>!!!',
+    validationMessage: '请至少填写燃油价格和效率',
+    importError: '导入设置时出错',
+    currency: '¥',
     periodicityOptions: {
       annual: '年',
       monthly: '月',
@@ -256,6 +297,9 @@ const translations = {
     registerButton: '車両登録',
     closeButton: '閉じる',
     saveButton: '保存',
+    resetButton: 'リセット',
+    exportButton: '設定をエクスポート',
+    importButton: '設定をインポート',
     fuelPrice: '燃料価格(1リットル):',
     fuelEfficiency: '1リットル当たり走行距離:',
     insuranceValue: '保険金額:',
@@ -277,6 +321,9 @@ const translations = {
     tip2: '全プラットフォーム/車両で利用可能! 配達アプリ(Ifood, Uber, 99等)、タクシー、バン、バス/飛行機/地下鉄まで(創造力が必要)',
     formula: '長期利益計算式: 収益 - 支出(燃料他) - 減価 (3.33% * 車両価値 年間) - リスク (10% * 保険料 年間)。注: 短期利益は走行の燃料費のみ控除',
     community: '私たちの<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">オープンソースコミュニティ</a>に参加しましょう',
+    validationMessage: '燃料価格と燃費を入力してください',
+    importError: '設定のインポートエラー',
+    currency: '¥',
     periodicityOptions: {
       annual: '年',
       monthly: '月',
@@ -290,6 +337,9 @@ const translations = {
     registerButton: 'تسجيل بيانات المركبة',
     closeButton: 'إغلاق',
     saveButton: 'حفظ',
+    resetButton: 'إعادة تعيين',
+    exportButton: 'تصدير الإعدادات',
+    importButton: 'استيراد الإعدادات',
     fuelPrice: 'سعر الوقود لكل لتر:',
     fuelEfficiency: 'المسافة المقطوعة لكل لتر:',
     insuranceValue: 'قيمة التأمين:',
@@ -311,6 +361,9 @@ const translations = {
     tip2: 'يمكن استخدامه لجميع المنصات والمركبات! لكل السائقين، التطبيقات (Ifood, Uber, 99, إلخ)، سيارات الأجرة، الحافلات وحتى الطائرات/المترو (يتطلب الإبداع)',
     formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - الإهلاك (3.33% * قيمة المركبة سنوياً) - المخاطرة (10% * قسط التأمين سنوياً). ملاحظة: الربح قصير المدى يخصم فقط تكلفة الوقود للرحلة',
     community: 'انضم إلى <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">مجتمعنا المفتوح المصدر</a>!!!',
+    validationMessage: 'يرجى ملء سعر الوقود والكفاءة على الأقل',
+    importError: 'خطأ في استيراد الإعدادات',
+    currency: 'ر.س',
     periodicityOptions: {
       annual: 'سنوي',
       monthly: 'شهري',
@@ -324,6 +377,9 @@ const translations = {
     registerButton: 'Регистрация данных ТС',
     closeButton: 'Закрыть',
     saveButton: 'Сохранить',
+    resetButton: 'Сбросить',
+    exportButton: 'Экспорт настроек',
+    importButton: 'Импорт настроек',
     fuelPrice: 'Цена топлива за литр:',
     fuelEfficiency: 'Расстояние на литр:',
     insuranceValue: 'Страховая стоимость:',
@@ -345,6 +401,9 @@ const translations = {
     tip2: 'Подходит для всех платформ и ТС! Водители приложений (Ifood, Uber, 99), такси, фургоны и даже автобусы/самолёты (требуется креативность)',
     formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - Амортизация (3.33% * Стоимость ТС в год) - Риск (10% * Страховая премия в год). Прим.: краткосрочная прибыль учитывает только затраты на топливо',
     community: 'Присоединяйтесь к нашему <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">сообществу OpenSource</a>!!!',
+    validationMessage: 'Пожалуйста, заполните хотя бы цену топлива и эффективность',
+    importError: 'Ошибка импорта настроек',
+    currency: '₽',
     periodicityOptions: {
       annual: 'Год',
       monthly: 'Месяц',
@@ -352,12 +411,15 @@ const translations = {
       daily: 'День'
     }
   },
-  'hi': { // Hindi
+  'hi': {
     title: 'सवारी लाभ कैलकुलेटर (सभी प्लेटफॉर्म/वाहन)',
     subtitle: 'कम और लंबी अवधि के निर्णय लेने के लिए',
     registerButton: 'वाहन डेटा पंजीकृत करें',
     closeButton: 'बंद करें',
     saveButton: 'सहेजें',
+    resetButton: 'रीसेट करें',
+    exportButton: 'निर्यात करें',
+    importButton: 'आयात करें',
     fuelPrice: 'प्रति लीटर ईंधन की कीमत:',
     fuelEfficiency: 'प्रति लीटर दूरी:',
     insuranceValue: 'बीमा मूल्य:',
@@ -379,6 +441,9 @@ const translations = {
     tip2: 'सभी प्लेटफॉर्म और वाहनों के लिए उपयोगी! ऐप ड्राइवर (इफूड, उबर, 99), टैक्सी, वैन और यहां तक कि बस/विमान भी (रचनात्मकता आवश्यक)',
     formula: 'दीर्घकालिक लाभ सूत्र: आय - व्यय (ईंधन आदि) - मूल्यह्रास (3.33% * वाहन मूल्य/वर्ष) - जोखिम (10% * प्रीमियम/वर्ष)। नोट: अल्पकालिक लाभ केवल ईंधन लागत घटाता है',
     community: 'हमारे <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ओपनसोर्स समुदाय</a> से जुड़ें!!!',
+    validationMessage: 'कृपया कम से कम ईंधन मूल्य और दक्षता भरें',
+    importError: 'सेटिंग्स आयात करने में त्रुटि',
+    currency: '₹',
     periodicityOptions: {
       annual: 'वार्षिक',
       monthly: 'मासिक',
@@ -386,12 +451,15 @@ const translations = {
       daily: 'दैनिक'
     }
   },
-  'pa': { // Punjabi
+  'pa': {
     title: 'ਸਵਾਰੀ ਲਾਭ ਕੈਲਕੁਲੇਟਰ (ਸਾਰੇ ਪਲੇਟਫਾਰਮ/ਵਾਹਨ)',
     subtitle: 'ਛੋਟੇ ਅਤੇ ਲੰਬੇ ਸਮੇਂ ਦੇ ਫੈਸਲੇ ਲਈ',
     registerButton: 'ਵਾਹਨ ਡੇਟਾ ਰਜਿਸਟਰ ਕਰੋ',
     closeButton: 'ਬੰਦ ਕਰੋ',
     saveButton: 'ਸੇਵ ਕਰੋ',
+    resetButton: 'ਰੀਸੈੱਟ ਕਰੋ',
+    exportButton: 'ਨਿਰਯਾਤ ਕਰੋ',
+    importButton: 'ਆਯਾਤ ਕਰੋ',
     fuelPrice: 'ਪ੍ਰਤੀ ਲੀਟਰ ਈਂਧਨ ਦੀ ਕੀਮਤ:',
     fuelEfficiency: 'ਪ੍ਰਤੀ ਲੀਟਰ ਦੂਰੀ:',
     insuranceValue: 'ਬੀਮਾ ਮੁੱਲ:',
@@ -413,6 +481,9 @@ const translations = {
     tip2: 'ਸਾਰੇ ਪਲੇਟਫਾਰਮ ਅਤੇ ਵਾਹਨਾਂ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ! ਸਾਰੇ ਡਰਾਈਵਰਾਂ ਲਈ, ਐਪ-ਅਧਾਰਿਤ (ਇਫੂਡ, ਉਬਰ, 99 ਆਦਿ), ਟੈਕਸੀ, ਵੈਨ ਅਤੇ ਯਹਾਂ ਤੱਕ ਕਿ ਬੱਸਾਂ/ਜਹਾਜ਼/ਮੈਟਰੋ (ਰਚਨਾਤਮਕਤਾ ਦੀ ਲੋੜ ਹੈ)',
     formula: 'ਲੰਬੇ ਸਮੇਂ ਦੇ ਲਾਭ ਦਾ ਫਾਰਮੂਲਾ: ਆਮਦਨ - ਖਰਚ (ਈਂਧਨ ਅਤੇ ਹੋਰ) - ਮੁੱਲ ਘਟਾਓ (3.33% * ਵਾਹਨ ਮੁੱਲ ਪ੍ਰਤੀ ਸਾਲ) - ਜੋਖਮ (10% * ਬੀਮਾ ਪ੍ਰੀਮੀਅਮ ਪ੍ਰਤੀ ਸਾਲ)। ਨੋਟ: ਛੋਟੇ ਸਮੇਂ ਦਾ ਲਾਭ ਸਿਰਫ਼ ਸਵਾਰੀ ਦੀ ਈਂਧਨ ਲਾਗਤ ਨੂੰ ਘਟਾਉਂਦਾ ਹੈ',
     community: 'ਸਾਡੇ <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ਓਪਨਸੋਰਸ ਕਮਿਊਨਿਟੀ</a> ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ!!!',
+    validationMessage: 'ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ ਘੱਟ ਈਂਧਨ ਦੀ ਕੀਮਤ ਅਤੇ ਕਾਰਜਕੁਸ਼ਲਤਾ ਭਰੋ',
+    importError: 'ਸੈਟਿੰਗਾਂ ਆਯਾਤ ਕਰਨ ਵਿੱਚ ਤਰੁੱਟੀ',
+    currency: '₹',
     periodicityOptions: {
       annual: 'ਸਾਲਾਨਾ',
       monthly: 'ਮਹੀਨਾਵਾਰ',
@@ -420,12 +491,15 @@ const translations = {
       daily: 'ਰੋਜ਼ਾਨਾ'
     }
   },
-  'bn': { // Bengali
+  'bn': {
     title: 'যাত্রার লাভ ক্যালকুলেটর (সমস্ত প্ল্যাটফর্ম/যানবাহন)',
     subtitle: 'সংক্ষিপ্ত ও দীর্ঘমেয়াদী সিদ্ধান্ত নেওয়ার জন্য',
     registerButton: 'যানবাহন ডেটা নিবন্ধন করুন',
     closeButton: 'বন্ধ করুন',
     saveButton: 'সংরক্ষণ করুন',
+    resetButton: 'রিসেট করুন',
+    exportButton: 'রপ্তানি করুন',
+    importButton: 'আমদানি করুন',
     fuelPrice: 'প্রতি লিটার জ্বালানির মূল্য:',
     fuelEfficiency: 'প্রতি লিটারে দূরত্ব:',
     insuranceValue: 'বীমা মূল্য:',
@@ -447,6 +521,9 @@ const translations = {
     tip2: 'সমস্ত প্ল্যাটফর্ম এবং যানবাহনের জন্য ব্যবহার করা যেতে পারে! সমস্ত ড্রাইভারদের জন্য, অ্যাপ-ভিত্তিক (ইফুড, উবার, 99 ইত্যাদি), ট্যাক্সি, ভ্যান এবং এমনকি বাস/বিমান/মেট্রো (সৃজনশীলতা প্রয়োজন)',
     formula: 'দীর্ঘমেয়াদী লাভ সূত্র: আয় - ব্যয় (জ্বালানি ও অন্যান্য) - অবচয় (3.33% * যানবাহনের মূল্য প্রতি বছর) - ঝুঁকি (10% * বীমা প্রিমিয়াম প্রতি বছর)। নোট: স্বল্পমেয়াদী লাভ শুধুমাত্র যাত্রার জ্বালানি খরচ কাটায়',
     community: 'আমাদের <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ওপেন সোর্স কমিউনিটি</a> এ যোগ দিন!!!',
+    validationMessage: 'অন্তত জ্বালানি মূল্য এবং দক্ষতা পূরণ করুন',
+    importError: 'সেটিংস আমদানি করার সময় ত্রুটি',
+    currency: '৳',
     periodicityOptions: {
       annual: 'বার্ষিক',
       monthly: 'মাসিক',
@@ -454,12 +531,15 @@ const translations = {
       daily: 'দৈনিক'
     }
   },
-  'ko': { // Korean
+  'ko': {
     title: '수익 계산기 (모든 플랫폼/차량)',
     subtitle: '단기 및 장기 의사 결정을 위해',
     registerButton: '차량 데이터 등록',
     closeButton: '닫기',
     saveButton: '저장',
+    resetButton: '재설정',
+    exportButton: '내보내기',
+    importButton: '가져오기',
     fuelPrice: '리터당 연료 가격:',
     fuelEfficiency: '리터당 거리:',
     insuranceValue: '보험 가치:',
@@ -481,6 +561,9 @@ const translations = {
     tip2: '모든 플랫폼 및 차량에 사용 가능! 앱 기반 (Ifood, Uber, 99 등), 택시, 밴 및 심지어 버스/비행기/지하철 (창의력 필요)',
     formula: '장기 수익 공식: 수익 - 비용 (연료 및 기타) - 감가 상각 (3.33% * 차량 가치/년) - 위험 (10% * 보험료/년). 참고: 단기 수익은 주행 연료 비용만 공제',
     community: '우리의 <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">오픈소스 커뮤니티</a>에 가입하세요!!!',
+    validationMessage: '최소한 연료 가격과 효율성을 입력하세요',
+    importError: '설정 가져 오기 오류',
+    currency: '₩',
     periodicityOptions: {
       annual: '연간',
       monthly: '월간',
@@ -488,12 +571,15 @@ const translations = {
       daily: '일일'
     }
   },
-  'vi': { // Vietnamese
+  'vi': {
     title: 'Máy Tính Lợi Nhuận Chuyến Đi (Tất Cả Nền Tảng/Xe)',
     subtitle: 'Cho quyết định ngắn hạn và dài hạn',
     registerButton: 'Đăng Ký Dữ Liệu Xe',
     closeButton: 'Đóng',
     saveButton: 'Lưu',
+    resetButton: 'Đặt lại',
+    exportButton: 'Xuất cấu hình',
+    importButton: 'Nhập cấu hình',
     fuelPrice: 'Giá Nhiên Liệu mỗi Lít:',
     fuelEfficiency: 'Khoảng Cách mỗi Lít:',
     insuranceValue: 'Giá Trị Bảo Hiểm:',
@@ -515,6 +601,9 @@ const translations = {
     tip2: 'Dùng được cho mọi nền tảng và xe! Tài xế ứng dụng (Ifood, Uber, 99...), taxi, xe tải và cả xe buýt/máy bay (cần sáng tạo)',
     formula: 'Công thức Lợi Nhuận Dài Hạn: Doanh Thu - Chi Phí (Nhiên Liệu...) - Khấu Hao (3.33% * Giá Trị Xe/năm) - Rủi Ro (10% * Phí Bảo Hiểm/năm). Lưu ý: lợi nhuận ngắn hạn chỉ trừ chi phí nhiên liệu',
     community: 'Tham gia <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Cộng Đồng OpenSource</a>!!!',
+    validationMessage: 'Vui lòng điền ít nhất giá nhiên liệu và hiệu suất',
+    importError: 'Lỗi khi nhập cấu hình',
+    currency: '₫',
     periodicityOptions: {
       annual: 'Hàng Năm',
       monthly: 'Hàng Tháng',
@@ -522,12 +611,15 @@ const translations = {
       daily: 'Hàng Ngày'
     }
   },
-  'th': { // Thai
+  'th': {
     title: 'เครื่องคำนวณกำไรการเดินทาง (ทุกแพลตฟอร์ม/ยานพาหนะ)',
     subtitle: 'สำหรับการตัดสินใจระยะสั้นและระยะยาว',
     registerButton: 'ลงทะเบียนข้อมูลยานพาหนะ',
     closeButton: 'ปิด',
     saveButton: 'บันทึก',
+    resetButton: 'รีเซ็ต',
+    exportButton: 'ส่งออกการตั้งค่า',
+    importButton: 'นำเข้าการตั้งค่า',
     fuelPrice: 'ราคาน้ำมันต่อลิตร:',
     fuelEfficiency: 'ระยะทางต่อลิตร:',
     insuranceValue: 'มูลค่าประกัน:',
@@ -549,6 +641,9 @@ const translations = {
     tip2: 'ใช้ได้กับทุกแพลตฟอร์มและยานพาหนะ! คนขับแอป (Ifood, Uber, 99...), แท็กซี่, รถตู้ และแม้แต่รถบัส/เครื่องบิน (ต้องมีความคิดสร้างสรรค์)',
     formula: 'สูตรกำไรระยะยาว: รายได้ - ค่าใช้จ่าย (น้ำมัน...) - ค่าเสื่อมราคา (3.33% * มูลค่ายานพาหนะ/ปี) - ความเสี่ยง (10% * เบี้ยประกัน/ปี). หมายเหตุ: กำไรระยะสั้นหักเฉพาะค่าน้ำมัน',
     community: 'เข้าร่วม <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ชุมชน OpenSource</a>!!!',
+    validationMessage: 'กรุณากรอกราคาน้ำมันและประสิทธิภาพอย่างน้อย',
+    importError: 'ข้อผิดพลาดในการนำเข้าการตั้งค่า',
+    currency: '฿',
     periodicityOptions: {
       annual: 'รายปี',
       monthly: 'รายเดือน',
@@ -556,12 +651,15 @@ const translations = {
       daily: 'รายวัน'
     }
   },
-  'tr': { // Turkish
+  'tr': {
     title: 'Sürüş Kar Hesaplayıcı (Tüm Platformlar/Araçlar)',
     subtitle: 'Kısa ve uzun vadeli kararlar için',
     registerButton: 'Araç Verisi Kaydet',
     closeButton: 'Kapat',
     saveButton: 'Kaydet',
+    resetButton: 'Sıfırla',
+    exportButton: 'Dışa Aktar',
+    importButton: 'İçe Aktar',
     fuelPrice: 'Litre Başına Yakıt Fiyatı:',
     fuelEfficiency: 'Litre Başına Mesafe:',
     insuranceValue: 'Sigorta Değeri:',
@@ -583,6 +681,9 @@ const translations = {
     tip2: 'Tüm platformlar ve araçlar için kullanılabilir! Uygulama sürücüleri (Ifood, Uber, 99...), taksi, minibüs ve hatta otobüs/uçak (yaratıcılık gerekir)',
     formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt...) - Amortisman (3.33% * Araç Değeri/yıl) - Risk (10% * Primi/yıl). Not: kısa vadeli kar yalnızca yakıt maliyetini düşürür',
     community: '<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Açık Kaynak Topluluğumuza</a> katılın!!!',
+    validationMessage: 'Lütfen en azından yakıt fiyatı ve verimliliği doldurun',
+    importError: 'Ayarları içe aktarma hatası',
+    currency: '₺',
     periodicityOptions: {
       annual: 'Yıllık',
       monthly: 'Aylık',
@@ -590,12 +691,15 @@ const translations = {
       daily: 'Günlük'
     }
   },
-  'fa': { // Persian
+  'fa': {
     title: 'ماشین حساب سود سفر (همه پلتفرم ها/وسایل نقلیه)',
     subtitle: 'برای تصمیم گیری کوتاه مدت و بلند مدت',
     registerButton: 'ثبت اطلاعات وسیله نقلیه',
     closeButton: 'بستن',
     saveButton: 'ذخیره',
+    resetButton: 'بازنشانی',
+    exportButton: 'صدور تنظیمات',
+    importButton: 'واردات تنظیمات',
     fuelPrice: 'قیمت سوخت در هر لیتر:',
     fuelEfficiency: 'مسافت در هر لیتر:',
     insuranceValue: 'مقدار بیمه:',
@@ -617,6 +721,9 @@ const translations = {
     tip2: 'برای همه پلتفرم ها و وسایل نقلیه قابل استفاده است! رانندگان اپلیکیشن (Ifood, Uber, 99...)، تاکسی، ون و حتی اتوبوس/هواپیما (نیاز به خلاقیت دارد)',
     formula: 'فرمول سود بلند مدت: درآمد - هزینه ها (سوخت...) - استهلاک (3.33% * ارزش وسیله نقلیه/سال) - ریسک (10% * حق بیمه/سال). توجه: سود کوتاه مدت فقط هزینه سوخت را کسر می کند',
     community: 'به <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">جامعه اوپن سورس</a> ما بپیوندید!!!',
+    validationMessage: 'لطفا حداقل قیمت سوخت و بازدهی را پر کنید',
+    importError: 'خطا در واردات تنظیمات',
+    currency: '﷼',
     periodicityOptions: {
       annual: 'سالانه',
       monthly: 'ماهانه',
@@ -624,12 +731,15 @@ const translations = {
       daily: 'روزانه'
     }
   },
-  'uk': { // Ukrainian
+  'uk': {
     title: 'Калькулятор прибутку (Усі платформи/ТЗ)',
     subtitle: 'Для прийняття рішень',
     registerButton: 'Реєстрація даних ТЗ',
     closeButton: 'Закрити',
     saveButton: 'Зберегти',
+    resetButton: 'Скинути',
+    exportButton: 'Експорт',
+    importButton: 'Імпорт',
     fuelPrice: 'Ціна палива за літр:',
     fuelEfficiency: 'Відстань на літр:',
     insuranceValue: 'Страхова вартість:',
@@ -651,6 +761,9 @@ const translations = {
     tip2: 'Підходить для всіх платформ і ТЗ! Водії додатків (Ifood, Uber, 99...), таксі, фургони та навіть автобуси/літаки (потрібна креативність)',
     formula: 'Формула довгострокового прибутку: Дохід - Витрати (Паливо...) - Амортизація (3.33% * Вартість ТЗ/рік) - Ризик (10% * Премія/рік). Примітка: короткостроковий прибуток враховує лише витрати на паливо',
     community: 'Приєднуйтесь до нашої <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">спільноти OpenSource</a>!!!',
+    validationMessage: 'Будь ласка, заповніть принаймні ціну палива та ефективність',
+    importError: 'Помилка імпорту налаштувань',
+    currency: '₴',
     periodicityOptions: {
       annual: 'Річний',
       monthly: 'Місячний',
@@ -658,12 +771,15 @@ const translations = {
       daily: 'Щоденний'
     }
   },
-  'sw': { // Swahili
+  'sw': {
     title: 'Kikokotoo cha Faida ya Usafiri (Mifumo Yote/Magari)',
     subtitle: 'Kwa maamuzi ya muda mfupi na mrefu',
     registerButton: 'Sajili Data ya Gari',
     closeButton: 'Funga',
     saveButton: 'Hifadhi',
+    resetButton: 'Weka upya',
+    exportButton: 'Hamisha Mipangilio',
+    importButton: 'Ingiza Mipangilio',
     fuelPrice: 'Bei ya Mafuta kwa Lita:',
     fuelEfficiency: 'Umbali kwa Lita:',
     insuranceValue: 'Thamani ya Bima:',
@@ -685,6 +801,9 @@ const translations = {
     tip2: 'Inatumika kwa mifumo yote na magari! Madereva wa programu (Ifood, Uber, 99...), teksi, vani na hata basi/ndege (unahitaji ubunifu)',
     formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta...) - Mshuko wa Thamani (3.33% * Thamani ya Gari/mwaka) - Hatari (10% * Malipo ya Bima/mwaka). Kumbuka: faida ya muda mfupu inatoa tu gharama ya mafuta',
     community: 'Jiunge na <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Jumuiya yetu ya OpenSource</a>!!!',
+    validationMessage: 'Tafadhali jaza angalau bei ya mafuta na ufanisi',
+    importError: 'Hitilafu wakati wa kuingiza mipangilio',
+    currency: 'TSh',
     periodicityOptions: {
       annual: 'Mwaka',
       monthly: 'Mwezi',
@@ -692,12 +811,15 @@ const translations = {
       daily: 'Siku'
     }
   },
-  'da': { // Danish
+  'da': {
     title: 'Kørselsprofitberegner (Alle platforme/køretøjer)',
     subtitle: 'Til kort- og langsigtede beslutninger',
     registerButton: 'Registrer Køretøjsdata',
     closeButton: 'Luk',
     saveButton: 'Gem',
+    resetButton: 'Nulstil',
+    exportButton: 'Eksporter',
+    importButton: 'Importer',
     fuelPrice: 'Brændstofpris pr. Liter:',
     fuelEfficiency: 'Distance pr. Liter:',
     insuranceValue: 'Forsikringsværdi:',
@@ -719,6 +841,9 @@ const translations = {
     tip2: 'Brugbart til alle platforme og køretøjer! App-chauffører (Ifood, Uber, 99...), taxaer, varevogne og endda busser/fly (kræver kreativitet)',
     formula: 'Langsigtet profitformel: Indtægt - Udgifter (Brændstof...) - Afskrivning (3.33% * Køretøjsværdi/år) - Risiko (10% * Præmie/år). Bemærk: kortsigtet profit fratrækker kun brændstofomkostninger',
     community: 'Tilmeld dig vores <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-fællesskab</a>!!!',
+    validationMessage: 'Udfyld venligst mindst brændstofpris og effektivitet',
+    importError: 'Fejl under import af indstillinger',
+    currency: 'kr',
     periodicityOptions: {
       annual: 'Årlig',
       monthly: 'Månedlig',
@@ -727,6 +852,8 @@ const translations = {
     }
   }
 };
+
+const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
   // Dados do veículo
@@ -754,6 +881,29 @@ export default function CalculoLucro() {
   const [language, setLanguage] = useState<Language>('pt');
 
   const t = translations[language];
+
+  // Carregar configurações salvas
+  useEffect(() => {
+    const savedSettings = localStorage.getItem(STORAGE_KEY);
+    if (savedSettings) {
+      try {
+        const parsedSettings = JSON.parse(savedSettings);
+        
+        setPrecoCombustivel(parsedSettings.fuelPrice || '');
+        setKmPorLitro(parsedSettings.kmPorLitro || '');
+        setValorSeguro(parsedSettings.valorSeguro || '');
+        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
+        setPremioSeguro(parsedSettings.premioSeguro || '');
+        setCustosManutencao(parsedSettings.custosManutencao || [{id: 1, valor: 0, periodicity: 'annual'}]);
+        setValorVeiculo(parsedSettings.valorVeiculo || '');
+        setHorasPorDia(parsedSettings.horasPorDia || '');
+        setDiasPorSemana(parsedSettings.diasPorSemana || '');
+        setLanguage(parsedSettings.language || 'pt');
+      } catch (e) {
+        console.error('Error loading settings:', e);
+      }
+    }
+  }, []);
 
   // Funções auxiliares
   const formatNumberInput = (value: string): string => {
@@ -784,72 +934,139 @@ export default function CalculoLucro() {
   };
 
   // Cálculos principais
-// Cálculos principais
-useEffect(() => {
-  // 1. Cálculo de curto prazo (apenas combustível)
-  const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
-  const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
-  setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
+  useEffect(() => {
+    const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
+    const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
+    setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
 
-  // 2. Cálculo de longo prazo
-  const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
+    const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
-  const custosAnuais = custosManutencao.map(c => {
-    switch(c.periodicity) {
-      case 'monthly': return c.valor * 12;
-      case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
-      case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
-      default: return c.valor;
+    const custosAnuais = custosManutencao.map(c => {
+      switch(c.periodicity) {
+        case 'monthly': return c.valor * 12;
+        case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
+        case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        default: return c.valor;
+      }
+    });
+
+    const seguroAnual = (() => {
+      switch(periodicidadeSeguro) {
+        case 'monthly': return parseInput(valorSeguro) * 12;
+        case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
+        case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        default: return parseInput(valorSeguro);
+      }
+    })();
+
+    const premioAnual = parseInput(premioSeguro);
+    const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
+
+    const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
+    const custoSeguroCorrida = seguroAnual * fatorTempo;
+    const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
+    const riscoCorrida = premioAnual * 0.1 * fatorTempo;
+
+    setLucroLongoPrazo(
+      parseInput(valorCorrida) - 
+      custoCombustivelCorrida - 
+      custoManutencaoCorrida - 
+      custoSeguroCorrida - 
+      depreciacaoCorrida - 
+      riscoCorrida
+    );
+  }, [
+    precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
+    custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
+    valorCorrida, distanciaCorrida, tempoCorrida
+  ]);
+
+  // Funções de persistência
+  const saveSettings = () => {
+    if (!precoCombustivel || !kmPorLitro) {
+      alert(t.validationMessage);
+      return;
     }
-  });
 
-  const seguroAnual = (() => {
-    switch(periodicidadeSeguro) {
-      case 'monthly': return parseInput(valorSeguro) * 12;
-      case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
-      case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
-      default: return parseInput(valorSeguro);
+    const settingsToSave = {
+      fuelPrice: precoCombustivel,
+      kmPorLitro,
+      valorSeguro,
+      periodicidadeSeguro,
+      premioSeguro,
+      custosManutencao,
+      valorVeiculo,
+      horasPorDia,
+      diasPorSemana,
+      language
+    };
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsToSave));
+    setShowModal(false);
+  };
+
+  const resetSettings = () => {
+    if (confirm(t.resetButton + '?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      setPrecoCombustivel('');
+      setKmPorLitro('');
+      setValorSeguro('');
+      setPeriodicidadeSeguro('annual');
+      setPremioSeguro('');
+      setCustosManutencao([{id: 1, valor: 0, periodicity: 'annual'}]);
+      setValorVeiculo('');
+      setHorasPorDia('');
+      setDiasPorSemana('');
     }
-  })();
+  };
 
-  const premioAnual = parseInput(premioSeguro);
+  const exportSettings = () => {
+    const settings = localStorage.getItem(STORAGE_KEY);
+    if (settings) {
+      const blob = new Blob([settings], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ride_profit_settings.json';
+      a.click();
+    }
+  };
 
-  const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
+  const importSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const settings = JSON.parse(event.target?.result as string);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+          window.location.reload();
+        } catch (error) {
+          alert(t.importError);
+        }
+      };
+      reader.readAsText(file);
+    }
+    e.target.value = ''; // Reset input
+  };
 
-  const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
-  const custoSeguroCorrida = seguroAnual * fatorTempo;
-  const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
-  const riscoCorrida = premioAnual * 0.1 * fatorTempo;
+  // Funções de custos
+  const adicionarCustoManutencao = () => {
+    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
+  };
 
-  setLucroLongoPrazo(
-    parseInput(valorCorrida) - 
-    custoCombustivelCorrida - 
-    custoManutencaoCorrida - 
-    custoSeguroCorrida - 
-    depreciacaoCorrida - 
-    riscoCorrida
-  );
-}, [
-  precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
-  custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
-  valorCorrida, distanciaCorrida, tempoCorrida
-]);
+  const removerCustoManutencao = (id: number) => {
+    if (custosManutencao.length > 1) {
+      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
+    }
+  };
 
-const adicionarCustoManutencao = () => {
-  setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
-};
-
-const removerCustoManutencao = (id: number) => {
-  if (custosManutencao.length > 1) {
-    setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
-  }
-};
-
-const atualizarCustoManutencao = (id: number, field: string, value: any) => {
-  setCustosManutencao(custosManutencao.map(custo => 
-    custo.id === id ? {...custo, [field]: field === 'valor' ? parseInput(value) : value} : custo
-  ));
-};
+  const atualizarCustoManutencao = (id: number, field: string, value: any) => {
+    setCustosManutencao(custosManutencao.map(custo => 
+      custo.id === id ? {...custo, [field]: field === 'valor' ? parseInput(value) : value} : custo
+    ));
+  };
 
   return (
     <div style={{ 
@@ -1131,23 +1348,80 @@ const atualizarCustoManutencao = (id: number, field: string, value: any) => {
             />
           </div>
 
-          <button
-            onClick={() => setShowModal(false)}
-            style={{
-              width: '100%',
+          {/* Botões de ação */}
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+            <button
+              onClick={saveSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#0f0',
+                color: '#000',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.saveButton}
+            </button>
+            <button
+              onClick={resetSettings}
+              style={{
+                padding: '12px',
+                backgroundColor: '#f00',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.resetButton}
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={exportSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#00f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.exportButton}
+            </button>
+            <label style={{
+              flex: 1,
               padding: '12px',
-              backgroundColor: '#0f0',
-              color: '#000',
+              backgroundColor: '#00f',
+              color: '#fff',
               border: 'none',
               borderRadius: '5px',
               fontWeight: 'bold',
               cursor: 'pointer',
               fontSize: '16px',
-              marginTop: '10px'
-            }}
-          >
-            {t.saveButton}
-          </button>
+              textAlign: 'center',
+              display: 'block'
+            }}>
+              {t.importButton}
+              <input 
+                type="file" 
+                accept=".json"
+                onChange={importSettings}
+                style={{ display: 'none' }}
+              />
+            </label>
+          </div>
         </div>
       )}
 
@@ -1234,7 +1508,7 @@ const atualizarCustoManutencao = (id: number, field: string, value: any) => {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroCurtoPrazo !== null ? `R$ ${lucroCurtoPrazo.toFixed(2)}` : '---'}
+            {lucroCurtoPrazo !== null ? `${t.currency} ${lucroCurtoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
 
