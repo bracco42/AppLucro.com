@@ -781,7 +781,6 @@ const translations = {
 };
 
 export default function CalculoLucro() {
-  const t = translations[language];
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('5');
   const [kmPorLitro, setKmPorLitro] = useState<string>('35');
@@ -902,7 +901,7 @@ export default function CalculoLucro() {
     ));
   };
 
-  return (
+ return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
@@ -937,8 +936,8 @@ export default function CalculoLucro() {
 
       {/* Header */}
       <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
-      <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
-      <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
+      <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{translations[language].title}</h1>
+      <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{translations[language].subtitle}</h2>
 
       {/* ... rest of your JSX ... */}
 
