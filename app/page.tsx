@@ -50,7 +50,7 @@ type Translation = {
 
 type Language = 'pt' | 'en' | 'fr' | 'zh' | 'ja' | 'ar' | 'de' | 'ru' | 'uk' | 'da' | 'tr' | 'sw' | 'hi' | 'es' | 'it' | 'pa' | 'vi' | 'ko' | 'th' | 'fa' | 'bn';
 
-const translations = {
+const translations: Record<Language, Translation> = {
   'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
