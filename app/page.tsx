@@ -10,7 +10,6 @@ type Cost = {
   periodicity: Periodicity;
 };
 
-// Definição do tipo para os dados salvos
 type SavedSettings = {
   fuelPrice: string;
   kmPorLitro: string;
@@ -24,44 +23,7 @@ type SavedSettings = {
   language: Language;
 };
 
-// Chave para localStorage (mantida igual)
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
-
-// Funções utilitárias para localStorage
-const loadSettings = (): Partial<SavedSettings> => {
-  try {
-    const savedData = localStorage.getItem(STORAGE_KEY);
-    return savedData ? JSON.parse(savedData) : {};
-  } catch (error) {
-    console.error('Failed to load settings:', error);
-    return {};
-  }
-};
-
-const saveSettings = (settings: SavedSettings, errorMessage?: string) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-  } catch (error) {
-    console.error('Failed to save settings:', error);
-    alert(errorMessage || 'Failed to save settings');
-  }
-};
-
-const resetSettings = () => {
-  localStorage.removeItem(STORAGE_KEY);
-  return {
-    fuelPrice: '',
-    kmPorLitro: '',
-    valorSeguro: '',
-    periodicidadeSeguro: 'annual',
-    premioSeguro: '',
-    custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
-    valorVeiculo: '',
-    horasPorDia: '',
-    diasPorSemana: '',
-    language: 'pt'
-  };
-};
 
 type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
 
@@ -908,7 +870,6 @@ const translations = {
 
 
 export default function CalculoLucro() {
-  // Estados (mantidos iguais)
   const [precoCombustivel, setPrecoCombustivel] = useState('');
   const [kmPorLitro, setKmPorLitro] = useState('');
   const [valorSeguro, setValorSeguro] = useState('');
@@ -919,108 +880,50 @@ export default function CalculoLucro() {
   const [horasPorDia, setHorasPorDia] = useState('');
   const [diasPorSemana, setDiasPorSemana] = useState('');
   const [language, setLanguage] = useState<Language>('pt');
-  
-  // Carregar configurações ao iniciar
-  useEffect(() => {
-    const saved = loadSettings();
-    if (saved) {
-      setPrecoCombustivel(saved.fuelPrice || '');
-      setKmPorLitro(saved.kmPorLitro || '');
-      setValorSeguro(saved.valorSeguro || '');
-      setPeriodicidadeSeguro(saved.periodicidadeSeguro || 'annual');
-      setPremioSeguro(saved.premioSeguro || '');
-      setCustosManutencao(saved.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
-      setValorVeiculo(saved.valorVeiculo || '');
-      setHorasPorDia(saved.horasPorDia || '');
-      setDiasPorSemana(saved.diasPorSemana || '');
-      setLanguage(saved.language || 'pt');
-    }
-  }, []);
-
-  // Função para salvar todas as configurações
-  const handleSaveSettings = () => {
-    const settingsToSave: SavedSettings = {
-      fuelPrice: precoCombustivel,
-      kmPorLitro,
-      valorSeguro,
-      periodicidadeSeguro,
-      premioSeguro,
-      custosManutencao,
-      valorVeiculo,
-      horasPorDia,
-      diasPorSemana,
-      language
-    };
-    saveSettings(settingsToSave, t.importError);
-    alert('Configurações salvas com sucesso!');
-  };
-
-  // Função para resetar
-  const handleResetSettings = () => {
-    if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
-      const defaults = resetSettings();
-      // Atualiza todos os estados
-      setPrecoCombustivel(defaults.fuelPrice);
-      setKmPorLitro(defaults.kmPorLitro);
-      // ... (atualize todos os outros estados)
-      alert('Configurações resetadas!');
-    }
-  };
-
-  // Funções de importação/exportação (mantidas similares)
-  const exportToFile = () => {
-    const settings = loadSettings();
-    const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ride_profit_settings.json';
-    a.click();
-  };
-
-  const importFromFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const settings = JSON.parse(event.target?.result as string) as SavedSettings;
-        saveSettings(settingsToSave, t.importError);
-        window.location.reload(); // Recarrega para aplicar as novas configurações
-      } catch (error) {
-        alert('Erro ao importar configurações: arquivo inválido');
-      }
-    };
-    reader.readAsText(file);
-  };
+  const [showModal, setShowModal] = useState(false);
+  const [valorCorrida, setValorCorrida] = useState('');
+  const [distanciaCorrida, setDistanciaCorrida] = useState('');
+  const [tempoCorrida, setTempoCorrida] = useState('');
+  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState(0);
+  const [lucroLongoPrazo, setLucroLongoPrazo] = useState(0);
 
   const t = translations[language];
 
-  // Carregar configurações salvas
-  useEffect(() => {
-    const savedSettings = localStorage.getItem(STORAGE_KEY);
-    if (savedSettings) {
-      try {
-        const parsedSettings = JSON.parse(savedSettings);
-        
-        setPrecoCombustivel(parsedSettings.fuelPrice || '');
-        setKmPorLitro(parsedSettings.kmPorLitro || '');
-        setValorSeguro(parsedSettings.valorSeguro || '');
-        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
-        setPremioSeguro(parsedSettings.premioSeguro || '');
-        setCustosManutencao(parsedSettings.custosManutencao || [{id: 1, valor: 0, periodicity: 'annual'}]);
-        setValorVeiculo(parsedSettings.valorVeiculo || '');
-        setHorasPorDia(parsedSettings.horasPorDia || '');
-        setDiasPorSemana(parsedSettings.diasPorSemana || '');
-        setLanguage(parsedSettings.language || 'pt');
-      } catch (e) {
-        console.error('Error loading settings:', e);
-      }
+  const loadSettings = (): Partial<SavedSettings> => {
+    try {
+      const savedData = localStorage.getItem(STORAGE_KEY);
+      return savedData ? JSON.parse(savedData) : {};
+    } catch (error) {
+      console.error('Failed to load settings:', error);
+      return {};
     }
-  }, []);
+  };
 
-  // Funções auxiliares
+  const saveSettings = (settings: SavedSettings, errorMessage?: string) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    } catch (error) {
+      console.error('Failed to save settings:', error);
+      alert(errorMessage || 'Failed to save settings');
+    }
+  };
+
+  const resetSettings = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    return {
+      fuelPrice: '',
+      kmPorLitro: '',
+      valorSeguro: '',
+      periodicidadeSeguro: 'annual',
+      premioSeguro: '',
+      custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
+      valorVeiculo: '',
+      horasPorDia: '',
+      diasPorSemana: '',
+      language: 'pt'
+    };
+  };
+
   const formatNumberInput = (value: string): string => {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
   };
@@ -1048,11 +951,156 @@ export default function CalculoLucro() {
     }
   };
 
-  // Cálculos principais
+  const handleSaveSettings = () => {
+    const settingsToSave: SavedSettings = {
+      fuelPrice: precoCombustivel,
+      kmPorLitro,
+      valorSeguro,
+      periodicidadeSeguro,
+      premioSeguro,
+      custosManutencao,
+      valorVeiculo,
+      horasPorDia,
+      diasPorSemana,
+      language
+    };
+    saveSettings(settingsToSave, t.importError);
+    alert('Configurações salvas com sucesso!');
+  };
+
+  const handleResetSettings = () => {
+    if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
+      const defaults = resetSettings();
+      setPrecoCombustivel(defaults.fuelPrice);
+      setKmPorLitro(defaults.kmPorLitro);
+      setValorSeguro(defaults.valorSeguro);
+      setPeriodicidadeSeguro(defaults.periodicidadeSeguro);
+      setPremioSeguro(defaults.premioSeguro);
+      setCustosManutencao(defaults.custosManutencao);
+      setValorVeiculo(defaults.valorVeiculo);
+      setHorasPorDia(defaults.horasPorDia);
+      setDiasPorSemana(defaults.diasPorSemana);
+      setLanguage(defaults.language);
+      alert('Configurações resetadas!');
+    }
+  };
+
+  const exportToFile = () => {
+    const settings = loadSettings();
+    const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ride_profit_settings.json';
+    a.click();
+  };
+
+  const importFromFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const settings = JSON.parse(event.target?.result as string) as SavedSettings;
+        saveSettings(settings, t.importError);
+        window.location.reload();
+      } catch (error) {
+        alert('Erro ao importar configurações: arquivo inválido');
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const adicionarCustoManutencao = () => {
+    setCustosManutencao([...custosManutencao, { id: Date.now(), valor: 0, periodicity: 'annual' }]);
+  };
+
+  const removerCustoManutencao = (id: number) => {
+    if (custosManutencao.length > 1) {
+      setCustosManutencao(custosManutencao.filter(custo => custo.id !== id));
+    }
+  };
+
+  const atualizarCustoManutencao = (id: number, field: string, value: any) => {
+    setCustosManutencao(custosManutencao.map(custo => 
+      custo.id === id ? { ...custo, [field]: field === 'valor' ? parseInput(value) : value } : custo
+    ));
+  };
+
+  useEffect(() => {
+    const saved = loadSettings();
+    if (saved) {
+      setPrecoCombustivel(saved.fuelPrice || '');
+      setKmPorLitro(saved.kmPorLitro || '');
+      setValorSeguro(saved.valorSeguro || '');
+      setPeriodicidadeSeguro(saved.periodicidadeSeguro || 'annual');
+      setPremioSeguro(saved.premioSeguro || '');
+      setCustosManutencao(saved.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
+      setValorVeiculo(saved.valorVeiculo || '');
+      setHorasPorDia(saved.horasPorDia || '');
+      setDiasPorSemana(saved.diasPorSemana || '');
+      setLanguage(saved.language || 'pt');
+    }
+  }, []);
+
   useEffect(() => {
     const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
     setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
+
+    const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
+
+    const custosAnuais = custosManutencao.map(c => {
+      switch (c.periodicity) {
+        case 'monthly': return c.valor * 12;
+        case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
+        case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        default: return c.valor;
+      }
+    });
+
+    const seguroAnual = (() => {
+      switch (periodicidadeSeguro) {
+        case 'monthly': return parseInput(valorSeguro) * 12;
+        case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
+        case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        default: return parseInput(valorSeguro);
+      }
+    })();
+
+    const premioAnual = parseInput(premioSeguro);
+    const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
+
+    const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
+    const custoSeguroCorrida = seguroAnual * fatorTempo;
+    const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
+    const riscoCorrida = premioAnual * 0.1 * fatorTempo;
+
+    setLucroLongoPrazo(
+      parseInput(valorCorrida) -
+      custoCombustivelCorrida -
+      custoManutencaoCorrida -
+      custoSeguroCorrida -
+      depreciacaoCorrida -
+      riscoCorrida
+    );
+  }, [
+    precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
+    custosManutencao, valorVeiculo, horasPorDia, diasPorSemana,
+    valorCorrida, distanciaCorrida, tempoCorrida
+  ]);
+
+  return (
+    <div style={{
+      textAlign: 'center',
+      padding: '20px',
+      backgroundColor: '#000',
+      color: '#fff',
+      maxWidth: '800px',
+      margin: '0 auto',
+      fontFamily: 'Arial, sans-serif'
+    }}>
 
     const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
