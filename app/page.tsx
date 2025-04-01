@@ -901,102 +901,342 @@ export default function CalculoLucro() {
     ));
   };
 
- return (
-    <div style={{ 
-      textAlign: 'center', 
-      padding: '20px', 
-      backgroundColor: '#000', 
-      color: '#fff',
-      maxWidth: '800px',
-      margin: '0 auto',
-      fontFamily: 'Arial, sans-serif'
+return (
+  <div style={{ 
+    textAlign: 'center', 
+    padding: '20px', 
+    backgroundColor: '#000', 
+    color: '#fff',
+    maxWidth: '800px',
+    margin: '0 auto',
+    fontFamily: 'Arial, sans-serif'
+  }}>
+    {/* Language selector */}
+    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+      <select 
+        value={language}
+        onChange={(e) => setLanguage(e.target.value as Language)}
+        style={{
+          padding: '8px 12px',
+          backgroundColor: '#0f0',
+          color: '#000',
+          border: 'none',
+          borderRadius: '5px',
+          fontWeight: 'bold',
+          cursor: 'pointer'
+        }}
+      >
+        <option value="pt">PT</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="zh">中</option>
+        <option value="ja">日</option>
+        <option value="ar">ع</option>
+        <option value="de">DE</option>
+        <option value="ru">RU</option>
+        <option value="uk">УК</option>
+        <option value="da">DK</option>
+        <option value="tr">TR</option>
+        <option value="sw">SW</option>
+        <option value="hi">हिं</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+        <option value="pa">ਪੰ</option>
+        <option value="vi">VN</option>
+        <option value="ko">한</option>
+        <option value="th">ไทย</option>
+        <option value="fa">فا</option>
+        <option value="bn">বাং</option>
+      </select>
+    </div>
+
+    {/* Header */}
+    <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
+    <div style={{ color: '#fff', fontSize: '24px', marginBottom: '5px' }}>AppLucro.com</div>
+    <h1 style={{ color: '#0f0' }}>{t.title}</h1>
+    <h2 style={{ color: '#0f0', fontSize: '18px', marginBottom: '20px' }}>{t.subtitle}</h2>
+    
+    {/* Register button */}
+    <button onClick={() => setShowModal(!showModal)} style={{
+      padding: '10px 20px',
+      backgroundColor: '#0f0',
+      color: '#000',
+      border: 'none',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      marginBottom: '20px'
     }}>
-      {/* Language selector */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value as Language)}
-          style={{
-            padding: '8px 12px',
+      {showModal ? t.closeButton : t.registerButton}
+    </button>
+
+    {/* Registration modal */}
+    {showModal && (
+      <div style={{ 
+        maxWidth: '400px', 
+        margin: '0 auto',
+        backgroundColor: '#222',
+        padding: '20px',
+        borderRadius: '10px',
+        boxShadow: '0 0 10px rgba(0,255,0,0.5)'
+      }}>
+        <h2 style={{ color: '#0f0' }}>{t.registerButton}</h2>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.fuelPrice}</label>
+          <input 
+            type="text" 
+            value={precoCombustivel} 
+            onChange={(e) => handleNumberInput(e.target.value, setPrecoCombustivel)} 
+            style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.fuelEfficiency}</label>
+          <input 
+            type="text" 
+            value={kmPorLitro} 
+            onChange={(e) => handleNumberInput(e.target.value, setKmPorLitro)} 
+            style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.insuranceValue}</label>
+          <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <input 
+              type="text" 
+              value={valorSeguro} 
+              onChange={(e) => handleNumberInput(e.target.value, setValorSeguro)} 
+              style={{ flex: 1, padding: '8px', borderRadius: '5px', border: 'none' }}
+            />
+            <select
+              value={periodicidadeSeguro}
+              onChange={(e) => setPeriodicidadeSeguro(e.target.value as Periodicity)}
+              style={{ padding: '8px', borderRadius: '5px', border: 'none' }}
+            >
+              <option value="annual">{t.periodicityOptions.annual}</option>
+              <option value="monthly">{t.periodicityOptions.monthly}</option>
+              <option value="weekly">{t.periodicityOptions.weekly}</option>
+              <option value="daily">{t.periodicityOptions.daily}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.insurancePremium}</label>
+          <input 
+            type="text" 
+            value={premioSeguro} 
+            onChange={(e) => handleNumberInput(e.target.value, setPremioSeguro)} 
+            style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.maintenanceCosts}</label>
+          {custosManutencao.map((custo) => (
+            <div key={custo.id} style={{marginBottom: '10px'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <input 
+                  type="text" 
+                  value={custo.valor} 
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)} 
+                  style={{ flex: 1, padding: '8px', borderRadius: '5px', border: 'none' }}
+                />
+                <select
+                  value={custo.periodicity}
+                  onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
+                  style={{ padding: '8px', borderRadius: '5px', border: 'none' }}
+                >
+                  <option value="annual">{t.periodicityOptions.annual}</option>
+                  <option value="monthly">{t.periodicityOptions.monthly}</option>
+                  <option value="weekly">{t.periodicityOptions.weekly}</option>
+                  <option value="daily">{t.periodicityOptions.daily}</option>
+                </select>
+                {custosManutencao.length > 1 && (
+                  <button 
+                    onClick={() => removerCustoManutencao(custo.id)} 
+                    style={{
+                      padding: '8px',
+                      backgroundColor: '#f00',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '5px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t.remove}
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+          <button 
+            onClick={adicionarCustoManutencao}
+            style={{ 
+              marginTop: '5px', 
+              padding: '8px 12px',
+              backgroundColor: '#0f0',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            {t.addCost}
+          </button>
+        </div>
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.distance}</label>
+          <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <input 
+              type="text" 
+              value={distanciaPercorrida} 
+              onChange={(e) => handleNumberInput(e.target.value, setDistanciaPercorrida)} 
+              style={{ flex: 1, padding: '8px', borderRadius: '5px', border: 'none' }}
+            />
+            <select
+              value={periodicidadeDistancia}
+              onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
+              style={{ padding: '8px', borderRadius: '5px', border: 'none' }}
+            >
+              <option value="daily">{t.periodicityOptions.daily}</option>
+              <option value="weekly">{t.periodicityOptions.weekly}</option>
+              <option value="monthly">{t.periodicityOptions.monthly}</option>
+            </select>
+          </div>
+        </div>
+
+        {periodicidadeDistancia === 'daily' && (
+          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+            <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.workingDays}</label>
+            <input 
+              type="text" 
+              value={diasTrabalhadosPorSemana} 
+              onChange={(e) => handleDiasTrabalhadosChange(e.target.value)} 
+              style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+            />
+          </div>
+        )}
+        
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.vehicleValue}</label>
+          <input 
+            type="text" 
+            value={valorVeiculo} 
+            onChange={(e) => handleNumberInput(e.target.value, setValorVeiculo)} 
+            style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+          />
+        </div>
+        
+        <button 
+          onClick={() => setShowModal(false)} 
+          style={{ 
+            marginTop: '20px', 
+            padding: '10px 20px', 
+            fontSize: '16px',
             backgroundColor: '#0f0',
             color: '#000',
             border: 'none',
             borderRadius: '5px',
             fontWeight: 'bold',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            width: '100%'
           }}
         >
-          {Object.keys(translations).map((lang) => (
-            <option key={lang} value={lang}>
-              {lang.toUpperCase()}
-            </option>
-          ))}
-        </select>
+          {t.saveButton}
+        </button>
       </div>
+    )}
 
-      {/* Header */}
-      <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
-      <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{translations[language].title}</h1>
-      <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{translations[language].subtitle}</h2>
-
-      {/* ... rest of your JSX ... */}
-
-      {/* Results section */}
-      <div style={{ 
-        backgroundColor: '#222', 
-        padding: '20px', 
-        borderRadius: '10px',
-        marginBottom: '20px',
-        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
-      }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
-        
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
-          <div style={{
-            padding: '12px',
-            backgroundColor: '#0f0',
-            color: '#000',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            textAlign: 'center'
-          }}>
-            {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo, language)}` : '---'}
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
-          <div style={{
-            padding: '12px',
-            backgroundColor: '#0f0',
-            color: '#000',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            textAlign: 'center'
-          }}>
-            {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo, language)}` : '---'}
-          </div>
-        </div>
+    {/* Ride inputs */}
+    <div style={{ 
+      backgroundColor: '#222', 
+      padding: '20px', 
+      borderRadius: '10px',
+      marginBottom: '20px',
+      boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
+    }}>
+      <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+        <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.rideValue}</label>
+        <input 
+          type="text" 
+          value={valorCorrida} 
+          onChange={(e) => handleNumberInput(e.target.value, setValorCorrida)} 
+          style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+        />
       </div>
-
-      {/* Tips and information */}
-      <div style={{ 
-        backgroundColor: '#222', 
-        padding: '20px', 
-        borderRadius: '10px',
-        marginBottom: '20px',
-        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
-        textAlign: 'left'
-      }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
-        <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
-        <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
-        <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-        <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+      
+      <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+        <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.rideDistance}</label>
+        <input 
+          type="text" 
+          value={KmRodados} 
+          onChange={(e) => handleNumberInput(e.target.value, setKmRodados)} 
+          style={{ width: '100%', padding: '8px', borderRadius: '5px', border: 'none' }}
+        />
       </div>
     </div>
-  );
-}
+
+    {/* Results section */}
+    <div style={{ 
+      backgroundColor: '#222', 
+      padding: '20px', 
+      borderRadius: '10px',
+      marginBottom: '20px',
+      boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
+    }}>
+      <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
+      
+      <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+        <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
+        <div style={{
+          padding: '12px',
+          backgroundColor: '#0f0',
+          color: '#000',
+          borderRadius: '5px',
+          fontWeight: 'bold',
+          fontSize: '18px',
+          textAlign: 'center'
+        }}>
+          {lucroCurtoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroCurtoPrazo, language)}` : '---'}
+        </div>
+      </div>
+
+      <div style={{ textAlign: 'left' }}>
+        <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.longTermProfit}</label>
+        <div style={{
+          padding: '12px',
+          backgroundColor: '#0f0',
+          color: '#000',
+          borderRadius: '5px',
+          fontWeight: 'bold',
+          fontSize: '18px',
+          textAlign: 'center'
+        }}>
+          {lucroLongoPrazo !== null ? `${CURRENCY_SYMBOLS[language]} ${formatCurrency(lucroLongoPrazo, language)}` : '---'}
+        </div>
+      </div>
+    </div>
+
+    {/* Tips and information */}
+    <div style={{ 
+      backgroundColor: '#222', 
+      padding: '20px', 
+      borderRadius: '10px',
+      marginBottom: '20px',
+      boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
+      textAlign: 'left'
+    }}>
+      <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+      <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
+      <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
+      <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+      <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+    </div>
+  </div>
+);
