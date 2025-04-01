@@ -906,7 +906,6 @@ const translations = {
   }
 };
 
-const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
   // Estados (mantidos iguais)
