@@ -13,7 +13,9 @@ type Cost = {
 type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
 
 const translations = {
- 'pt': {
+ 
+const translations = {
+  'pt': {
     title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
     registerButton: 'Cadastrar Dados do Veículo',
@@ -30,8 +32,8 @@ const translations = {
     addCost: 'Adicionar Custo',
     remove: 'Remover',
     timeSpent: 'Tempo trabalhado:',
-    workingHours: 'Horas/dia (1-16):',
-    workingDays: 'Dias/semana (1-7):',
+    workingHours: 'Horas/dia trabalhadas (1-16):',
+    workingDays: 'Dias/semana trabalhados (1-7):',
     vehicleValue: 'Valor Atual do Veículo:',
     rideValue: 'Valor Pago:',
     rideDistance: 'Distância da Corrida (km):',
@@ -51,7 +53,7 @@ const translations = {
       weekly: 'Semanal',
       daily: 'Diário'
     }
-  },
+  },,
    'en': {
     title: 'Ride Profits (All Platforms/Vehicles)',
     subtitle: 'For short and long term decision making',
@@ -853,6 +855,18 @@ const translations = {
   }
 };
 
+'use client';
+
+import React, { useState, useEffect } from 'react';
+
+type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
+
+type Cost = {
+  id: number;
+  valor: number;
+  periodicity: Periodicity;
+};
+
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
@@ -1020,118 +1034,100 @@ export default function CalculoLucro() {
     }
   };
 
- const exportSettings = async () => {
-  try {
-    const settings = localStorage.getItem(STORAGE_KEY);
-    if (!settings) return;
+  const exportSettings = async () => {
+    try {
+      const settings = localStorage.getItem(STORAGE_KEY);
+      if (!settings) return;
 
-    // Verifica se a API File System Access está disponível
-    if ('showSaveFilePicker' in window) {
-      try {
-        const handle = await (window as any).showSaveFilePicker({
-          suggestedName: 'ride_profit_settings.json',
-          types: [{
-            description: 'JSON Files',
-            accept: { 'application/json': ['.json'] },
-          }],
-        });
-        
-        const writable = await handle.createWritable();
-        await writable.write(settings);
-        await writable.close();
-      } catch (err) {
-        // Usuário cancelou a operação
-        console.log('Export cancelled');
-      }
-    } else {
-      // Fallback para navegadores que não suportam a API
-      const blob = new Blob([settings], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'ride_profit_settings.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  } catch (error) {
-    console.error('Error exporting settings:', error);
-  }
-};
-
-const importSettings = async () => {
-  try {
-    // Verifica se a API File System Access está disponível
-    if ('showOpenFilePicker' in window) {
-      try {
-        const [handle] = await (window as any).showOpenFilePicker({
-          types: [{
-            description: 'JSON Files',
-            accept: { 'application/json': ['.json'] },
-          }],
-          multiple: false
-        });
-        
-        const file = await handle.getFile();
-        const content = await file.text();
-        
+      // Verifica se a API File System Access está disponível
+      if ('showSaveFilePicker' in window) {
         try {
-          const settings = JSON.parse(content);
-          localStorage.setItem(STORAGE_KEY, content);
-          window.location.reload();
-        } catch (error) {
-          alert(t.importError);
+          const handle = await (window as any).showSaveFilePicker({
+            suggestedName: 'ride_profit_settings.json',
+            types: [{
+              description: 'JSON Files',
+              accept: { 'application/json': ['.json'] },
+            }],
+          });
+          
+          const writable = await handle.createWritable();
+          await writable.write(settings);
+          await writable.close();
+        } catch (err) {
+          // Usuário cancelou a operação
+          console.log('Export cancelled');
         }
-      } catch (err) {
-        // Usuário cancelou a operação
-        console.log('Import cancelled');
+      } else {
+        // Fallback para navegadores que não suportam a API
+        const blob = new Blob([settings], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ride_profit_settings.json';
+        a.click();
+        URL.revokeObjectURL(url);
       }
-    } else {
-      // Fallback para navegadores que não suportam a API
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.json';
-      
-      input.onchange = (e: Event) => {
-        const file = (e.target as HTMLInputElement).files?.[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            try {
-              const settings = JSON.parse(event.target?.result as string);
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-              window.location.reload();
-            } catch (error) {
-              alert(t.importError);
-            }
-          };
-          reader.readAsText(file);
-        }
-      };
-      
-      input.click();
+    } catch (error) {
+      console.error('Error exporting settings:', error);
     }
-  } catch (error) {
-    console.error('Error importing settings:', error);
-  }
-};
+  };
 
-  const importSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
+  const importSettings = async () => {
+    try {
+      // Verifica se a API File System Access está disponível
+      if ('showOpenFilePicker' in window) {
         try {
-          const settings = JSON.parse(event.target?.result as string);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-          window.location.reload();
-        } catch (error) {
-          alert(t.importError);
+          const [handle] = await (window as any).showOpenFilePicker({
+            types: [{
+              description: 'JSON Files',
+              accept: { 'application/json': ['.json'] },
+            }],
+            multiple: false
+          });
+          
+          const file = await handle.getFile();
+          const content = await file.text();
+          
+          try {
+            const settings = JSON.parse(content);
+            localStorage.setItem(STORAGE_KEY, content);
+            window.location.reload();
+          } catch (error) {
+            alert(t.importError);
+          }
+        } catch (err) {
+          // Usuário cancelou a operação
+          console.log('Import cancelled');
         }
-      };
-      reader.readAsText(file);
+      } else {
+        // Fallback para navegadores que não suportam a API
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+        
+        input.onchange = (e: Event) => {
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              try {
+                const settings = JSON.parse(event.target?.result as string);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+                window.location.reload();
+              } catch (error) {
+                alert(t.importError);
+              }
+            };
+            reader.readAsText(file);
+          }
+        };
+        
+        input.click();
+      }
+    } catch (error) {
+      console.error('Error importing settings:', error);
     }
-    e.target.value = ''; // Reset input
   };
 
   // Funções de custos
@@ -1466,40 +1462,42 @@ const importSettings = async () => {
             </button>
           </div>
 
-         <div style={{ display: 'flex', gap: '10px' }}>
-  <button
-    onClick={exportSettings}
-    style={{
-      flex: 1,
-      padding: '12px',
-      backgroundColor: '#00f',
-      color: '#fff',
-      border: 'none',
-      borderRadius: '5px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      fontSize: '16px'
-    }}
-  >
-    {t.exportButton}
-  </button>
-  <button
-    onClick={importSettings}
-    style={{
-      flex: 1,
-      padding: '12px',
-      backgroundColor: '#00f',
-      color: '#fff',
-      border: 'none',
-      borderRadius: '5px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      fontSize: '16px'
-    }}
-  >
-    {t.importButton}
-  </button>
-</div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={exportSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#00f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.exportButton}
+            </button>
+            <button
+              onClick={importSettings}
+              style={{
+                flex: 1,
+                padding: '12px',
+                backgroundColor: '#00f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+            >
+              {t.importButton}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Seção de dados da corrida */}
       <div style={{ 
@@ -1584,7 +1582,8 @@ const importSettings = async () => {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroCurtoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroCurtoPrazo.toFixed(2)}` : '---'}
+            /*{lucroCurtoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroCurtoPrazo.toFixed(2)}` : '---'}*/
+            {lucroCurtoPrazo !== null ? `$ ${lucroCurtoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
 
@@ -1599,7 +1598,7 @@ const importSettings = async () => {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroLongoPrazo !== null ? `R$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
+            {lucroLongoPrazo !== null ? `$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
       </div>
