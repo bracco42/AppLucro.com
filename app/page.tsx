@@ -25,7 +25,6 @@ const translations = {
     maintenanceCosts: 'Custos de Manutenção:',
     addCost: 'Adicionar Custo',
     remove: 'Remover',
-    distance: 'Distância percorrida:',
     timeSpent: 'Tempo trabalhado:',
     workingHours: 'Horas/dia (1-16):',
     workingDays: 'Dias/semana (1-7):',
@@ -36,7 +35,7 @@ const translations = {
     shortTermProfit: 'Lucro de Curto Prazo:',
     longTermProfit: 'Lucro de Longo Prazo:',
     tips: 'Dicas:',
-    tip1: 'Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
+    tip1: 'Levar espera em consideração no tempo gasto. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade)',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida',
     community: 'Entre em nossa <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidade OpenSource</a>!!!',
@@ -60,7 +59,6 @@ const translations = {
     maintenanceCosts: 'Maintenance Costs:',
     addCost: 'Add Cost',
     remove: 'Remove',
-    distance: 'Distance traveled:',
     timeSpent: 'Time worked:',
     workingHours: 'Hours/day (1-16):',
     workingDays: 'Days/week (1-7):',
@@ -71,7 +69,7 @@ const translations = {
     shortTermProfit: 'Short Term Profit:',
     longTermProfit: 'Long Term Profit:',
     tips: 'Tips:',
-    tip1: 'If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
+    tip1: 'Consider waiting time in time spent. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity)',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost',
     community: 'Join our <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Community</a>!!!',
@@ -95,7 +93,6 @@ const translations = {
     maintenanceCosts: 'Costos de Mantenimiento:',
     addCost: 'Agregar Costo',
     remove: 'Eliminar',
-    distance: 'Distancia recorrida:',
     timeSpent: 'Tiempo trabajado:',
     workingHours: 'Horas/día (1-16):',
     workingDays: 'Días/semana (1-7):',
@@ -106,7 +103,7 @@ const translations = {
     shortTermProfit: 'Ganancia Corto Plazo:',
     longTermProfit: 'Ganancia Largo Plazo:',
     tips: 'Consejos:',
-    tip1: 'Si alquilas el vehículo, establece su valor en cero e incluye el alquiler en los costos.',
+    tip1: 'Considerar el tiempo de espera en el tiempo gastado. Si alquilas el vehículo, establece su valor en cero e incluye el alquiler en los costos.',
     tip2: '¡Útil para todas las plataformas! Conductores de apps (Ifood, Uber, 99), taxis, furgonetas y hasta buses/aviones (usa tu creatividad)',
     formula: 'Fórmula Largo Plazo: Ingresos - Gastos (Combustible y otros) - Depreciación (3.33% * Valor/año) - Riesgo (10% * Prima/año). Nota: ganancia corto plazo solo descuenta combustible',
     community: 'Únete a nuestra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunidad OpenSource</a>!!!',
@@ -130,7 +127,6 @@ const translations = {
     maintenanceCosts: 'Coûts Maintenance:',
     addCost: 'Ajouter Coût',
     remove: 'Supprimer',
-    distance: 'Distance parcourue:',
     timeSpent: 'Temps travaillé:',
     workingHours: 'Heures/jour (1-16):',
     workingDays: 'Jours/semaine (1-7):',
@@ -141,7 +137,7 @@ const translations = {
     shortTermProfit: 'Bénéfice Court Terme:',
     longTermProfit: 'Bénéfice Long Terme:',
     tips: 'Conseils:',
-    tip1: 'Si vous louez le véhicule, mettez sa valeur à zéro et incluez le loyer dans les coûts.',
+    tip1: 'Prendre en compte le temps d\'attente dans le temps passé. Si vous louez le véhicule, mettez sa valeur à zéro et incluez le loyer dans les coûts.',
     tip2: 'Utilisable pour toutes plateformes! Conducteurs d\'apps (Ifood, Uber...), taxis, fourgonnettes et même bus/avions (soyez créatifs!)',
     formula: 'Formule Long Terme: Revenus - Dépenses (Carburant etc.) - Dépréciation (3.33% * Valeur/an) - Risque (10% * Prime/an). NB: bénéfice court terme ne déduit que le carburant',
     community: 'Rejoignez notre <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Communauté OpenSource</a>!!!',
@@ -165,7 +161,6 @@ const translations = {
     maintenanceCosts: 'Wartungskosten:',
     addCost: 'Kosten hinzufügen',
     remove: 'Entfernen',
-    distance: 'Zurückgelegte Strecke:',
     timeSpent: 'Gearbeitete Zeit:',
     workingHours: 'Stunden/Tag (1-16):',
     workingDays: 'Tage/Woche (1-7):',
@@ -176,7 +171,7 @@ const translations = {
     shortTermProfit: 'Kurzfristiger Gewinn:',
     longTermProfit: 'Langfristiger Gewinn:',
     tips: 'Tipps:',
-    tip1: 'Bei Mietfahrzeugen Wert auf 0 setzen und Mietkosten zu Wartungskosten addieren.',
+    tip1: 'Wartezeit in der Arbeitszeit berücksichtigen. Bei Mietfahrzeugen Wert auf 0 setzen und Mietkosten zu Wartungskosten addieren.',
     tip2: 'Für alle Plattformen nutzbar! App-Fahrer (Ifood, Uber...), Taxis, Transporter und sogar Busse/Flugzeuge (Kreativität erforderlich)',
     formula: 'Langfristige Gewinnformel: Einnahmen - Ausgaben (Kraftstoff etc.) - Abschreibung (3.33% * Fahrzeugwert/Jahr) - Risiko (10% * Prämie/Jahr). Hinweis: Kurzfristiger Gewinn berücksichtigt nur Kraftstoffkosten',
     community: 'Treten Sie unserer <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-Community</a> bei!!!',
@@ -200,7 +195,6 @@ const translations = {
     maintenanceCosts: 'Costi Manutenzione:',
     addCost: 'Aggiungi Costo',
     remove: 'Rimuovi',
-    distance: 'Distanza percorsa:',
     timeSpent: 'Tempo lavorato:',
     workingHours: 'Ore/giorno (1-16):',
     workingDays: 'Giorni/settimana (1-7):',
@@ -211,7 +205,7 @@ const translations = {
     shortTermProfit: 'Guadagno Breve Termine:',
     longTermProfit: 'Guadagno Lungo Termine:',
     tips: 'Consigli:',
-    tip1: 'Se noleggi il veicolo, imposta il valore a zero e includi il noleggio nei costi.',
+    tip1: 'Considerare il tempo di attesa nel tempo speso. Se noleggi il veicolo, imposta il valore a zero e includi il noleggio nei costi.',
     tip2: 'Utilizzabile per tutte le piattaforme! Driver di app (Ifood, Uber...), taxi, furgoni e persino bus/aerei (usa la creatività!)',
     formula: 'Formula Lungo Termine: Entrate - Spese (Carburante etc.) - Svalutazione (3.33% * Valore/anno) - Rischio (10% * Premio/anno). Nota: guadagno breve termine deduce solo il carburante',
     community: 'Unisciti alla nostra <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Comunità OpenSource</a>!!!',
@@ -235,7 +229,6 @@ const translations = {
     maintenanceCosts: '维护成本:',
     addCost: '添加',
     remove: '删除',
-    distance: '行驶距离:',
     timeSpent: '工作时间:',
     workingHours: '小时/天 (1-16):',
     workingDays: '天/周 (1-7):',
@@ -246,7 +239,7 @@ const translations = {
     shortTermProfit: '短期利润:',
     longTermProfit: '长期利润:',
     tips: '提示:',
-    tip1: '如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
+    tip1: '将等待时间计入工作时间。如租赁车辆，请将车辆价值设为零并将租金计入维护成本',
     tip2: '适用于所有平台和车辆！包括网约车司机(如Ifood, Uber, 99等)、出租车、货车，甚至公交车/飞机/地铁(需灵活应用)',
     formula: '长期利润公式: 收入 - 支出(燃油及其他) - 折旧 (3.33% * 车辆价值每年) - 风险 (10% * 保险费用每年)。注: 短期利润仅扣除行程燃油成本',
     community: '加入我们的<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">开源社区</a>!!!',
@@ -270,7 +263,6 @@ const translations = {
     maintenanceCosts: '維持費:',
     addCost: '追加',
     remove: '削除',
-    distance: '走行距離:',
     timeSpent: '作業時間:',
     workingHours: '時間/日 (1-16):',
     workingDays: '日/週 (1-7):',
@@ -281,7 +273,7 @@ const translations = {
     shortTermProfit: '短期利益:',
     longTermProfit: '長期利益:',
     tips: 'ヒント:',
-    tip1: 'レンタル車両は車両価値を0にし維持費にレンタル代を計上',
+    tip1: '待ち時間を作業時間に含める。レンタル車両は車両価値を0にし維持費にレンタル代を計上',
     tip2: '全プラットフォーム/車両で利用可能! 配達アプリ(Ifood, Uber, 99等)、タクシー、バン、バス/飛行機/地下鉄まで(創造力が必要)',
     formula: '長期利益計算式: 収益 - 支出(燃料他) - 減価 (3.33% * 車両価値 年間) - リスク (10% * 保険料 年間)。注: 短期利益は走行の燃料費のみ控除',
     community: '私たちの<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">オープンソースコミュニティ</a>に参加しましょう',
@@ -305,7 +297,6 @@ const translations = {
     maintenanceCosts: 'تكاليف الصيانة:',
     addCost: 'إضافة',
     remove: 'إزالة',
-    distance: 'المسافة المقطوعة:',
     timeSpent: 'الوقت العامل:',
     workingHours: 'ساعات/يوم (1-16):',
     workingDays: 'أيام/أسبوع (1-7):',
@@ -316,7 +307,7 @@ const translations = {
     shortTermProfit: 'الربح قصير المدى:',
     longTermProfit: 'الربح طويل المدى:',
     tips: 'نصائح:',
-    tip1: 'عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
+    tip1: 'أخذ وقت الانتظار في الاعتبار في الوقت المستغرق. عند استئجار المركبة، اضبط القيمة على صفر وأضف الإيجار إلى تكاليف الصيانة',
     tip2: 'يمكن استخدامه لجميع المنصات والمركبات! لكل السائقين، التطبيقات (Ifood, Uber, 99, إلخ)، سيارات الأجرة، الحافلات وحتى الطائرات/المترو (يتطلب الإبداع)',
     formula: 'معادلة الربح طويل المدى: الإيرادات - المصروفات (الوقود وغيرها) - الإهلاك (3.33% * قيمة المركبة سنوياً) - المخاطرة (10% * قسط التأمين سنوياً). ملاحظة: الربح قصير المدى يخصم فقط تكلفة الوقود للرحلة',
     community: 'انضم إلى <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">مجتمعنا المفتوح المصدر</a>!!!',
@@ -340,7 +331,6 @@ const translations = {
     maintenanceCosts: 'Затраты на обслуживание:',
     addCost: 'Добавить',
     remove: 'Удалить',
-    distance: 'Пробег:',
     timeSpent: 'Отработанное время:',
     workingHours: 'Часы/день (1-16):',
     workingDays: 'Дни/неделю (1-7):',
@@ -351,7 +341,7 @@ const translations = {
     shortTermProfit: 'Краткосрочная прибыль:',
     longTermProfit: 'Долгосрочная прибыль:',
     tips: 'Советы:',
-    tip1: 'Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
+    tip1: 'Учитывайте время ожидания в рабочем времени. Для арендованных ТС установите стоимость 0 и включите аренду в затраты',
     tip2: 'Подходит для всех платформ и ТС! Водители приложений (Ifood, Uber, 99), такси, фургоны и даже автобусы/самолёты (требуется креативность)',
     formula: 'Формула долгосрочной прибыли: Доход - Расходы (топливо и др.) - Амортизация (3.33% * Стоимость ТС в год) - Риск (10% * Страховая премия в год). Прим.: краткосрочная прибыль учитывает только затраты на топливо',
     community: 'Присоединяйтесь к нашему <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">сообществу OpenSource</a>!!!',
@@ -375,7 +365,6 @@ const translations = {
     maintenanceCosts: 'रखरखाव लागत:',
     addCost: 'जोड़ें',
     remove: 'हटाएं',
-    distance: 'तय दूरी:',
     timeSpent: 'काम का समय:',
     workingHours: 'घंटे/दिन (1-16):',
     workingDays: 'दिन/सप्ताह (1-7):',
@@ -386,7 +375,7 @@ const translations = {
     shortTermProfit: 'अल्पकालिक लाभ:',
     longTermProfit: 'दीर्घकालिक लाभ:',
     tips: 'टिप्स:',
-    tip1: 'वाहन किराए पर लेने पर मूल्य शून्य पर सेट करें और किराया रखरखाव लागत में शामिल करें',
+    tip1: 'प्रतीक्षा समय को कार्य समय में शामिल करें। वाहन किराए पर लेने पर मूल्य शून्य पर सेट करें और किराया रखरखाव लागत में शामिल करें',
     tip2: 'सभी प्लेटफॉर्म और वाहनों के लिए उपयोगी! ऐप ड्राइवर (इफूड, उबर, 99), टैक्सी, वैन और यहां तक कि बस/विमान भी (रचनात्मकता आवश्यक)',
     formula: 'दीर्घकालिक लाभ सूत्र: आय - व्यय (ईंधन आदि) - मूल्यह्रास (3.33% * वाहन मूल्य/वर्ष) - जोखिम (10% * प्रीमियम/वर्ष)। नोट: अल्पकालिक लाभ केवल ईंधन लागत घटाता है',
     community: 'हमारे <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ओपनसोर्स समुदाय</a> से जुड़ें!!!',
@@ -410,7 +399,6 @@ const translations = {
     maintenanceCosts: 'ਰੱਖ-ਰਖਾਅ ਲਾਗਤ:',
     addCost: 'ਜੋੜੋ',
     remove: 'ਹਟਾਓ',
-    distance: 'ਤੈਅ ਦੂਰੀ:',
     timeSpent: 'ਕੰਮ ਦਾ ਸਮਾਂ:',
     workingHours: 'ਘੰਟੇ/ਦਿਨ (1-16):',
     workingDays: 'ਦਿਨ/ਹਫ਼ਤਾ (1-7):',
@@ -421,7 +409,7 @@ const translations = {
     shortTermProfit: 'ਛੋਟੇ ਸਮੇਂ ਦਾ ਲਾਭ:',
     longTermProfit: 'ਲੰਬੇ ਸਮੇਂ ਦਾ ਲਾਭ:',
     tips: 'ਸੁਝਾਅ:',
-    tip1: 'ਜੇਕਰ ਤੁਸੀਂ ਵਾਹਨ ਕਿਰਾਏ \'ਤੇ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਵਾਹਨ ਦਾ ਮੁੱਲ ਜ਼ੀਰੋ \'ਤੇ ਸੈੱਟ ਕਰੋ ਅਤੇ ਕਿਰਾਏ ਨੂੰ ਰੱਖ-ਰਖਾਅ ਲਾਗਤ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ',
+    tip1: 'ਉਡੀਕ ਦੇ ਸਮੇਂ ਨੂੰ ਕੰਮ ਦੇ ਸਮੇਂ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਵਾਹਨ ਕਿਰਾਏ \'ਤੇ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਵਾਹਨ ਦਾ ਮੁੱਲ ਜ਼ੀਰੋ \'ਤੇ ਸੈੱਟ ਕਰੋ ਅਤੇ ਕਿਰਾਏ ਨੂੰ ਰੱਖ-ਰਖਾਅ ਲਾਗਤ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ',
     tip2: 'ਸਾਰੇ ਪਲੇਟਫਾਰਮ ਅਤੇ ਵਾਹਨਾਂ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ! ਸਾਰੇ ਡਰਾਈਵਰਾਂ ਲਈ, ਐਪ-ਅਧਾਰਿਤ (ਇਫੂਡ, ਉਬਰ, 99 ਆਦਿ), ਟੈਕਸੀ, ਵੈਨ ਅਤੇ ਯਹਾਂ ਤੱਕ ਕਿ ਬੱਸਾਂ/ਜਹਾਜ਼/ਮੈਟਰੋ (ਰਚਨਾਤਮਕਤਾ ਦੀ ਲੋੜ ਹੈ)',
     formula: 'ਲੰਬੇ ਸਮੇਂ ਦੇ ਲਾਭ ਦਾ ਫਾਰਮੂਲਾ: ਆਮਦਨ - ਖਰਚ (ਈਂਧਨ ਅਤੇ ਹੋਰ) - ਮੁੱਲ ਘਟਾਓ (3.33% * ਵਾਹਨ ਮੁੱਲ ਪ੍ਰਤੀ ਸਾਲ) - ਜੋਖਮ (10% * ਬੀਮਾ ਪ੍ਰੀਮੀਅਮ ਪ੍ਰਤੀ ਸਾਲ)। ਨੋਟ: ਛੋਟੇ ਸਮੇਂ ਦਾ ਲਾਭ ਸਿਰਫ਼ ਸਵਾਰੀ ਦੀ ਈਂਧਨ ਲਾਗਤ ਨੂੰ ਘਟਾਉਂਦਾ ਹੈ',
     community: 'ਸਾਡੇ <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ਓਪਨਸੋਰਸ ਕਮਿਊਨਿਟੀ</a> ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ!!!',
@@ -445,7 +433,6 @@ const translations = {
     maintenanceCosts: 'রক্ষণাবেক্ষণ খরচ:',
     addCost: 'যোগ করুন',
     remove: 'অপসারণ',
-    distance: 'দূরত্ব ভ্রমণ:',
     timeSpent: 'কাজের সময়:',
     workingHours: 'ঘন্টা/দিন (1-16):',
     workingDays: 'দিন/সপ্তাহ (1-7):',
@@ -456,7 +443,7 @@ const translations = {
     shortTermProfit: 'স্বল্পমেয়াদী লাভ:',
     longTermProfit: 'দীর্ঘমেয়াদী লাভ:',
     tips: 'পরামর্শ:',
-    tip1: 'আপনি যদি যানবাহন ভাড়া নেন, যানবাহনের মূল্য শূন্য সেট করুন এবং ভাড়া রক্ষণাবেক্ষণ খরচ অন্তর্ভুক্ত করুন',
+    tip1: 'অপেক্ষার সময় কাজের সময়ে বিবেচনা করুন। আপনি যদি যানবাহন ভাড়া নেন, যানবাহনের মূল্য শূন্য সেট করুন এবং ভাড়া রক্ষণাবেক্ষণ খরচ অন্তর্ভুক্ত করুন',
     tip2: 'সমস্ত প্ল্যাটফর্ম এবং যানবাহনের জন্য ব্যবহার করা যেতে পারে! সমস্ত ড্রাইভারদের জন্য, অ্যাপ-ভিত্তিক (ইফুড, উবার, 99 ইত্যাদি), ট্যাক্সি, ভ্যান এবং এমনকি বাস/বিমান/মেট্রো (সৃজনশীলতা প্রয়োজন)',
     formula: 'দীর্ঘমেয়াদী লাভ সূত্র: আয় - ব্যয় (জ্বালানি ও অন্যান্য) - অবচয় (3.33% * যানবাহনের মূল্য প্রতি বছর) - ঝুঁকি (10% * বীমা প্রিমিয়াম প্রতি বছর)। নোট: স্বল্পমেয়াদী লাভ শুধুমাত্র যাত্রার জ্বালানি খরচ কাটায়',
     community: 'আমাদের <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ওপেন সোর্স কমিউনিটি</a> এ যোগ দিন!!!',
@@ -480,7 +467,6 @@ const translations = {
     maintenanceCosts: '유지 보수 비용:',
     addCost: '추가',
     remove: '제거',
-    distance: '주행 거리:',
     timeSpent: '작업 시간:',
     workingHours: '시간/일 (1-16):',
     workingDays: '일/주 (1-7):',
@@ -491,7 +477,7 @@ const translations = {
     shortTermProfit: '단기 수익:',
     longTermProfit: '장기 수익:',
     tips: '팁:',
-    tip1: '차량을 임대하는 경우 차량 가치를 0으로 설정하고 임대 비용을 유지 관리 비용에 포함',
+    tip1: '대기 시간을 작업 시간에 포함하세요. 차량을 임대하는 경우 차량 가치를 0으로 설정하고 임대 비용을 유지 관리 비용에 포함',
     tip2: '모든 플랫폼 및 차량에 사용 가능! 앱 기반 (Ifood, Uber, 99 등), 택시, 밴 및 심지어 버스/비행기/지하철 (창의력 필요)',
     formula: '장기 수익 공식: 수익 - 비용 (연료 및 기타) - 감가 상각 (3.33% * 차량 가치/년) - 위험 (10% * 보험료/년). 참고: 단기 수익은 주행 연료 비용만 공제',
     community: '우리의 <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">오픈소스 커뮤니티</a>에 가입하세요!!!',
@@ -515,7 +501,6 @@ const translations = {
     maintenanceCosts: 'Chi Phí Bảo Trì:',
     addCost: 'Thêm',
     remove: 'Xóa',
-    distance: 'Khoảng cách di chuyển:',
     timeSpent: 'Thời gian làm việc:',
     workingHours: 'Giờ/ngày (1-16):',
     workingDays: 'Ngày/tuần (1-7):',
@@ -526,7 +511,7 @@ const translations = {
     shortTermProfit: 'Lợi Nhuận Ngắn Hạn:',
     longTermProfit: 'Lợi Nhuận Dài Hạn:',
     tips: 'Mẹo:',
-    tip1: 'Nếu thuê xe, đặt giá trị xe thành 0 và bao gồm tiền thuê trong chi phí bảo trì',
+    tip1: 'Tính thời gian chờ vào thời gian làm việc. Nếu thuê xe, đặt giá trị xe thành 0 và bao gồm tiền thuê trong chi phí bảo trì',
     tip2: 'Dùng được cho mọi nền tảng và xe! Tài xế ứng dụng (Ifood, Uber, 99...), taxi, xe tải và cả xe buýt/máy bay (cần sáng tạo)',
     formula: 'Công thức Lợi Nhuận Dài Hạn: Doanh Thu - Chi Phí (Nhiên Liệu...) - Khấu Hao (3.33% * Giá Trị Xe/năm) - Rủi Ro (10% * Phí Bảo Hiểm/năm). Lưu ý: lợi nhuận ngắn hạn chỉ trừ chi phí nhiên liệu',
     community: 'Tham gia <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Cộng Đồng OpenSource</a>!!!',
@@ -550,7 +535,6 @@ const translations = {
     maintenanceCosts: 'ค่าบำรุงรักษา:',
     addCost: 'เพิ่ม',
     remove: 'ลบ',
-    distance: 'ระยะทางที่เดินทาง:',
     timeSpent: 'เวลาทำงาน:',
     workingHours: 'ชั่วโมง/วัน (1-16):',
     workingDays: 'วัน/สัปดาห์ (1-7):',
@@ -561,7 +545,7 @@ const translations = {
     shortTermProfit: 'กำไรระยะสั้น:',
     longTermProfit: 'กำไรระยะยาว:',
     tips: 'คำแนะนำ:',
-    tip1: 'หากเช่ายานพาหนะ ให้ตั้งค่ามูลค่าเป็นศูนย์และรวมค่าเช่าในค่าบำรุงรักษา',
+    tip1: 'คำนึงถึงเวลารอในเวลาทำงาน หากเช่ายานพาหนะ ให้ตั้งค่ามูลค่าเป็นศูนย์และรวมค่าเช่าในค่าบำรุงรักษา',
     tip2: 'ใช้ได้กับทุกแพลตฟอร์มและยานพาหนะ! คนขับแอป (Ifood, Uber, 99...), แท็กซี่, รถตู้ และแม้แต่รถบัส/เครื่องบิน (ต้องมีความคิดสร้างสรรค์)',
     formula: 'สูตรกำไรระยะยาว: รายได้ - ค่าใช้จ่าย (น้ำมัน...) - ค่าเสื่อมราคา (3.33% * มูลค่ายานพาหนะ/ปี) - ความเสี่ยง (10% * เบี้ยประกัน/ปี). หมายเหตุ: กำไรระยะสั้นหักเฉพาะค่าน้ำมัน',
     community: 'เข้าร่วม <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">ชุมชน OpenSource</a>!!!',
@@ -585,7 +569,6 @@ const translations = {
     maintenanceCosts: 'Bakım Maliyetleri:',
     addCost: 'Ekle',
     remove: 'Sil',
-    distance: 'Kat Edilen Mesafe:',
     timeSpent: 'Çalışma Süresi:',
     workingHours: 'Saat/Gün (1-16):',
     workingDays: 'Gün/Hafta (1-7):',
@@ -596,7 +579,7 @@ const translations = {
     shortTermProfit: 'Kısa Vadeli Kar:',
     longTermProfit: 'Uzun Vadeli Kar:',
     tips: 'İpuçları:',
-    tip1: 'Araç kiralıyorsanız değeri sıfırlayın ve kira ücretini bakım maliyetine ekleyin',
+    tip1: 'Bekleme süresini çalışma süresine dahil edin. Araç kiralıyorsanız değeri sıfırlayın ve kira ücretini bakım maliyetine ekleyin',
     tip2: 'Tüm platformlar ve araçlar için kullanılabilir! Uygulama sürücüleri (Ifood, Uber, 99...), taksi, minibüs ve hatta otobüs/uçak (yaratıcılık gerekir)',
     formula: 'Uzun Vadeli Kar Formülü: Gelir - Giderler (Yakıt...) - Amortisman (3.33% * Araç Değeri/yıl) - Risk (10% * Primi/yıl). Not: kısa vadeli kar yalnızca yakıt maliyetini düşürür',
     community: '<a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Açık Kaynak Topluluğumuza</a> katılın!!!',
@@ -620,7 +603,6 @@ const translations = {
     maintenanceCosts: 'هزینه های نگهداری:',
     addCost: 'اضافه کردن',
     remove: 'حذف',
-    distance: 'مسافت طی شده:',
     timeSpent: 'زمان کار:',
     workingHours: 'ساعت/روز (1-16):',
     workingDays: 'روز/هفته (1-7):',
@@ -631,7 +613,7 @@ const translations = {
     shortTermProfit: 'سود کوتاه مدت:',
     longTermProfit: 'سود بلند مدت:',
     tips: 'نکات:',
-    tip1: 'اگر وسیله نقلیه را اجاره می دهید، مقدار را صفر قرار دهید و اجاره را در هزینه ها لحاظ کنید',
+    tip1: 'زمان انتظار را در زمان کار در نظر بگیرید. اگر وسیله نقلیه را اجاره می دهید، مقدار را صفر قرار دهید و اجاره را در هزینه ها لحاظ کنید',
     tip2: 'برای همه پلتفرم ها و وسایل نقلیه قابل استفاده است! رانندگان اپلیکیشن (Ifood, Uber, 99...)، تاکسی، ون و حتی اتوبوس/هواپیما (نیاز به خلاقیت دارد)',
     formula: 'فرمول سود بلند مدت: درآمد - هزینه ها (سوخت...) - استهلاک (3.33% * ارزش وسیله نقلیه/سال) - ریسک (10% * حق بیمه/سال). توجه: سود کوتاه مدت فقط هزینه سوخت را کسر می کند',
     community: 'به <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">جامعه اوپن سورس</a> ما بپیوندید!!!',
@@ -655,7 +637,6 @@ const translations = {
     maintenanceCosts: 'Витрати на обслуговування:',
     addCost: 'Додати',
     remove: 'Видалити',
-    distance: 'Пробіг:',
     timeSpent: 'Час роботи:',
     workingHours: 'Годин/день (1-16):',
     workingDays: 'Днів/тиждень (1-7):',
@@ -666,7 +647,7 @@ const translations = {
     shortTermProfit: 'Короткостроковий прибуток:',
     longTermProfit: 'Довгостроковий прибуток:',
     tips: 'Поради:',
-    tip1: 'Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
+    tip1: 'Враховуйте час очікування у робочому часі. Для орендованих ТЗ встановіть вартість 0 та додайте оренду до витрат',
     tip2: 'Підходить для всіх платформ і ТЗ! Водії додатків (Ifood, Uber, 99...), таксі, фургони та навіть автобуси/літаки (потрібна креативність)',
     formula: 'Формула довгострокового прибутку: Дохід - Витрати (Паливо...) - Амортизація (3.33% * Вартість ТЗ/рік) - Ризик (10% * Премія/рік). Примітка: короткостроковий прибуток враховує лише витрати на паливо',
     community: 'Приєднуйтесь до нашої <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">спільноти OpenSource</a>!!!',
@@ -690,7 +671,6 @@ const translations = {
     maintenanceCosts: 'Gharama za Ukarabati:',
     addCost: 'Ongeza',
     remove: 'Ondoa',
-    distance: 'Umbali uliosafiri:',
     timeSpent: 'Muda wa Kazi:',
     workingHours: 'Saa/Siku (1-16):',
     workingDays: 'Siku/Juma (1-7):',
@@ -701,7 +681,7 @@ const translations = {
     shortTermProfit: 'Faida ya Muda Mfupi:',
     longTermProfit: 'Faida ya Muda Mrefu:',
     tips: 'Vidokezo:',
-    tip1: 'Ukikodisha gari, weka thamani kwa sifuri na ujumuishe kodi kwenye gharama',
+    tip1: 'Zingatia muda wa kusubiri katika muda uliotumika kufanya kazi. Ukikodisha gari, weka thamani kwa sifuri na ujumuishe kodi kwenye gharama',
     tip2: 'Inatumika kwa mifumo yote na magari! Madereva wa programu (Ifood, Uber, 99...), teksi, vani na hata basi/ndege (unahitaji ubunifu)',
     formula: 'Fomula ya Faida ya Muda Mrefu: Mapato - Matumizi (Mafuta...) - Mshuko wa Thamani (3.33% * Thamani ya Gari/mwaka) - Hatari (10% * Malipo ya Bima/mwaka). Kumbuka: faida ya muda mfupu inatoa tu gharama ya mafuta',
     community: 'Jiunge na <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">Jumuiya yetu ya OpenSource</a>!!!',
@@ -725,7 +705,6 @@ const translations = {
     maintenanceCosts: 'Vedligeholdelsesomkostninger:',
     addCost: 'Tilføj',
     remove: 'Fjern',
-    distance: 'Kørt distance:',
     timeSpent: 'Arbejdstid:',
     workingHours: 'Timer/dag (1-16):',
     workingDays: 'Dage/uge (1-7):',
@@ -736,7 +715,7 @@ const translations = {
     shortTermProfit: 'Kortsigtet profit:',
     longTermProfit: 'Langsigtet profit:',
     tips: 'Tips:',
-    tip1: 'Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
+    tip1: 'Tag ventetid med i arbejdstiden. Ved leje af køretøj, sæt værdi til 0 og inkluder leje i omkostninger',
     tip2: 'Brugbart til alle platforme og køretøjer! App-chauffører (Ifood, Uber, 99...), taxaer, varevogne og endda busser/fly (kræver kreativitet)',
     formula: 'Langsigtet profitformel: Indtægt - Udgifter (Brændstof...) - Afskrivning (3.33% * Køretøjsværdi/år) - Risiko (10% * Præmie/år). Bemærk: kortsigtet profit fratrækker kun brændstofomkostninger',
     community: 'Tilmeld dig vores <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource-fællesskab</a>!!!',
@@ -751,24 +730,22 @@ const translations = {
 
 export default function CalculoLucro() {
   // Dados do veículo
-  const [precoCombustivel, setPrecoCombustivel] = useState<string>('5');
-  const [kmPorLitro, setKmPorLitro] = useState<string>('10');
-  const [valorSeguro, setValorSeguro] = useState<string>('2000');
+  const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
+  const [kmPorLitro, setKmPorLitro] = useState<string>('');
+  const [valorSeguro, setValorSeguro] = useState<string>('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
-  const [premioSeguro, setPremioSeguro] = useState<string>('4000');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 20000, periodicity: 'annual'}]);
-  const [valorVeiculo, setValorVeiculo] = useState<string>('15000');
+  const [premioSeguro, setPremioSeguro] = useState<string>('');
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 0, periodicity: 'annual'}]);
+  const [valorVeiculo, setValorVeiculo] = useState<string>('');
 
   // Jornada de trabalho
-  const [distanciaPercorrida, setDistanciaPercorrida] = useState<string>('250');
-  const [periodicidadeDistancia, setPeriodicidadeDistancia] = useState<Periodicity>('daily');
-  const [horasPorDia, setHorasPorDia] = useState<string>('8');
-  const [diasPorSemana, setDiasPorSemana] = useState<string>('5');
+  const [horasPorDia, setHorasPorDia] = useState<string>('');
+  const [diasPorSemana, setDiasPorSemana] = useState<string>('');
 
   // Dados da corrida
-  const [valorCorrida, setValorCorrida] = useState<string>('15');
-  const [distanciaCorrida, setDistanciaCorrida] = useState<string>('10');
-  const [tempoCorrida, setTempoCorrida] = useState<string>('30');
+  const [valorCorrida, setValorCorrida] = useState<string>('');
+  const [distanciaCorrida, setDistanciaCorrida] = useState<string>('');
+  const [tempoCorrida, setTempoCorrida] = useState<string>('');
 
   // Resultados
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
@@ -814,28 +791,29 @@ export default function CalculoLucro() {
     setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
 
     // 2. Cálculo de longo prazo
-    const converterParaAnual = (valor: number, periodicidade: Periodicity) => {
-      const diasUteisAno = 252 * (parseInput(diasPorSemana) / 5);
-      const fatorHoras = parseInput(horasPorDia) / 8;
-      
-      switch(periodicidade) {
-        case 'monthly': return valor * 12;
-        case 'weekly': return valor * (252 / parseInput(diasPorSemana)) * 7;
-        case 'daily': return valor * diasUteisAno * fatorHoras;
-        default: return valor;
-      }
-    };
-
-    const distanciaAnual = converterParaAnual(parseInput(distanciaPercorrida), periodicidadeDistancia);
     const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
-    const custosAnuais = custosManutencao.map(c => converterParaAnual(c.valor, c.periodicity));
-    const seguroAnual = converterParaAnual(parseInput(valorSeguro), periodicidadeSeguro);
+    const custosAnuais = custosManutencao.map(c => {
+      switch(c.periodicity) {
+        case 'monthly': return c.valor * 12;
+        case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
+        case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        default: return c.valor;
+      }
+    });
+
+    const seguroAnual = {
+      case 'monthly': return parseInput(valorSeguro) * 12;
+      case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
+      case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+      default: return parseInput(valorSeguro);
+    };
+
     const premioAnual = parseInput(premioSeguro);
 
     const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
 
-    const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo ;
+    const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
     const custoSeguroCorrida = seguroAnual * fatorTempo;
     const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
     const riscoCorrida = premioAnual * 0.1 * fatorTempo;
@@ -850,8 +828,8 @@ export default function CalculoLucro() {
     );
   }, [
     precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
-    custosManutencao, valorVeiculo, distanciaPercorrida, periodicidadeDistancia,
-    horasPorDia, diasPorSemana, valorCorrida, distanciaCorrida, tempoCorrida
+    custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
+    valorCorrida, distanciaCorrida, tempoCorrida
   ]);
 
   const adicionarCustoManutencao = () => {
@@ -1094,41 +1072,6 @@ export default function CalculoLucro() {
           </div>
 
           {/* Seção de jornada de trabalho */}
-          <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>{t.distance}</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <input 
-                type="text" 
-                value={distanciaPercorrida} 
-                onChange={(e) => handleNumberInput(e.target.value, setDistanciaPercorrida)} 
-                style={{
-                  flex: 1,
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff'
-                }}
-              />
-              <select
-                value={periodicidadeDistancia}
-                onChange={(e) => setPeriodicidadeDistancia(e.target.value as Periodicity)}
-                style={{
-                  padding: '8px',
-                  borderRadius: '5px',
-                  border: '1px solid #0f0',
-                  backgroundColor: '#111',
-                  color: '#fff',
-                  minWidth: '100px'
-                }}
-              >
-                {Object.entries(t.periodicityOptions).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingHours}</label>
             <input 
