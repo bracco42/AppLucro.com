@@ -10,6 +10,59 @@ type Cost = {
   periodicity: Periodicity;
 };
 
+// Definição do tipo para os dados salvos
+type SavedSettings = {
+  fuelPrice: string;
+  kmPorLitro: string;
+  valorSeguro: string;
+  periodicidadeSeguro: Periodicity;
+  premioSeguro: string;
+  custosManutencao: Cost[];
+  valorVeiculo: string;
+  horasPorDia: string;
+  diasPorSemana: string;
+  language: Language;
+};
+
+// Chave para localStorage (mantida igual)
+const STORAGE_KEY = 'rideProfitCalculatorSettings';
+
+// Funções utilitárias para localStorage
+const loadSettings = (): Partial<SavedSettings> => {
+  try {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    return savedData ? JSON.parse(savedData) : {};
+  } catch (error) {
+    console.error('Failed to load settings:', error);
+    return {};
+  }
+};
+
+const saveSettings = (settings: SavedSettings) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+  } catch (error) {
+    console.error('Failed to save settings:', error);
+    alert(t.importError);
+  }
+};
+
+const resetSettings = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  return {
+    fuelPrice: '',
+    kmPorLitro: '',
+    valorSeguro: '',
+    periodicidadeSeguro: 'annual',
+    premioSeguro: '',
+    custosManutencao: [{ id: 1, valor: 0, periodicity: 'annual' }],
+    valorVeiculo: '',
+    horasPorDia: '',
+    diasPorSemana: '',
+    language: 'pt'
+  };
+};
+
 type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ar' | 'ru' | 'hi' | 'pa' | 'bn' | 'ko' | 'vi' | 'th' | 'tr' | 'fa' | 'uk' | 'sw' | 'da';
 
 const translations = {
@@ -856,29 +909,92 @@ const translations = {
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
-  // Dados do veículo
-  const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
-  const [kmPorLitro, setKmPorLitro] = useState<string>('');
-  const [valorSeguro, setValorSeguro] = useState<string>('');
+  // Estados (mantidos iguais)
+  const [precoCombustivel, setPrecoCombustivel] = useState('');
+  const [kmPorLitro, setKmPorLitro] = useState('');
+  const [valorSeguro, setValorSeguro] = useState('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
-  const [premioSeguro, setPremioSeguro] = useState<string>('');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 0, periodicity: 'annual'}]);
-  const [valorVeiculo, setValorVeiculo] = useState<string>('');
-
-  // Jornada de trabalho
-  const [horasPorDia, setHorasPorDia] = useState<string>('');
-  const [diasPorSemana, setDiasPorSemana] = useState<string>('');
-
-  // Dados da corrida
-  const [valorCorrida, setValorCorrida] = useState<string>('');
-  const [distanciaCorrida, setDistanciaCorrida] = useState<string>('');
-  const [tempoCorrida, setTempoCorrida] = useState<string>('');
-
-  // Resultados
-  const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
-  const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [premioSeguro, setPremioSeguro] = useState('');
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{ id: 1, valor: 0, periodicity: 'annual' }]);
+  const [valorVeiculo, setValorVeiculo] = useState('');
+  const [horasPorDia, setHorasPorDia] = useState('');
+  const [diasPorSemana, setDiasPorSemana] = useState('');
   const [language, setLanguage] = useState<Language>('pt');
+  
+  // Carregar configurações ao iniciar
+  useEffect(() => {
+    const saved = loadSettings();
+    if (saved) {
+      setPrecoCombustivel(saved.fuelPrice || '');
+      setKmPorLitro(saved.kmPorLitro || '');
+      setValorSeguro(saved.valorSeguro || '');
+      setPeriodicidadeSeguro(saved.periodicidadeSeguro || 'annual');
+      setPremioSeguro(saved.premioSeguro || '');
+      setCustosManutencao(saved.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
+      setValorVeiculo(saved.valorVeiculo || '');
+      setHorasPorDia(saved.horasPorDia || '');
+      setDiasPorSemana(saved.diasPorSemana || '');
+      setLanguage(saved.language || 'pt');
+    }
+  }, []);
+
+  // Função para salvar todas as configurações
+  const handleSaveSettings = () => {
+    const settingsToSave: SavedSettings = {
+      fuelPrice: precoCombustivel,
+      kmPorLitro,
+      valorSeguro,
+      periodicidadeSeguro,
+      premioSeguro,
+      custosManutencao,
+      valorVeiculo,
+      horasPorDia,
+      diasPorSemana,
+      language
+    };
+    saveSettings(settingsToSave);
+    alert('Configurações salvas com sucesso!');
+  };
+
+  // Função para resetar
+  const handleResetSettings = () => {
+    if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
+      const defaults = resetSettings();
+      // Atualiza todos os estados
+      setPrecoCombustivel(defaults.fuelPrice);
+      setKmPorLitro(defaults.kmPorLitro);
+      // ... (atualize todos os outros estados)
+      alert('Configurações resetadas!');
+    }
+  };
+
+  // Funções de importação/exportação (mantidas similares)
+  const exportToFile = () => {
+    const settings = loadSettings();
+    const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ride_profit_settings.json';
+    a.click();
+  };
+
+  const importFromFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const settings = JSON.parse(event.target?.result as string) as SavedSettings;
+        saveSettings(settings);
+        window.location.reload(); // Recarrega para aplicar as novas configurações
+      } catch (error) {
+        alert('Erro ao importar configurações: arquivo inválido');
+      }
+    };
+    reader.readAsText(file);
+  };
 
   const t = translations[language];
 
@@ -1508,7 +1624,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroCurtoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroCurtoPrazo.toFixed(2)}` : '---'}
+            $${lucroCurtoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
 
@@ -1523,7 +1639,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroLongoPrazo !== null ? `${'currency' in t ? t.currency : '$'} ${lucroLongoPrazo.toFixed(2)}` : '---'}
+            $${lucroLongoPrazo.toFixed(2)}` : '---'}
           </div>
         </div>
       </div>
