@@ -1096,13 +1096,6 @@ export default function CalculoLucro() {
     valorCorrida, distanciaCorrida, tempoCorrida
   ]);
 
-  // Funções de persistência
-  const saveSettings = () => {
-    if (!precoCombustivel || !kmPorLitro) {
-      alert(t.validationMessage);
-      return;
-    }
-
     const settingsToSave = {
       fuelPrice: precoCombustivel,
       kmPorLitro,
