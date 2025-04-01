@@ -752,7 +752,7 @@ const translations = {
 export default function CalculoLucro() {
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('5');
-  const [kmPorLitro, setKmPorLitro] = useState<string>('10');
+  const [kmPorLitro, setKmPorLitro] = useState<string>('35');
   const [valorSeguro, setValorSeguro] = useState<string>('2000');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('4000');
