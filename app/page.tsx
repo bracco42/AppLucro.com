@@ -1466,48 +1466,40 @@ const importSettings = async () => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <button
-              onClick={exportSettings}
-              style={{
-                flex: 1,
-                padding: '12px',
-                backgroundColor: '#00f',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                fontSize: '16px'
-              }}
-            >
-            {t.exportButton}
-            <button
-              onClick={importSettings}
-              style={{
-                flex: 1,
-                padding: '12px',
-                backgroundColor: '#00f',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                fontSize: '16px'
-              }}
-            >
-            {t.importButton}
-</button>
-              <input 
-                type="file" 
-                accept=".json"
-                onChange={importSettings}
-                style={{ display: 'none' }}
-              />
-            </label>
-          </div>
-        </div>
-      )}
+         <div style={{ display: 'flex', gap: '10px' }}>
+  <button
+    onClick={exportSettings}
+    style={{
+      flex: 1,
+      padding: '12px',
+      backgroundColor: '#00f',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      fontSize: '16px'
+    }}
+  >
+    {t.exportButton}
+  </button>
+  <button
+    onClick={importSettings}
+    style={{
+      flex: 1,
+      padding: '12px',
+      backgroundColor: '#00f',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      fontSize: '16px'
+    }}
+  >
+    {t.importButton}
+  </button>
+</div>
 
       {/* Seção de dados da corrida */}
       <div style={{ 
