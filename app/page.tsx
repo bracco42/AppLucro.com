@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { ReactComponent as Logo } from './logo.svg';
+
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
 type Cost = {
@@ -1135,15 +1137,11 @@ export default function CalculoLucro() {
       </div>
 
       {/* Cabeçalho */}
-      <img 
-      src="./logo.png" 
-      alt="Logo" 
-      style={{ 
-        width: '150px', 
-        marginBottom: '10px',
-        backgroundColor: '#000000', // Força fundo preto
-        padding: '5px', // Espaçamento interno
-        borderRadius: '5px' // Opcional para estética
+       <Logo 
+        style={{ 
+          width: '150px', 
+          marginBottom: '10px',
+          fill: '#000000'
         }} 
       />
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
