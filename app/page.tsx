@@ -948,10 +948,14 @@ export default function CalculoLucro() {
 
     const custosAnuais = custosManutencao.map(c => {
       switch(c.periodicity) {
-        case 'monthly': return c.valor * 12;
-        case 'weekly': return c.valor * (252 / (parseInput(diasPorSemana) || 5) * (parseInput(diasPorSemana) || 5) / 5;
-        case 'daily': return c.valor * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
-        default: return c.valor;
+        case 'monthly': 
+          return c.valor * 12;
+        case 'weekly': 
+          return c.valor * (252 / (parseInput(diasPorSemana) || 5));
+        case 'daily': 
+          return c.valor * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
+        default: 
+          return c.valor;
       }
     });
 
