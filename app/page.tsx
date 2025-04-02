@@ -865,20 +865,13 @@ const translations = {
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
-  return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      {/* Logo */}
-      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
-      
-      <h1 style={{ color: '#0f0' }}>Calculadora de Lucro</h1>
-
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
   const [kmPorLitro, setKmPorLitro] = useState<string>('');
   const [valorSeguro, setValorSeguro] = useState<string>('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{id: 1, valor: 0, periodicity: 'annual'}]);
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{ id: 1, valor: 0, periodicity: 'annual' }]);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
 
   // Jornada de trabalho
@@ -895,6 +888,41 @@ export default function CalculoLucro() {
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>('pt');
+
+  const t = translations[language];
+
+  // Carregar configurações salvas
+  useEffect(() => {
+    const savedSettings = localStorage.getItem(STORAGE_KEY);
+    if (savedSettings) {
+      try {
+        const parsedSettings = JSON.parse(savedSettings);
+
+        setPrecoCombustivel(parsedSettings.fuelPrice || '');
+        setKmPorLitro(parsedSettings.kmPorLitro || '');
+        setValorSeguro(parsedSettings.valorSeguro || '');
+        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
+        setPremioSeguro(parsedSettings.premioSeguro || '');
+        setCustosManutencao(parsedSettings.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
+        setValorVeiculo(parsedSettings.valorVeiculo || '');
+        setHorasPorDia(parsedSettings.horasPorDia || '');
+        setDiasPorSemana(parsedSettings.diasPorSemana || '');
+        setLanguage(parsedSettings.language || 'pt');
+      } catch (e) {
+        console.error('Error loading settings:', e);
+      }
+    }
+  }, []);
+
+  // Funções auxiliares
+  const formatNumberInput = (value: string): string => {
+    return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
+  };
+
+  return (
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      {/* Logo */}
+      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
 
   const t = translations[language];
 
