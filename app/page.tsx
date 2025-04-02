@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { ReactComponent as Logo } from './logo.svg';
+import { ReactComponent as Logo } from './public/logo.svg';
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
