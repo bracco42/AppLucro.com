@@ -866,11 +866,10 @@ const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
   return (
-  // LOGO.SVG
-  <div style={{ textAlign: 'center', padding: '20px' }}>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
       {/* Logo */}
       <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
-
+      
       <h1 style={{ color: '#0f0' }}>Calculadora de Lucro</h1>
 
   // Dados do veículo
