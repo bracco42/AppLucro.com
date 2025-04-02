@@ -865,7 +865,7 @@ const translations = {
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
-
+  return (
   // LOGO.SVG
   <div style={{ textAlign: 'center', padding: '20px' }}>
       {/* Logo */}
