@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { ReactComponent as Logo } from '../../../public/logo.svg';
-
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
 type Cost = {
@@ -543,7 +541,7 @@ const translations = {
     exportButton: '내보내기',
     importButton: '가져오기',
     fuelPrice: '리터당 연료 가격:',
-    fuelEfficiency: 'প্রতি লিটারে দূরত্ব (কিমি/লিটার):',
+    fuelEfficiency: '리터당 거리 (Km/L):',
     insuranceValue: '보험 가치:',
     insurancePremium: '보험료:',
     maintenanceCosts: '유지 보수 비용:',
@@ -1137,13 +1135,6 @@ export default function CalculoLucro() {
       </div>
 
       {/* Cabeçalho */}
-       <Logo 
-        style={{ 
-          width: '150px', 
-          marginBottom: '10px',
-          fill: '#000000'
-        }} 
-      />
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
 
