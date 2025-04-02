@@ -854,7 +854,6 @@ const translations = {
   }
 };
 
-
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
@@ -925,6 +924,8 @@ export default function CalculoLucro() {
     const num = parseInt(value.replace(/\D/g, ''));
     if (!isNaN(num) && num >= 1 && num <= 16) {
       setHorasPorDia(num.toString());
+    } else if (value === '') {
+      setHorasPorDia('');
     }
   };
 
@@ -932,6 +933,8 @@ export default function CalculoLucro() {
     const num = parseInt(value.replace(/\D/g, ''));
     if (!isNaN(num) && num >= 1 && num <= 7) {
       setDiasPorSemana(num.toString());
+    } else if (value === '') {
+      setDiasPorSemana('');
     }
   };
 
@@ -946,8 +949,8 @@ export default function CalculoLucro() {
     const custosAnuais = custosManutencao.map(c => {
       switch(c.periodicity) {
         case 'monthly': return c.valor * 12;
-        case 'weekly': return c.valor * (252 / parseInput(diasPorSemana)) * 7;
-        case 'daily': return c.valor * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        case 'weekly': return c.valor * (252 / (parseInput(diasPorSemana) || 5) * (parseInput(diasPorSemana) || 5) / 5;
+        case 'daily': return c.valor * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
         default: return c.valor;
       }
     });
@@ -955,8 +958,8 @@ export default function CalculoLucro() {
     const seguroAnual = (() => {
       switch(periodicidadeSeguro) {
         case 'monthly': return parseInput(valorSeguro) * 12;
-        case 'weekly': return parseInput(valorSeguro) * (252 / parseInput(diasPorSemana)) * 7;
-        case 'daily': return parseInput(valorSeguro) * (252 * (parseInput(diasPorSemana) / 5)) * (parseInput(horasPorDia) / 8);
+        case 'weekly': return parseInput(valorSeguro) * (252 / (parseInput(diasPorSemana) || 5)) * (parseInput(diasPorSemana) || 5) / 5;
+        case 'daily': return parseInput(valorSeguro) * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
         default: return parseInput(valorSeguro);
       }
     })();
@@ -1022,81 +1025,64 @@ export default function CalculoLucro() {
     }
   };
 
- return (
-    <div style={{ 
-      textAlign: 'center', 
-      padding: '20px', 
-      backgroundColor: '#000', 
-      color: '#fff',
-      maxWidth: '800px',
-      margin: '0 auto',
-      fontFamily: 'Arial, sans-serif'
-    }}>
-      {/* Logo */}
-      <Logo style={{ fill: "currentColor", width: '100px', marginBottom: '20px' }} />
+  const exportSettings = async () => {
+    try {
+      const settings = localStorage.getItem(STORAGE_KEY);
+      if (!settings) return;
 
- const exportSettings = async () => {
-  try {
-    const settings = localStorage.getItem(STORAGE_KEY);
-    if (!settings) return;
-
-    // Fallback para todos os navegadores (incluindo Safari)
-    const blob = new Blob([settings], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ride_profit_settings.json';
-    document.body.appendChild(a);
-    a.click();
-    
-    // Limpeza
-    setTimeout(() => {
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, 100);
-  } catch (error) {
-    console.error('Error exporting settings:', error);
-    alert('Failed to export settings');
-  }
-};
+      const blob = new Blob([settings], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ride_profit_settings.json';
+      document.body.appendChild(a);
+      a.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+    } catch (error) {
+      console.error('Error exporting settings:', error);
+      alert('Failed to export settings');
+    }
+  };
   
- const importSettings = async () => {
-  try {
-    // Fallback para todos os navegadores (incluindo Safari)
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    
-    input.onchange = (e: Event) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          try {
-            const settings = event.target?.result as string;
-            localStorage.setItem(STORAGE_KEY, settings);
-            window.location.reload();
-          } catch (error) {
-            alert(t.importError);
-          }
-        };
-        reader.readAsText(file);
-      }
-    };
-    
-    document.body.appendChild(input);
-    input.click();
-    
-    // Limpeza
-    setTimeout(() => {
-      document.body.removeChild(input);
-    }, 100);
-  } catch (error) {
-    console.error('Error importing settings:', error);
-    alert('Failed to import settings');
-  }
-};
+  const importSettings = async () => {
+    try {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      
+      input.onchange = (e: Event) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            try {
+              const settings = event.target?.result as string;
+              localStorage.setItem(STORAGE_KEY, settings);
+              window.location.reload();
+            } catch (error) {
+              alert(t.importError);
+            }
+          };
+          reader.readAsText(file);
+        }
+      };
+      
+      document.body.appendChild(input);
+      input.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(input);
+      }, 100);
+    } catch (error) {
+      console.error('Error importing settings:', error);
+      alert('Failed to import settings');
+    }
+  };
 
   // Funções de custos
   const adicionarCustoManutencao = () => {
@@ -1115,7 +1101,7 @@ export default function CalculoLucro() {
     ));
   };
 
- return (
+  return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
