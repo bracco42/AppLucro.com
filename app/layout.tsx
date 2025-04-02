@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import './globals.css' // Se você tiver estilos globais
 
 export const metadata: Metadata = {
   title: 'Ride Profit Calculator',
