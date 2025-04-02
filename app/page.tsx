@@ -958,7 +958,7 @@ export default function CalculoLucro() {
     const seguroAnual = (() => {
       switch(periodicidadeSeguro) {
         case 'monthly': return parseInput(valorSeguro) * 12;
-        case 'weekly': return parseInput(valorSeguro) * (252 / (parseInput(diasPorSemana) || 5)) * (parseInput(diasPorSemana) || 5) / 5;
+        case 'weekly': return c.valor * (252 / (parseInput(diasPorSemana) || 5));
         case 'daily': return parseInput(valorSeguro) * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
         default: return parseInput(valorSeguro);
       }
