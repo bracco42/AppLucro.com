@@ -1135,7 +1135,17 @@ export default function CalculoLucro() {
       </div>
 
       {/* Cabeçalho */}
-      <img src="./logo.png" alt="Logo" style={{ width: '150px', marginBottom: '10px' }} />
+      <img 
+      src="./logo.png" 
+      alt="Logo" 
+      style={{ 
+        width: '150px', 
+        marginBottom: '10px',
+        backgroundColor: '#000000', // Força fundo preto
+        padding: '5px', // Espaçamento interno
+        borderRadius: '5px' // Opcional para estética
+        }} 
+      />
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
 
