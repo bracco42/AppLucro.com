@@ -947,14 +947,17 @@ export default function CalculoLucro() {
     const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
 
     const custosAnuais = custosManutencao.map(c => {
+      const daysPerWeek = parseInput(diasPorSemana) || 5;
+      const hoursPerDay = parseInput(horasPorDia) || 8;
+      
       switch(c.periodicity) {
-        case 'monthly': 
+        case 'monthly':
           return c.valor * 12;
-        case 'weekly': 
-          return c.valor * (252 / (parseInput(diasPorSemana) || 5));
-        case 'daily': 
-          return c.valor * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8;
-        default: 
+        case 'weekly':
+          return c.valor * (252 / daysPerWeek);
+        case 'daily':
+          return c.valor * (252 * daysPerWeek / 5 * hoursPerDay / 8);
+        default:
           return c.valor;
       }
     });
