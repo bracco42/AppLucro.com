@@ -919,41 +919,6 @@ export default function CalculoLucro() {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
   };
 
-  return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      {/* Logo */}
-      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
-
-  const t = translations[language];
-
-  // Carregar configurações salvas
-  useEffect(() => {
-    const savedSettings = localStorage.getItem(STORAGE_KEY);
-    if (savedSettings) {
-      try {
-        const parsedSettings = JSON.parse(savedSettings);
-        
-        setPrecoCombustivel(parsedSettings.fuelPrice || '');
-        setKmPorLitro(parsedSettings.kmPorLitro || '');
-        setValorSeguro(parsedSettings.valorSeguro || '');
-        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
-        setPremioSeguro(parsedSettings.premioSeguro || '');
-        setCustosManutencao(parsedSettings.custosManutencao || [{id: 1, valor: 0, periodicity: 'annual'}]);
-        setValorVeiculo(parsedSettings.valorVeiculo || '');
-        setHorasPorDia(parsedSettings.horasPorDia || '');
-        setDiasPorSemana(parsedSettings.diasPorSemana || '');
-        setLanguage(parsedSettings.language || 'pt');
-      } catch (e) {
-        console.error('Error loading settings:', e);
-      }
-    }
-  }, []);
-
-  // Funções auxiliares
-  const formatNumberInput = (value: string): string => {
-    return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
-  };
-
   const parseInput = (value: string): number => {
     const formattedValue = formatNumberInput(value);
     return formattedValue === '' || isNaN(parseFloat(formattedValue)) ? 0 : parseFloat(formattedValue);
@@ -1063,6 +1028,18 @@ export default function CalculoLucro() {
       setDiasPorSemana('');
     }
   };
+
+  return (
+    <div style={{ 
+      textAlign: 'center', 
+      padding: '20px', 
+      backgroundColor: '#000', 
+      color: '#fff',
+      maxWidth: '800px',
+      margin: '0 auto',
+    }}>
+      {/* Logo */}
+      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
 
  const exportSettings = async () => {
   try {
