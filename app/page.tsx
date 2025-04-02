@@ -1587,5 +1587,6 @@ export default function CalculoLucro() {
         <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
       </div>
     </div>
+  </div> // LOGO.SVG
   );
 }
