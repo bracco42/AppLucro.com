@@ -1115,7 +1115,7 @@ export default function CalculoLucro() {
     ));
   };
 
-  return (
+ return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
@@ -1125,6 +1125,9 @@ export default function CalculoLucro() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
+      {/* Logo */}
+      <Logo style={{ fill: "currentColor", width: '100px', marginBottom: '20px' }} />
+
       {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select
@@ -1584,6 +1587,6 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
       </div>
-  </div>
+    </div>
   );
 }
