@@ -1,11 +1,18 @@
 {
-  "compilerOptions": {
+    "compilerOptions": {
     "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "jsx": "react-jsx",  // Adicione isso para Next.js/React 17+
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
