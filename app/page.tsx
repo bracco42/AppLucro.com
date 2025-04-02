@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as Logo } from "/logo.svg";
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
@@ -938,42 +937,41 @@ export default function CalculoLucro() {
     }
   };
 
-  // Cálculos principais
+   // Cálculos principais - VERSÃO CORRIGIDA
   useEffect(() => {
     const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
     setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
 
-    const minutosTrabalhadosAno = parseInput(horasPorDia) * 60 * parseInput(diasPorSemana) * 252 / 5;
+    const daysPerWeek = parseInput(diasPorSemana) || 5;
+    const hoursPerDay = parseInput(horasPorDia) || 8;
+    const minutosTrabalhadosAno = hoursPerDay * 60 * daysPerWeek * 252 / 5;
 
     const custosAnuais = custosManutencao.map(c => {
-      const daysPerWeek = parseInput(diasPorSemana) || 5;
-      const hoursPerDay = parseInput(horasPorDia) || 8;
-      
       switch(c.periodicity) {
-        case 'monthly':
+        case 'monthly': 
           return c.valor * 12;
-        case 'weekly':
+        case 'weekly': 
           return c.valor * (252 / daysPerWeek);
-        case 'daily':
+        case 'daily': 
           return c.valor * (252 * daysPerWeek / 5 * hoursPerDay / 8);
-        default:
+        default: 
           return c.valor;
       }
     });
 
-   const seguroAnual = (() => {
-  switch(periodicidadeSeguro) {
-    case 'monthly': 
-      return parseInput(valorSeguro) * 12;
-    case 'weekly': 
-      return parseInput(valorSeguro) * (252 / (parseInput(diasPorSemana) || 5));
-    case 'daily': 
-      return parseInput(valorSeguro) * (252 * ((parseInput(diasPorSemana) || 5) / 5) * ((parseInput(horasPorDia) || 8) / 8));
-    default: 
-      return parseInput(valorSeguro);
-  }
-})();
+    const seguroAnual = (() => {
+      switch(periodicidadeSeguro) {
+        case 'monthly': 
+          return parseInput(valorSeguro) * 12;
+        case 'weekly': 
+          return parseInput(valorSeguro) * (252 / daysPerWeek);
+        case 'daily': 
+          return parseInput(valorSeguro) * (252 * daysPerWeek / 5 * hoursPerDay / 8);
+        default: 
+          return parseInput(valorSeguro);
+      }
+    })();
 
     const premioAnual = parseInput(premioSeguro);
     const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
@@ -1112,7 +1110,7 @@ export default function CalculoLucro() {
     ));
   };
 
-  return (
+   return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
@@ -1122,8 +1120,8 @@ export default function CalculoLucro() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Logo */}
-      <Logo style={{ fill: "currentColor", width: '100px', marginBottom: '20px' }} />
+      {/* Logo - corrigido para referenciar corretamente da pasta public */}
+      <img src="/logo.svg" alt="Logo" style={{ width: '100px', marginBottom: '20px' }} />
 
       {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
