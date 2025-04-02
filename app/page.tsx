@@ -1121,7 +1121,15 @@ export default function CalculoLucro() {
       fontFamily: 'Arial, sans-serif'
     }}>
       {/* Logo - corrigido para referenciar corretamente da pasta public */}
-      <img src="/logo.svg" alt="Logo" style={{ width: '100px', marginBottom: '20px' }} />
+      <img 
+      src="/logo.svg" 
+      alt="Logo" 
+      style={{ 
+        width: '166px',  // 100px * 1.66
+        height: 'auto',  // mantém a proporção
+        marginBottom: '20px' 
+      }} 
+    />
 
       {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
