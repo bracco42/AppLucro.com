@@ -1,0 +1,26 @@
+{
+  "name": "Ride Profit Calculator",
+  "short_name": "RideProfit",
+  "icons": [
+    {
+      "src": "/logo.svg",  // Seu arquivo SVG vetorizado
+      "sizes": "any",      // "any" indica que o SVG é escalável
+      "type": "image/svg+xml",
+      "purpose": "any maskable"  // Pode ser usado como ícone regular ou maskable
+    },
+    {
+      "src": "/logo-192x192.png",  // Fallback para navegadores que não suportam SVG
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-512x512.png",  // Fallback para tamanhos maiores
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff00"
+}
