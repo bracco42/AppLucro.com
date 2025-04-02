@@ -1,26 +1,27 @@
 {
-  "name": "Ride Profit Calculator",
+  "name": "RideProfit",
   "short_name": "RideProfit",
+  "description": "Calculator for ride profits across all platforms",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#00ff00",
   "icons": [
     {
-      "src": "/logo.svg",  // Seu arquivo SVG vetorizado
-      "sizes": "any",      // "any" indica que o SVG é escalável
-      "type": "image/svg+xml",
-      "purpose": "any maskable"  // Pode ser usado como ícone regular ou maskable
-    },
-    {
-      "src": "/logo-192x192.png",  // Fallback para navegadores que não suportam SVG
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/logo-512x512.png",  // Fallback para tamanhos maiores
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable.png",  // Ícone adaptável (Android)
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ],
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#00ff00"
+  ]
 }
