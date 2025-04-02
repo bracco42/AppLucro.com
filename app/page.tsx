@@ -1,8 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { ReactComponent as Logo } from "/logo.svg";
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
+
+const App = () => {
+  return (
+    <div>
+      <Logo style={{ fill: "currentColor" }} />
+    </div>
+  );
+};
 
 type Cost = {
   id: number;
@@ -856,6 +865,13 @@ const translations = {
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
+
+  // LOGO.SVG
+  <div style={{ textAlign: 'center', padding: '20px' }}>
+      {/* Logo */}
+      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
+
+      <h1 style={{ color: '#0f0' }}>Calculadora de Lucro</h1>
 
   // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
