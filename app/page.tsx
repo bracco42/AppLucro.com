@@ -5,14 +5,6 @@ import { ReactComponent as Logo } from "/logo.svg";
 
 type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
-const App = () => {
-  return (
-    <div>
-      <Logo style={{ fill: "currentColor" }} />
-    </div>
-  );
-};
-
 type Cost = {
   id: number;
   valor: number;
@@ -862,6 +854,7 @@ const translations = {
   }
 };
 
+
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 
 export default function CalculoLucro() {
@@ -1029,7 +1022,7 @@ export default function CalculoLucro() {
     }
   };
 
-  return (
+ return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
@@ -1037,9 +1030,10 @@ export default function CalculoLucro() {
       color: '#fff',
       maxWidth: '800px',
       margin: '0 auto',
+      fontFamily: 'Arial, sans-serif'
     }}>
       {/* Logo */}
-      <img src="/logo.svg" alt="Logo" width={100} style={{ marginBottom: '20px' }} />
+      <Logo style={{ fill: "currentColor", width: '100px', marginBottom: '20px' }} />
 
  const exportSettings = async () => {
   try {
@@ -1590,7 +1584,6 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
       </div>
-    </div>
-  </div> // LOGO.SVG
+  </div>
   );
 }
