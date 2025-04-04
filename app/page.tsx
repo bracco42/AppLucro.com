@@ -595,6 +595,7 @@ export default function CalculoLucro() {
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'descricao', e.target.value)}
                   placeholder={t.costDescription}
                   style={{
+                    width: '33%',
                     flex: 1,
                     padding: '8px',
                     borderRadius: '5px',
@@ -609,6 +610,7 @@ export default function CalculoLucro() {
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
                   placeholder={t.costValue}
                   style={{
+                    width: '33%',
                     flex: 1,
                     padding: '8px',
                     borderRadius: '5px',
