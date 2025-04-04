@@ -30,7 +30,7 @@ const translations = {
     exportButton: 'Exportar Config',
     importButton: 'Importar Config',
     fuelPrice: 'Preço do Combustível por Litro:',
-    fuelEfficiency: 'Distância Percorrida por Litro (Km/L):',
+    fuelEfficiency: 'Distância Percorrida por Litro (km/L):',
     insuranceValue: 'Valor do Seguro:',
     insurancePremium: 'Prêmio do Seguro:',
     maintenanceCosts: 'Custos de Manutenção:',
@@ -49,7 +49,6 @@ const translations = {
     tip1: 'Levar espera em consideração no tempo gasto. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade).',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida.',
-    validationMessage: 'Por favor, preencha pelo menos preço do combustível e eficiência',
     importError: 'Erro ao importar configurações',
     history: 'Histórico de Cálculos',
     saveCalculation: 'Salvar Cálculo',
@@ -78,7 +77,7 @@ const translations = {
     exportButton: 'Export Settings',
     importButton: 'Import Settings',
     fuelPrice: 'Fuel Price per Liter:',
-    fuelEfficiency: 'Distance per Liter (Km/L):',
+    fuelEfficiency: 'Distance per Liter (km/L):',
     insuranceValue: 'Insurance Value:',
     insurancePremium: 'Insurance Premium:',
     maintenanceCosts: 'Maintenance Costs:',
@@ -89,7 +88,7 @@ const translations = {
     workingDays: 'Days/week (1-7):',
     vehicleValue: 'Current Vehicle Value:',
     rideValue: 'Paid Value:',
-    rideDistance: 'Ride Distance (km):',
+    rideDistance: 'Ride Distance (km or mi):',
     rideTime: 'Ride Time (minutes):',
     shortTermProfit: 'Short Term Profit:',
     longTermProfit: 'Long Term Profit:',
@@ -97,7 +96,6 @@ const translations = {
     tip1: 'Consider waiting time in time spent. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity).',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost.',
-    validationMessage: 'Please fill at least fuel price and efficiency',
     importError: 'Error importing settings',
     history: 'Calculation History',
     saveCalculation: 'Save Calculation',
@@ -120,6 +118,23 @@ const translations = {
 
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 const HISTORY_KEY = 'rideProfitCalculationHistory';
+
+// Função para validar o formato dos dados importados
+const isValidSettings = (data: any): boolean => {
+  try {
+    if (!data || typeof data !== 'object') return false;
+    
+    // Verifica apenas os campos essenciais
+    const hasRequiredFields = (
+      ('fuelPrice' in data || 'precoCombustivel' in data) &&
+      ('kmPorLitro' in data || 'fuelEfficiency' in data)
+    );
+    
+    return hasRequiredFields;
+  } catch {
+    return false;
+  }
+};
 
 export default function CalculoLucro() {
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
@@ -165,32 +180,49 @@ export default function CalculoLucro() {
       
       if (savedSettings) {
         const parsedSettings = JSON.parse(savedSettings);
-        setPrecoCombustivel(parsedSettings.fuelPrice || '');
-        setKmPorLitro(parsedSettings.kmPorLitro || '');
-        setValorSeguro(parsedSettings.valorSeguro || '');
-        setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
-        setPremioSeguro(parsedSettings.premioSeguro || '');
-        setCustosManutencao(parsedSettings.custosManutencao || [
-          { id: 1, descricao: 'Taxa', valor: 0, periodicity: 'annual' },
-          { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
-        ]);
-        setValorVeiculo(parsedSettings.valorVeiculo || '');
-        setHorasPorDia(parsedSettings.horasPorDia || '');
-        setDiasPorSemana(parsedSettings.diasPorSemana || '');
-        setLanguage(parsedSettings.language || 'pt');
+        if (isValidSettings(parsedSettings)) {
+          setPrecoCombustivel(parsedSettings.fuelPrice || parsedSettings.precoCombustivel || '');
+          setKmPorLitro(parsedSettings.kmPorLitro || parsedSettings.fuelEfficiency || '');
+          setValorSeguro(parsedSettings.valorSeguro || parsedSettings.insuranceValue || '');
+          setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
+          setPremioSeguro(parsedSettings.premioSeguro || parsedSettings.insurancePremium || '');
+          
+          // Garantir que os custos tenham estrutura correta
+          if (Array.isArray(parsedSettings.custosManutencao) || Array.isArray(parsedSettings.maintenanceCosts)) {
+            const costs = parsedSettings.custosManutencao || parsedSettings.maintenanceCosts;
+            setCustosManutencao(costs.map((c: any) => ({
+              id: c.id || Date.now(),
+              descricao: c.descricao || c.description || `Custo ${c.id || Date.now()}`,
+              valor: typeof c.valor === 'number' ? c.valor : (typeof c.value === 'number' ? c.value : 0),
+              periodicity: ['annual', 'monthly', 'weekly', 'daily'].includes(c.periodicity) 
+                ? c.periodicity 
+                : 'annual'
+            })));
+          }
+          
+          setValorVeiculo(parsedSettings.valorVeiculo || parsedSettings.vehicleValue || '');
+          setHorasPorDia(parsedSettings.horasPorDia || parsedSettings.workingHours || '');
+          setDiasPorSemana(parsedSettings.diasPorSemana || parsedSettings.workingDays || '');
+          setLanguage(['pt', 'en'].includes(parsedSettings.language) ? parsedSettings.language : 'pt');
+        }
       }
 
       if (savedHistory) {
-        const parsedHistory = JSON.parse(savedHistory);
-        setCalculationHistory(parsedHistory.map((item: any) => ({
-          ...item,
-          timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
-        })));
+        try {
+          const parsedHistory = JSON.parse(savedHistory);
+          if (Array.isArray(parsedHistory)) {
+            setCalculationHistory(parsedHistory.map((item: any) => ({
+              shortTerm: typeof item.shortTerm === 'number' ? item.shortTerm : 0,
+              longTerm: typeof item.longTerm === 'number' ? item.longTerm : 0,
+              timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+            })));
+          }
+        } catch (e) {
+          console.error('Error parsing history:', e);
+        }
       }
     } catch (e) {
       console.error('Error loading data:', e);
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(HISTORY_KEY);
     }
   }, []);
 
@@ -226,9 +258,17 @@ export default function CalculoLucro() {
   };
 
   useEffect(() => {
+    // Mostrar "-" quando faltar parâmetros essenciais
+    if (!precoCombustivel || !kmPorLitro || !valorCorrida || !distanciaCorrida) {
+      setLucroCurtoPrazo(null);
+      setLucroLongoPrazo(null);
+      return;
+    }
+
     const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
-    setLucroCurtoPrazo(parseInput(valorCorrida) - custoCombustivelCorrida);
+    const shortTerm = parseInput(valorCorrida) - custoCombustivelCorrida;
+    setLucroCurtoPrazo(isNaN(shortTerm) ? null : shortTerm);
 
     const daysPerWeek = parseInput(diasPorSemana) || 5;
     const hoursPerDay = parseInput(horasPorDia) || 8;
@@ -268,14 +308,14 @@ export default function CalculoLucro() {
     const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
     const riscoCorrida = premioAnual * 0.1 * fatorTempo;
 
-    setLucroLongoPrazo(
-      parseInput(valorCorrida) - 
+    const longTerm = parseInput(valorCorrida) - 
       custoCombustivelCorrida - 
       custoManutencaoCorrida - 
       custoSeguroCorrida - 
       depreciacaoCorrida - 
-      riscoCorrida
-    );
+      riscoCorrida;
+      
+    setLucroLongoPrazo(isNaN(longTerm) ? null : longTerm);
   }, [
     precoCombustivel, kmPorLitro, valorSeguro, periodicidadeSeguro, premioSeguro,
     custosManutencao, valorVeiculo, horasPorDia, diasPorSemana, 
@@ -283,11 +323,6 @@ export default function CalculoLucro() {
   ]);
 
   const saveSettings = () => {
-    if (!precoCombustivel || !kmPorLitro) {
-      alert(t.validationMessage);
-      return;
-    }
-
     const settingsToSave = {
       fuelPrice: precoCombustivel,
       kmPorLitro,
@@ -352,19 +387,27 @@ export default function CalculoLucro() {
       
       input.onchange = (e: Event) => {
         const file = (e.target as HTMLInputElement).files?.[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            try {
-              const settings = event.target?.result as string;
-              localStorage.setItem(STORAGE_KEY, settings);
-              window.location.reload();
-            } catch (error) {
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const settings = JSON.parse(event.target?.result as string);
+            if (!isValidSettings(settings)) {
               alert(t.importError);
+              return;
             }
-          };
-          reader.readAsText(file);
-        }
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+            window.location.reload();
+          } catch (error) {
+            alert(t.importError);
+          }
+        };
+        reader.onerror = () => {
+          alert(t.importError);
+        };
+        reader.readAsText(file);
       };
       
       document.body.appendChild(input);
@@ -375,7 +418,7 @@ export default function CalculoLucro() {
       }, 100);
     } catch (error) {
       console.error('Error importing settings:', error);
-      alert('Failed to import settings');
+      alert(t.importError);
     }
   };
 
@@ -876,7 +919,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroCurtoPrazo !== null ? `$ ${lucroCurtoPrazo.toFixed(2)}` : '---'}
+            {lucroCurtoPrazo !== null ? `$ ${lucroCurtoPrazo.toFixed(2)}` : '-'}
           </div>
         </div>
 
@@ -891,7 +934,7 @@ export default function CalculoLucro() {
             fontSize: '18px',
             textAlign: 'center'
           }}>
-            {lucroLongoPrazo !== null ? `$ ${lucroLongoPrazo.toFixed(2)}` : '---'}
+            {lucroLongoPrazo !== null ? `$ ${lucroLongoPrazo.toFixed(2)}` : '-'}
           </div>
         </div>
 
