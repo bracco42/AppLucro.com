@@ -119,7 +119,7 @@ const translations = {
       weekly: 'Weekly',
       daily: 'Daily'
     }
-  },
+  }
   // ... (todas as outras traduções com os novos campos adicionados)
 };
 
