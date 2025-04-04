@@ -143,8 +143,8 @@ export default function CalculoLucro() {
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('');
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([
-    { id: 1, descricao: 'Taxa', valor: 0, periodicity: 'annual' },
-    { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
+    { id: 1, descricao: language === 'pt' ? 'Taxa' : 'Fee', valor: 0, periodicity: 'annual' },
+    { id: 2, descricao: language === 'pt' ? 'Óleo' : 'Oil', valor: 0, periodicity: 'annual' }
   ]);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
   const [horasPorDia, setHorasPorDia] = useState<string>('');
@@ -164,12 +164,12 @@ export default function CalculoLucro() {
   useEffect(() => {
     const handleError = (err: ErrorEvent) => {
       console.error('Global error:', err);
-      setError('Ocorreu um erro. Por favor, recarregue a página.');
+      setError(language === 'pt' ? 'Ocorreu um erro. Por favor, recarregue a página.' : 'An error occurred. Please reload the page.');
     };
 
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -192,7 +192,7 @@ export default function CalculoLucro() {
             const costs = parsedSettings.custosManutencao || parsedSettings.maintenanceCosts;
             setCustosManutencao(costs.map((c: any) => ({
               id: c.id || Date.now(),
-              descricao: c.descricao || c.description || `Custo ${c.id || Date.now()}`,
+              descricao: c.descricao || c.description || (language === 'pt' ? `Custo ${c.id || Date.now()}` : `Cost ${c.id || Date.now()}`),
               valor: typeof c.valor === 'number' ? c.valor : (typeof c.value === 'number' ? c.value : 0),
               periodicity: ['annual', 'monthly', 'weekly', 'daily'].includes(c.periodicity) 
                 ? c.periodicity 
@@ -224,7 +224,7 @@ export default function CalculoLucro() {
     } catch (e) {
       console.error('Error loading data:', e);
     }
-  }, []);
+  }, [language]);
 
   const formatNumberInput = (value: string): string => {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
@@ -348,7 +348,10 @@ export default function CalculoLucro() {
       setValorSeguro('');
       setPeriodicidadeSeguro('annual');
       setPremioSeguro('');
-      setCustosManutencao([{id: 1, descricao: 'Taxa', valor: 0, periodicity: 'annual'}]);
+      setCustosManutencao([
+        { id: 1, descricao: language === 'pt' ? 'Imposto' : 'Tax', valor: 0, periodicity: 'annual' },
+        { id: 2, descricao: language === 'pt' ? 'Óleo' : 'Oil', valor: 0, periodicity: 'annual' }
+      ]);
       setValorVeiculo('');
       setHorasPorDia('');
       setDiasPorSemana('');
@@ -439,7 +442,7 @@ export default function CalculoLucro() {
   };
 
   const clearHistory = () => {
-    if (confirm('Clear all calculation history?')) {
+    if (confirm(language === 'pt' ? 'Limpar todo o histórico de cálculos?' : 'Clear all calculation history?')) {
       setCalculationHistory([]);
       localStorage.removeItem(HISTORY_KEY);
     }
@@ -631,15 +634,13 @@ export default function CalculoLucro() {
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
             {custosManutencao.map((custo) => (
-              <div key={custo.id} style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <div key={custo.id} style={{ marginBottom: '10px', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: '10px', alignItems: 'center' }}>
                 <input
                   type="text"
                   value={custo.descricao}
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'descricao', e.target.value)}
                   placeholder={t.costDescription}
                   style={{
-                    width: '50%',
-                    flex: 1,
                     padding: '8px',
                     borderRadius: '5px',
                     border: '1px solid #0f0',
@@ -653,8 +654,6 @@ export default function CalculoLucro() {
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
                   placeholder={t.costValue}
                   style={{
-                    width: '66%',
-                    flex: 1,
                     padding: '8px',
                     borderRadius: '5px',
                     border: '1px solid #0f0',
@@ -670,8 +669,7 @@ export default function CalculoLucro() {
                     borderRadius: '5px',
                     border: '1px solid #0f0',
                     backgroundColor: '#111',
-                    color: '#fff',
-                    minWidth: '100px'
+                    color: '#fff'
                   }}
                 >
                   {Object.entries(t.periodicityOptions).map(([value, label]) => (
@@ -845,7 +843,7 @@ export default function CalculoLucro() {
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
       }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Dados da Corrida</h3>
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{language === 'pt' ? 'Dados da Corrida' : 'Ride Data'}</h3>
         
         <div style={{ marginBottom: '15px', textAlign: 'left' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideValue}</label>
@@ -906,7 +904,7 @@ export default function CalculoLucro() {
         marginBottom: '20px',
         boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
       }}>
-        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>Resultados</h3>
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{language === 'pt' ? 'Resultados' : 'Results'}</h3>
         
         <div style={{ marginBottom: '15px', textAlign: 'left' }}>
           <label style={{ display: 'block', marginBottom: '5px', color: '#0f0' }}>{t.shortTermProfit}</label>
@@ -1029,14 +1027,14 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div>
-          Entre em nossa{' '}
+          {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
           <a 
             href="https://www.facebook.com/groups/1587875928477657" 
             target="_blank" 
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            OpenSource Facebook Community
+            {language === 'pt' ? 'Comunidade OpenSource no Facebook' : 'OpenSource Facebook Community'}
           </a>
           !!!
         </div>
