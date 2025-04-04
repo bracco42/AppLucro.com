@@ -60,6 +60,10 @@ const translations = {
     profitShort: 'Lucro Curto',
     profitLong: 'Lucro Longo',
     actions: 'Ações',
+    defaultCosts: [
+      { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
+      { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
+    ],
     periodicityOptions: {
       annual: 'Anual',
       monthly: 'Mensal',
@@ -107,6 +111,10 @@ const translations = {
     profitShort: 'Short Profit',
     profitLong: 'Long Profit',
     actions: 'Actions',
+    defaultCosts: [
+      { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' },
+      { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' }
+    ],
     periodicityOptions: {
       annual: 'Annual',
       monthly: 'Monthly',
@@ -136,10 +144,7 @@ export default function CalculoLucro() {
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('');
   const [language, setLanguage] = useState<Language>('pt');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([
-    { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
-    { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
-  ]);
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>(translations['pt'].defaultCosts);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
   const [horasPorDia, setHorasPorDia] = useState<string>('');
   const [diasPorSemana, setDiasPorSemana] = useState<string>('');
@@ -339,10 +344,7 @@ export default function CalculoLucro() {
       setValorSeguro('');
       setPeriodicidadeSeguro('annual');
       setPremioSeguro('');
-      setCustosManutencao([
-        { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
-        { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
-      ]);
+      setCustosManutencao(t.defaultCosts);
       setValorVeiculo('');
       setHorasPorDia('');
       setDiasPorSemana('');
@@ -625,13 +627,25 @@ export default function CalculoLucro() {
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
             {custosManutencao.map((custo) => (
-              <div key={custo.id} style={{ marginBottom: '10px', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: '10px', alignItems: 'center' }}>
+              <div 
+                key={custo.id} 
+                style={{ 
+                  marginBottom: '10px', 
+                  display: 'flex', 
+                  flexDirection: 'row', 
+                  flexWrap: 'wrap',
+                  gap: '10px', 
+                  alignItems: 'center' 
+                }}
+              >
                 <input
                   type="text"
                   value={custo.descricao}
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'descricao', e.target.value)}
                   placeholder={t.costDescription}
                   style={{
+                    flex: '1 1 150px',
+                    minWidth: '120px',
                     padding: '8px',
                     borderRadius: '5px',
                     border: '1px solid #0f0',
@@ -645,6 +659,7 @@ export default function CalculoLucro() {
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
                   placeholder={t.costValue}
                   style={{
+                    flex: '0 1 100px',
                     padding: '8px',
                     borderRadius: '5px',
                     border: '1px solid #0f0',
@@ -656,6 +671,7 @@ export default function CalculoLucro() {
                   value={custo.periodicity}
                   onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value as Periodicity)}
                   style={{
+                    flex: '0 1 120px',
                     padding: '8px',
                     borderRadius: '5px',
                     border: '1px solid #0f0',
@@ -671,6 +687,7 @@ export default function CalculoLucro() {
                   <button
                     onClick={() => removerCustoManutencao(custo.id)}
                     style={{
+                      flex: '0 0 auto',
                       padding: '8px 12px',
                       backgroundColor: '#f00',
                       color: '#fff',
