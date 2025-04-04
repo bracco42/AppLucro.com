@@ -119,18 +119,11 @@ const translations = {
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
 const HISTORY_KEY = 'rideProfitCalculationHistory';
 
-// Função para validar o formato dos dados importados
 const isValidSettings = (data: any): boolean => {
   try {
     if (!data || typeof data !== 'object') return false;
-    
-    // Verifica apenas os campos essenciais
-    const hasRequiredFields = (
-      ('fuelPrice' in data || 'precoCombustivel' in data) &&
-      ('kmPorLitro' in data || 'fuelEfficiency' in data)
-    );
-    
-    return hasRequiredFields;
+    return ('fuelPrice' in data || 'precoCombustivel' in data) &&
+           ('kmPorLitro' in data || 'fuelEfficiency' in data);
   } catch {
     return false;
   }
@@ -142,9 +135,10 @@ export default function CalculoLucro() {
   const [valorSeguro, setValorSeguro] = useState<string>('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('');
+  const [language, setLanguage] = useState<Language>('pt');
   const [custosManutencao, setCustosManutencao] = useState<Cost[]>([
-    { id: 1, descricao: language === 'pt' ? 'Taxa' : 'Fee', valor: 0, periodicity: 'annual' },
-    { id: 2, descricao: language === 'pt' ? 'Óleo' : 'Oil', valor: 0, periodicity: 'annual' }
+    { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
+    { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
   ]);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
   const [horasPorDia, setHorasPorDia] = useState<string>('');
@@ -155,7 +149,6 @@ export default function CalculoLucro() {
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [language, setLanguage] = useState<Language>('pt');
   const [calculationHistory, setCalculationHistory] = useState<CalculationHistory[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -187,7 +180,6 @@ export default function CalculoLucro() {
           setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
           setPremioSeguro(parsedSettings.premioSeguro || parsedSettings.insurancePremium || '');
           
-          // Garantir que os custos tenham estrutura correta
           if (Array.isArray(parsedSettings.custosManutencao) || Array.isArray(parsedSettings.maintenanceCosts)) {
             const costs = parsedSettings.custosManutencao || parsedSettings.maintenanceCosts;
             setCustosManutencao(costs.map((c: any) => ({
@@ -258,7 +250,6 @@ export default function CalculoLucro() {
   };
 
   useEffect(() => {
-    // Mostrar "-" quando faltar parâmetros essenciais
     if (!precoCombustivel || !kmPorLitro || !valorCorrida || !distanciaCorrida) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
@@ -349,8 +340,8 @@ export default function CalculoLucro() {
       setPeriodicidadeSeguro('annual');
       setPremioSeguro('');
       setCustosManutencao([
-        { id: 1, descricao: language === 'pt' ? 'Imposto' : 'Tax', valor: 0, periodicity: 'annual' },
-        { id: 2, descricao: language === 'pt' ? 'Óleo' : 'Oil', valor: 0, periodicity: 'annual' }
+        { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
+        { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
       ]);
       setValorVeiculo('');
       setHorasPorDia('');
@@ -1034,7 +1025,7 @@ export default function CalculoLucro() {
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            {language === 'pt' ? 'Comunidade OpenSource no Facebook' : 'OpenSource Facebook Community'}
+            {language === 'pt' ? 'OpenSource! Comunidade Facebook' : 'OpenSource! Community Facebook'}
           </a>
           !!!
         </div>
