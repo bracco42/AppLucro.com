@@ -120,7 +120,6 @@ const translations = {
       daily: 'Daily'
     }
   }
-  // ... (todas as outras traduções com os novos campos adicionados)
 };
 
 const STORAGE_KEY = 'rideProfitCalculatorSettings';
