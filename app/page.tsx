@@ -158,6 +158,7 @@ export default function CalculoLucro() {
 
   // Carregar configurações salvas
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const savedSettings = localStorage.getItem(STORAGE_KEY);
     const savedHistory = localStorage.getItem(HISTORY_KEY);
     
