@@ -6,6 +6,7 @@ type Periodicity = 'annual' | 'monthly' | 'daily' | 'weekly';
 
 type Cost = {
   id: number;
+  descricao: string;
   valor: number;
   periodicity: Periodicity;
 };
@@ -862,7 +863,10 @@ export default function CalculoLucro() {
   const [valorSeguro, setValorSeguro] = useState<string>('');
   const [periodicidadeSeguro, setPeriodicidadeSeguro] = useState<Periodicity>('annual');
   const [premioSeguro, setPremioSeguro] = useState<string>('');
-  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([{ id: 1, valor: 0, periodicity: 'annual' }]);
+  const [custosManutencao, setCustosManutencao] = useState<Cost[]>([
+  { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' },
+  { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' }
+]);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
 
   // Jornada de trabalho
@@ -894,7 +898,10 @@ export default function CalculoLucro() {
         setValorSeguro(parsedSettings.valorSeguro || '');
         setPeriodicidadeSeguro(parsedSettings.periodicidadeSeguro || 'annual');
         setPremioSeguro(parsedSettings.premioSeguro || '');
-        setCustosManutencao(parsedSettings.custosManutencao || [{ id: 1, valor: 0, periodicity: 'annual' }]);
+        setCustosManutencao(parsedSettings.custosManutencao || [
+            { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' },
+            { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' }
+          ]);
         setValorVeiculo(parsedSettings.valorVeiculo || '');
         setHorasPorDia(parsedSettings.horasPorDia || '');
         setDiasPorSemana(parsedSettings.diasPorSemana || '');
@@ -1094,9 +1101,9 @@ export default function CalculoLucro() {
   };
 
   // Funções de custos
-  const adicionarCustoManutencao = () => {
-    setCustosManutencao([...custosManutencao, {id: Date.now(), valor: 0, periodicity: 'annual'}]);
-  };
+const adicionarCustoManutencao = () => {
+  setCustosManutencao([...custosManutencao, {id: Date.now(), descricao: '', valor: 0, periodicity: 'annual'}]);
+};
 
   const removerCustoManutencao = (id: number) => {
     if (custosManutencao.length > 1) {
@@ -1278,32 +1285,38 @@ export default function CalculoLucro() {
           {/* Seção de custos de manutenção */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
-            {custosManutencao.map((custo) => (
-              <div key={custo.id} style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <input 
-                  type="text" 
-                  value={custo.valor} 
-                  onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
-                  style={{
-                    flex: 1,
-                    padding: '8px',
-                    borderRadius: '5px',
-                    border: '1px solid #0f0',
-                    backgroundColor: '#111',
-                    color: '#fff'
-                  }}
-                />
-                <select
-                  value={custo.periodicity}
-                  onChange={(e) => atualizarCustoManutencao(custo.id, 'periodicity', e.target.value)}
-                  style={{
-                    padding: '8px',
-                    borderRadius: '5px',
-                    border: '1px solid #0f0',
-                    backgroundColor: '#111',
-                    color: '#fff',
-                    minWidth: '100px'
-                  }}
+           {custosManutencao.map((custo) => (
+                    <div key={custo.id} style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <input
+                        type="text"
+                        value={custo.descricao}
+                        onChange={(e) => atualizarCustoManutencao(custo.id, 'descricao', e.target.value)}
+                        placeholder="Description"
+                        style={{
+                          flex: 0.5,
+                          padding: '8px',
+                          borderRadius: '5px',
+                          border: '1px solid #0f0',
+                          backgroundColor: '#111',
+                          color: '#fff'
+                        }}
+                      />
+                      <input 
+                        type="text" 
+                        value={custo.valor} 
+                        onChange={(e) => atualizarCustoManutencao(custo.id, 'valor', e.target.value)}
+                        style={{
+                          flex: 1,
+                          padding: '8px',
+                          borderRadius: '5px',
+                          border: '1px solid #0f0',
+                          backgroundColor: '#111',
+                          color: '#fff'
+                        }}
+                      />
+                      {/* Restante do código... */}
+                    </div>
+                  ))}
                 >
                   {Object.entries(t.periodicityOptions).map(([value, label]) => (
                     <option key={value} value={value}>{label}</option>
