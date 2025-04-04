@@ -13,8 +13,6 @@ type Cost = {
 
 type Language = 'pt' | 'en';
 
-
-
 type CalculationHistory = {
   shortTerm: number;
   longTerm: number;
@@ -51,7 +49,6 @@ const translations = {
     tip1: 'Levar espera em consideração no tempo gasto. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade).',
     formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida.',
-    community: 'Entre em nossa <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Facebook Community</a>!!!',
     validationMessage: 'Por favor, preencha pelo menos preço do combustível e eficiência',
     importError: 'Erro ao importar configurações',
     history: 'Histórico de Cálculos',
@@ -100,7 +97,6 @@ const translations = {
     tip1: 'Consider waiting time in time spent. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity).',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost.',
-    community: 'Join our <a href="https://www.facebook.com/groups/1587875928477657" target="_blank" style="color: #0f0; text-decoration: underline;">OpenSource Facebook Community</a>!!!',
     validationMessage: 'Please fill at least fuel price and efficiency',
     importError: 'Error importing settings',
     history: 'Calculation History',
@@ -126,7 +122,6 @@ const STORAGE_KEY = 'rideProfitCalculatorSettings';
 const HISTORY_KEY = 'rideProfitCalculationHistory';
 
 export default function CalculoLucro() {
-  // Dados do veículo
   const [precoCombustivel, setPrecoCombustivel] = useState<string>('');
   const [kmPorLitro, setKmPorLitro] = useState<string>('');
   const [valorSeguro, setValorSeguro] = useState<string>('');
@@ -137,33 +132,38 @@ export default function CalculoLucro() {
     { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
   ]);
   const [valorVeiculo, setValorVeiculo] = useState<string>('');
-
-  // Jornada de trabalho
   const [horasPorDia, setHorasPorDia] = useState<string>('');
   const [diasPorSemana, setDiasPorSemana] = useState<string>('');
-
-  // Dados da corrida
   const [valorCorrida, setValorCorrida] = useState<string>('');
   const [distanciaCorrida, setDistanciaCorrida] = useState<string>('');
   const [tempoCorrida, setTempoCorrida] = useState<string>('');
-
-  // Resultados
   const [lucroCurtoPrazo, setLucroCurtoPrazo] = useState<number | null>(null);
   const [lucroLongoPrazo, setLucroLongoPrazo] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>('pt');
   const [calculationHistory, setCalculationHistory] = useState<CalculationHistory[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const t = translations[language];
 
-  // Carregar configurações salvas
+  useEffect(() => {
+    const handleError = (err: ErrorEvent) => {
+      console.error('Global error:', err);
+      setError('Ocorreu um erro. Por favor, recarregue a página.');
+    };
+
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
+  }, []);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const savedSettings = localStorage.getItem(STORAGE_KEY);
-    const savedHistory = localStorage.getItem(HISTORY_KEY);
     
-    if (savedSettings) {
-      try {
+    try {
+      const savedSettings = localStorage.getItem(STORAGE_KEY);
+      const savedHistory = localStorage.getItem(HISTORY_KEY);
+      
+      if (savedSettings) {
         const parsedSettings = JSON.parse(savedSettings);
         setPrecoCombustivel(parsedSettings.fuelPrice || '');
         setKmPorLitro(parsedSettings.kmPorLitro || '');
@@ -178,25 +178,22 @@ export default function CalculoLucro() {
         setHorasPorDia(parsedSettings.horasPorDia || '');
         setDiasPorSemana(parsedSettings.diasPorSemana || '');
         setLanguage(parsedSettings.language || 'pt');
-      } catch (e) {
-        console.error('Error loading settings:', e);
       }
-    }
 
-    if (savedHistory) {
-      try {
+      if (savedHistory) {
         const parsedHistory = JSON.parse(savedHistory);
         setCalculationHistory(parsedHistory.map((item: any) => ({
           ...item,
-          timestamp: new Date(item.timestamp)
+          timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
         })));
-      } catch (e) {
-        console.error('Error loading history:', e);
       }
+    } catch (e) {
+      console.error('Error loading data:', e);
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(HISTORY_KEY);
     }
   }, []);
 
-  // Funções auxiliares
   const formatNumberInput = (value: string): string => {
     return value.replace(/[^0-9.,]/g, '').replace(',', '.').replace(/(\..*)\./g, '$1');
   };
@@ -228,7 +225,6 @@ export default function CalculoLucro() {
     }
   };
 
-  // Cálculos principais
   useEffect(() => {
     const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
     const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
@@ -286,7 +282,6 @@ export default function CalculoLucro() {
     valorCorrida, distanciaCorrida, tempoCorrida
   ]);
 
-  // Funções de persistência
   const saveSettings = () => {
     if (!precoCombustivel || !kmPorLitro) {
       alert(t.validationMessage);
@@ -384,7 +379,6 @@ export default function CalculoLucro() {
     }
   };
 
-  // Funções de histórico
   const saveCalculation = () => {
     if (lucroCurtoPrazo === null || lucroLongoPrazo === null) return;
 
@@ -395,7 +389,7 @@ export default function CalculoLucro() {
         timestamp: new Date()
       },
       ...calculationHistory
-    ].slice(0, 10); // Limitar a 10 itens no histórico
+    ].slice(0, 10);
 
     setCalculationHistory(newHistory);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
@@ -408,7 +402,6 @@ export default function CalculoLucro() {
     }
   };
 
-  // Funções de custos
   const adicionarCustoManutencao = () => {
     setCustosManutencao([...custosManutencao, {id: Date.now(), descricao: '', valor: 0, periodicity: 'annual'}]);
   };
@@ -435,7 +428,12 @@ export default function CalculoLucro() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Logo */}
+      {error && (
+        <div style={{ color: 'red', padding: '20px', background: '#ffecec' }}>
+          {error}
+        </div>
+      )}
+
       <img 
         src="/logo.svg" 
         alt="Logo" 
@@ -443,10 +441,12 @@ export default function CalculoLucro() {
           width: '166px',
           height: 'auto',
           marginBottom: '20px' 
+        }}
+        onError={(e) => {
+          (e.target as HTMLImageElement).style.display = 'none';
         }} 
       />
 
-      {/* Seletor de idioma */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <select
           value={language}
@@ -469,11 +469,9 @@ export default function CalculoLucro() {
         </select>
       </div>
 
-      {/* Cabeçalho */}
       <h1 style={{ color: '#0f0', marginBottom: '5px', fontSize: '24px' }}>{t.title}</h1>
       <h2 style={{ color: '#0f0', fontSize: '16px', marginBottom: '20px' }}>{t.subtitle}</h2>
 
-      {/* Botão de configuração */}
       <button
         onClick={() => setShowModal(!showModal)}
         style={{
@@ -491,7 +489,6 @@ export default function CalculoLucro() {
         {showModal ? t.closeButton : t.registerButton}
       </button>
 
-      {/* Modal de configuração */}
       {showModal && (
         <div style={{
           backgroundColor: '#222',
@@ -502,7 +499,6 @@ export default function CalculoLucro() {
         }}>
           <h3 style={{ color: '#0f0', marginTop: 0 }}>{t.registerButton}</h3>
           
-          {/* Seção de combustível */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.fuelPrice}</label>
             <input 
@@ -537,7 +533,6 @@ export default function CalculoLucro() {
             />
           </div>
 
-          {/* Seção de seguro */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.insuranceValue}</label>
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -590,7 +585,6 @@ export default function CalculoLucro() {
             />
           </div>
 
-          {/* Seção de custos de manutenção */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.maintenanceCosts}</label>
             {custosManutencao.map((custo) => (
@@ -673,7 +667,6 @@ export default function CalculoLucro() {
             </button>
           </div>
 
-          {/* Seção de jornada de trabalho */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.workingHours}</label>
             <input 
@@ -712,7 +705,6 @@ export default function CalculoLucro() {
             />
           </div>
 
-          {/* Seção de valor do veículo */}
           <div style={{ marginBottom: '15px', textAlign: 'left' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>{t.vehicleValue}</label>
             <input 
@@ -730,7 +722,6 @@ export default function CalculoLucro() {
             />
           </div>
 
-          {/* Botões de ação */}
           <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
             <button
               onClick={saveSettings}
@@ -802,7 +793,6 @@ export default function CalculoLucro() {
         </div>
       )}
 
-      {/* Seção de dados da corrida */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -864,7 +854,6 @@ export default function CalculoLucro() {
         </div>
       </div>
 
-      {/* Resultados */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -926,7 +915,6 @@ export default function CalculoLucro() {
         </div>
       </div>
 
-      {/* Histórico de cálculos */}
       {calculationHistory.length > 0 && (
         <div style={{ 
           backgroundColor: '#222', 
@@ -983,7 +971,6 @@ export default function CalculoLucro() {
         </div>
       )}
 
-      {/* Dicas e informações */}
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
@@ -996,7 +983,18 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-        <div dangerouslySetInnerHTML={{ __html: t.community }} style={{ marginTop: '15px' }} />
+        <div>
+          Entre em nossa{' '}
+          <a 
+            href="https://www.facebook.com/groups/1587875928477657" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#0f0', textDecoration: 'underline' }}
+          >
+            OpenSource Facebook Community
+          </a>
+          !!!
+        </div>
       </div>
     </div>
   );
