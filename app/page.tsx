@@ -60,9 +60,9 @@ const translations = {
     profitShort: 'Lucro Curto',
     profitLong: 'Lucro Longo',
     actions: 'Ações',
-    defaultCosts: [
-      { id: 1, descricao: 'Imposto', valor: 0, periodicity: 'annual' },
-      { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' }
+     defaultCosts: [
+      { id: 1, descricao: 'Taxa (IPVA/Impostos)', valor: 0, periodicity: 'annual' as Periodicity },
+      { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' as Periodicity }
     ],
     periodicityOptions: {
       annual: 'Anual',
@@ -112,8 +112,8 @@ const translations = {
     profitLong: 'Long Profit',
     actions: 'Actions',
     defaultCosts: [
-      { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' },
-      { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' }
+      { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' as Periodicity },
+      { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' as Periodicity }
     ],
     periodicityOptions: {
       annual: 'Annual',
