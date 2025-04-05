@@ -1312,7 +1312,7 @@ export default function CalculoLucro() {
           >
             {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
           </a>
-          OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra, custou cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60. Costs: works and 40 dollars, so considerer donating to Brazilian Itau Account Ag. 8499. CC 15528-4. Donates (doações): 0.
+          OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Parceria: @famartdistribuidora.
         </div>
       </div>
     </div>
