@@ -14,8 +14,17 @@ type Cost = {
 type Language = 'pt' | 'en';
 
 type CalculationHistory = {
+  id: string;
   shortTerm: number;
   longTerm: number;
+  rideMinutes: number;
+  rideValue: number;
+  rideDistance: number;
+  fuelCost: number;
+  maintenanceCost: number;
+  insuranceCost: number;
+  depreciation: number;
+  riskCost: number;
   timestamp: Date;
 };
 
@@ -60,7 +69,22 @@ const translations = {
     profitShort: 'Lucro Curto',
     profitLong: 'Lucro Longo',
     actions: 'Ações',
-     defaultCosts: [
+    rideMinutes: 'Minutos',
+    rideValueHistory: 'Valor',
+    rideDistanceHistory: 'Distância',
+    delete: 'Excluir',
+    details: 'Detalhes',
+    noHistory: 'Nenhum cálculo no histórico',
+    calculationDetails: 'Detalhes do Cálculo',
+    closeDetails: 'Fechar Detalhes',
+    fuelCost: 'Custo Combustível',
+    maintenanceCost: 'Custo Manutenção',
+    insuranceCost: 'Custo Seguro',
+    depreciation: 'Depreciação',
+    riskCost: 'Custo Risco',
+    totalCosts: 'Custos Totais',
+    netProfit: 'Lucro Líquido',
+    defaultCosts: [
       { id: 1, descricao: 'Taxa (IPVA/Impostos)', valor: 0, periodicity: 'annual' as Periodicity },
       { id: 2, descricao: 'Óleo', valor: 0, periodicity: 'annual' as Periodicity }
     ],
@@ -111,6 +135,21 @@ const translations = {
     profitShort: 'Short Profit',
     profitLong: 'Long Profit',
     actions: 'Actions',
+    rideMinutes: 'Minutes',
+    rideValueHistory: 'Value',
+    rideDistanceHistory: 'Distance',
+    delete: 'Delete',
+    details: 'Details',
+    noHistory: 'No calculations in history',
+    calculationDetails: 'Calculation Details',
+    closeDetails: 'Close Details',
+    fuelCost: 'Fuel Cost',
+    maintenanceCost: 'Maintenance Cost',
+    insuranceCost: 'Insurance Cost',
+    depreciation: 'Depreciation',
+    riskCost: 'Risk Cost',
+    totalCosts: 'Total Costs',
+    netProfit: 'Net Profit',
     defaultCosts: [
       { id: 1, descricao: 'Tax', valor: 0, periodicity: 'annual' as Periodicity },
       { id: 2, descricao: 'Oil', valor: 0, periodicity: 'annual' as Periodicity }
@@ -156,6 +195,8 @@ export default function CalculoLucro() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [calculationHistory, setCalculationHistory] = useState<CalculationHistory[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCalculation, setSelectedCalculation] = useState<CalculationHistory | null>(null);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
 
   const t = translations[language];
 
@@ -209,8 +250,17 @@ export default function CalculoLucro() {
           const parsedHistory = JSON.parse(savedHistory);
           if (Array.isArray(parsedHistory)) {
             setCalculationHistory(parsedHistory.map((item: any) => ({
+              id: item.id || Date.now().toString(),
               shortTerm: typeof item.shortTerm === 'number' ? item.shortTerm : 0,
               longTerm: typeof item.longTerm === 'number' ? item.longTerm : 0,
+              rideMinutes: item.rideMinutes || 0,
+              rideValue: item.rideValue || 0,
+              rideDistance: item.rideDistance || 0,
+              fuelCost: item.fuelCost || 0,
+              maintenanceCost: item.maintenanceCost || 0,
+              insuranceCost: item.insuranceCost || 0,
+              depreciation: item.depreciation || 0,
+              riskCost: item.riskCost || 0,
               timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
             })));
           }
@@ -255,7 +305,7 @@ export default function CalculoLucro() {
   };
 
   useEffect(() => {
-    if (!precoCombustivel || !kmPorLitro || !valorCorrida || !distanciaCorrida) {
+    if (!precoCombustivel || !kmPorLitro || !valorCorrida || !distanciaCorrida || !tempoCorrida) {
       setLucroCurtoPrazo(null);
       setLucroLongoPrazo(null);
       return;
@@ -419,16 +469,57 @@ export default function CalculoLucro() {
   };
 
   const saveCalculation = () => {
-    if (lucroCurtoPrazo === null || lucroLongoPrazo === null) return;
+    if (lucroCurtoPrazo === null || lucroLongoPrazo === null || !tempoCorrida || !valorCorrida || !distanciaCorrida) return;
+
+    const custoCombustivelPorKm = parseInput(kmPorLitro) > 0 ? parseInput(precoCombustivel) / parseInput(kmPorLitro) : 0;
+    const custoCombustivelCorrida = custoCombustivelPorKm * parseInput(distanciaCorrida);
+
+    const daysPerWeek = parseInput(diasPorSemana) || 5;
+    const hoursPerDay = parseInput(horasPorDia) || 8;
+    const minutosTrabalhadosAno = hoursPerDay * 60 * daysPerWeek * 252 / 5;
+    const fatorTempo = minutosTrabalhadosAno > 0 ? parseInput(tempoCorrida) / minutosTrabalhadosAno : 0;
+
+    const custosAnuais = custosManutencao.map(c => {
+      switch(c.periodicity) {
+        case 'monthly': return c.valor * 12;
+        case 'weekly': return c.valor * (252 / daysPerWeek);
+        case 'daily': return c.valor * (252 * daysPerWeek / 5 * hoursPerDay / 8);
+        default: return c.valor;
+      }
+    });
+
+    const seguroAnual = (() => {
+      switch(periodicidadeSeguro) {
+        case 'monthly': return parseInput(valorSeguro) * 12;
+        case 'weekly': return parseInput(valorSeguro) * (252 / daysPerWeek);
+        case 'daily': return parseInput(valorSeguro) * (252 * daysPerWeek / 5 * hoursPerDay / 8);
+        default: return parseInput(valorSeguro);
+      }
+    })();
+
+    const premioAnual = parseInput(premioSeguro);
+    const custoManutencaoCorrida = custosAnuais.reduce((a, b) => a + b, 0) * fatorTempo;
+    const custoSeguroCorrida = seguroAnual * fatorTempo;
+    const depreciacaoCorrida = parseInput(valorVeiculo) * 0.0333 * fatorTempo;
+    const riscoCorrida = premioAnual * 0.1 * fatorTempo;
 
     const newHistory = [
       {
+        id: Date.now().toString(),
         shortTerm: lucroCurtoPrazo,
         longTerm: lucroLongoPrazo,
+        rideMinutes: parseInput(tempoCorrida),
+        rideValue: parseInput(valorCorrida),
+        rideDistance: parseInput(distanciaCorrida),
+        fuelCost: custoCombustivelCorrida,
+        maintenanceCost: custoManutencaoCorrida,
+        insuranceCost: custoSeguroCorrida,
+        depreciation: depreciacaoCorrida,
+        riskCost: riscoCorrida,
         timestamp: new Date()
       },
       ...calculationHistory
-    ].slice(0, 10);
+    ].slice(0, 20);
 
     setCalculationHistory(newHistory);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
@@ -439,6 +530,19 @@ export default function CalculoLucro() {
       setCalculationHistory([]);
       localStorage.removeItem(HISTORY_KEY);
     }
+  };
+
+  const deleteCalculation = (id: string) => {
+    if (confirm(language === 'pt' ? 'Excluir este cálculo?' : 'Delete this calculation?')) {
+      const updatedHistory = calculationHistory.filter(item => item.id !== id);
+      setCalculationHistory(updatedHistory);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
+    }
+  };
+
+  const showCalculationDetails = (calc: CalculationHistory) => {
+    setSelectedCalculation(calc);
+    setShowDetails(true);
   };
 
   const adicionarCustoManutencao = () => {
@@ -966,7 +1070,7 @@ export default function CalculoLucro() {
         </div>
       </div>
 
-      {calculationHistory.length > 0 && (
+      {calculationHistory.length > 0 ? (
         <div style={{ 
           backgroundColor: '#222', 
           padding: '20px', 
@@ -998,15 +1102,28 @@ export default function CalculoLucro() {
               <thead>
                 <tr style={{ borderBottom: '1px solid #0f0' }}>
                   <th style={{ padding: '8px', textAlign: 'left', color: '#0f0' }}>{t.calculationTime}</th>
+                  <th style={{ padding: '8px', textAlign: 'right', color: '#0f0' }}>{t.rideMinutes}</th>
+                  <th style={{ padding: '8px', textAlign: 'right', color: '#0f0' }}>{t.rideValueHistory}</th>
+                  <th style={{ padding: '8px', textAlign: 'right', color: '#0f0' }}>{t.rideDistanceHistory}</th>
                   <th style={{ padding: '8px', textAlign: 'right', color: '#0f0' }}>{t.profitShort}</th>
                   <th style={{ padding: '8px', textAlign: 'right', color: '#0f0' }}>{t.profitLong}</th>
+                  <th style={{ padding: '8px', textAlign: 'center', color: '#0f0' }}>{t.actions}</th>
                 </tr>
               </thead>
               <tbody>
-                {calculationHistory.map((calc, index) => (
-                  <tr key={index} style={{ borderBottom: '1px solid #333' }}>
+                {calculationHistory.map((calc) => (
+                  <tr key={calc.id} style={{ borderBottom: '1px solid #333' }}>
                     <td style={{ padding: '8px', textAlign: 'left' }}>
                       {calc.timestamp.toLocaleString()}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>
+                      {calc.rideMinutes} min
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>
+                      $ {calc.rideValue.toFixed(2)}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>
+                      {calc.rideDistance} km
                     </td>
                     <td style={{ padding: '8px', textAlign: 'right' }}>
                       $ {calc.shortTerm.toFixed(2)}
@@ -1014,10 +1131,161 @@ export default function CalculoLucro() {
                     <td style={{ padding: '8px', textAlign: 'right' }}>
                       $ {calc.longTerm.toFixed(2)}
                     </td>
+                    <td style={{ padding: '8px', textAlign: 'center', display: 'flex', gap: '5px', justifyContent: 'center' }}>
+                      <button
+                        onClick={() => showCalculationDetails(calc)}
+                        style={{
+                          padding: '6px 10px',
+                          backgroundColor: '#0f0',
+                          color: '#000',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {t.details}
+                      </button>
+                      <button
+                        onClick={() => deleteCalculation(calc.id)}
+                        style={{
+                          padding: '6px 10px',
+                          backgroundColor: '#f00',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {t.delete}
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      ) : (
+        <div style={{ 
+          backgroundColor: '#222', 
+          padding: '20px', 
+          borderRadius: '10px',
+          marginBottom: '20px',
+          boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
+          textAlign: 'center'
+        }}>
+          <p>{t.noHistory}</p>
+        </div>
+      )}
+
+      {showDetails && selectedCalculation && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '20px'
+        }}>
+          <div style={{
+            backgroundColor: '#222',
+            padding: '20px',
+            borderRadius: '10px',
+            maxWidth: '600px',
+            width: '100%',
+            boxShadow: '0 0 20px rgba(0, 255, 0, 0.5)',
+            maxHeight: '90vh',
+            overflowY: 'auto'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <h3 style={{ color: '#0f0', margin: 0 }}>{t.calculationDetails}</h3>
+              <button
+                onClick={() => setShowDetails(false)}
+                style={{
+                  padding: '8px 12px',
+                  backgroundColor: '#f00',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer'
+                }}
+              >
+                {t.closeDetails}
+              </button>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <p style={{ margin: '5px 0', color: '#0f0' }}>{t.calculationTime}:</p>
+              <p>{selectedCalculation.timestamp.toLocaleString()}</p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
+              <div>
+                <p style={{ margin: '5px 0', color: '#0f0' }}>{t.rideValue}:</p>
+                <p>$ {selectedCalculation.rideValue.toFixed(2)}</p>
+              </div>
+              <div>
+                <p style={{ margin: '5px 0', color: '#0f0' }}>{t.rideDistance}:</p>
+                <p>{selectedCalculation.rideDistance} km</p>
+              </div>
+              <div>
+                <p style={{ margin: '5px 0', color: '#0f0' }}>{t.rideMinutes}:</p>
+                <p>{selectedCalculation.rideMinutes} min</p>
+              </div>
+            </div>
+
+            <div style={{ margin: '20px 0', borderTop: '1px solid #0f0', paddingTop: '15px' }}>
+              <h4 style={{ color: '#0f0', marginBottom: '10px' }}>{t.totalCosts}:</h4>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.fuelCost}:</p>
+                  <p>$ {selectedCalculation.fuelCost.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.maintenanceCost}:</p>
+                  <p>$ {selectedCalculation.maintenanceCost.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.insuranceCost}:</p>
+                  <p>$ {selectedCalculation.insuranceCost.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.depreciation}:</p>
+                  <p>$ {selectedCalculation.depreciation.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.riskCost}:</p>
+                  <p>$ {selectedCalculation.riskCost.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0', fontWeight: 'bold' }}>Total:</p>
+                  <p style={{ fontWeight: 'bold' }}>
+                    $ {(selectedCalculation.fuelCost + selectedCalculation.maintenanceCost + 
+                        selectedCalculation.insuranceCost + selectedCalculation.depreciation + 
+                        selectedCalculation.riskCost).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '20px', borderTop: '1px solid #0f0', paddingTop: '15px' }}>
+              <h4 style={{ color: '#0f0', marginBottom: '10px' }}>{t.netProfit}:</h4>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.shortTermProfit}:</p>
+                  <p>$ {selectedCalculation.shortTerm.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p style={{ margin: '5px 0', color: '#0f0' }}>{t.longTermProfit}:</p>
+                  <p>$ {selectedCalculation.longTerm.toFixed(2)}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
