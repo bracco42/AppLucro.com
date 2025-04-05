@@ -1310,7 +1310,7 @@ export default function CalculoLucro() {
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            {language === 'pt' ? 'Comunidade no Facebook! OpenSource' : 'Facebook Community! OpenSource')
+            {language === 'pt' ? 'Comunidade no Facebook! OpenSource' : 'Facebook Community! OpenSource'}
           </a>
           !!!
         </div>
