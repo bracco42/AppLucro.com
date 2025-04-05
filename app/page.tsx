@@ -1310,9 +1310,9 @@ export default function CalculoLucro() {
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            {language === 'pt' ? 'Comunidade no Facebook! OpenSource' : 'Facebook Community! OpenSource'}
+            {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
           </a>
-          !!!
+          {language === 'pt' ? 'OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra custo cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60.' : 'It's OpenSource!!! But already costs 40 dollars without donations! To donate enter community first and be part of the ideia to move us foward!' }
         </div>
       </div>
     </div>
