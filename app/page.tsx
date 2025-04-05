@@ -1312,7 +1312,7 @@ export default function CalculoLucro() {
           >
             {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
           </a>
-          {language === 'pt' ? 'OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra custo cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60.' : 'It's OpenSource!!! But already costs 40 dollars without donations! To donate enter community first and be part of the ideia to move us foward!' }
+          {language === 'pt' ? 'OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra custo cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60.' : 'It\'s OpenSource!!! To use and create profissionally! This App has already cost besides the working days 40 dollars. To donate acess the community and talk to Adm.'}
         </div>
       </div>
     </div>
