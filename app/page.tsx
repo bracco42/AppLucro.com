@@ -117,7 +117,7 @@ const translations = {
     vehicleValue: 'Current Vehicle Value:',
     rideValue: 'Paid Value:',
     rideDistance: 'Ride Distance (km or mi):',
-    rideTime: 'Ride Total Time since the end of the last (in minutes):',
+    rideTime: 'Ride Total Time since the end of the last one (in minutes):',
     shortTermProfit: 'Short Term Profit:',
     longTermProfit: 'Long Term Profit:',
     tips: 'Tips:',
