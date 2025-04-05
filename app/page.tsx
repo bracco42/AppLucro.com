@@ -1310,9 +1310,9 @@ export default function CalculoLucro() {
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
+            {language === 'pt' ? 'Comunidade no Facebook! ' : 'Facebook Community! '}
           </a>
-          {language === 'pt' ? 'OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra, custou cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60.' : 'Its OpenSource!!! You can you the root-code and App as you wish! But it has already costs besides working days 40 dollars, so considerar donating to Brazilian Itau Account Ag. 8499. CC 15528-4. Thx a lot!'}
+          'OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Além da mão de obra, custou cerca de 150-200 reais e até então não houve doação. PIX para tal: 100.980.686-60. Costs: works and 40 dollars, so considerer donating to Brazilian Itau Account Ag. 8499. CC 15528-4. Donates (doações): 0.'
         </div>
       </div>
     </div>
