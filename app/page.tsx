@@ -394,7 +394,7 @@ export default function CalculoLucro() {
       setValorSeguro('');
       setPeriodicidadeSeguro('annual');
       setPremioSeguro('');
-      setCustosManutencao(t.defaultCosts);
+      setCustosManutencao(translations[language].defaultCosts);
       setValorVeiculo('');
       setHorasPorDia('');
       setDiasPorSemana('');
@@ -1303,22 +1303,21 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div>
-     <div>
-     <div>
-  <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-  <div>
-    {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
-    <a 
-      href="https://www.facebook.com/groups/1587875928477657" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      style={{ color: '#0f0', textDecoration: 'underline' }}
-    >
-      {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
-    </a>
-    {language === 'pt' 
-      ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' 
-      : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'
-    }
-  </div>
-</div>
+          {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
+          <a 
+            href="https://www.facebook.com/groups/1587875928477657" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#0f0', textDecoration: 'underline' }}
+          >
+            {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
+          </a>
+          {language === 'pt' 
+            ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' 
+            : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
