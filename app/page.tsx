@@ -658,7 +658,7 @@ export default function RideProfitCalculator() {
       <img 
         src="/logo.svg" 
         alt="Ride Profit Calculator Logo"
-        width={200} 
+        width={366} 
         height={100}
         style={{ 
           filter: 'drop-shadow(0 0 5px #0f0)',
