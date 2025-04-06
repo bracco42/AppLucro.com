@@ -1315,10 +1315,10 @@ export default function CalculoLucro() {
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 10px #6ec1ff, 0 0 20px #6ec1ff';
+              (e.target as HTMLElement).style.textShadow = '0 0 10px #6ec1ff, 0 0 20px #39ff14';
             }}
             onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 5px #6ec1ff, 0 0 10px #6ec1ff';
+              (e.target as HTMLElement).style.textShadow = '0 0 5px #6ec1ff, 0 0 10px #39ff14';
             }}
           >
             bernarddinizbracco.live
