@@ -1308,17 +1308,17 @@ export default function CalculoLucro() {
             target="_blank" 
             rel="noopener noreferrer"
             style={{
-              color: '#6ec1ff',
+              color: '#ffffff',
               textDecoration: 'none',
               fontWeight: 'bold',
-              textShadow: '0 0 5px #6ec1ff, 0 0 10px #6ec1ff',
+              textShadow: '0 0 5px #ffffff, 0 0 10px #6ec1ff',
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 10px #6ec1ff, 0 0 20px #39ff14';
+              (e.target as HTMLElement).style.textShadow = '0 0 10px #ffffff, 0 0 20px #ffffff';
             }}
             onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 5px #6ec1ff, 0 0 10px #39ff14';
+              (e.target as HTMLElement).style.textShadow = '0 0 5px #ffffff, 0 0 10px #ffffff';
             }}
           >
             bernarddinizbracco.live
