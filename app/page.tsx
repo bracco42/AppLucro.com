@@ -641,9 +641,7 @@ export default function RideProfitCalculator() {
   };
 
   const changeLanguage = (lang: Language) => {
-    if (confirm(t.changeLanguageConfirmation)) {
-      setLanguage(lang);
-    }
+    setLanguage(lang);
   };
 
  return (
