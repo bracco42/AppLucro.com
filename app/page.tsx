@@ -1312,7 +1312,7 @@ export default function CalculoLucro() {
           >
             {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
           </a>
-           OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Parceria: @famartdistribuidora.petropolis materiais de construção e tudo mais que você precisar, com preços que vão te surpreender. Consulte nosso catálogo de vendas (em breve maiores novidades)!
+           OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte). Em Parceria Com: @famartdistribuidora.petropolis, materiais de construção e tudo mais que você precisar (pinturas, do lar, eletrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site comprefamart.com.br (em breve maiores novidades)!
         </div>
       </div>
     </div>
