@@ -1289,8 +1289,7 @@ export default function CalculoLucro() {
           </div>
         </div>
       )}
-
-      <div style={{ 
+<div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
         borderRadius: '10px',
@@ -1302,36 +1301,35 @@ export default function CalculoLucro() {
       
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-  <p style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
-  {language === 'pt' ? 'OpenSource!!! bernarddinizbracco.live Em Parceria Com: ' : 'OpenSource!!! bernarddinizbracco.live In Partnership With: '}
-  <a 
-    href="https://instagram.com/famartdistribuidora.petropolis" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    style={{ color: '#6ec1ff', textDecoration: 'none' }}
-  >
-    @famartdistribuidora.petropolis
-  </a>
-  ,<br />
-  {language === 'pt' 
-    ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
-    : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
-  }
-  <a 
-    href="https://comprefamart.com.br" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    style={{ color: '#6ec1ff', textDecoration: 'none' }}
-  >
-    comprefamart.com.br
-  </a>
-  .<br />
-  {language === 'pt' 
-    ? '(Em breve maiores novidades)!' 
-    : '(More news coming soon)!'
-  }
-</p>
-        </div>
+        <p style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
+          {language === 'pt' ? 'OpenSource!!! bernarddinizbracco.live Em Parceria Com: ' : 'OpenSource!!! bernarddinizbracco.live In Partnership With: '}
+          <a 
+            href="https://instagram.com/famartdistribuidora.petropolis" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#6ec1ff', textDecoration: 'none' }}
+          >
+            @famartdistribuidora.petropolis
+          </a>
+          ,<br />
+          {language === 'pt' 
+            ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
+            : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
+          }
+          <a 
+            href="https://comprefamart.com.br" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#6ec1ff', textDecoration: 'none' }}
+          >
+            comprefamart.com.br
+          </a>
+          .<br />
+          {language === 'pt' 
+            ? '(Em breve maiores novidades)!' 
+            : '(More news coming soon)!'
+          }
+        </p>
       </div>
     </div>
   );
