@@ -1323,54 +1323,6 @@ export default function CalculoLucro() {
           >
             bernarddinizbracco.live
           </a>
-          {language === 'pt' ? ' Em Parceria Com: ' : ' In Partnership With: '}
-          <a 
-            href="https://instagram.com/famartdistribuidora.petropolis" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              color: '#6ec1ff',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              textShadow: '0 0 5px #6ec1ff, 0 0 10px #6ec1ff',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 10px #6ec1ff, 0 0 20px #6ec1ff';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 5px #6ec1ff, 0 0 10px #6ec1ff';
-            }}
-          >
-            @famartdistribuidora.petropolis
-          </a>
-          ,<br />
-          {language === 'pt' 
-            ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas no site ' 
-            : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog on the website '
-          }
-          <a 
-            href="https://comprefamart.com.br" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              color: '#6ec1ff',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              textShadow: '0 0 5px #6ec1ff, 0 0 10px #6ec1ff',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 10px #6ec1ff, 0 0 20px #6ec1ff';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.textShadow = '0 0 5px #6ec1ff, 0 0 10px #6ec1ff';
-            }}
-          >
-            comprefamart.com.br
-          </a>
-          . WIP always!<br />
-        </p>
       </div>
     </div>
   );
