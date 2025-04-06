@@ -1310,9 +1310,9 @@ export default function CalculoLucro() {
             rel="noopener noreferrer"
             style={{ color: '#0f0', textDecoration: 'underline' }}
           >
-            {language === 'pt' ? 'Comunidade no Facebook!' : 'Facebook Community!'}
+            {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
           </a>
-           OpenSource!!! Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).
+           Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).
 
           <p>
           Em Parceria Com: <a href="https://instagram.com/famartdistribuidora.petropolis" target="_blank" rel="noopener noreferrer">@famartdistribuidora.petropolis</a>,<br />.
