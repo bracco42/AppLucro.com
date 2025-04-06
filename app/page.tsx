@@ -656,18 +656,18 @@ export default function RideProfitCalculator() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <div style={{ marginBottom: '20px' }}>
-        <Image 
-          src="/logo.svg" 
-          alt="Ride Profit Calculator Logo"
-          width={200} 
-          height={100}
-          style={{ 
-            filter: 'drop-shadow(0 0 5px #0f0)',
-            margin: '0 auto'
-          }}
-        />
-      </div>
+     <div style={{ marginBottom: '20px' }}>
+      <img 
+        src="/logo.svg" 
+        alt="Ride Profit Calculator Logo"
+        width={200} 
+        height={100}
+        style={{ 
+          filter: 'drop-shadow(0 0 5px #0f0)',
+          margin: '0 auto'
+        }}
+      />
+    </div>
 
       {error && (
         <div style={{ color: 'red', padding: '20px', background: '#ffecec' }}>
