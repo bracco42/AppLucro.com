@@ -1347,7 +1347,7 @@ export default function CalculoLucro() {
           ,<br />
           {language === 'pt' 
             ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
-            : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
+            : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog on the website '
           }
           <a 
             href="https://comprefamart.com.br" 
@@ -1369,7 +1369,7 @@ export default function CalculoLucro() {
           >
             comprefamart.com.br
           </a>
-          .<br />
+          . Em breve maiores novidades!<br />
         </p>
       </div>
     </div>
