@@ -1323,6 +1323,8 @@ export default function CalculoLucro() {
           >
             bernarddinizbracco.live
           </a>
+        <br />
+        </p>
       </div>
     </div>
   );
