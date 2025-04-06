@@ -40,9 +40,9 @@ const translations = {
     importButton: 'Import Settings',
     fuelPrice: 'Fuel Price per Liter:',
     fuelEfficiency: 'Distance per Liter (km/L or mi/L):',
-    insuranceValue: 'Insurance Value:',
+    insuranceValue: '*Insurance Value:',
     insurancePremium: 'Insurance Premium:',
-    maintenanceCosts: 'Maintenance Costs:',
+    maintenanceCosts: '*Maintenance Costs:',
     addCost: 'Add Cost',
     remove: 'Remove',
     timeSpent: 'Time worked:',
@@ -106,9 +106,9 @@ const translations = {
     importButton: 'Importer les Paramètres',
     fuelPrice: 'Prix du Carburant par Litre:',
     fuelEfficiency: 'Distance par Litre (km/L ou mi/L):',
-    insuranceValue: 'Valeur de l\'Assurance:',
+    insuranceValue: '*Valeur de l\'Assurance:',
     insurancePremium: 'Prime d\'Assurance:',
-    maintenanceCosts: 'Coûts de Maintenance:',
+    maintenanceCosts: '*Coûts de Maintenance:',
     addCost: 'Ajouter un Coût',
     remove: 'Supprimer',
     timeSpent: 'Temps travaillé:',
@@ -172,9 +172,9 @@ const translations = {
     importButton: 'Importar Config',
     fuelPrice: 'Preço do Combustível por Litro:',
     fuelEfficiency: 'Distância Percorrida por Litro (km/L):',
-    insuranceValue: 'Valor do Seguro:',
+    insuranceValue: '*Valor do Seguro:',
     insurancePremium: 'Prêmio do Seguro:',
-    maintenanceCosts: 'Custos de Manutenção:',
+    maintenanceCosts: '*Custos de Manutenção:',
     addCost: 'Adicionar Custo',
     remove: 'Remover',
     timeSpent: 'Tempo trabalhado:',
@@ -636,9 +636,7 @@ export default function RideProfitCalculator() {
   };
 
   const changeLanguage = (lang: Language) => {
-    if (confirm(t.changeLanguageConfirmation)) {
       setLanguage(lang);
-    }
   };
 
   return (
@@ -1380,9 +1378,13 @@ export default function RideProfitCalculator() {
               gap: '10px',
               marginBottom: '15px'
             }}>
-              <div>
+               <div style={{
+                backgroundColor: '#333300', // Fundo amarelo escuro para combustível
+                padding: '10px',
+                borderRadius: '5px'
+              }}>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.fuelCost}</div>
-                <div>{selectedCalculation.fuelCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+                <div>{formatCurrency(selectedCalculation.fuelCost, language)}</div>
               </div>
               <div>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.maintenanceCost}</div>
