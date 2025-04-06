@@ -57,7 +57,7 @@ const translations = {
     tips: 'Dicas:',
     tip1: 'Levar espera em consideração no tempo gasto. Se você aluga o veículo, deixe o valor do veículo como zero e inclua o valor do aluguel nos custos de manutenção.',
     tip2: 'Pode ser usado em todas as plataformas e veículos! Para todos os motoristas, tanto aplicativos (Ifood, Uber, 99, etc.) quanto taxi, vans e até ônibus/avião/metrô (demanda criatividade).',
-    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida.',
+    formula: 'Fórmula do Lucro de Longo Prazo: Receita - Despesas (Combustível e Outros) - Depreciação (3.33% * Valor do Veículo por ano) - Risco (10% * Prêmio do Seguro por ano). Obs.: lucro de curto prazo desconta somente combustível da corrida. * Os gastos que podem ser anuais/mensais/semanais/diarios ponderados pelo quanto trabalha e tempo total gasto entre uma corrida e outra',
     importError: 'Erro ao importar configurações',
     history: 'Histórico de Cálculos',
     saveCalculation: 'Salvar Cálculo',
@@ -123,7 +123,7 @@ const translations = {
     tips: 'Tips:',
     tip1: 'Consider waiting time in time spent. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
     tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity).',
-    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost.',
+    formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel and Others) - Depreciation (3.33% * Vehicle Value per year) - Risk (10% * Insurance Premium per year). Note: short term profit only deducts ride fuel cost. * Expenses can be annual/monthly/weekly/daily weighted by how much you work and total time spent between rides',
     importError: 'Error importing settings',
     history: 'Calculation History',
     saveCalculation: 'Save Calculation',
@@ -948,70 +948,430 @@ export default function CalculoLucro() {
         </div>
       )}
 
-     <div style={{ 
-      backgroundColor: '#222', 
-      padding: '20px', 
-      borderRadius: '10px',
-      marginBottom: '20px',
-      boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
-      textAlign: 'left'
-    }}>
-      <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+      <div style={{ 
+        backgroundColor: '#222', 
+        padding: '20px', 
+        borderRadius: '10px',
+        marginBottom: '20px',
+        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)',
+        textAlign: 'left'
+      }}>
+        <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
+        
+        <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
+        <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+        
+        <div style={{ color: 'white', fontFamily: 'Arial, sans-serif', marginBottom: '10px' }}>
+          {language === 'pt' ? 'OpenSource!!! ' : 'OpenSource!!! '}
+          <a 
+            href="https://bernarddinizbracco.live" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              textShadow: '0 0 5px #ffffff, 0 0 10px #6ec1ff',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLElement).style.textShadow = '0 0 10px #ffffff, 0 0 20px #ffffff';
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLElement).style.textShadow = '0 0 5px #ffffff, 0 0 10px #ffffff';
+            }}
+          >
+            bernarddinizbracco.live
+          </a>
+        </div>
       
-      <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
-      <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-      
-      <div style={{ color: 'white', fontFamily: 'Arial, sans-serif', marginBottom: '10px' }}>
-        {language === 'pt' ? 'OpenSource!!! ' : 'OpenSource!!! '}
-        <a 
-          href="https://bernarddinizbracco.live" 
-          target="_blank" 
-          rel="noopener noreferrer"
+        <div style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
+          {language === 'pt' ? 'Em Parceria Com: ' : 'In Partnership With: '}
+          <a 
+            href="https://instagram.com/famartdistribuidora.petropolis" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#6ec1ff', textDecoration: 'none' }}
+          >
+            @famartdistribuidora.petropolis
+          </a>
+          ,<br />
+          {language === 'pt' 
+            ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
+            : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
+          }
+          <a 
+            href="https://comprefamart.com.br" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#6ec1ff', textDecoration: 'none' }}
+          >
+            comprefamart.com.br
+          </a>
+          .<br />
+          {language === 'pt' 
+            ? '(Em breve maiores novidades)!' 
+            : '(More news coming soon)!'
+          }
+        </div>
+      </div>
+
+      <div style={{ 
+        backgroundColor: '#222', 
+        padding: '20px', 
+        borderRadius: '10px',
+        marginBottom: '20px',
+        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
+      }}>
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideValue}</label>
+          <input 
+            type="text" 
+            value={valorCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setValorCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideDistance}</label>
+          <input 
+            type="text" 
+            value={distanciaCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setDistanciaCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>{t.rideTime}</label>
+          <input 
+            type="text" 
+            value={tempoCorrida} 
+            onChange={(e) => handleNumberInput(e.target.value, setTempoCorrida)} 
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #0f0',
+              backgroundColor: '#111',
+              color: '#fff'
+            }}
+          />
+        </div>
+
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between',
+          marginBottom: '15px'
+        }}>
+          <div style={{ textAlign: 'left', flex: 1 }}>
+            <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.shortTermProfit}</div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+              {lucroCurtoPrazo !== null ? 
+                lucroCurtoPrazo.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' }) : 
+                '---'}
+            </div>
+          </div>
+          <div style={{ textAlign: 'right', flex: 1 }}>
+            <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.longTermProfit}</div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+              {lucroLongoPrazo !== null ? 
+                lucroLongoPrazo.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' }) : 
+                '---'}
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={saveCalculation}
+          disabled={lucroCurtoPrazo === null || lucroLongoPrazo === null}
           style={{
-            color: '#ffffff',
-            textDecoration: 'none',
+            width: '100%',
+            padding: '12px',
+            backgroundColor: lucroCurtoPrazo === null || lucroLongoPrazo === null ? '#555' : '#0f0',
+            color: '#000',
+            border: 'none',
+            borderRadius: '5px',
             fontWeight: 'bold',
-            textShadow: '0 0 5px #ffffff, 0 0 10px #6ec1ff',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => {
-            (e.target as HTMLElement).style.textShadow = '0 0 10px #ffffff, 0 0 20px #ffffff';
-          }}
-          onMouseLeave={(e) => {
-            (e.target as HTMLElement).style.textShadow = '0 0 5px #ffffff, 0 0 10px #ffffff';
+            cursor: lucroCurtoPrazo === null || lucroLongoPrazo === null ? 'not-allowed' : 'pointer',
+            fontSize: '16px'
           }}
         >
-          bernarddinizbracco.live
-        </a>
+          {t.saveCalculation}
+        </button>
       </div>
-    
-      <div style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
-        {language === 'pt' ? 'Em Parceria Com: ' : 'In Partnership With: '}
-        <a 
-          href="https://instagram.com/famartdistribuidora.petropolis" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          style={{ color: '#6ec1ff', textDecoration: 'none' }}
-        >
-          @famartdistribuidora.petropolis
-        </a>
-        ,<br />
-        {language === 'pt' 
-          ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
-          : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
-        }
-        <a 
-          href="https://comprefamart.com.br" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          style={{ color: '#6ec1ff', textDecoration: 'none' }}
-        >
-          comprefamart.com.br
-        </a>
-        .<br />
-        {language === 'pt' 
-          ? '(Em breve maiores novidades)!' 
-          : '(More news coming soon)!'
-        }
+
+      <div style={{ 
+        backgroundColor: '#222', 
+        padding: '20px', 
+        borderRadius: '10px',
+        boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '15px'
+        }}>
+          <h3 style={{ color: '#0f0', margin: 0 }}>{t.history}</h3>
+          <button
+            onClick={clearHistory}
+            disabled={calculationHistory.length === 0}
+            style={{
+              padding: '8px 12px',
+              backgroundColor: calculationHistory.length === 0 ? '#555' : '#f00',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: calculationHistory.length === 0 ? 'not-allowed' : 'pointer'
+            }}
+          >
+            {t.clearHistory}
+          </button>
+        </div>
+
+        {calculationHistory.length > 0 ? (
+          <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid #0f0' }}>
+                  <th style={{ padding: '8px', textAlign: 'left' }}>{t.calculationTime}</th>
+                  <th style={{ padding: '8px', textAlign: 'right' }}>{t.rideMinutes}</th>
+                  <th style={{ padding: '8px', textAlign: 'right' }}>{t.rideValueHistory}</th>
+                  <th style={{ padding: '8px', textAlign: 'right' }}>{t.profitShort}</th>
+                  <th style={{ padding: '8px', textAlign: 'right' }}>{t.profitLong}</th>
+                  <th style={{ padding: '8px', textAlign: 'center' }}>{t.actions}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {calculationHistory.map((calc) => (
+                  <tr key={calc.id} style={{ borderBottom: '1px solid #444' }}>
+                    <td style={{ padding: '8px', textAlign: 'left' }}>
+                      {calc.timestamp.toLocaleString(language)}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>
+                      {calc.rideMinutes}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>
+                      {calc.rideValue.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right', color: calc.shortTerm >= 0 ? '#0f0' : '#f00' }}>
+                      {calc.shortTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'right', color: calc.longTerm >= 0 ? '#0f0' : '#f00' }}>
+                      {calc.longTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                    </td>
+                    <td style={{ padding: '8px', textAlign: 'center' }}>
+                      <button
+                        onClick={() => showCalculationDetails(calc)}
+                        style={{
+                          padding: '5px 10px',
+                          backgroundColor: '#0f0',
+                          color: '#000',
+                          border: 'none',
+                          borderRadius: '5px',
+                          marginRight: '5px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {t.details}
+                      </button>
+                      <button
+                        onClick={() => deleteCalculation(calc.id)}
+                        style={{
+                          padding: '5px 10px',
+                          backgroundColor: '#f00',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {t.delete}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div style={{ padding: '20px', color: '#aaa', textAlign: 'center' }}>
+            {t.noHistory}
+          </div>
+        )}
       </div>
+
+      {showDetails && selectedCalculation && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000
+        }}>
+          <div style={{
+            backgroundColor: '#222',
+            padding: '20px',
+            borderRadius: '10px',
+            maxWidth: '500px',
+            width: '90%',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            boxShadow: '0 0 20px rgba(0, 255, 0, 0.5)'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '20px'
+            }}>
+              <h3 style={{ color: '#0f0', margin: 0 }}>{t.calculationDetails}</h3>
+              <button
+                onClick={() => setShowDetails(false)}
+                style={{
+                  padding: '5px 10px',
+                  backgroundColor: '#f00',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer'
+                }}
+              >
+                {t.closeDetails}
+              </button>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.calculationTime}</div>
+              <div>{selectedCalculation.timestamp.toLocaleString(language)}</div>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.rideValueHistory}</div>
+              <div>{selectedCalculation.rideValue.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.rideDistanceHistory}</div>
+              <div>{selectedCalculation.rideDistance} {language === 'pt' ? 'km' : 'mi'}</div>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.rideMinutes}</div>
+              <div>{selectedCalculation.rideMinutes} {language === 'pt' ? 'minutos' : 'minutes'}</div>
+            </div>
+
+            <div style={{ 
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px',
+              marginBottom: '15px'
+            }}>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.fuelCost}</div>
+                <div>{selectedCalculation.fuelCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              </div>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.maintenanceCost}</div>
+                <div>{selectedCalculation.maintenanceCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              </div>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.insuranceCost}</div>
+                <div>{selectedCalculation.insuranceCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              </div>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.depreciation}</div>
+                <div>{selectedCalculation.depreciation.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              </div>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.riskCost}</div>
+                <div>{selectedCalculation.riskCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.totalCosts}</div>
+              <div>
+                {(selectedCalculation.fuelCost + 
+                  selectedCalculation.maintenanceCost + 
+                  selectedCalculation.insuranceCost + 
+                  selectedCalculation.depreciation + 
+                  selectedCalculation.riskCost).toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+              </div>
+            </div>
+
+            <div style={{ 
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: '15px'
+            }}>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.profitShort}</div>
+                <div style={{ 
+                  color: selectedCalculation.shortTerm >= 0 ? '#0f0' : '#f00',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  {selectedCalculation.shortTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                </div>
+              </div>
+              <div>
+                <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.profitLong}</div>
+                <div style={{ 
+                  color: selectedCalculation.longTerm >= 0 ? '#0f0' : '#f00',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  {selectedCalculation.longTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.netProfit}</div>
+              <div style={{ 
+                color: (selectedCalculation.rideValue - 
+                  selectedCalculation.fuelCost - 
+                  selectedCalculation.maintenanceCost - 
+                  selectedCalculation.insuranceCost - 
+                  selectedCalculation.depreciation - 
+                  selectedCalculation.riskCost) >= 0 ? '#0f0' : '#f00',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }}>
+                {(selectedCalculation.rideValue - 
+                  selectedCalculation.fuelCost - 
+                  selectedCalculation.maintenanceCost - 
+                  selectedCalculation.insuranceCost - 
+                  selectedCalculation.depreciation - 
+                  selectedCalculation.riskCost).toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
