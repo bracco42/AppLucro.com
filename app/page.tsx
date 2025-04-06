@@ -1325,10 +1325,6 @@ export default function CalculoLucro() {
             comprefamart.com.br
           </a>
           .<br />
-          {language === 'pt' 
-            ? '(Em breve maiores novidades)!' 
-            : '(More news coming soon)!'
-          }
         </p>
       </div>
     </div>
