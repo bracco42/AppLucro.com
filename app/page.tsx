@@ -1,4 +1,4 @@
-  'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -1303,6 +1303,7 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div>
+     <div>
      <div>
   <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
   <div>
