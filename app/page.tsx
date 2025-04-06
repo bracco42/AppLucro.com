@@ -1299,25 +1299,11 @@ export default function CalculoLucro() {
         textAlign: 'left'
       }}>
         <h3 style={{ color: '#0f0', marginTop: 0, marginBottom: '15px' }}>{t.tips}</h3>
-        <p style={{ marginBottom: '10px' }}>{t.tip1}</p>
+      
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-        <div>
-          {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
-          <a 
-            href="https://www.facebook.com/groups/1587875928477657" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ color: '#0f0', textDecoration: 'underline' }}
-          >
-            {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
-          </a>
-          {language === 'pt' 
-            ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' 
-            : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'
-          }
   <p style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
-  {language === 'pt' ? 'Em Parceria Com: ' : 'In Partnership With: '}
+  {language === 'pt' ? 'OpenSource!!! bernarddinizbracco.live Em Parceria Com: ' : 'OpenSource!!! bernarddinizbracco.live In Partnership With: '}
   <a 
     href="https://instagram.com/famartdistribuidora.petropolis" 
     target="_blank" 
