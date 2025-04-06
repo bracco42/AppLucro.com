@@ -30,7 +30,7 @@ type CalculationHistory = {
 
 const translations = {
   'pt': {
-    title: 'Lucros de Corridas (Todas Plataformas/Veículos)',
+    title: 'Calculadora de Lucros de Corridas (Todas Plataformas/Veículos)',
     subtitle: 'Destinado à tomada de decisões de curto e longo prazo',
     registerButton: 'Cadastrar Dados do Veículo',
     closeButton: 'Fechar Cadastro',
