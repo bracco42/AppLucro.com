@@ -1,4 +1,4 @@
-'use client';
+  ='use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -1303,25 +1303,52 @@ export default function CalculoLucro() {
         <p style={{ marginBottom: '10px' }}>{t.tip2}</p>
         <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
         <div>
-      <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
-      <div>
-        {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
-        <a 
-          href="https://www.facebook.com/groups/1587875928477657" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          style={{ color: '#0f0', textDecoration: 'underline' }}
-        >
-          {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
-        </a>
-        {language === 'pt' ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'}
-        
-        <p style={{ color: 'white', fontFamily: 'Arial, sans-serif', backgroundColor: '#000000', padding: '12px', margin: '12px 0' }}>
-          Em Parceria Com: <a href="https://instagram.com/famartdistribuidora.petropolis" target="_blank" rel="noopener noreferrer" style={{ color: '#00B0FF', textDecoration: 'none' }}>@famartdistribuidora.petropolis</a><br />
-          materiais de construção e tudo mais que você precisar (pinturas do lar elétrica ferragens hidráulica ferramentas)<br />
-          com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site <a href="https://comprefamart.com.br" target="_blank" rel="noopener noreferrer" style={{ color: '#00B0FF', textDecoration: 'none' }}>comprefamart.com.br</a><br />
-        </p>
-      </div>
-    </div>
-  );
-}
+     <div>
+  <p style={{ marginBottom: '10px', fontStyle: 'italic' }}>{t.formula}</p>
+  <div>
+    {language === 'pt' ? 'Entre em nossa ' : 'Join our '}
+    <a 
+      href="https://www.facebook.com/groups/1587875928477657" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      style={{ color: '#0f0', textDecoration: 'underline' }}
+    >
+      {language === 'pt' ? 'Comunidade no Facebook OpenSource!' : 'OpenSource Facebook Community!'}
+    </a>
+    {language === 'pt' 
+      ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' 
+      : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'
+    }
+    
+    <p style={{ 
+      color: 'white', 
+      fontFamily: 'Arial, sans-serif', 
+      backgroundColor: '#000000', 
+      padding: '12px', 
+      margin: '12px 0' 
+    }}>
+      Em Parceria Com: {' '}
+      <a 
+        href="https://instagram.com/famartdistribuidora.petropolis" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: '#00B0FF', textDecoration: 'none' }}
+      >
+        @famartdistribuidora.petropolis
+      </a>
+      <br />
+      materiais de construção e tudo mais que você precisar (pinturas do lar elétrica ferragens hidráulica ferramentas)
+      <br />
+      com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site {' '}
+      <a 
+        href="https://comprefamart.com.br" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: '#00B0FF', textDecoration: 'none' }}
+      >
+        comprefamart.com.br
+      </a>
+      <br />
+    </p>
+  </div>
+</div>
