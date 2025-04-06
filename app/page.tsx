@@ -1371,7 +1371,7 @@ export default function RideProfitCalculator() {
 
             <div style={{ marginBottom: '15px' }}>
               <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.rideDistanceHistory}</div>
-              <div>{selectedCalculation.rideDistance} {language === 'pt' ? 'km' : language === 'fr' ? 'km' : 'mi'}</div>
+              <div>{selectedCalculation.rideDistance} {language === 'pt' ? 'km' : language === 'fr' ? 'km' : 'mi/km'}</div>
             </div>
 
             <div style={{ marginBottom: '15px' }}>
