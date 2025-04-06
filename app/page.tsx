@@ -1369,7 +1369,7 @@ export default function CalculoLucro() {
           >
             comprefamart.com.br
           </a>
-          . Em breve maiores novidades!<br />
+          . WIP always!<br />
         </p>
       </div>
     </div>
