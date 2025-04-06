@@ -1316,11 +1316,34 @@ export default function CalculoLucro() {
             ? ' Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).' 
             : ' This App was fully developed as open source for anyone to access and use professionally in various ways (including the source code).'
           }
-          <p style="color: white; font-family: Arial, sans-serif;">
-  Em Parceria Com: <a href="https://instagram.com/famartdistribuidora.petropolis" target="_blank" style="color: #6ec1ff; text-decoration: none;">@famartdistribuidora.petropolis</a>,<br>
-  materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas),<br>
-  com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site <a href="https://comprefamart.com.br" target="_blank" style="color: #6ec1ff; text-decoration: none;">comprefamart.com.br</a>.<br>
-  (Em breve maiores novidades)!
+  <p style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
+  {language === 'pt' ? 'Em Parceria Com: ' : 'In Partnership With: '}
+  <a 
+    href="https://instagram.com/famartdistribuidora.petropolis" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ color: '#6ec1ff', textDecoration: 'none' }}
+  >
+    @famartdistribuidora.petropolis
+  </a>
+  ,<br />
+  {language === 'pt' 
+    ? 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site ' 
+    : 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website '
+  }
+  <a 
+    href="https://comprefamart.com.br" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ color: '#6ec1ff', textDecoration: 'none' }}
+  >
+    comprefamart.com.br
+  </a>
+  .<br />
+  {language === 'pt' 
+    ? '(Em breve maiores novidades)!' 
+    : '(More news coming soon)!'
+  }
 </p>
         </div>
       </div>
