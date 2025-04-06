@@ -1314,11 +1314,10 @@ export default function CalculoLucro() {
           </a>
            Este App foi desenvolvido todo em código aberto para quem quiser acessar e usar profissionalmente das mais diversas formas (inclusive o código-fonte).
 
-          <p>
-          Em Parceria Com: <a href="https://instagram.com/famartdistribuidora.petropolis" target="_blank" rel="noopener noreferrer">@famartdistribuidora.petropolis</a>,<br />.
-          materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas),<br />
-          com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site <a href="https://comprefamart.com.br" target="_blank" rel="noopener noreferrer">comprefamart.com.br</a>.<br />
-          (Em breve maiores novidades)!
+          <p style="color: white; font-family: Arial, sans-serif; background-color: #000000; padding: 12px;">
+          Em Parceria Com: <a href="https://instagram.com/famartdistribuidora.petropolis" target="_blank" style="color: #00B0FF; text-decoration: none;">@famartdistribuidora.petropolis</a><br>
+          materiais de construção e tudo mais que você precisar (pinturas do lar elétrica ferragens hidráulica ferramentas)<br>
+          com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site <a href="https://comprefamart.com.br" target="_blank" style="color: #00B0FF; text-decoration: none;">comprefamart.com.br</a><br>
           </p>
         </div>
       </div>
