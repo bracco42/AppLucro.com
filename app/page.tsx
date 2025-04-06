@@ -241,6 +241,11 @@ const isValidSettings = (data: any): boolean => {
   }
 };
 
+// Função para formatar valores monetários com $ independente do idioma
+const formatCurrency = (value: number): string => {
+  return `$${value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+};
+
 export default function RideProfitCalculator() {
   const [fuelPrice, setFuelPrice] = useState<string>('');
   const [fuelEfficiency, setFuelEfficiency] = useState<string>('');
@@ -636,7 +641,9 @@ export default function RideProfitCalculator() {
   };
 
   const changeLanguage = (lang: Language) => {
+    if (confirm(t.changeLanguageConfirmation)) {
       setLanguage(lang);
+    }
   };
 
   return (
@@ -1158,7 +1165,7 @@ export default function RideProfitCalculator() {
               borderRadius: '5px'
             }}>
               {shortTermProfit !== null ? 
-                shortTermProfit.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' }) : 
+                formatCurrency(shortTermProfit) : 
                 '---'}
             </div>
           </div>
@@ -1172,7 +1179,7 @@ export default function RideProfitCalculator() {
               borderRadius: '5px'
             }}>
               {longTermProfit !== null ? 
-                longTermProfit.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' }) : 
+                formatCurrency(longTermProfit) : 
                 '---'}
             </div>
           </div>
@@ -1250,21 +1257,21 @@ export default function RideProfitCalculator() {
                       {calc.rideMinutes}
                     </td>
                     <td style={{ padding: '8px', textAlign: 'right' }}>
-                      {calc.rideValue.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                      {formatCurrency(calc.rideValue)}
                     </td>
                     <td style={{ 
                       padding: '8px', 
                       textAlign: 'right',
                       backgroundColor: calc.shortTerm >= 0 ? '#333300' : '#330000'
                     }}>
-                      {calc.shortTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                      {formatCurrency(calc.shortTerm)}
                     </td>
                     <td style={{ 
                       padding: '8px', 
                       textAlign: 'right',
                       backgroundColor: calc.longTerm >= 0 ? '#003300' : '#330000'
                     }}>
-                      {calc.longTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                      {formatCurrency(calc.longTerm)}
                     </td>
                     <td style={{ padding: '8px', textAlign: 'center' }}>
                       <button
@@ -1359,7 +1366,7 @@ export default function RideProfitCalculator() {
 
             <div style={{ marginBottom: '15px' }}>
               <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.rideValueHistory}</div>
-              <div>{selectedCalculation.rideValue.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+              <div>{formatCurrency(selectedCalculation.rideValue)}</div>
             </div>
 
             <div style={{ marginBottom: '15px' }}>
@@ -1378,40 +1385,42 @@ export default function RideProfitCalculator() {
               gap: '10px',
               marginBottom: '15px'
             }}>
-               <div style={{
-                backgroundColor: '#333300', // Fundo amarelo escuro para combustível
+              <div style={{
+                backgroundColor: '#333300',
                 padding: '10px',
                 borderRadius: '5px'
               }}>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.fuelCost}</div>
-                <div>{formatCurrency(selectedCalculation.fuelCost, language)}</div>
+                <div>{formatCurrency(selectedCalculation.fuelCost)}</div>
               </div>
               <div>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.maintenanceCost}</div>
-                <div>{selectedCalculation.maintenanceCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+                <div>{formatCurrency(selectedCalculation.maintenanceCost)}</div>
               </div>
               <div>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.insuranceCost}</div>
-                <div>{selectedCalculation.insuranceCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+                <div>{formatCurrency(selectedCalculation.insuranceCost)}</div>
               </div>
               <div>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.depreciation}</div>
-                <div>{selectedCalculation.depreciation.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+                <div>{formatCurrency(selectedCalculation.depreciation)}</div>
               </div>
               <div>
                 <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.riskCost}</div>
-                <div>{selectedCalculation.riskCost.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}</div>
+                <div>{formatCurrency(selectedCalculation.riskCost)}</div>
               </div>
             </div>
 
             <div style={{ marginBottom: '15px' }}>
               <div style={{ color: '#0f0', marginBottom: '5px' }}>{t.totalCosts}</div>
               <div>
-                {(selectedCalculation.fuelCost + 
+                {formatCurrency(
+                  selectedCalculation.fuelCost + 
                   selectedCalculation.maintenanceCost + 
                   selectedCalculation.insuranceCost + 
                   selectedCalculation.depreciation + 
-                  selectedCalculation.riskCost).toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                  selectedCalculation.riskCost
+                )}
               </div>
             </div>
 
@@ -1430,7 +1439,7 @@ export default function RideProfitCalculator() {
                   padding: '5px',
                   borderRadius: '5px'
                 }}>
-                  {selectedCalculation.shortTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                  {formatCurrency(selectedCalculation.shortTerm)}
                 </div>
               </div>
               <div>
@@ -1443,7 +1452,7 @@ export default function RideProfitCalculator() {
                   padding: '5px',
                   borderRadius: '5px'
                 }}>
-                  {selectedCalculation.longTerm.toLocaleString(language, { style: 'currency', currency: language === 'pt' ? 'BRL' : 'USD' })}
+                  {formatCurrency(selectedCalculation.longTerm)}
                 </div>
               </div>
             </div>
