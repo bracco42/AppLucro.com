@@ -640,11 +640,7 @@ export default function RideProfitCalculator() {
     ));
   };
 
-  const changeLanguage = (lang: Language) => {
-    setLanguage(lang);
-  };
-
- return (
+  const changeLanguage = (lang: Language) => {return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
@@ -654,19 +650,21 @@ export default function RideProfitCalculator() {
       margin: '0 auto',
       fontFamily: 'Arial, sans-serif'
     }}>
-     <div style={{ marginBottom: '20px' }}>
-      <img 
-        src="/logo.svg" 
-        alt="Ride Profit Calculator Logo"
-        width={332} 
-        height={332}
-        style={{ 
-          filter: 'drop-shadow(0 0 5px #0f0)',
-          margin: '0 auto'
-        }}
-      />
-    </div>
-
+      <div style={{ marginBottom: '20px' }}>
+        <img 
+          src="/logo.svg" 
+          alt="Ride Profit Calculator Logo"
+          style={{ 
+            width: 'min(300px, 80vw)',  // Usa 300px ou 80% da largura da tela (o que for menor)
+            height: 'auto',             // Mantém a proporção
+            maxHeight: '300px',        // Limita a altura máxima
+            filter: 'drop-shadow(0 0 5px #0f0)',
+            margin: '0 auto',
+            display: 'block'           // Garante que as margens automáticas funcionem
+          }}
+        />
+      </div>
+      
       {error && (
         <div style={{ color: 'red', padding: '20px', background: '#ffecec' }}>
           {error}
