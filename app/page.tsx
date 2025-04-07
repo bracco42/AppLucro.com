@@ -640,7 +640,11 @@ export default function RideProfitCalculator() {
     ));
   };
 
-  const changeLanguage = (lang: Language) => {return (
+  const changeLanguage = (lang: Language) => {
+     setLanguage(lang);
+   };
+ 
+  return (
     <div style={{ 
       textAlign: 'center', 
       padding: '20px', 
