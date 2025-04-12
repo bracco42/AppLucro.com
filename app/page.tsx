@@ -1067,6 +1067,7 @@ export default function RideProfitCalculator() {
             bernarddinizbracco.live
           </a>
         </div>
+      </div>
      
       <div style={{ 
         backgroundColor: '#222', 
