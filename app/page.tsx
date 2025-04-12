@@ -1067,44 +1067,7 @@ export default function RideProfitCalculator() {
             bernarddinizbracco.live
           </a>
         </div>
-      
-        <div style={{ color: 'white', fontFamily: 'Arial, sans-serif' }}>
-          {language === 'en' ? 'In Partnership With: ' : 
-           language === 'fr' ? 'En Partenariat Avec: ' : 
-           'Em Parceria Com: '}
-          <a 
-            href="https://instagram.com/famartdistribuidora.petropolis" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ color: '#6ec1ff', textDecoration: 'none' }}
-          >
-            @famartdistribuidora.petropolis
-          </a>
-          ,<br />
-          {language === 'en' 
-            ? 'construction materials and everything else you need (paints, home items, electrical, hardware, plumbing, tools), with prices that will surprise you! Check our sales catalog also on the website ' 
-            : language === 'fr'
-            ? 'matériaux de construction et tout ce dont vous avez besoin (peintures, articles ménagers, électrique, quincaillerie, plomberie, outils), avec des prix qui vous surprendront ! Consultez notre catalogue de vente également sur le site '
-            : 'materiais de construção e tudo mais que você precisar (pinturas, do lar, elétrica, ferragens, hidráulica, ferramentas), com preços que vão te surpreender! Consulte nosso catálogo de vendas também no site '
-          }
-          <a 
-            href="https://comprefamart.com.br" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ color: '#6ec1ff', textDecoration: 'none' }}
-          >
-            comprefamart.com.br
-          </a>
-          .<br />
-          {language === 'en' 
-            ? '(More news coming soon)!' 
-            : language === 'fr'
-            ? '(Plus de nouvelles à venir)!'
-            : '(Em breve maiores novidades)!'
-          }
-        </div>
-      </div>
-
+     
       <div style={{ 
         backgroundColor: '#222', 
         padding: '20px', 
