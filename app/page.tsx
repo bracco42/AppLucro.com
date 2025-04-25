@@ -105,7 +105,7 @@ const translations = {
     exportButton: 'Exporter les Paramètres',
     importButton: 'Importer les Paramètres',
     fuelPrice: 'Prix du Carburant par Litre:',
-    fuelEfficiency: 'Distance par Litre (km/L ou mi/L):',
+    fuelEfficiency: 'Distance par Litre (km/L):',
     insuranceValue: '*Valeur de l\'Assurance:',
     insurancePremium: 'Prime d\'Assurance:',
     maintenanceCosts: '*Coûts de Maintenance:',
