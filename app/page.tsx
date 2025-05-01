@@ -46,7 +46,7 @@ const translations = {
     addCost: 'Add Cost',
     remove: 'Remove',
     timeSpent: 'Time worked:',
-    workingHours: 'Driving hours/day (1-16):',
+    workingHours: 'Driven hours/day (1-16):',
     workingDays: 'Days/week (1-7):',
     vehicleValue: 'Current Vehicle Value (If Purchased, depreciates):',
     rideValue: 'Paid Value:',
