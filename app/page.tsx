@@ -48,7 +48,7 @@ const translations = {
     timeSpent: 'Time worked:',
     workingHours: 'Driving hours/day (1-16):',
     workingDays: 'Days/week (1-7):',
-    vehicleValue: 'Current Vehicle Value (If Bought, depreciates):',
+    vehicleValue: 'Current Vehicle Value (If Purchased, depreciates):',
     rideValue: 'Paid Value:',
     rideDistance: 'Actual Distance (km or mi) Ridden Going/Returning:',
     rideTime: 'Ride Total Time Since The End of The Last One (in minutes):',
