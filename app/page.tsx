@@ -213,7 +213,7 @@ const translations = {
     maintenanceCost: 'Custo Manutenção',
     insuranceCost: 'Custo Seguro',
     depreciation: 'Depreciação',
-    riskCost: 'Custo Risque',
+    riskCost: 'Custo Risco',
     totalCosts: 'Custos Totais',
     changeLanguageConfirmation: 'Mudar o idioma irá resetar dados não salvos. Continuar?',
     defaultCosts: [
