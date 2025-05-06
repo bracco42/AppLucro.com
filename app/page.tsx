@@ -56,7 +56,7 @@ const translations = {
     longTermProfit: 'Long Term Profit:',
     tips: 'Tips:',
     tip1: 'Consider waiting time in time spent. If you rent the vehicle, set the vehicle value to zero and include the rental value in maintenance costs.',
-    tip2: 'Can be used for all platforms and vehicles! For all drivers, app-based (Ifood, Uber, 99, etc.), taxis, vans and even buses/planes/subways (requires creativity).',
+    tip2: 'It can be used on all platforms and vehicles! For all drivers, whether apps (Ifood, Uber, 99, etc.) or taxis, vans and even buses/planes/subways (requires creativity).',
     formula: 'Long Term Profit Formula: Revenue - Expenses (Fuel [km/mi riden based] and Others* [time spent based]) - Depreciation (3.33% x Vehicle Value per year) - Risk (10% x Insurance Premium per year). Note: short term profit only deducts ride fuel cost.',
     importError: 'Error importing settings',
     history: 'Calculation History',
