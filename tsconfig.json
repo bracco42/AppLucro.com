@@ -1,3 +1,4 @@
+
 {
   "compilerOptions": {
     "target": "ES2017",
@@ -6,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "jsx": "react-jsx",  // Certifique-se de que essa linha está correta
+    "jsx": "preserve",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
@@ -18,7 +19,6 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
