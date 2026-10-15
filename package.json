@@ -21,8 +21,7 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "20.x",
-    "npm": "8.x"
-  }
+“engines”: {
+“node”: “20.x”
+}
 }
