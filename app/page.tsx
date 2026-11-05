@@ -1047,7 +1047,7 @@ export default function RideProfitCalculator() {
         <div style={{ color: 'white', fontFamily: 'Arial, sans-serif', marginBottom: '10px' }}>
           OpenSource!!!{' '}
           <a 
-            href="https://bernarddinizbracco.live" 
+            href="https://github.com/bracco42/AppLucro.com" 
             target="_blank" 
             rel="noopener noreferrer"
             style={{
@@ -1064,7 +1064,7 @@ export default function RideProfitCalculator() {
               (e.target as HTMLElement).style.textShadow = '0 0 5px #ffffff, 0 0 10px #ffffff';
             }}
           >
-            bernarddinizbracco.live
+            GitHub
           </a>
         </div>
       </div>
